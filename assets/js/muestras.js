@@ -8,13 +8,13 @@ var acciones = {
     $("#EnviarModificarMuestra").on('click', acciones.clickModificarMuestra);
     $('.modalMuestra').on('click', acciones.clickEditarMuestra);
     $('.guardaLimites').on('click', acciones.updateLimites);
-    $('.limites').on('keyup change', acciones.calculosLimites);
+    $('.limites').on('keyup', acciones.calculosLimites);
     $('.noplastico').on('click', acciones.noplastico);
     $('.noliquido').on('click', acciones.noliquido);
     $('.guardarGranulometria').on('click', acciones.updateGranulometria);
     $('.GuardarCompresion').on('click', acciones.clickGuardarCompresion);
-    $('.icompresion,.ideformacion').on('keyup change', acciones.calculosCompresion);
-    $('.analisis,.granulo').on('keyup change', acciones.calculosGranulometria);
+    $('.icompresion,.ideformacion').on('keyup', acciones.calculosCompresion);
+    $('.analisis,.granulo').on('keyup', acciones.calculosGranulometria);
 
   },
 
@@ -194,6 +194,9 @@ var acciones = {
       tdFinalLiquido3=trFinalLiquido.eq(2).find("td:last"),
       tdFinalLiquido4=trFinalLiquido.eq(3).find("td:last");
 
+      tdgolpes1=trFinalLiquido.eq(0).find("input.ngolpes"),
+      tdgolpes2=trFinalLiquido.eq(1).find("input.ngolpes"),
+      tdgolpes3=trFinalLiquido.eq(2).find("input.ngolpes");
 
       tdFinalPlastico1=trFinalPlastico.eq(0).find("td:last"),
       tdFinalPlastico2=trFinalPlastico.eq(1).find("td:last"),
@@ -210,6 +213,11 @@ var acciones = {
         tdFinalLiquido2Var= parseFloat(tdFinalLiquido2.text()),
         tdFinalLiquido3Var= parseFloat(tdFinalLiquido3.text()),
         tdFinalLiquido4Var= parseFloat(tdFinalLiquido4.text());
+
+      var tdgolpes1Var=parseFloat(tdgolpes1.val()),
+        tdgolpes2Var=parseFloat(tdgolpes2.val()),
+        tdgolpes3Var=parseFloat(tdgolpes3.val());
+
 
       var tdFinalPlastico1Var= parseFloat(tdFinalPlastico1.text()),
         tdFinalPlastico2Var= parseFloat(tdFinalPlastico2.text()),
@@ -244,34 +252,29 @@ var acciones = {
 
         tdFinalHumedad4.text(FinalHumedadNatural.toPrecision(4));
 
-        //liquido calculando el promedio
-        var menorliquido1 = Math.min(tdFinalLiquido1Var,tdFinalLiquido2Var),
-          mayorliquido1 = Math.max(tdFinalLiquido1Var,tdFinalLiquido2Var),  
-          divisionMayorMenor1L=mayorliquido1/menorliquido1;
-          if(divisionMayorMenor1L<1.29){
-            LimiteLiquido= (mayorliquido1+menorliquido1)/2
-          }
-        var menorliquido2 = Math.min(tdFinalLiquido2Var,tdFinalLiquido3Var),
-          mayorliquido2 = Math.max(tdFinalLiquido2Var,tdFinalLiquido3Var),  
-          divisionMayorMenor2L=mayorliquido2/menorliquido2;
-          if(divisionMayorMenor2L<1.29){
-            LimiteLiquido= (mayorliquido2+menorliquido2)/2
-          }
-        var menorliquido3 = Math.min(tdFinalLiquido1Var,tdFinalLiquido3Var),
-          mayorliquido3 = Math.max(tdFinalLiquido1Var,tdFinalLiquido3Var),  
-          divisionMayorMenor3L=mayorliquido3/menorliquido3;
-          if(divisionMayorMenor3L<1.29){
-            LimiteLiquido= (mayorliquido3+menorliquido3)/2
-          }
-          if(divisionMayorMenor1L>1.29 && divisionMayorMenor2L>1.29 && divisionMayorMenor3L>1.29 ){
-            LimiteLiquido=0;  
-          }
+//        liquido calculando el promedio
+
+//               x1             y1
+//        (tdgolpes1Var,tdFinalLiquido1Var)
+//               x2             y2
+//        (tdgolpes2Var,tdFinalLiquido2Var)
+//               x3             y3
+//        (tdgolpes3Var,tdFinalLiquido3Var)
+        
+        var pendiente1=(tdFinalLiquido2Var-tdFinalLiquido1Var)/(tdgolpes2Var-tdgolpes1Var),
+          pendiente2=(tdFinalLiquido3Var-tdFinalLiquido1Var)/(tdgolpes3Var-tdgolpes1Var),
+          pendiente3=(tdFinalLiquido3Var-tdFinalLiquido2Var)/(tdgolpes3Var-tdgolpes2Var);
+
+        var limite1=(pendiente1*25)-(pendiente1*tdgolpes1Var)+(tdFinalLiquido1Var),
+          limite2=(pendiente2*25)-(pendiente2*tdgolpes3Var)+(tdFinalLiquido3Var),
+          limite3=(pendiente3*25)-(pendiente3*tdgolpes2Var)+(tdFinalLiquido2Var);
+
+        LimiteLiquido=(limite1+limite2+limite3)/3;
 
         var FinalLimiteLiquido=Math.round(LimiteLiquido);
         tdFinalLiquido4.text(FinalLimiteLiquido.toPrecision(4));
 
-
-
+        var LimitePlastico;
         //Plastico calculando el promedio
         var menorplastico1 = Math.min(tdFinalPlastico1Var,tdFinalPlastico2Var),
           mayorplastico1 = Math.max(tdFinalPlastico1Var,tdFinalPlastico2Var),  
@@ -295,7 +298,10 @@ var acciones = {
             LimitePlastico=0;  
           }
 
+
         var FinalLimitePlastico=Math.round(LimitePlastico);
+        
+
         tdFinalPlastico4.text(FinalLimitePlastico.toPrecision(4));
           
       
@@ -321,6 +327,15 @@ var acciones = {
       resultadoliquido = trResultados.eq(1),
       resultadoIndicePlasticidad = trResultados.eq(3);
 
+
+    //resultados grafica 
+    var inputGrafica = $(this).closest("div").find("input.datosgrafica");
+
+    inputGrafica.val("["+parseFloat(tdgolpes1Var)+","+parseFloat(tdFinalLiquido1Var)+"]"+","+"["+parseFloat(tdgolpes2Var)+","+parseFloat(tdFinalLiquido2Var)+"]"+","+"["+parseFloat(tdgolpes3Var)+","+parseFloat(tdFinalLiquido3Var)+"]").trigger('change');
+
+
+
+
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
     } else {
@@ -343,7 +358,7 @@ var acciones = {
       resultadoliquido.text(liquidoVar.toPrecision(4));
     }
 
-    if (liquidoVar <= 0 || liquidoVar == null || plasticoVar <= 0 || plasticoVar == null) {
+    if (liquidoVar == null || plasticoVar == null) {
       resultadoIndicePlasticidad.text("N/A");
     } else {
       indicePlasticidad = liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4);
@@ -411,7 +426,7 @@ var acciones = {
       resultadoliquido.text(liquidoVar.toPrecision(4));
     }
 
-    if (liquidoVar <= 0 || liquidoVar == null || plasticoVar <= 0 || plasticoVar == null) {
+    if (liquidoVar == null || plasticoVar == null) {
       resultadoIndicePlasticidad.text("N/A");
     } else {
       indicePlasticidad = liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4);
@@ -478,7 +493,7 @@ var acciones = {
       resultadoliquido.text(liquidoVar.toPrecision(4));
     }
 
-    if (liquidoVar <= 0 || liquidoVar == null || plasticoVar <= 0 || plasticoVar == null) {
+    if (liquidoVar == null || plasticoVar == null) {
       resultadoIndicePlasticidad.text("N/A");
     } else {
       indicePlasticidad = liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4);

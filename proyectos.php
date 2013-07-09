@@ -129,7 +129,7 @@
           <?php foreach ( $proyectos as $proyecto ) : ?>
           <tr>
             <td>
-              <span class="pull-left titulo-proyectos"><?php echo $proyecto->nombre_proyecto; ?></span>
+              <a  href="sondeos.php?idp=<?php echo $proyecto->id_proyecto; ?>"><span class="pull-left titulo-proyectos brand"><?php echo $proyecto->nombre_proyecto; ?></span></a>
               <br>
               <span class="muted pull-left">Autor: <?php echo $proyecto->nombres_autor.' '.$proyecto->apellidos_autor ?></span>
               <span class="muted pull-right">Responsable: <?php echo $proyecto->nombres_responsable.' '.$proyecto->apellidos_responsable ?></span>

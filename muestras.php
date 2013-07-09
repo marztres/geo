@@ -7,7 +7,7 @@
   require_once('includes/compresion.php');
   require_once('includes/granulometria.php');
   require_once('includes/pesos_retenidos.php');
-
+  
   
   $data = $_SESSION['usuario'];
   $proyectosClass = new proyectos();
@@ -23,7 +23,7 @@
     //$DatosCompresion[]=$datosCompresion->GetDatosCompresion( $muestra->id_muestra );
     $TestLimitesMuestra[] = $testLimitesClass->getLimitesMuestra( $muestra->id_muestra );
   }
-
+  
   $datosGranulometria= new granulometria();
   $pesosRetenidosClass= new pesos_retenidos(); 
   ?>
@@ -38,17 +38,9 @@
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/muestras.css">
-
-
-
-
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>  
-    
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    
-
     <script src="assets/js/vendor/bootstrap.js"></script>
     <script src="assets/js/vendor/highcharts.js"></script>
     <script src="assets/js/vendor/regression.js"></script>
@@ -92,7 +84,6 @@
       </div>
     </div>
     <!-- ############# FIN HEADER ############### -->
-
     <!-- #############  CUERPO ############### --> 
     <div class="row-fluid cuerpo-proyectos">
       <!-- #############  NAVEGACION SUPERIOR ############### --> 
@@ -139,7 +130,7 @@
           <a href="#Muestras" data-toggle="tab">Muestras</a>
         </li>
         <li>
-          <a href="#Limites" class="replots" data-toggle="tab">Limites de humedad y plasticidad natural</a>
+          <a href="#Limites"  data-toggle="tab">Limites de humedad y plasticidad natural</a>
         </li>
         <li>
           <a href="#Compresion" data-toggle="tab">Compresión simple</a>
@@ -218,7 +209,7 @@
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <li class="<?php echo (($i==1)?'active':''); ?>">
-                <a href="#muestra<?php echo $i; ?>" class="replots" data-toggle="tab">Muestra <?php echo $i; ?> </a>
+                <a href="#muestra<?php echo $i; ?>"  data-toggle="tab">Muestra <?php echo $i; ?> </a>
               </li>
               <?php $i++; ?>
               <?php endforeach; ?>
@@ -353,38 +344,37 @@
                         <td> </td>
                         <td><strong>Total</strong></td>
                         <td>
-                             <?php
-                                  $resultado = 0;
-                                  $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
-                                  $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
-                                  if($mayor!=0 AND $menor!=0){
-                                  $divMayorMenor1 = $mayor / $menor;
-                                  }
-                                  if ( $divMayorMenor1 < 1.29 ) {
-                                    $resultado = ($mayor + $menor)/2;
-                                  }
-                                  $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
-                                  $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
-                                  if($mayor!=0 AND $menor!=0){
-                                    $divMayorMenor2 = $mayor / $menor;
-                                  }
-                                  if ( $divMayorMenor2 < 1.29 ) {
-                                    $resultado = ($mayor + $menor)/2;
-                                  }
-                                  $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
-                                  $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
-                                  if($mayor!=0 AND $menor!=0){
-                                      $divMayorMenor3 = $mayor / $menor;
-                                   }
-                                  if ( $divMayorMenor3 < 1.29 ) {
-                                    $resultado = ($mayor + $menor)/2;
-                                  }
-                                  if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
-                                    $resultado = 0;
-                                  }
-                                    echo $humedadNatural=ceil(round($resultado,2));
-                             ?>
-
+                          <?php
+                            $resultado = 0;
+                            $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                            $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                            if($mayor!=0 AND $menor!=0){
+                            $divMayorMenor1 = $mayor / $menor;
+                            }
+                            if ( $divMayorMenor1 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                            $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                            if($mayor!=0 AND $menor!=0){
+                              $divMayorMenor2 = $mayor / $menor;
+                            }
+                            if ( $divMayorMenor2 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                            $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                            if($mayor!=0 AND $menor!=0){
+                                $divMayorMenor3 = $mayor / $menor;
+                             }
+                            if ( $divMayorMenor3 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                              $resultado = 0;
+                            }
+                              echo ceil(round($resultado,2));
+                            ?>
                         </td>
                       </tr>
                     </tbody>
@@ -422,7 +412,7 @@
                           <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->nom_capsula; ?>">
                         </td>
                         <td>
-                          <input name="liquidoGolpes[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->num_golpes; ?>">
+                          <input name="liquidoGolpes[]" class="input-mini limites iliquido ngolpes" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->num_golpes; ?>">
                         </td>
                         <td>
                           <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->peso_capsula; ?>">
@@ -457,7 +447,7 @@
                           <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->nom_capsula; ?>">
                         </td>
                         <td>
-                          <input name="liquidoGolpes[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->num_golpes; ?>">
+                          <input name="liquidoGolpes[]" class="input-mini limites iliquido ngolpes" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->num_golpes; ?>">
                         </td>
                         <td>
                           <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->peso_capsula; ?>">
@@ -491,7 +481,7 @@
                           <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][5]->nom_capsula; ?>">
                         </td>
                         <td>
-                          <input name="liquidoGolpes[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][5]->num_golpes; ?>">
+                          <input name="liquidoGolpes[]" class="input-mini ngolpes" type="text" value="<?php echo $TestLimitesMuestra[$i-1][5]->num_golpes; ?>">
                         </td>
                         <td>
                           <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][5]->peso_capsula; ?>">
@@ -534,35 +524,15 @@
                         <td> </td>
                         <td></td>
                         <td><strong>Total</strong></td>
-                        <td>
-                            <?php 
-                                $humedad1=$porcentajeLiquido1;
-                                $humedad2=$porcentajeLiquido2;
-                                $humedad3=$porcentajeLiquido3;
-                                $golpes1=$TestLimitesMuestra[$i-1][3]->num_golpes;
-                                $golpes2=$TestLimitesMuestra[$i-1][4]->num_golpes;
-                                $golpes3=$TestLimitesMuestra[$i-1][5]->num_golpes;
-                                $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
-                                $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
-                                $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
-
-                                $limite1=($pendiente1*25)-($pendiente1*$golpes1)+$humedad1;
-                                $limite2=($pendiente2*25)-($pendiente2*$golpes3)+$humedad3;
-                                $limite3=($pendiente3*25)-($pendiente3*$golpes2)+$humedad2;
-
-                                $LimiteLiquido=($limite1+$limite2+$limite3)/3;
-                                echo round($LimiteLiquido,2);
-
-                            ?>
-                        </td>
+                        <td></td>
                       </tr>
                     </tbody>
                   </table>
                 </form>
-            
-                <input id="datosgrafica<?php echo $i; ?>"  type="hidden" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
+                
+                <input id="datosgrafica<?php echo $i; ?>" class="datosgrafica"  type="text" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
                 <div id="grafica<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
-
+                
                 <!-- #############  LIMITE PLASTICO ############### -->
                 <h3>Limite plastico</h3>
                 <a href="#"  class="btn btn-info pull-right title noplastico">Pulsar si el suelo es NO PLASTICO</a>
@@ -681,37 +651,37 @@
                         <td> </td>
                         <td><strong>Total</strong></td>
                         <td>
-                            <?php
-                                $resultado = 0;
-                                $menor = min( array( $porcentajePlastico1, $porcentajePlastico2 ) );
-                                $mayor = max( array( $porcentajePlastico1, $porcentajePlastico2 ) );
-                                if($mayor!=0 AND $menor!=0){                          
-                                  $divMayorMenor1 = $mayor / $menor;
-                                }
-                                if ( $divMayorMenor1 < 1.29 ) {
-                                  $resultado = ($mayor + $menor)/2;
-                                }
-                                $menor = min( array( $porcentajePlastico2, $porcentajePlastico3 ) );
-                                $mayor = max( array( $porcentajePlastico2, $porcentajePlastico3 ) );
-                                if($mayor!=0 AND $menor!=0){
-                                  $divMayorMenor2 = $mayor / $menor;
-                                }    
-                                if ( $divMayorMenor2 < 1.29 ) {
-                                  $resultado = ($mayor + $menor)/2;
-                                }
-                                $menor = min( array( $porcentajePlastico1, $porcentajePlastico3 ) );
-                                $mayor = max( array( $porcentajePlastico1, $porcentajePlastico3 ) );
-                                if($mayor!=0 AND $menor!=0){
-                                  $divMayorMenor3 = $mayor / $menor;
-                                 } 
-                                if ( $divMayorMenor3 < 1.29 ) {
-                                  $resultado = ($mayor + $menor)/2;
-                                }
-                                if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
-                                  $resultado = 0;
-                                }
-                                   echo $limitePlastico=round($resultado,2);
-                          ?>
+                          <?php
+                            $resultado = 0;
+                            $menor = min( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                            $mayor = max( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                            if($mayor!=0 AND $menor!=0){                          
+                              $divMayorMenor1 = $mayor / $menor;
+                            }
+                            if ( $divMayorMenor1 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            $menor = min( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                            $mayor = max( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                            if($mayor!=0 AND $menor!=0){
+                              $divMayorMenor2 = $mayor / $menor;
+                            }    
+                            if ( $divMayorMenor2 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            $menor = min( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                            $mayor = max( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                            if($mayor!=0 AND $menor!=0){
+                              $divMayorMenor3 = $mayor / $menor;
+                             } 
+                            if ( $divMayorMenor3 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                              $resultado = 0;
+                            }
+                               echo $limitePlastico=round($resultado,2);
+                            ?>
                         </td>
                       </tr>
                     </tbody>
@@ -733,7 +703,35 @@
                     <tr>
                       <td>
                         <?php
-                            echo round($humedadNatural,2);
+                          $resultado = 0;
+                          $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                          $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                          if($mayor!=0 AND $menor!=0){
+                          $divMayorMenor1 = $mayor / $menor;
+                          }
+                          if ( $divMayorMenor1 < 1.29 ) {
+                            $resultado = ($mayor + $menor)/2;
+                          }
+                          $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                          $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                          if($mayor!=0 AND $menor!=0){
+                            $divMayorMenor2 = $mayor / $menor;
+                          }
+                          if ( $divMayorMenor2 < 1.29 ) {
+                            $resultado = ($mayor + $menor)/2;
+                          }
+                          $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                          $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                          if($mayor!=0 AND $menor!=0){
+                              $divMayorMenor3 = $mayor / $menor;
+                           }
+                          if ( $divMayorMenor3 < 1.29 ) {
+                            $resultado = ($mayor + $menor)/2;
+                          }
+                          if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                            $resultado = 0;
+                          }
+                            echo ceil(round($resultado,2));
                           ?>
                       </td>
                       <td>
@@ -771,7 +769,35 @@
                       </td>
                       <td>
                         <?php
-                            echo round($limitePlastico,2);
+                          $resultado = 0;
+                          $menor = min( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                          $mayor = max( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                          if($mayor!=0 AND $menor!=0){                          
+                            $divMayorMenor1 = $mayor / $menor;
+                          }
+                          if ( $divMayorMenor1 < 1.29 ) {
+                            $resultado = ($mayor + $menor)/2;
+                          }
+                          $menor = min( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                          $mayor = max( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                          if($mayor!=0 AND $menor!=0){
+                            $divMayorMenor2 = $mayor / $menor;
+                          }    
+                          if ( $divMayorMenor2 < 1.29 ) {
+                            $resultado = ($mayor + $menor)/2;
+                          }
+                          $menor = min( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                          $mayor = max( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                          if($mayor!=0 AND $menor!=0){
+                            $divMayorMenor3 = $mayor / $menor;
+                           } 
+                          if ( $divMayorMenor3 < 1.29 ) {
+                            $resultado = ($mayor + $menor)/2;
+                          }
+                          if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                            $resultado = 0;
+                          }
+                          echo $limitePlastico=round($resultado,2);
                           ?>
                       </td>
                       <td><?php echo $limeteLiquido-$limitePlastico?></td>
@@ -858,134 +884,129 @@
                       </tr>
                     </tbody>
                   </table>
-                
-                <!-- ############# FIN MEDIDAS DE LA MUESTRA ############### -->
-                <!-- #############  TABLA DE COMPRESIÓN ############### -->
-                <h3>Tabla de deformación</h3>
-                <table class="table table-hover table-striped table-bordered tabladeformacion">
-                  <thead>
-                    <tr>
-                      <th>Deformación(Pulg3)</th>
-                      <th>Carga (N)</th>
-                      <th>Deformación total</th>
-                      <th>Carga (Kg)</th>
-                      <th>Area corregida cm2</th>
-                      <th>Esfuerzo (Kg/cm2)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $DatosDeformaciones = $datosCompresion->GetDatosDeformaciones( $DatosCompresion->id_compresion); ?>
-                    <?php if ($DatosDeformaciones>0): ?>
-                    <?php foreach ( $DatosDeformaciones as $deformaciones ):?>                    
-                    <tr>
-                      <td>
-                        <input class="input-mini " name="compresionIdDeformacion[]" type="hidden" value="<?php echo $deformaciones ->id_deformacion ?>">
-                        <input class="input-mini" name="func" type="hidden" value="UpdateCompresion">
-                        <?php echo $deformaciones ->deformacion; 
-                          ?>
-                      </td>
-                      <td>
-                        <input class="input-mini ideformacion" name="compresionDeformaciones[]" type="text" value="<?php echo $deformaciones ->carga ?>">
-                      </td>
-                      <td>
-                        <?php if($deformaciones ->carga>0) {
-                          $deformacionTotal=($deformaciones ->deformacion*2.54)/1000;
-                          echo round($deformacionTotal,2); 
-                          } 
-                          else{
-                          echo 0;
-                          }
-                          ?>
-                      </td>
-                      <td>
-                        <?php if($deformaciones ->carga>0) {
-                          $cargakg=$deformaciones ->carga/10;
-                           echo round($cargakg,2);
-                          } 
-                          else{
+                  <!-- ############# FIN MEDIDAS DE LA MUESTRA ############### -->
+                  <!-- #############  TABLA DE COMPRESIÓN ############### -->
+                  <h3>Tabla de deformación</h3>
+                  <table class="table table-hover table-striped table-bordered tabladeformacion">
+                    <thead>
+                      <tr>
+                        <th>Deformación(Pulg3)</th>
+                        <th>Carga (N)</th>
+                        <th>Deformación total</th>
+                        <th>Carga (Kg)</th>
+                        <th>Area corregida cm2</th>
+                        <th>Esfuerzo (Kg/cm2)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php $DatosDeformaciones = $datosCompresion->GetDatosDeformaciones( $DatosCompresion->id_compresion); ?>
+                      <?php if ($DatosDeformaciones>0): ?>
+                      <?php foreach ( $DatosDeformaciones as $deformaciones ):?>                    
+                      <tr>
+                        <td>
+                          <input class="input-mini " name="compresionIdDeformacion[]" type="hidden" value="<?php echo $deformaciones ->id_deformacion ?>">
+                          <input class="input-mini" name="func" type="hidden" value="UpdateCompresion">
+                          <?php echo $deformaciones ->deformacion; 
+                            ?>
+                        </td>
+                        <td>
+                          <input class="input-mini ideformacion" name="compresionDeformaciones[]" type="text" value="<?php echo $deformaciones ->carga ?>">
+                        </td>
+                        <td>
+                          <?php if($deformaciones ->carga>0) {
+                            $deformacionTotal=($deformaciones ->deformacion*2.54)/1000;
+                            echo round($deformacionTotal,2); 
+                            } 
+                            else{
                             echo 0;
+                            }
+                            ?>
+                        </td>
+                        <td>
+                          <?php if($deformaciones ->carga>0) {
+                            $cargakg=$deformaciones ->carga/10;
+                             echo round($cargakg,2);
+                            } 
+                            else{
+                              echo 0;
+                            }
+                            ?>
+                        </td>
+                        <td>
+                          <?php if($deformaciones ->carga>0 AND $area!=0 ) {
+                            $areaCorregida= $area/(1-($deformacionTotal/$DatosCompresion->altura));
+                            echo round($areaCorregida,2);
+                            } 
+                            else{
+                            echo 0;
+                            }
+                            ?>
+                        </td>
+                        <td>
+                          <?php if($deformaciones ->carga>0 AND $areaCorregida!=0) {
+                            $esfuerzo= $cargakg/$areaCorregida;
+                            echo round($esfuerzo,2);
+                            $mayoresfuerzo[] =$esfuerzo;
+                            } 
+                            else{
+                            echo 0;
+                            }
+                            ?>
+                        </td>
+                      </tr>
+                      <?php endforeach; ?>
+                      <?php endif; ?>
+                    </tbody>
+                  </table>
+                  <!-- ############# TABLA DE COMPRESIÓN ############### -->
+                  <!-- ############# GRAFICA DE COMPRESIÓN ############### -->
+                  <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
+                  <!-- ############# RESULTADOS ############### -->
+                  <h3>Resultados</h3>
+                  <table class="table table-hover table-striped table-bordered resultadoscompresion">
+                    <thead>
+                      <tr>
+                        <th> Diametro cm</th>
+                        <th> Altura cm</th>
+                        <th> Peso</th>
+                        <th> Tipo de falla</th>
+                        <th> Area</th>
+                        <th> Volumen</th>
+                        <th> Peso unitario</th>
+                        <th> Cohesión</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> <?php echo $DatosCompresion->diametro; ?> </td>
+                        <td>  <?php echo $DatosCompresion->altura; ?> </td>
+                        <td> <?php echo $DatosCompresion->peso; ?></td>
+                        <td> <?php echo $DatosCompresion->tipoFalla; ?> </td>
+                        <td> <?php echo round($area,2); ?> </td>
+                        <td> <?php echo round($volumen,2); ?> </td>
+                        <td> <?php  
+                          if($DatosCompresion->peso!=0){
+                                $pesoUnitario=($DatosCompresion->peso/ $volumen)*10;
+                                echo round($pesoUnitario,2);
                           }
                           ?>
-                      </td>
-                      <td>
-                        <?php if($deformaciones ->carga>0 AND $area!=0 ) {
-                          $areaCorregida= $area/(1-($deformacionTotal/$DatosCompresion->altura));
-                          echo round($areaCorregida,2);
-                          } 
-                          else{
-                          echo 0;
-                          }
-                          ?>
-                      </td>
-                      <td>
-                        <?php if($deformaciones ->carga>0 AND $areaCorregida!=0) {
-                          $esfuerzo= $cargakg/$areaCorregida;
-                          echo round($esfuerzo,2);
-                          $mayoresfuerzo[] =$esfuerzo;
-                          } 
-                          else{
-                          echo 0;
-                          }
-                          ?>
-                      </td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                  </tbody>
-                </table>
-                
-                <!-- ############# TABLA DE COMPRESIÓN ############### -->
-                <!-- ############# GRAFICA DE COMPRESIÓN ############### -->
-                
-                
-
-                <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
-                <!-- ############# RESULTADOS ############### -->
-                <h3>Resultados</h3>
-                <table class="table table-hover table-striped table-bordered resultadoscompresion">
-                  <thead>
-                    <tr>
-                      <th> Diametro cm</th>
-                      <th> Altura cm</th>
-                      <th> Peso</th>
-                      <th> Tipo de falla</th>
-                      <th> Area</th>
-                      <th> Volumen</th>
-                      <th> Peso unitario</th>
-                      <th> Cohesión</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td> <?php echo $DatosCompresion->diametro; ?> </td>
-                      <td>  <?php echo $DatosCompresion->altura; ?> </td>
-                      <td> <?php echo $DatosCompresion->peso; ?></td>
-                      <td> <?php echo $DatosCompresion->tipoFalla; ?> </td>
-                      <td> <?php echo round($area,2); ?> </td>
-                      <td> <?php echo round($volumen,2); ?> </td>
-                      <td> <?php  
-                        if($DatosCompresion->peso!=0){
-                              $pesoUnitario=($DatosCompresion->peso/ $volumen)*10;
-                              echo round($pesoUnitario,2);
-                        }
-                        ?>
-                      </td>
-                      <td>
-                        <?php if($mayoresfuerzo!=null):?>
+                        </td>
+                        <td>
+                          <?php if($mayoresfuerzo!=null):?>
                           <?php sort($mayoresfuerzo);?>
-                        <?php endif;?>
-                        <?php
-                          $posicion=count($mayoresfuerzo); 
-                         if($mayoresfuerzo[$posicion-1]!=0){
-
-                             $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;
-                             echo round($cohesion,2);
-                         }
-                          ?>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                          <?php endif;?>
+                          <?php
+                            $posicion=count($mayoresfuerzo); 
+                            if($mayoresfuerzo[$posicion-1]!=0){
+                            
+                               $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;
+                               echo round($cohesion,2);
+                            }
+                            ?>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </form>
                 <!-- ############# FIN RESULTADOS compresion ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
@@ -1031,18 +1052,18 @@
                   <input type="hidden" name="func" value="granulometria">
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
                   <input type="hidden" name="idgranulometria" value="<?php echo $DatosGranulometria->id_granulometria ?>">
-                <table class="table table-hover table-striped table-bordered tablaanalisis">
-                  <thead>
-                    <tr>
-                      <th>Peso recipiente gr</th>
-                      <th>Peso recipiente + muestra</th>
-                      <th>Peso muestra seca</th>
-                      <th>Peso retenido N°200 + recipiente</th>
-                      <th>Peso retenido N°200 </th>
-                      <th>Suma pesos retenidos</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                  <table class="table table-hover table-striped table-bordered tablaanalisis">
+                    <thead>
+                      <tr>
+                        <th>Peso recipiente gr</th>
+                        <th>Peso recipiente + muestra</th>
+                        <th>Peso muestra seca</th>
+                        <th>Peso retenido N°200 + recipiente</th>
+                        <th>Peso retenido N°200 </th>
+                        <th>Suma pesos retenidos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       <tr>
                         <td> <input name="pesoRecipiente" class="input-mini analisis" type="text" value="<?php echo $DatosGranulometria->pesoRecipiente?>"> </td>
                         <td> <input name="pesoRecipienteMasMuestra" class="input-mini analisis" type="text" value="<?php echo $DatosGranulometria->pesoRecipienteMasMuestra ?>"> </td>
@@ -1068,23 +1089,23 @@
                         <td> <?php echo $sumapesoretenidos ?></td>
                       </tr>
                     </tbody>
-                </table>
-                <!-- ############# FIN MEDIDAS DE LA MUESTRA GRANULOMETRIA ############### -->
-                <!-- #############  TABLA DE GRANULOMETRIA ############### -->
-                <h3>Tabla de granulometria</h3>
-                <table class="table table-hover table-striped table-bordered tablapesos">
-                  <thead>
-                    <tr>
-                      <th>Tamiz</th>
-                      <th>Tamaño(mm)</th>
-                      <th>Peso retenido gr</th>
-                      <th>Peso retenido corregido gr</th>
-                      <th>Retenido %</th>
-                      <th>Retenido acumulado %</th>
-                      <th>Pasa %</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                  </table>
+                  <!-- ############# FIN MEDIDAS DE LA MUESTRA GRANULOMETRIA ############### -->
+                  <!-- #############  TABLA DE GRANULOMETRIA ############### -->
+                  <h3>Tabla de granulometria</h3>
+                  <table class="table table-hover table-striped table-bordered tablapesos">
+                    <thead>
+                      <tr>
+                        <th>Tamiz</th>
+                        <th>Tamaño(mm)</th>
+                        <th>Peso retenido gr</th>
+                        <th>Peso retenido corregido gr</th>
+                        <th>Retenido %</th>
+                        <th>Retenido acumulado %</th>
+                        <th>Pasa %</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                       <?php if ($DatosRetenidos>0): ?>
                       <?php $j = 0; $temp = array(); ?>
                       <?php foreach ( $DatosRetenidos as $retenidos ):?>
@@ -1094,7 +1115,6 @@
                         </td>
                         <td><?php echo $retenidos->tamanoTamiz ?></td>
                         <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
-                        
                         <?php $fondopesoretenido=$DatosGranulometria->pesoRecipienteMasMuestra-$pesoretenidomasrecipiente;
                           $totalpesoretenido=$sumapesoretenidos+$fondopesoretenido;
                           ?>
@@ -1169,13 +1189,10 @@
                         <td>  </td>
                       </tr>
                     </tbody>
-                </table>
+                  </table>
                 </form>
                 <!-- ############# TABLA DE GRANULOMETRIA ############### -->
                 <!-- ############# GRAFICA DE GRANULOMETRIA ############### -->
-                
-
-
                 <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                 <!-- ############# RESULTADOS ############### -->
                 <h3>Resultados</h3>
@@ -1214,8 +1231,6 @@
                   </tbody>
                 </table>
                 <!-- ############# FIN RESULTADOS ############### -->
-
-
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
                 <div class="form-actions">
                   <a href='#' rel="granulometria<?php echo $i;?>" class="btn btn-primary input-xlarge guardarGranulometria">Guardar información</a>
@@ -1585,12 +1600,9 @@
           <h5 >Nivel freatico: 1</h5>
           <!-- ############# FIN INFORME DE ESTRATIGRAFIA ############### -->
           <!-- ############# fin tabs de muestras internas estratigrafia ############### --> 
-          
-        
         </div>
       </div>
       <!-- ############# FIN CUERPO ############### --> 
-    
     </div>
     <!-- #############  FOOTER ############### -->    
     <div class="row-fluid footer ">
@@ -1763,90 +1775,116 @@
     <!-- #############  BOOTSTRAP JS ############### -->
     <!--script type="text/javascript" src="assets/js/jqplot/plugins/example.js"></script-->
     <script src="assets/js/muestras.js"></script>
+    
     <script type="text/javascript">
-        $(function () {
-
+      $(function graficador() {
+      
+        
+       
+      <?php $i = 1; ?>
+      <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+      
+      
+      
+      var datosgrafica=$('#datosgrafica<?php echo $i; ?>').val();
+      var sourceData = eval("["+datosgrafica+"]");  
+      
+      $('#grafica<?php echo $i; ?>').highcharts({
           
-         
-    <?php $i = 1; ?>
-    <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
-  
-     var sourceData = [[16,57.86],[26,56.11],[34,54.46]];
-
-
-     //var sourceData = JSON.parse("["+$("#datosgrafica<?php echo $i; ?>").val()+"]");
-     //var sourceData = JSON.parse("["+datos+"]");
+          chart: {
+            renderTo: 'linear',
+            events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        setInterval(function() {
+                            var x = (new Date()).getTime(), // current time
+                                y = Math.random();
+                            series.addPoint([x, y], true, true);
+                        }, 1000);
+                    }
+                }
+          },
           
-          $('#grafica<?php echo $i; ?>').highcharts({
-            
-            chart: {
-              renderTo: 'linear'
-            },
-            
-            title: {
-                text: 'Grafica de Limite liquido'
-            },
-            credits : {
-              enabled : false
-            },
-            
-            xAxis: {
-               type: 'logarithmic',
-                min: 1,
-                max: 100,
-                minorTickInterval: 10,
-                title: {
-                    text: 'Numero de golpes'
-                }  
-                
-            },
-            
-            yAxis: {
-                
-                tickInterval: 1,
-                title: {
-                    text: 'Contenido de humedad (%)'
-                },
-                labels: {
-                  format: '{value} %'
-                } 
-            },
-            
-            tooltip: {
-                headerFormat: '<b>{series.name}</b><br />',
-                pointFormat: 'x = {point.x}, y = {point.y}'
-            },
-            
-            series: [{
-                name: 'Datos',
-                type: 'scatter',            
-                data: sourceData,
-                pointStart: 1
-            },
-            {
-            name: 'Linea de tendencia',  
-            type: 'line',
-            marker: { enabled: false },
-            /* function returns data for trend-line */
-            data: (function() {
-              return fitData(sourceData).data;
-            })()
-          }]
-        });
-  
-    <?php $i++; ?>
-    <?php endforeach; ?>
+          title: {
+              text: 'Grafica de Limite liquido'
+          },
+          credits : {
+            enabled : false
+          },
+          
+          xAxis: {
+             type: 'logarithmic',
+              min: 1,
+              max: 100,
+              minorTickInterval: 10,
+              title: {
+                  text: 'Numero de golpes'
+              }  
+          },
+          
+          yAxis: {
+              
+              tickInterval: 1,
+              title: {
+                  text: 'Contenido de humedad (%)'
+              },
+              labels: {
+                format: '{value} %'
+              } 
+          },
+          
+          tooltip: {
+              headerFormat: '<b>{series.name}</b><br />',
+              pointFormat: 'x = {point.x}, y = {point.y}'
+          },
+          
+          series: [{
+              name: 'Datos',
+              type: 'scatter',            
+              data: sourceData,
+              pointStart: 1
+          },
+          {
+          name: 'Linea de tendencia',  
+          type: 'line',
+          marker: { enabled: false },
+          /* function returns data for trend-line */
+          data: (function() {
+            return fitData(sourceData).data;
+          })()
+        }]
+      });
+      
+      <?php $i++; ?>
+      <?php endforeach; ?>
+      
+      $('.brand').tooltip('hide');
 
-    $('.brand').tooltip('hide');
-    });
 
+
+
+      var contador=0;
+      $('.datosgrafica').on("change", function(){
+        
+        contador++;
+        
+        if(contador==6){
+          graficador();
+          contador=0;
+        }
+        console.log(contador);
+        console.log('Graficas modificadas');
+
+      });
+
+
+
+      });
+
+
+      
     </script>
-  
-
-
-
-
-
-
   </body>
 </html>
