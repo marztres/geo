@@ -1873,6 +1873,7 @@
     <?php $i++; ?>
     <?php endforeach; ?>
 
+    $('.brand').tooltip('hide');
     });
 
     </script>
