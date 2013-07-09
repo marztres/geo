@@ -1,0 +1,35 @@
+.cuerpo-login {
+
+	background: #fafafa; 
+}
+.arealogin {
+	background: #fafafa;
+}
+
+
+.title-login {
+	display: block;
+	background: #CCC;
+} 
+.input-prepend .input-block-level {
+  width: 90%;
+}
+
+.arealogin > form {
+	
+		padding: 0 20px 0 20px;
+		margin-top: 70px;
+		margin-bottom: 100px;
+		background: #FFFFFF;
+		border: 1px solid #EAEAEA;
+		border-radius: 10px;
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+        box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+.inputs {
+	margin-bottom: 20px;
+} 
+
+

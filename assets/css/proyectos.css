@@ -1,0 +1,32 @@
+.header {
+	
+	border-bottom: none;
+}
+
+
+.table td  {
+   text-align: center;   
+}
+
+.table th {
+
+	text-align: center;
+}
+
+.buscador {
+
+	margin-right: 30px;
+}
+
+.titulo-proyectos
+{
+	font-weight:600;
+	font-size: 1.2em;
+	color: #505050;
+}
+
+.cuerpo-proyectos {
+ min-height:450px;
+}
+
+

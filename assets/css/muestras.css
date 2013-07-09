@@ -1,0 +1,82 @@
+.header {
+	
+	border-bottom: none;
+}
+
+
+.table td  {
+   text-align: center;   
+}
+
+.table th {
+
+	text-align: center;
+}
+
+.buscador {
+
+	margin-right: 30px;
+}
+
+.titulo-proyectos
+{
+	font-weight:600;
+	font-size: 1.2em;
+	color: #505050;
+}
+
+.cuerpo-proyectos {
+ min-height:450px;
+}
+.title  {
+
+	font-weight: bold;  
+}
+
+
+.info_sondeos label:first-child {
+
+	padding-left: 10px;
+}
+.info_sondeos {
+
+	border-bottom: 2px solid #CCC;
+	margin-bottom: 10px;
+}
+.tituloprofundidad {
+	margin-top: 5px;
+	font-size: 1.2em;
+}
+
+.texture {
+
+	 background:url(../img/fondo.jpg) ;
+}
+.texture1 {
+
+	 background:url(../img/fondo1.jpg) ;
+}
+.letra-s {
+	font-size: 0.8em;
+}
+
+.tds {
+	height: 100%;
+	padding: 0 0 0 0;
+	margin:  0 0 0 0;
+	
+}
+
+.centimetros {
+	background: #CCC;
+	padding-top: 50px;
+	margin: 0 0 0 0;
+}
+
+.nivel_freatico{
+	height: 0px;
+	margin: 0 0 0 0;
+	position: relative;
+	top:100px;		
+
+}

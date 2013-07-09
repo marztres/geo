@@ -1,0 +1,73 @@
+.logo{
+	background:url(../img/logo_geotecnia.png) no-repeat;
+	height: 134px;
+	width: 90px;
+	transition:all 0.5s ease-in;
+
+}
+.logo:hover{
+	background:url(../img/logo_geotecnia_hover.png) no-repeat;
+	cursor: pointer;
+
+}
+
+.header {
+	
+	border-bottom: 1px solid #CCC
+}
+.header-title {
+
+	margin-top: 100px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 500;
+	
+}
+
+.link-header{
+	margin-top: 60px;
+	font-weight: 600;
+	font-size: 1.1em;
+	color: #5e5c5c;
+	text-align: center;
+	transition:all 0.5s ease-in;
+}
+.link-header:hover{
+	
+	font-weight: 600;
+	font-size: 1.1em;
+	color: #ea5d5d;
+	text-decoration: none;
+
+}
+.datos-perfil{
+	margin-top: 15px;
+}
+
+
+.copiright {
+		
+		color: #c7c7c7;
+		padding-left: 10px;
+}
+.footer {
+	border-top: 1px solid #CCC;
+	padding: 5px 0 0 0 ;
+}
+a.links-footer {
+	font-size: 1.1em;
+	font-weight: 500;
+	padding-right: 30px;
+	transition:all 0.5s ease-in;
+}
+
+a.links-footer:hover {
+	color: #ea5d5d;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+
+
+.brand:hover {
+	color: #ea5d5d;
+}
