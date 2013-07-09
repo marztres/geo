@@ -352,7 +352,40 @@
                         </td>
                         <td> </td>
                         <td><strong>Total</strong></td>
-                        <td></td>
+                        <td>
+                             <?php
+                                  $resultado = 0;
+                                  $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                                  $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                                  if($mayor!=0 AND $menor!=0){
+                                  $divMayorMenor1 = $mayor / $menor;
+                                  }
+                                  if ( $divMayorMenor1 < 1.29 ) {
+                                    $resultado = ($mayor + $menor)/2;
+                                  }
+                                  $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                                  $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                                  if($mayor!=0 AND $menor!=0){
+                                    $divMayorMenor2 = $mayor / $menor;
+                                  }
+                                  if ( $divMayorMenor2 < 1.29 ) {
+                                    $resultado = ($mayor + $menor)/2;
+                                  }
+                                  $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                                  $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                                  if($mayor!=0 AND $menor!=0){
+                                      $divMayorMenor3 = $mayor / $menor;
+                                   }
+                                  if ( $divMayorMenor3 < 1.29 ) {
+                                    $resultado = ($mayor + $menor)/2;
+                                  }
+                                  if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                                    $resultado = 0;
+                                  }
+                                    echo ceil(round($resultado,2));
+                             ?>
+
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -627,7 +660,39 @@
                         </td>
                         <td> </td>
                         <td><strong>Total</strong></td>
-                        <td></td>
+                        <td>
+                            <?php
+                                $resultado = 0;
+                                $menor = min( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                                $mayor = max( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                                if($mayor!=0 AND $menor!=0){                          
+                                  $divMayorMenor1 = $mayor / $menor;
+                                }
+                                if ( $divMayorMenor1 < 1.29 ) {
+                                  $resultado = ($mayor + $menor)/2;
+                                }
+                                $menor = min( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                                $mayor = max( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                                if($mayor!=0 AND $menor!=0){
+                                  $divMayorMenor2 = $mayor / $menor;
+                                }    
+                                if ( $divMayorMenor2 < 1.29 ) {
+                                  $resultado = ($mayor + $menor)/2;
+                                }
+                                $menor = min( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                                $mayor = max( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                                if($mayor!=0 AND $menor!=0){
+                                  $divMayorMenor3 = $mayor / $menor;
+                                 } 
+                                if ( $divMayorMenor3 < 1.29 ) {
+                                  $resultado = ($mayor + $menor)/2;
+                                }
+                                if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                                  $resultado = 0;
+                                }
+                                   echo $limitePlastico=round($resultado,2);
+                          ?>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
