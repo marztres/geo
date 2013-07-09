@@ -1792,19 +1792,7 @@
       $('#grafica<?php echo $i; ?>').highcharts({
           
           chart: {
-            renderTo: 'linear',
-            events: {
-                    load: function() {
-    
-                        // set up the updating of the chart each second
-                        var series = this.series[0];
-                        setInterval(function() {
-                            var x = (new Date()).getTime(), // current time
-                                y = Math.random();
-                            series.addPoint([x, y], true, true);
-                        }, 1000);
-                    }
-                }
+            renderTo: 'linear'
           },
           
           title: {
@@ -1878,10 +1866,7 @@
         console.log('Graficas modificadas');
 
       });
-
-
-
-      });
+    });
 
 
       
