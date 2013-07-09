@@ -534,7 +534,27 @@
                         <td> </td>
                         <td></td>
                         <td><strong>Total</strong></td>
-                        <td></td>
+                        <td>
+                            <?php 
+                                $humedad1=$porcentajeLiquido1;
+                                $humedad2=$porcentajeLiquido2;
+                                $humedad3=$porcentajeLiquido3;
+                                $golpes1=$TestLimitesMuestra[$i-1][3]->num_golpes;
+                                $golpes2=$TestLimitesMuestra[$i-1][4]->num_golpes;
+                                $golpes3=$TestLimitesMuestra[$i-1][5]->num_golpes;
+                                $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
+                                $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
+                                $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
+
+                                $limite1=($pendiente1*25)-($pendiente1*$golpes1)+$humedad1;
+                                $limite2=($pendiente2*25)-($pendiente2*$golpes3)+$humedad3;
+                                $limite3=($pendiente3*25)-($pendiente3*$golpes2)+$humedad2;
+
+                                $LimiteLiquido=($limite1+$limite2+$limite3)/3;
+                                echo round($LimiteLiquido,2);
+
+                            ?>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
