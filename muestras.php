@@ -42,6 +42,7 @@
 
 
 
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>  
     
@@ -49,6 +50,8 @@
     
 
     <script src="assets/js/vendor/bootstrap.js"></script>
+    <script src="assets/js/vendor/highcharts.js"></script>
+    <script src="assets/js/vendor/regression.js"></script>
   </head>
   <body>
     <!-- ############# HEADER ############### -->
@@ -504,7 +507,8 @@
                   </table>
                 </form>
             
-                
+                <input id="datosgrafica<?php echo $i; ?>"  type="text" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
+                <div id="grafica<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
 
                 <!-- #############  LIMITE PLASTICO ############### -->
                 <h3>Limite plastico</h3>
@@ -1730,6 +1734,83 @@
     <!-- #############  BOOTSTRAP JS ############### -->
     <!--script type="text/javascript" src="assets/js/jqplot/plugins/example.js"></script-->
     <script src="assets/js/muestras.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+          
+         
+    <?php $i = 1; ?>
+    <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+  
+     var sourceData = [[16,57.86],[26,56.11],[34,54.46]];
+
+
+     //var sourceData = JSON.parse("["+$("#datosgrafica<?php echo $i; ?>").val()+"]");
+     //var sourceData = JSON.parse("["+datos+"]");
+          
+          $('#grafica<?php echo $i; ?>').highcharts({
+            
+            chart: {
+              renderTo: 'linear'
+            },
+            
+            title: {
+                text: 'Grafica de Limite liquido'
+            },
+            credits : {
+              enabled : false
+            },
+            
+            xAxis: {
+               type: 'logarithmic',
+                min: 1,
+                max: 100,
+                minorTickInterval: 10,
+                title: {
+                    text: 'Numero de golpes'
+                }  
+                
+            },
+            
+            yAxis: {
+                
+                tickInterval: 1,
+                title: {
+                    text: 'Contenido de humedad (%)'
+                },
+                labels: {
+                  format: '{value} %'
+                } 
+            },
+            
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br />',
+                pointFormat: 'x = {point.x}, y = {point.y}'
+            },
+            
+            series: [{
+                name: 'Datos',
+                type: 'scatter',            
+                data: sourceData,
+                pointStart: 1
+            },
+            {
+            name: 'Linea de tendencia',  
+            type: 'line',
+            marker: { enabled: false },
+            /* function returns data for trend-line */
+            data: (function() {
+              return fitData(sourceData).data;
+            })()
+          }]
+        });
+  
+    <?php $i++; ?>
+    <?php endforeach; ?>
+
+    });
+
+    </script>
   
 
 
