@@ -968,7 +968,7 @@
                         <?php 
                             $tamano=count($gdt);
                             $t=$tamano-1;
-                            for($l=1; $l<=$t; $l++){
+                            for($l=0; $l<=$t; $l++){
                                if(isset($gdt[$l]) AND isset($ge[$l])){
                                   if($l<$t){
                                     $datos=$datos."[".$gdt[$l].",".$ge[$l]."],";
@@ -981,7 +981,11 @@
                         ?>
                   <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="text" value="<?php echo $datos?>">
                   <div id="graficacompresion<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
-
+                    <?php 
+                        unset($gdt);
+                        unset($ge);
+                        unset($datos);
+                    ?>
                   <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
                   <!-- ############# RESULTADOS ############### -->
                   <h3>Resultados</h3>
@@ -1141,6 +1145,11 @@
                         </td>
                         <td><?php echo $retenidos->tamanoTamiz ?></td>
                         <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
+                         <?php 
+                           if($retenidos->pesoRetenido>0){
+                               $pr[]=$retenidos->pesoRetenido;
+                           }
+                          ?>
                         <?php $fondopesoretenido=$DatosGranulometria->pesoRecipienteMasMuestra-$pesoretenidomasrecipiente;
                           $totalpesoretenido=$sumapesoretenidos+$fondopesoretenido;
                           ?>
@@ -1167,7 +1176,13 @@
                         </td>
                         <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
                         <td class="acumulado" ><?php echo $temp[$j]; ?></td>
-                        <td><?php echo 100 - $temp[$j]; ?></td>
+                        <td>
+                            <?php echo $pasa=100 - $temp[$j];
+                                if($retenidos->pesoRetenido>0){
+                                   $p[]=$pasa;
+                                }
+                             ?>
+                        </td>
                       </tr>
                       <?php $j++; ?>
                       <?php endforeach?>
@@ -1221,10 +1236,29 @@
                 <!-- ############# TABLA DE GRANULOMETRIA ############### -->
 
                 <!-- ############# GRAFICA DE GRANULOMETRIA ############### -->
-                <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgrafica"  type="text" value="">
+                        <?php 
+                            $tamano=count($pr);
+                            $t=$tamano-1;
+                            for($l=0; $l<=$t; $l++){
+                               if(isset($pr[$l]) AND isset($p[$l])){
+                                  if($l<$t){
+                                    $datos=$datos."[".$pr[$l].",".$p[$l]."],";
+                                  }
+                                  else{
+                                    $datos=$datos."[".$pr[$l].",".$p[$l]."]"; 
+                                  }
+                               }
+                            }
+                        ?>
+                <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgrafica"  type="text" value="<?php  echo $datos; ?>">
                 <div id="graficagranulometria<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                 <!-- ############# RESULTADOS ############### -->
+                <?php 
+                    unset($pr);
+                    unset($p);
+                    unset($datos); 
+                ?>
                 <h3>Resultados</h3>
                 <table class="table table-hover table-striped table-bordered ">
                   <thead>
