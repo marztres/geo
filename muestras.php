@@ -900,6 +900,8 @@
                     <tbody>
                       <?php $DatosDeformaciones = $datosCompresion->GetDatosDeformaciones( $DatosCompresion->id_compresion); ?>
                       <?php if ($DatosDeformaciones>0): ?>
+                      <?php $k=0; $m=1;?>
+
                       <?php foreach ( $DatosDeformaciones as $deformaciones ):?>                    
                       <tr>
                         <td>
@@ -915,6 +917,7 @@
                           <?php if($deformaciones ->carga>0) {
                             $deformacionTotal=($deformaciones ->deformacion*2.54)/1000;
                             echo round($deformacionTotal,2); 
+                            $gdt[$k]=round($deformacionTotal,2);
                             } 
                             else{
                             echo 0;
@@ -945,6 +948,7 @@
                           <?php if($deformaciones ->carga>0 AND $areaCorregida!=0) {
                             $esfuerzo= $cargakg/$areaCorregida;
                             echo round($esfuerzo,2);
+                            $ge[$k]=round($esfuerzo,2);
                             $mayoresfuerzo[] =$esfuerzo;
                             } 
                             else{
@@ -953,13 +957,29 @@
                             ?>
                         </td>
                       </tr>
+                        
+                        <?php $k++ ?>
                       <?php endforeach; ?>
                       <?php endif; ?>
                     </tbody>
                   </table>
                   <!-- ############# TABLA DE COMPRESIÓN ############### -->
                   <!-- ############# GRAFICA DE COMPRESIÓN ############### -->
-                  <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="text" value="">
+                        <?php 
+                            $tamano=count($gdt);
+                            $t=$tamano-1;
+                            for($l=1; $l<=$t; $l++){
+                               if(isset($gdt[$l]) AND isset($ge[$l])){
+                                  if($l<$t){
+                                    $datos=$datos."[".$gdt[$l].",".$ge[$l]."],";
+                                  }
+                                  else{
+                                    $datos=$datos."[".$gdt[$l].",".$ge[$l]."]"; 
+                                  }
+                               }
+                            }
+                        ?>
+                  <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="text" value="<?php echo $datos?>">
                   <div id="graficacompresion<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
 
                   <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
@@ -1174,10 +1194,11 @@
                             ?>
                         </td>
                         <td class="acumulado"><?php 
-                          echo $TotalRetenidoAcomulado=round($Fondoretenido+$temp[13],2);
+                          echo $FondoRetenidoAcomulado=round($Fondoretenido+$temp[13],2);
+                               $fondor=round($FondoRetenidoAcomulado);
                           ?>
                         </td>
-                        <td> <?php echo 100-$TotalRetenidoAcomulado; ?></td>
+                        <td> <?php echo 100 - $fondor ; ?></td>
                       </tr>
                       <tr>
                         <td> Total </td>
