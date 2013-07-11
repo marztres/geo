@@ -1859,7 +1859,7 @@
             renderTo: 'linear',
             events: {
                     load: function() {
-    
+                        
                         // set up the updating of the chart each second
                         var series = this.series[0];
                         var series2= this.series[1];
@@ -1946,24 +1946,43 @@
     
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
-      
-      //var datosgrafica=$('#datosgrafica<?php echo $i; ?>').val();
-      //var sourceData = eval("["+datosgrafica+"]");  
-      
-      var sourceData =[
-      [0.03,0.08],
-      [0.08,0.29],
-      [0.13,0.61],
-      [0.19,0.95],
-      [0.25,1.10],
-      [0.38,1.23],
-      [0.51,1.32]];
+    
+      var inputCompresion=$('#datosgraficacompresion<?php echo $i; ?>').val();
+      var datosCompresion = eval("["+inputCompresion+"]");
 
 
+      var datosCompresion2;
       $('#graficacompresion<?php echo $i; ?>').highcharts({
 
           chart: {
-            renderTo: 'linear'
+            renderTo: 'linear',
+            events: {
+                load: function() {
+
+
+                        // data series
+                        var series = this.series[0];
+                        var series2= this.series[1];
+                        $("#datosgraficacompresion<?php echo $i; ?>").change(function() {
+                            console.log("entrando");
+                             // update grafica
+                            var inputCompresion2=$('#datosgraficacompresion<?php echo $i; ?>').val();
+                            datosCompresion2 = eval("["+inputCompresion2+"]");           
+                            series.update({ 
+                              data: datosCompresion2
+                              } 
+                            );
+
+                            series2.update({ 
+                              data: datosCompresion2
+                              } 
+                            );
+                            console.log("Grafica de compresion");
+
+                        });
+                    }
+            }
+            
           },
           
           title: {
@@ -1991,14 +2010,14 @@
           series: [{
               name: 'Datos',
               type: 'scatter',            
-              data: sourceData,
+              data: datosCompresion,
               pointStart: 1
           },{
           name: 'Linea de tendencia',  
           type: 'line',
           lineWidth: 0.5,
           marker: { enabled: false },
-          data: sourceData
+          data: datosCompresion
         }]
       });
       
@@ -2015,8 +2034,6 @@
 
       <?php $i++; ?>
       <?php endforeach; ?>
-
-
 
     });
     </script>

@@ -690,21 +690,53 @@ var acciones = {
 
 
     // grafica de deformacion 
-    var inputGraficaCompresion = $(this).closest("div").find("input.datosgraficacompresion");
+    var inputGraficaCompresion = $(this).closest("div").find("input.datosgraficaCompresion");
 
+ 
     optimizadorGraficas++;
     if(optimizadorGraficas==5){
       var total=5;
       var aux=0;
-      inputGraficaCompresion.val(
- 
-      ).trigger('change');
-
-
-
+      inputGraficaCompresion.val("["+parseFloat(tdDeformacion0Var)+","+parseFloat(td0Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion1Var)+","+parseFloat(td1Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion2Var)+","+parseFloat(td2Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion3Var)+","+parseFloat(td3Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion4Var)+","+parseFloat(td4Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion5Var)+","+parseFloat(td5Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion6Var)+","+parseFloat(td6Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion7Var)+","+parseFloat(td7Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion8Var)+","+parseFloat(td8Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion9Var)+","+parseFloat(td9Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion10Var)+","+parseFloat(td10Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion11Var)+","+parseFloat(td11Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion12Var)+","+parseFloat(td12Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion13Var)+","+parseFloat(td13Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion14Var)+","+parseFloat(td14Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion15Var)+","+parseFloat(td15Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion16Var)+","+parseFloat(td16Var)+"]"
+      +","+
+      "["+parseFloat(tdDeformacion17Var)+","+parseFloat(td17Var)+"]").trigger('change');
     
     optimizadorGraficas=0;  
     }
+    console.log(optimizadorGraficas);
+
 
     //Calculos de cohesion   
     cohesionVar = (Math.max(td0Var, td1Var, td2Var, td3Var, td4Var, td5Var, td6Var, td7Var, td8Var, td9Var, td10Var, td11Var, td12Var, td13Var, td14Var, td15Var, td16Var, td17Var)) / 2 * 100;
