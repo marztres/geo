@@ -260,10 +260,10 @@
                         <td>
                           <?php 
                             if($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco!=0 ){
-                            echo $porcentajeAgua1 = round((($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][0]->peso_capsula )) * 100, 2);
+                                  echo $porcentajeAgua1 = round((($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][0]->peso_capsula )) * 100, 2);
                             }
                             else{
-                            echo 0;
+                                  echo 0;
                             }
                             ?>
                         </td>
@@ -808,7 +808,7 @@
                   <a href="#" rel="muestra<?php echo $i; ?>" class="guardaLimites btn btn-primary input-xlarge">Guardar información</a>
                 </div>
               </div>
-              <?php $i++; ?>
+              <?php $i++;?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>
@@ -1002,7 +1002,11 @@
                             if($mayoresfuerzo[$posicion-1]!=0){
                             
                                $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;
-                               echo round($cohesion,2);
+                                 
+                                 if($posicion==9){
+                                  echo round($cohesion,2);
+                                   unset($mayoresfuerzo);
+                                 }
                             }
                             ?>
                         </td>
