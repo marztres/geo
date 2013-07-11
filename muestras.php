@@ -23,7 +23,6 @@
     //$DatosCompresion[]=$datosCompresion->GetDatosCompresion( $muestra->id_muestra );
     $TestLimitesMuestra[] = $testLimitesClass->getLimitesMuestra( $muestra->id_muestra );
   }
-  
   $datosGranulometria= new granulometria();
   $pesosRetenidosClass= new pesos_retenidos(); 
   ?>
@@ -530,8 +529,8 @@
                   </table>
                 </form>
                 
-                <input id="datosgrafica<?php echo $i; ?>" class="datosgrafica"  type="text" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
-                <div id="grafica<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+                <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="text" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
+                <div id="graficaLimites<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 
                 <!-- #############  LIMITE PLASTICO ############### -->
                 <h3>Limite plastico</h3>
@@ -912,7 +911,7 @@
                         <td>
                           <input class="input-mini ideformacion" name="compresionDeformaciones[]" type="text" value="<?php echo $deformaciones ->carga ?>">
                         </td>
-                        <td>
+                        <td class="gdeformacion">
                           <?php if($deformaciones ->carga>0) {
                             $deformacionTotal=($deformaciones ->deformacion*2.54)/1000;
                             echo round($deformacionTotal,2); 
@@ -960,6 +959,9 @@
                   </table>
                   <!-- ############# TABLA DE COMPRESIÓN ############### -->
                   <!-- ############# GRAFICA DE COMPRESIÓN ############### -->
+                  <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="text" value="">
+                  <div id="graficacompresion<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+
                   <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
                   <!-- ############# RESULTADOS ############### -->
                   <h3>Resultados</h3>
@@ -1192,7 +1194,10 @@
                   </table>
                 </form>
                 <!-- ############# TABLA DE GRANULOMETRIA ############### -->
+
                 <!-- ############# GRAFICA DE GRANULOMETRIA ############### -->
+                <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgrafica"  type="text" value="">
+                <div id="graficagranulometria<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                 <!-- ############# RESULTADOS ############### -->
                 <h3>Resultados</h3>
@@ -1786,13 +1791,40 @@
       
       
       
-      var datosgrafica=$('#datosgrafica<?php echo $i; ?>').val();
-      var sourceData = eval("["+datosgrafica+"]");  
-      
-      $('#grafica<?php echo $i; ?>').highcharts({
+      var datosgrafica=$('#datosgraficaLimites<?php echo $i; ?>').val();
+      var sourceData = eval("["+datosgrafica+"]");
+      var sourceData2;
+      $('#graficaLimites<?php echo $i; ?>').highcharts({
           
           chart: {
-            renderTo: 'linear'
+            renderTo: 'linear',
+            events: {
+                    load: function() {
+    
+                        // set up the updating of the chart each second
+                        var series = this.series[0];
+                        var series2= this.series[1];
+                        $("#datosgraficaLimites<?php echo $i; ?>").change(function() {
+                             // current time
+                            
+                            var datosgrafica2=$('#datosgraficaLimites<?php echo $i; ?>').val();
+                            sourceData2 = eval("["+datosgrafica2+"]");           
+                            series.update({ 
+                              data: sourceData2
+                              } 
+                            );
+
+                            series2.update({ 
+                              data: (function() {
+                                return fitData(sourceData2).data;
+                                    })()
+                              } 
+                            );
+                            console.log("Grafica de limites actualizada");
+
+                        });
+                    }
+            }
           },
           
           title: {
@@ -1811,9 +1843,7 @@
                   text: 'Numero de golpes'
               }  
           },
-          
           yAxis: {
-              
               tickInterval: 1,
               title: {
                   text: 'Contenido de humedad (%)'
@@ -1848,28 +1878,89 @@
       <?php $i++; ?>
       <?php endforeach; ?>
       
-      $('.brand').tooltip('hide');
+     
+  
 
+      $('.brand').tooltip('hide');   
 
-
-
-      var contador=0;
-      $('.datosgrafica').on("change", function(){
-        
-        contador++;
-        
-        if(contador==6){
-          graficador();
-          contador=0;
-        }
-        console.log(contador);
-        console.log('Graficas modificadas');
-
-      });
-    });
-
-
+    //graficas compresion
+    
+      <?php $i = 1; ?>
+      <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
+      //var datosgrafica=$('#datosgrafica<?php echo $i; ?>').val();
+      //var sourceData = eval("["+datosgrafica+"]");  
+      
+      var sourceData =[
+      [0.03,0.08],
+      [0.08,0.29],
+      [0.13,0.61],
+      [0.19,0.95],
+      [0.25,1.10],
+      [0.38,1.23],
+      [0.51,1.32]];
+
+
+      $('#graficacompresion<?php echo $i; ?>').highcharts({
+
+          chart: {
+            renderTo: 'linear'
+          },
+          
+          title: {
+              text: 'Grafica de Compresion'
+          },
+          credits : {
+            enabled : false
+          },
+          
+          xAxis: {
+            title: {
+              text: 'Deformaciones'
+            }  
+          },
+          yAxis: {
+              tickInterval: 1,
+              title: {
+                  text: 'Esfuerzo (Kg/cm2)'
+              }
+          },
+          tooltip: {
+              headerFormat: '<b>{series.name}</b><br />',
+              pointFormat: 'x = {point.x}, y = {point.y}'
+          },
+          series: [{
+              name: 'Datos',
+              type: 'scatter',            
+              data: sourceData,
+              pointStart: 1
+          },{
+          name: 'Linea de tendencia',  
+          type: 'line',
+          lineWidth: 0.5,
+          marker: { enabled: false },
+          data: sourceData
+        }]
+      });
+      
+      <?php $i++; ?>
+      <?php endforeach; ?>
+        
+       <?php $i = 1; ?>
+      <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+      
+    
+    
+
+
+
+      <?php $i++; ?>
+      <?php endforeach; ?>
+
+
+
+    });
     </script>
+
   </body>
 </html>

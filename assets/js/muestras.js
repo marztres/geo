@@ -1,3 +1,5 @@
+
+var optimizadorGraficas=0;
 var acciones = {
   init: function () {
     acciones.clicks();
@@ -15,7 +17,6 @@ var acciones = {
     $('.GuardarCompresion').on('click', acciones.clickGuardarCompresion);
     $('.icompresion,.ideformacion').on('keyup', acciones.calculosCompresion);
     $('.analisis,.granulo').on('keyup', acciones.calculosGranulometria);
-
   },
 
   updateLimites: function (e) {
@@ -95,7 +96,8 @@ var acciones = {
     $('#numero_golpes_modificar').val(num_golpes);
     $('#id_muestra_modificar').val(idm);
   },
-  calculosLimites: function () {
+  calculosLimites:  function () {
+
     if ($(this).hasClass('iliquido')) {
 
       //elementos columnas finales tablas
@@ -224,7 +226,7 @@ var acciones = {
         tdFinalPlastico3Var= parseFloat(tdFinalPlastico3.text()),
         tdFinalPlastico4Var= parseFloat(tdFinalPlastico4.text());              
 
-
+        var HumedadNatural;
         //humedad calculando el promedio
         var menorhumedad1 = Math.min(tdFinalHumedad1Var,tdFinalHumedad2Var),
           mayorhumedad1 = Math.max(tdFinalHumedad1Var,tdFinalHumedad2Var),  
@@ -317,9 +319,6 @@ var acciones = {
       liquidoVar = parseFloat(tdLiquido.text()),
       plasticoVar = parseFloat(tdPlastico.text());
 
-
-
-
     //Elementos tabla de resultados  
     var trResultados = $(this).closest("div").find("table.resultados").find("tbody").find("tr").children(),
       resultadoHumedad = trResultados.eq(0),
@@ -327,14 +326,15 @@ var acciones = {
       resultadoliquido = trResultados.eq(1),
       resultadoIndicePlasticidad = trResultados.eq(3);
 
-
     //resultados grafica 
-    var inputGrafica = $(this).closest("div").find("input.datosgrafica");
+    var inputGraficaLimites = $(this).closest("div").find("input.datosgraficaLimites");
 
-    inputGrafica.val("["+parseFloat(tdgolpes1Var)+","+parseFloat(tdFinalLiquido1Var)+"]"+","+"["+parseFloat(tdgolpes2Var)+","+parseFloat(tdFinalLiquido2Var)+"]"+","+"["+parseFloat(tdgolpes3Var)+","+parseFloat(tdFinalLiquido3Var)+"]").trigger('change');
-
-
-
+    optimizadorGraficas++;
+    if(optimizadorGraficas==5){
+      inputGraficaLimites.val("["+parseFloat(tdgolpes1Var)+","+parseFloat(tdFinalLiquido1Var)+"]"+","+"["+parseFloat(tdgolpes2Var)+","+parseFloat(tdFinalLiquido2Var)+"]"+","+"["+parseFloat(tdgolpes3Var)+","+parseFloat(tdFinalLiquido3Var)+"]").trigger('change');
+    optimizadorGraficas=0;  
+    }
+    
 
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
@@ -471,6 +471,30 @@ var acciones = {
       resultadoliquido = trResultados.eq(2),
       resultadoIndicePlasticidad = trResultados.eq(3);
 
+    //modificador de graficas  
+    trFinalLiquido = $(this).closest("div").find("table.liquido").find("tbody").children(); 
+      tdFinalLiquido1=trFinalLiquido.eq(0).find("td:last"),
+      tdFinalLiquido2=trFinalLiquido.eq(1).find("td:last"),
+      tdFinalLiquido3=trFinalLiquido.eq(2).find("td:last"),
+      tdFinalLiquido4=trFinalLiquido.eq(3).find("td:last");
+
+      tdgolpes1=trFinalLiquido.eq(0).find("input.ngolpes"),
+      tdgolpes2=trFinalLiquido.eq(1).find("input.ngolpes"),
+      tdgolpes3=trFinalLiquido.eq(2).find("input.ngolpes");
+    var tdFinalLiquido1Var= parseFloat(tdFinalLiquido1.text()),
+        tdFinalLiquido2Var= parseFloat(tdFinalLiquido2.text()),
+        tdFinalLiquido3Var= parseFloat(tdFinalLiquido3.text()),
+        tdFinalLiquido4Var= parseFloat(tdFinalLiquido4.text());
+
+    var tdgolpes1Var=parseFloat(tdgolpes1.val()),
+      tdgolpes2Var=parseFloat(tdgolpes2.val()),
+      tdgolpes3Var=parseFloat(tdgolpes3.val());
+
+    var inputGrafica = $(this).closest("div").find("input.datosgraficaLimites");
+
+    inputGrafica.val("["+parseFloat(tdgolpes1Var)+","+parseFloat(tdFinalLiquido1Var)+"]"+","+"["+parseFloat(tdgolpes2Var)+","+parseFloat(tdFinalLiquido2Var)+"]"+","+"["+parseFloat(tdgolpes3Var)+","+parseFloat(tdFinalLiquido3Var)+"]").trigger('change');  
+
+
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
     } else {
@@ -582,27 +606,28 @@ var acciones = {
       areaCorregida.text(areaCorregidaVar.toPrecision(4));
       esfuerzo.text(esfuerzoVar.toPrecision(2));
     }
-    //todas los td finales de la tabla de deformacion
+    //todas los td esfuerzo finales de la tabla de deformacion
     var trDeformacion = $(this).closest("div").find("table.tabladeformacion").find("tbody").children();
-    tdFinal0 = trDeformacion.eq(0).find("td:last()"), 
-    tdFinal1 = trDeformacion.eq(1).find("td:last()"), 
-    tdFinal2 = trDeformacion.eq(2).find("td:last()"), 
-    tdFinal3 = trDeformacion.eq(3).find("td:last()"), 
-    tdFinal4 = trDeformacion.eq(4).find("td:last()"), 
-    tdFinal5 = trDeformacion.eq(5).find("td:last()"), 
-    tdFinal6 = trDeformacion.eq(6).find("td:last()"), 
-    tdFinal7 = trDeformacion.eq(7).find("td:last()"), 
-    tdFinal8 = trDeformacion.eq(8).find("td:last()"), 
-    tdFinal9 = trDeformacion.eq(9).find("td:last()"), 
-    tdFinal10 = trDeformacion.eq(10).find("td:last()"), 
-    tdFinal11 = trDeformacion.eq(11).find("td:last()"), 
-    tdFinal12 = trDeformacion.eq(12).find("td:last()"), 
-    tdFinal13 = trDeformacion.eq(13).find("td:last()"), 
-    tdFinal14 = trDeformacion.eq(14).find("td:last()"), 
-    tdFinal15 = trDeformacion.eq(15).find("td:last()"), 
-    tdFinal16 = trDeformacion.eq(16).find("td:last()"), 
-    tdFinal17 = trDeformacion.eq(17).find("td:last()");
-    //Calculos de cohesion 
+    var tdFinal0 = trDeformacion.eq(0).find("td:last"), 
+      tdFinal1 = trDeformacion.eq(1).find("td:last"), 
+      tdFinal2 = trDeformacion.eq(2).find("td:last"), 
+      tdFinal3 = trDeformacion.eq(3).find("td:last"), 
+      tdFinal4 = trDeformacion.eq(4).find("td:last"), 
+      tdFinal5 = trDeformacion.eq(5).find("td:last"), 
+      tdFinal6 = trDeformacion.eq(6).find("td:last"), 
+      tdFinal7 = trDeformacion.eq(7).find("td:last"), 
+      tdFinal8 = trDeformacion.eq(8).find("td:last"), 
+      tdFinal9 = trDeformacion.eq(9).find("td:last"), 
+      tdFinal10 = trDeformacion.eq(10).find("td:last"), 
+      tdFinal11 = trDeformacion.eq(11).find("td:last"), 
+      tdFinal12 = trDeformacion.eq(12).find("td:last"), 
+      tdFinal13 = trDeformacion.eq(13).find("td:last"), 
+      tdFinal14 = trDeformacion.eq(14).find("td:last"), 
+      tdFinal15 = trDeformacion.eq(15).find("td:last"), 
+      tdFinal16 = trDeformacion.eq(16).find("td:last"), 
+      tdFinal17 = trDeformacion.eq(17).find("td:last");
+
+    // variables de ultimos td esfuerzo 
     var td0Var = parseFloat(tdFinal0.text()),
       td1Var = parseFloat(tdFinal1.text()),
       td2Var = parseFloat(tdFinal2.text()),
@@ -621,6 +646,67 @@ var acciones = {
       td15Var = parseFloat(tdFinal15.text()),
       td16Var = parseFloat(tdFinal16.text()),
       td17Var = parseFloat(tdFinal17.text());
+
+
+    //Todos los td columna deformacion 
+    var tdDeformacion0 = trDeformacion.eq(0).find("td.gdeformacion"), 
+      tdDeformacion1 = trDeformacion.eq(1).find("td.gdeformacion"), 
+      tdDeformacion2 = trDeformacion.eq(2).find("td.gdeformacion"), 
+      tdDeformacion3 = trDeformacion.eq(3).find("td.gdeformacion"), 
+      tdDeformacion4 = trDeformacion.eq(4).find("td.gdeformacion"), 
+      tdDeformacion5 = trDeformacion.eq(5).find("td.gdeformacion"), 
+      tdDeformacion6 = trDeformacion.eq(6).find("td.gdeformacion"), 
+      tdDeformacion7 = trDeformacion.eq(7).find("td.gdeformacion"), 
+      tdDeformacion8 = trDeformacion.eq(8).find("td.gdeformacion"), 
+      tdDeformacion9 = trDeformacion.eq(9).find("td.gdeformacion"), 
+      tdDeformacion10 = trDeformacion.eq(10).find("td.gdeformacion"), 
+      tdDeformacion11 = trDeformacion.eq(11).find("td.gdeformacion"), 
+      tdDeformacion12 = trDeformacion.eq(12).find("td.gdeformacion"), 
+      tdDeformacion13 = trDeformacion.eq(13).find("td.gdeformacion"), 
+      tdDeformacion14 = trDeformacion.eq(14).find("td.gdeformacion"), 
+      tdDeformacion15 = trDeformacion.eq(15).find("td.gdeformacion"), 
+      tdDeformacion16 = trDeformacion.eq(16).find("td.gdeformacion"), 
+      tdDeformacion17 = trDeformacion.eq(17).find("td.gdeformacion");
+
+    // variables de td columna deformacion  
+    var tdDeformacion0Var = parseFloat(tdDeformacion0.text()),
+      tdDeformacion1Var = parseFloat(tdDeformacion1.text()),
+      tdDeformacion2Var = parseFloat(tdDeformacion2.text()),
+      tdDeformacion3Var = parseFloat(tdDeformacion3.text()),
+      tdDeformacion4Var = parseFloat(tdDeformacion4.text()),
+      tdDeformacion5Var = parseFloat(tdDeformacion5.text()),
+      tdDeformacion6Var = parseFloat(tdDeformacion6.text()),
+      tdDeformacion7Var = parseFloat(tdDeformacion7.text()),
+      tdDeformacion8Var = parseFloat(tdDeformacion8.text()),
+      tdDeformacion9Var = parseFloat(tdDeformacion9.text()),
+      tdDeformacion10Var = parseFloat(tdDeformacion10.text()),
+      tdDeformacion11Var = parseFloat(tdDeformacion11.text()),
+      tdDeformacion12Var = parseFloat(tdDeformacion12.text()),
+      tdDeformacion13Var = parseFloat(tdDeformacion13.text()),
+      tdDeformacion14Var = parseFloat(tdDeformacion14.text()),
+      tdDeformacion15Var = parseFloat(tdDeformacion15.text()),
+      tdDeformacion16Var = parseFloat(tdDeformacion16.text()),
+      tdDeformacion17Var = parseFloat(tdDeformacion17.text());
+
+
+    // grafica de deformacion 
+    var inputGraficaCompresion = $(this).closest("div").find("input.datosgraficacompresion");
+
+    optimizadorGraficas++;
+    if(optimizadorGraficas==5){
+      var total=5;
+      var aux=0;
+      inputGraficaCompresion.val(
+ 
+      ).trigger('change');
+
+
+
+    
+    optimizadorGraficas=0;  
+    }
+
+    //Calculos de cohesion   
     cohesionVar = (Math.max(td0Var, td1Var, td2Var, td3Var, td4Var, td5Var, td6Var, td7Var, td8Var, td9Var, td10Var, td11Var, td12Var, td13Var, td14Var, td15Var, td16Var, td17Var)) / 2 * 100;
     // Elementos y calculos tabla de resultados compresion
     var trResultados = $(this).closest("div").find("table.resultadoscompresion").find("tbody").find("tr").children();
