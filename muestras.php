@@ -2060,12 +2060,10 @@
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
-      var inputGranulometria=[[0.08,35.58],[0.15,37.70],[0.43,38.92],[0.60,40.16]];
-      //var datosGranulometria = eval("["+inputCompresion+"]");
+      var inputGranulometria=[[0.08,35.58],[0.15,37.70],[0.43,38.92],[0.60,40.16],[1.19,42.90],[2.00,45.79],[4.75,48.87],[9.52,56.09],[12.7,60.19],[19.05,63.85],[25.4,68.39],[38.1,100.00],[50.8,100.00],[63.5,100.00]];
+  
       var datosGranulometria = inputGranulometria;
-
-
-     
+   
       var datosGranulometria2;
       $('#graficagranulometria<?php echo $i; ?>').highcharts({
 
@@ -2084,10 +2082,17 @@
           xAxis: {
             title: {
               text: 'Diametro de las particulas'
-            }  
+            },
+            type: 'logarithmic',
+            min: 0.01,
+            max: 100,
+            minorTickInterval: 10,
+            reversed: true  
           },
           yAxis: {
-              tickInterval: 1,
+              minorTickInterval: 10,
+              min: 1,
+              max: 100,
               title: {
                   text: 'Pasa (%)'
               },
@@ -2104,7 +2109,13 @@
               type: 'line',            
               data: datosGranulometria,
               pointStart: 1
-          }]
+          },{
+              name: 'D60',
+              type: 'line',            
+              pointStart: 1,
+              data: [[0.01,60][0.01,60]]
+          }
+          ]
       });  
     
       <?php $i++; ?>

@@ -739,15 +739,11 @@ var acciones = {
 
       if ( 0 != arrayCompresion[i][0] && 0 != arrayCompresion[i][1] ) {
         arrayCompresionFinal.push("["+arrayCompresion[i]+"]");
-        console.log(arrayCompresion[i]);
       }
-
       i++;
     }
-     console.log(arrayCompresionFinal);
      inputGraficaCompresion.val(arrayCompresionFinal).trigger('change');
      optimizadorGraficas = 0;
-    
     }
 
     //Calculos de cohesion   
@@ -794,7 +790,6 @@ var acciones = {
           tr14 = trGranulometria.eq(13).children(),
           tr15 = trGranulometria.eq(14).children(),
           tr16 = trGranulometria.eq(15).children();
-
          
       //Todos los td de la columna pesos retenidos    
       var tdReT1=tr1.eq(2).find("input"),
@@ -813,9 +808,6 @@ var acciones = {
         tdReT14=tr14.eq(2).find("input"),
         tdReT15=tr15.eq(2),
         tdReT16=tr16.eq(2);
-
-
-        
 
       // Variables de pesos retenidos   
       var pesoRet1Var= parseFloat(tdReT1.val()),
@@ -836,16 +828,12 @@ var acciones = {
         //Sumatoria Pesos Retenidos
         var todosPesosRetenidos= pesoRet1Var+pesoRet2Var+pesoRet3Var+pesoRet4Var+pesoRet5Var+pesoRet6Var+pesoRet7Var+pesoRet8Var+pesoRet9Var+pesoRet10Var+pesoRet11Var+pesoRet12Var+pesoRet13Var+pesoRet14Var;
 
-
       //td fondo corregido y total corregido  
       var fondoRetenidoCorregido=tr15.eq(3),
         totalRetenidoCorregido= tr16.eq(3); 
 
-      
       //td fondo RETENIDO % 
       var fondoRetenido=tr15.eq(4);
-
-    
 
       //td fondo RETENIDO % 
       var fondoRetenidoAcumulado=tr15.eq(5);
@@ -870,7 +858,6 @@ var acciones = {
     pesoRetenidoN200MasRecipienteVar=todosPesosRetenidos+pesoRecipienteVar,
     pesoRetenidoN200Var=pesoRetenidoN200MasRecipienteVar-pesoRecipienteVar,
     sumaPesoRetenidosVar=parseFloat(todosPesosRetenidos);
-
 
       //resultados y calculos tabla analisis 
       
