@@ -695,9 +695,7 @@ var acciones = {
  
     optimizadorGraficas++;
     if(optimizadorGraficas==5){
-      var total=5;
-      var aux=0;
-      inputGraficaCompresion.val("["+parseFloat(tdDeformacion0Var)+","+parseFloat(td0Var)+"]"
+      var datosCompresion = "["+parseFloat(tdDeformacion0Var)+","+parseFloat(td0Var)+"]"
       +","+
       "["+parseFloat(tdDeformacion1Var)+","+parseFloat(td1Var)+"]"
       +","+
@@ -731,12 +729,26 @@ var acciones = {
       +","+
       "["+parseFloat(tdDeformacion16Var)+","+parseFloat(td16Var)+"]"
       +","+
-      "["+parseFloat(tdDeformacion17Var)+","+parseFloat(td17Var)+"]").trigger('change');
-    
-    optimizadorGraficas=0;  
-    }
-    console.log(optimizadorGraficas);
+      "["+parseFloat(tdDeformacion17Var)+","+parseFloat(td17Var)+"]";
 
+      var arrayCompresion = eval("["+datosCompresion+"]");
+      
+    var i = 0;
+    var arrayCompresionFinal = new Array();
+    while ( i < arrayCompresion.length ) {
+
+      if ( 0 != arrayCompresion[i][0] && 0 != arrayCompresion[i][1] ) {
+        arrayCompresionFinal.push("["+arrayCompresion[i]+"]");
+        console.log(arrayCompresion[i]);
+      }
+
+      i++;
+    }
+     console.log(arrayCompresionFinal);
+     inputGraficaCompresion.val(arrayCompresionFinal).trigger('change');
+     optimizadorGraficas = 0;
+    
+    }
 
     //Calculos de cohesion   
     cohesionVar = (Math.max(td0Var, td1Var, td2Var, td3Var, td4Var, td5Var, td6Var, td7Var, td8Var, td9Var, td10Var, td11Var, td12Var, td13Var, td14Var, td15Var, td16Var, td17Var)) / 2 * 100;

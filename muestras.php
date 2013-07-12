@@ -1994,7 +1994,7 @@
                         var series = this.series[0];
                         var series2= this.series[1];
                         $("#datosgraficacompresion<?php echo $i; ?>").change(function() {
-                            console.log("entrando");
+                            
                              // update grafica
                             var inputCompresion2=$('#datosgraficacompresion<?php echo $i; ?>').val();
                             datosCompresion2 = eval("["+inputCompresion2+"]");           
@@ -2053,15 +2053,60 @@
       
       <?php $i++; ?>
       <?php endforeach; ?>
-        
-       <?php $i = 1; ?>
+      
+
+
+
+      <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
+      var inputGranulometria=[[0.08,35.58],[0.15,37.70],[0.43,38.92],[0.60,40.16]];
+      //var datosGranulometria = eval("["+inputCompresion+"]");
+      var datosGranulometria = inputGranulometria;
+
+
+     
+      var datosGranulometria2;
+      $('#graficagranulometria<?php echo $i; ?>').highcharts({
+
+          chart: {
+            renderTo: 'linear'
+            
+          },
+          
+          title: {
+              text: 'Grafica de Compresion'
+          },
+          credits : {
+            enabled : false
+          },
+          
+          xAxis: {
+            title: {
+              text: 'Diametro de las particulas'
+            }  
+          },
+          yAxis: {
+              tickInterval: 1,
+              title: {
+                  text: 'Pasa (%)'
+              },
+              labels: {
+                format: '{value} %'
+              }
+          },
+          tooltip: {
+              headerFormat: '<b>{series.name}</b><br />',
+              pointFormat: 'x = {point.x}, y = {point.y}'
+          },
+          series: [{
+              name: 'Datos',
+              type: 'line',            
+              data: datosGranulometria,
+              pointStart: 1
+          }]
+      });  
     
-    
-
-
-
       <?php $i++; ?>
       <?php endforeach; ?>
 
