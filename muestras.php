@@ -2091,8 +2091,6 @@
           },
           yAxis: {
               minorTickInterval: 10,
-              min: 1,
-              max: 100,
               title: {
                   text: 'Pasa (%)'
               },
@@ -2113,7 +2111,17 @@
               name: 'D60',
               type: 'line',            
               pointStart: 1,
-              data: [[0.01,60][0.01,60]]
+              data: [[0.01,60],[100,60]]
+          },{
+              name: 'D30',
+              type: 'line',            
+              pointStart: 1,
+              data: [[0.01,30],[100,30]]
+          },{
+              name: 'D10',
+              type: 'line',            
+              pointStart: 1,
+              data: [[0.01,10],[100,10]]
           }
           ]
       });  
