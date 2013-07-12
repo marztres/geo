@@ -310,7 +310,7 @@
 						$respuesta2 = $testLimitesClass->modificarTest($test2, $plasticoNombreCapsula[1], $plasticoPeso[1], $plasticoPesoSueloHumedo[1], $plasticoPesoSueloSeco[1], 0);
 						$respuesta3 = $testLimitesClass->modificarTest($test3, $plasticoNombreCapsula[2], $plasticoPeso[2], $plasticoPesoSueloHumedo[2], $plasticoPesoSueloSeco[2], 0);
 						
-						$resultadosClass->updateResultados($humedaFinal,$limiteLiquidoFinal,$limitePlasticoFinal,$indicePlasticidadFinal,$fk_idMuestra);
+						$resultadosClass->updateResultadosLimites($humedaFinal,$limiteLiquidoFinal,$limitePlasticoFinal,$indicePlasticidadFinal,$fk_idMuestra);
 
 					if ( $respuesta1 ) {
 					$response["status"] = "OK";
