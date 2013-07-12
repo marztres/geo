@@ -428,7 +428,8 @@
                         <td>
                           <?php
                             if($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco!=0){
-                            echo $porcentajeLiquido1 = round((($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][3]->peso_capsula )) * 100, 2);
+                                $porcentajeLiquido1 = round((($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][3]->peso_capsula )) * 100, 2);
+                                echo $porcentajeLiquido1;
                             }
                             else{
                             echo 0;
@@ -462,7 +463,8 @@
                         <td>
                           <?php
                             if($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco!=0){
-                             echo $porcentajeLiquido2 = round((($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula )) * 100, 2); 
+                               $porcentajeLiquido2 = round((($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula )) * 100, 2); 
+                               echo $porcentajeLiquido2;
                             }
                             else{
                             echo 0;  
@@ -475,7 +477,7 @@
                         $temp->porcentaje2 = $porcentajeLiquido2;
                         ?>
                       <tr>
-                        <td>3</td>
+                        <td></td>
                         <td>
                           <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][5]->nom_capsula; ?>">
                         </td>
@@ -496,7 +498,8 @@
                         <td>
                           <?php
                             if($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco!=0){
-                              echo $porcentajeLiquido3 = round((($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][5]->peso_capsula )) * 100, 2); 
+                              $porcentajeLiquido3 = round((($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][5]->peso_capsula )) * 100, 2); 
+                              echo $porcentajeLiquido3;
                             }
                             else{
                             echo 0;
@@ -523,7 +526,33 @@
                         <td> </td>
                         <td></td>
                         <td><strong>Total</strong></td>
-                        <td></td>
+                        <td>
+                            <?php 
+                                    $humedad1=$porcentajeLiquido1;
+                                    $humedad2=$porcentajeLiquido2;
+                                    $humedad3=$porcentajeLiquido3;
+                                    $golpes1=$TestLimitesMuestra[$i-1][3]->num_golpes;
+                                    $golpes2=$TestLimitesMuestra[$i-1][4]->num_golpes;
+                                    $golpes3=$TestLimitesMuestra[$i-1][5]->num_golpes;
+                                    if($golpes1!=0 AND $golpes2!=0 AND $golpes3!=0    ){
+                                        $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
+                                        $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
+                                        $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
+                                    }
+                                    $limite1=($pendiente1*25)-($pendiente1*$golpes1)+$humedad1;
+                                    $limite2=($pendiente2*25)-($pendiente2*$golpes3)+$humedad3;
+                                    $limite3=($pendiente3*25)-($pendiente3*$golpes2)+$humedad2;
+
+                                    $LimiteLiquido=($limite1+$limite2+$limite3)/3;
+                                    if($LimiteLiquido>=0){
+                                        echo round($LimiteLiquido,2);
+                                    }
+                                    else{
+                                        echo 0;
+                                    }
+
+                              ?>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -654,7 +683,7 @@
                             $resultado = 0;
                             $menor = min( array( $porcentajePlastico1, $porcentajePlastico2 ) );
                             $mayor = max( array( $porcentajePlastico1, $porcentajePlastico2 ) );
-                            if($mayor!=0 AND $menor!=0){                          
+                            if($mayor!=0 && $menor!=0){                          
                               $divMayorMenor1 = $mayor / $menor;
                             }
                             if ( $divMayorMenor1 < 1.29 ) {
@@ -662,7 +691,7 @@
                             }
                             $menor = min( array( $porcentajePlastico2, $porcentajePlastico3 ) );
                             $mayor = max( array( $porcentajePlastico2, $porcentajePlastico3 ) );
-                            if($mayor!=0 AND $menor!=0){
+                            if($mayor!=0 && $menor!=0){
                               $divMayorMenor2 = $mayor / $menor;
                             }    
                             if ( $divMayorMenor2 < 1.29 ) {
@@ -670,7 +699,7 @@
                             }
                             $menor = min( array( $porcentajePlastico1, $porcentajePlastico3 ) );
                             $mayor = max( array( $porcentajePlastico1, $porcentajePlastico3 ) );
-                            if($mayor!=0 AND $menor!=0){
+                            if($mayor!=0 && $menor!=0){
                               $divMayorMenor3 = $mayor / $menor;
                              } 
                             if ( $divMayorMenor3 < 1.29 ) {
@@ -703,68 +732,54 @@
                       <td>
                         <?php
                           $resultado = 0;
-                          $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
-                          $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
-                          if($mayor!=0 AND $menor!=0){
-                          $divMayorMenor1 = $mayor / $menor;
-                          }
-                          if ( $divMayorMenor1 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
-                          $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
-                          if($mayor!=0 AND $menor!=0){
-                            $divMayorMenor2 = $mayor / $menor;
-                          }
-                          if ( $divMayorMenor2 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
-                          $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
-                          if($mayor!=0 AND $menor!=0){
-                              $divMayorMenor3 = $mayor / $menor;
-                           }
-                          if ( $divMayorMenor3 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
-                            $resultado = 0;
-                          }
-                            echo ceil(round($resultado,2));
+                                $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                                $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                                if($mayor!=0 AND $menor!=0){
+                                $divMayorMenor1 = $mayor / $menor;
+                                }
+                                if ( $divMayorMenor1 < 1.29 ) {
+                                  $resultado = ($mayor + $menor)/2;
+                                }
+                                $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                                $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                                if($mayor!=0 AND $menor!=0){
+                                  $divMayorMenor2 = $mayor / $menor;
+                                }
+                                if ( $divMayorMenor2 < 1.29 ) {
+                                  $resultado = ($mayor + $menor)/2;
+                                }
+                                $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                                $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                                if($mayor!=0 AND $menor!=0){
+                                    $divMayorMenor3 = $mayor / $menor;
+                                 }
+                                if ( $divMayorMenor3 < 1.29 ) {
+                                  $resultado = ($mayor + $menor)/2;
+                                }
+                                if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                                  $resultado = 0;
+                                }
+                                  echo ceil(round($resultado,2));
+                                  $porcentajeAgua1=0;
+                                  $porcentajeAgua2=0;
+                                  $porcentajeAgua3=0;
                           ?>
                       </td>
                       <td>
-                        <?php
-                          $resultado = 0;
-                          $menor = min( array( $porcentajeLiquido1, $porcentajeLiquido2 ) );
-                          $mayor = max( array( $porcentajeLiquido1, $porcentajeLiquido2 ) );
-                          if($mayor!=0 AND $menor!=0){
-                            $divMayorMenor1 = $mayor / $menor;
-                          }
-                          if ( $divMayorMenor1 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          $menor = min( array( $porcentajeLiquido2, $porcentajeLiquido3 ) );
-                          $mayor = max( array( $porcentajeLiquido2, $porcentajeLiquido3 ) );
-                          if($mayor!=0 AND $menor!=0){
-                             $divMayorMenor2 = $mayor / $menor;
-                           }
-                          if ( $divMayorMenor2 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          $menor = min( array( $porcentajeLiquido1, $porcentajeLiquido3 ) );
-                          $mayor = max( array( $porcentajeLiquido1, $porcentajeLiquido3 ) );
-                          if($mayor!=0 AND $menor!=0){
-                            $divMayorMenor3 = $mayor / $menor;
-                          }
-                          if ( $divMayorMenor3 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
-                            $resultado = 0;
-                          }
-                          echo $limiteLiquido=ceil(round($resultado,2));
-                          ?>
+                                <?php
+                                      if($LimiteLiquido>=0){
+                                        echo round($LimiteLiquido,2);
+                                      }  
+                                      else{
+                                         echo 0;
+                                      }
+                                        $porcentajeLiquido1=0;
+                                        $porcentajeLiquido2=0;
+                                        $porcentajeLiquido3=0; 
+                                        $golpes1=0;
+                                        $golpes2=0;
+                                        $golpes3=0;                                                         
+                                ?>
                       </td>
                       <td>
                         <?php
@@ -797,9 +812,23 @@
                             $resultado = 0;
                           }
                           echo $limitePlastico=round($resultado,2);
+                             
                           ?>
                       </td>
-                      <td><?php echo $limeteLiquido-$limitePlastico?></td>
+                      <td>
+                        <?php
+                          if($LimiteLiquido>=0){
+                             echo round($LimiteLiquido-$limitePlastico,2);
+                          }
+                          else{
+                            echo 0;
+                          }
+                                $porcentajePlastico1=0;
+                                $porcentajePlastico2=0;
+                                $porcentajePlastico3=0;
+
+                        ?>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -808,7 +837,8 @@
                   <a href="#" rel="muestra<?php echo $i; ?>" class="guardaLimites btn btn-primary input-xlarge">Guardar información</a>
                 </div>
               </div>
-              <?php $i++;?>
+
+              <?php $i++;?>  
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>
