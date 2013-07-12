@@ -361,12 +361,21 @@
 				case 'granulometria':
   						$granulometriaClass=new granulometria();
   	  			  $pesosRetenidosClass=new pesos_retenidos();
-  
+  						$resultadosClass= new resultados();	
+
   						$idPesoRetenido = array();
   						$PesosRetenido = array();
   						$id_granulometria=$_POST['idgranulometria'];
   						$pesoRecipiente=$_POST['pesoRecipiente'];
   						$pesoRecipienteMasMuestra=$_POST['pesoRecipienteMasMuestra'];
+  						$N200=$_POST['N200'];
+  						$N4=$_POST['N4'];
+  						$N10=$_POST['N10'];
+  						$N40=$_POST['N40'];
+  						$notacionSucs=$_POST['notacionSucs'];
+  						$descripcionSucs=$_POST['descripcionSucs'];
+  						$aashto=$_POST['aashto'];
+
   						foreach ( $_POST['idPesoRetenido'] as $valor ) {
   							$idPesoRetenido[] = $valor;
   						}
@@ -387,8 +396,11 @@
   							$respuesta11 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[10],$PesosRetenido[10]);
   							$respuesta12 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[11],$PesosRetenido[11]);
   							$respuesta13= $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[12],$PesosRetenido[12]);
-  							$respuesta14 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[13],$PesosRetenido[13]);					
-  
+  							$respuesta14 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[13],$PesosRetenido[13]);	
+
+
+  							$resultadosClass->updateResultadosGranulometria($N200,$N4,$N10,$N40,$notacionSucs,$descripcionSucs,$aashto,$fk_idMuestra);
+  							
   					if ( $respuesta ) {
   						$response["status"] = "OK";
   						$response["message"] = "Granulometria Actualisada correctamente";

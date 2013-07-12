@@ -1465,7 +1465,7 @@
             </thead>
             <tbody>
               <tr>
-                <td class="tds" rowspan="13">
+                <td class="tds" style=" margin: 0 0 0 0;" rowspan="13">
                   <p class="nivel_freatico"><i class="icon-ok"></i> </p>
                   <p class="centimetros">0.5 m</p>
                   <p class="centimetros">1 m</p>
@@ -1477,9 +1477,11 @@
                   <p class="centimetros">4 metros</p>
                   <p class="centimetros">4.5 metros</p>
                   <p class="centimetros">5 metros</p>
+                  <p class="centimetros">5.5 metros</p>
+                  <p class="centimetros">6 metros</p>
                 </td>
                 <td> - </td>
-                <td style=" height: 50px;" class="texture1">  </td>
+                <td style=" height:<?php echo round($datos_sondeo->profundidad_superficie); ?>px;" >  </td>
                 <td> - </td>
                 <td> - </td>
                 <td> - </td>
@@ -1489,311 +1491,53 @@
                 <td> - </td>
                 <td> - </td>
                 <td> - </td>
-                <td> Capa vegetal </td>
+                <td> <?php echo "Superficie ".$datos_sondeo ->tipo_superficie; ?> </td>
               </tr>
-              <tr>
-                <td> 1 </td>
-                <td style=" height: 50px;" class="texture">  </td>
-                <td> 25 </td>
-                <td> 40</td>
-                <td> 23 </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
+
+              <?php $i = 1; ?>
+              <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+              <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
+                <tr>
+                <td> <?php echo $i; ?> </td>
+
+                <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
+                
+                <td style=" height: <?php echo $tamano;?>px;" >  </td>
+                <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
+                <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
+                <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
+                <td> <?php echo $resultado->humedad; ?> </td>
+                <td> <?php echo $resultado->limiteLiquido; ?></td>
+                <td> <?php echo $resultado->indicePlasticidad; ?> </td>
+                <td> <?php echo $resultado->notacionSucs; ?> </td>
+                <td> <?php echo $resultado->aashto; ?> </td>
                 <td> 
-                  <span class="badge">N° 4 = 23% 
+                  <span class="badge">N° 4 = <?php echo $resultado->N4; ?>% 
                   </span>
-                  <span class="badge">N° 10 = 23% 
+                  <span class="badge">N° 10 = <?php echo $resultado->N10; ?>% 
                   </span>
-                  <span class="badge">N° 40 = 23% 
+                  <span class="badge">N° 40 = <?php echo $resultado->N40; ?>% 
                   </span>
-                  <span class="badge">N° 200 = 23% 
+                  <span class="badge">N° 200 = <?php echo $resultado->N200; ?>% 
                   </span>
                 </td>
                 <td>
-                  Material de relleno Grava areno Arcillosa 
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
                 </td>
               </tr>
-              <tr>
-                <td> 2 </td>
-                <td style=" height: 35px;" class="texture1">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 3 </td>
-                <td style=" height: 62px;" class="texture">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 4 </td>
-                <td style=" height: 90px;" class="texture1">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 5 </td>
-                <td style=" height: 55px;" class="texture">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 6 </td>
-                <td style=" height: 33px;" class="texture1">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 7 </td>
-                <td style=" height: 75px;" class="texture">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 8 </td>
-                <td style=" height: 45px;" class="texture1">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 9 </td>
-                <td style=" height: 45px;" class="texture">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 10 </td>
-                <td style=" height: 45px;" class="texture1">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 11 </td>
-                <td style=" height: 45px;" class="texture">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
-              <tr>
-                <td> 12 </td>
-                <td style=" height: 45px;" class="texture1">  </td>
-                <td> 25 </td>
-                <td> -</td>
-                <td> - </td>
-                <td> 66% </td>
-                <td> 55% </td>
-                <td> 34% </td>
-                <td> GC </td>
-                <td> A-2-7 </td>
-                <td> 
-                  <span class="badge">N° 4 = 23% 
-                  </span>
-                  <span class="badge">N° 10 = 23% 
-                  </span>
-                  <span class="badge">N° 40 = 23% 
-                  </span>
-                  <span class="badge">N° 200 = 23% 
-                  </span>
-                </td>
-                <td>
-                  Material de relleno Grava areno Arcillosa 
-                </td>
-              </tr>
+
+
+
+              <?php $i++; ?>
+              <?php endforeach; ?>
+
+              
+      
+     
+          
             </tbody>
           </table>
-          <h5 >Nivel freatico: 1</h5>
+          <h5 >Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
           <!-- ############# FIN INFORME DE ESTRATIGRAFIA ############### -->
           <!-- ############# fin tabs de muestras internas estratigrafia ############### --> 
         </div>

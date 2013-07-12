@@ -47,6 +47,34 @@
 			return $retorno;
 		}
 
+		function updateResultadosGranulometria($N200,$N4,$N10,$N40,$notacionSucs,$descripcionSucs,$aashto,$fk_idMuestra){
+	  	$retorno = false;
+
+			$sql0="	SELECT id_resultados FROM resultados where fk_idMuestra='".$this->real_escape_string($fk_idMuestra)."' limit 1 ";
+			$respuesta0 = $this -> query($sql0);
+
+				if ( $respuesta0 ) {
+			$idResult = $respuesta0->fetch_object();
+			$respuesta0->free();
+			}	
+
+			$sql = "UPDATE resultados SET 
+		 	N200 = '".$this->real_escape_string($N200)."',
+			N4 = '".$this->real_escape_string($N4)."',
+			N10 = '".$this->real_escape_string($N10)."',
+			N40 = '".$this->real_escape_string($N40)."',
+			notacionSucs = '".$this->real_escape_string($notacionSucs)."',
+			descripcionSucs = '".$this->real_escape_string($descripcionSucs)."',
+			aashto = '".$this->real_escape_string($aashto)."' 
+			WHERE id_resultados = '".$this->real_escape_string($idResult->id_resultados)."' ";
+			
+			$respuesta = $this -> query($sql);
+			if ( $respuesta ) {
+				$retorno = true;
+			}
+			return $retorno;
+		}
+
 		function updateResultadosLimites($humedad,$limiteLiquido,$limitePlastico,$indicePlasticidad,$fk_idMuestra){
 	  	$retorno = false;
 
