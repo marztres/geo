@@ -946,6 +946,46 @@ var acciones = {
         fin13Var = parseFloat(tdFinal13.text()),
         FondoFinalVar = parseFloat(tdFinal4.text());
 
+        //td tamaño de tamiz en mn
+        var tdTam0 = trGranulometria.eq(0).find("td.tamTamiz"),
+          tdTam1 = trGranulometria.eq(1).find("td.tamTamiz"),
+          tdTam2 = trGranulometria.eq(2).find("td.tamTamiz"),
+          tdTam3 = trGranulometria.eq(3).find("td.tamTamiz"),
+          tdTam4 = trGranulometria.eq(4).find("td.tamTamiz"),
+          tdTam5 = trGranulometria.eq(5).find("td.tamTamiz"),
+          tdTam6 = trGranulometria.eq(6).find("td.tamTamiz"),
+          tdTam7 = trGranulometria.eq(7).find("td.tamTamiz"),
+          tdTam8 = trGranulometria.eq(8).find("td.tamTamiz"),
+          tdTam9 = trGranulometria.eq(9).find("td.tamTamiz"),
+          tdTam10 = trGranulometria.eq(10).find("td.tamTamiz"),
+          tdTam11 = trGranulometria.eq(11).find("td.tamTamiz"),
+          tdTam12 = trGranulometria.eq(12).find("td.tamTamiz"),
+          tdTam13 = trGranulometria.eq(13).find("td.tamTamiz"),
+          tdTam14 = trGranulometria.eq(14).find("td.tamTamiz");
+
+
+        var tdTam0Var = parseFloat(XXXXX.text()),
+          tdTam1Var = parseFloat(XXXXX.text()),
+          tdTam2Var = parseFloat(XXXXX.text()),
+          tdTam3Var = parseFloat(XXXXX.text()),
+          tdTam4Var = parseFloat(XXXXX.text()),
+          tdTam5Var = parseFloat(XXXXX.text()),
+          tdTam6Var = parseFloat(XXXXX.text()),
+          tdTam7Var = parseFloat(XXXXX.text()),
+          tdTam8Var = parseFloat(XXXXX.text()),
+          tdTam9Var = parseFloat(XXXXX.text()),
+          tdTam10Var = parseFloat(XXXXX.text()),
+          tdTam11Var = parseFloat(XXXXX.text()),
+          tdTam12Var = parseFloat(XXXXX.text()),
+          tdTam13Var = parseFloat(XXXXX.text()),
+          tdTam14Var = parseFloat(XXXXX.text());  
+
+        
+
+
+
+
+
 
 //td  retenido %
     var tdRetenido0 = trGranulometria.eq(0).find("td.retenido"),

@@ -1173,7 +1173,7 @@
                         <td><?php echo $retenidos->tamiz ?>
                           <input name="idPesoRetenido[]" class="input-mini" type="hidden" value="<?php echo $retenidos->idPesoRetenido ?>">
                         </td>
-                        <td><?php echo $retenidos->tamanoTamiz ?></td>
+                        <td class="tamTamiz"><?php echo $retenidos->tamanoTamiz ?></td>
                         <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
                          <?php 
                            if($retenidos->pesoRetenido>0){
@@ -2060,9 +2060,9 @@
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
-      var inputGranulometria=[[0.08,35.58],[0.15,37.70],[0.43,38.92],[0.60,40.16],[1.19,42.90],[2.00,45.79],[4.75,48.87],[9.52,56.09],[12.7,60.19],[19.05,63.85],[25.4,68.39],[38.1,100.00],[50.8,100.00],[63.5,100.00]];
+      var inputGranulometria=$('#datosgraficagranulometria<?php echo $i; ?>').val();
   
-      var datosGranulometria = inputGranulometria;
+      var datosGranulometria = eval("["+inputGranulometria+"]");
    
       var datosGranulometria2;
       $('#graficagranulometria<?php echo $i; ?>').highcharts({
@@ -2084,8 +2084,6 @@
               text: 'Diametro de las particulas'
             },
             type: 'logarithmic',
-            min: 0.01,
-            max: 100,
             minorTickInterval: 10,
             reversed: true  
           },
@@ -2104,7 +2102,7 @@
           },
           series: [{
               name: 'Datos',
-              type: 'line',            
+              type: 'spline',            
               data: datosGranulometria,
               pointStart: 1
           },{
