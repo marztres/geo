@@ -1173,7 +1173,7 @@
                         <td><?php echo $retenidos->tamiz ?>
                           <input name="idPesoRetenido[]" class="input-mini" type="hidden" value="<?php echo $retenidos->idPesoRetenido ?>">
                         </td>
-                        <td class="tamTamiz"><?php echo $retenidos->tamanoTamiz ?></td>
+                        <td class="tamTamiz"><?php echo $tamañoTamiz[]=$retenidos->tamanoTamiz ?></td>
                         <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
                          <?php 
                            if($retenidos->pesoRetenido>0){
@@ -1306,9 +1306,9 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td> <input type="text"> </td>
-                      <td> <input type="text"> </td>
-                      <td> <input type="text"> </td>
+                      <td> <input name="" type="text" value="0.13"> </td>
+                      <td> <input name="" type="text" value="1.5"> </td>
+                      <td> <input name="" type="text" value="3.1"> </td>
                     </tr>
                   </tbody>
                 </table>
@@ -1326,11 +1326,16 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td> 45 </td>
-                      <td> 51 </td>
-                      <td> 23 </td>
-                      <td> 62 </td>
-                      <td> - </td>
+                      <?php
+                        $d60=0.13;
+                        $d60=1.5;
+                        $d60=3.1;
+                      ?>
+                      <td> <?php echo $tamañoTamiz[7] ?></td>
+                      <td> <?php echo $tamañoTamiz[13] ?> </td>
+                      <td> 10 </td>
+                      <td> 21</td>
+                      <td> 36 </td>
                     </tr>
                   </tbody>
                 </table>
