@@ -1294,6 +1294,25 @@
                     unset($p);
                     unset($datos); 
                 ?>
+                
+                <h3>Observaciones de la tabla</h3>
+                <table class="table table-hover table-striped table-bordered ">
+                  <thead>
+                    <tr>
+                      <th> D60</th>
+                      <th> D30</th>
+                      <th> D10</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td> <input type="text"> </td>
+                      <td> <input type="text"> </td>
+                      <td> <input type="text"> </td>
+                    </tr>
+                  </tbody>
+                </table>
+        
                 <h3>Resultados</h3>
                 <table class="table table-hover table-striped table-bordered ">
                   <thead>
@@ -1311,7 +1330,7 @@
                       <td> 51 </td>
                       <td> 23 </td>
                       <td> 62 </td>
-                      <td> 45 </td>
+                      <td> - </td>
                     </tr>
                   </tbody>
                 </table>
@@ -1324,8 +1343,8 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td> MH - Arcilla de mediana plasticidad  </td>
-                      <td> A-M-5 </td>
+                      <td> - </td>
+                      <td> - </td>
                     </tr>
                   </tbody>
                 </table>
