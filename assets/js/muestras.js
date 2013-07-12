@@ -946,6 +946,41 @@ var acciones = {
         fin13Var = parseFloat(tdFinal13.text()),
         FondoFinalVar = parseFloat(tdFinal4.text());
 
+        //tds Pasa %
+        var tdPasa0 = trGranulometria.eq(0).find("td:last"),
+          tdPasa1 = trGranulometria.eq(1).find("td:last"),
+          tdPasa2 = trGranulometria.eq(2).find("td:last"),
+          tdPasa3 = trGranulometria.eq(3).find("td:last"),
+          tdPasa4 = trGranulometria.eq(4).find("td:last"),
+          tdPasa5 = trGranulometria.eq(5).find("td:last"),
+          tdPasa6 = trGranulometria.eq(6).find("td:last"),
+          tdPasa7 = trGranulometria.eq(7).find("td:last"),
+          tdPasa8 = trGranulometria.eq(8).find("td:last"),
+          tdPasa9 = trGranulometria.eq(9).find("td:last"),
+          tdPasa10 = trGranulometria.eq(10).find("td:last"),
+          tdPasa11 = trGranulometria.eq(11).find("td:last"),
+          tdPasa12 = trGranulometria.eq(12).find("td:last"),
+          tdPasa13 = trGranulometria.eq(13).find("td:last");
+          
+
+
+      //Variables de todos los td Finales
+      var pasa0Var = parseFloat(tdPasa0.text()),
+        pasa1Var = parseFloat(tdPasa1.text()),
+        pasa2Var = parseFloat(tdPasa2.text()),
+        pasa3Var = parseFloat(tdPasa3.text()),
+        pasa4Var = parseFloat(tdPasa4.text()),
+        pasa5Var = parseFloat(tdPasa5.text()),
+        pasa6Var = parseFloat(tdPasa6.text()),
+        pasa7Var = parseFloat(tdPasa7.text()),
+        pasa8Var = parseFloat(tdPasa8.text()),
+        pasa9Var = parseFloat(tdPasa9.text()),
+        pasa10Var = parseFloat(tdPasa10.text()),
+        pasa11Var = parseFloat(tdPasa11.text()),
+        pasa12Var = parseFloat(tdPasa12.text()),
+        pasa13Var = parseFloat(tdPasa13.text());
+
+
         //td tamaño de tamiz en mn
         var tdTam0 = trGranulometria.eq(0).find("td.tamTamiz"),
           tdTam1 = trGranulometria.eq(1).find("td.tamTamiz"),
@@ -960,31 +995,77 @@ var acciones = {
           tdTam10 = trGranulometria.eq(10).find("td.tamTamiz"),
           tdTam11 = trGranulometria.eq(11).find("td.tamTamiz"),
           tdTam12 = trGranulometria.eq(12).find("td.tamTamiz"),
-          tdTam13 = trGranulometria.eq(13).find("td.tamTamiz"),
-          tdTam14 = trGranulometria.eq(14).find("td.tamTamiz");
+          tdTam13 = trGranulometria.eq(13).find("td.tamTamiz");
 
 
-        var tdTam0Var = parseFloat(XXXXX.text()),
-          tdTam1Var = parseFloat(XXXXX.text()),
-          tdTam2Var = parseFloat(XXXXX.text()),
-          tdTam3Var = parseFloat(XXXXX.text()),
-          tdTam4Var = parseFloat(XXXXX.text()),
-          tdTam5Var = parseFloat(XXXXX.text()),
-          tdTam6Var = parseFloat(XXXXX.text()),
-          tdTam7Var = parseFloat(XXXXX.text()),
-          tdTam8Var = parseFloat(XXXXX.text()),
-          tdTam9Var = parseFloat(XXXXX.text()),
-          tdTam10Var = parseFloat(XXXXX.text()),
-          tdTam11Var = parseFloat(XXXXX.text()),
-          tdTam12Var = parseFloat(XXXXX.text()),
-          tdTam13Var = parseFloat(XXXXX.text()),
-          tdTam14Var = parseFloat(XXXXX.text());  
+        var tdTam0Var = parseFloat(tdTam0.text()),
+          tdTam1Var = parseFloat(tdTam1.text()),
+          tdTam2Var = parseFloat(tdTam2.text()),
+          tdTam3Var = parseFloat(tdTam3.text()),
+          tdTam4Var = parseFloat(tdTam4.text()),
+          tdTam5Var = parseFloat(tdTam5.text()),
+          tdTam6Var = parseFloat(tdTam6.text()),
+          tdTam7Var = parseFloat(tdTam7.text()),
+          tdTam8Var = parseFloat(tdTam8.text()),
+          tdTam9Var = parseFloat(tdTam9.text()),
+          tdTam10Var = parseFloat(tdTam10.text()),
+          tdTam11Var = parseFloat(tdTam11.text()),
+          tdTam12Var = parseFloat(tdTam12.text()),
+          tdTam13Var = parseFloat(tdTam13.text()); 
 
-        
+        //grafica de granulometria
+    // grafica de deformacion 
+    var inputGraficaGranulometria = $(this).closest("div").find("input.datosgraficaGranulometria");    
+
+    optimizadorGraficas++
+    if(optimizadorGraficas==5){
+      var datosGranulometria = 
+      "["+parseFloat(tdTam13Var)+","+parseFloat(pasa13Var)+"]"
+      +","+
+      "["+parseFloat(tdTam12Var)+","+parseFloat(pasa12Var)+"]"
+      +","+
+      "["+parseFloat(tdTam11Var)+","+parseFloat(pasa11Var)+"]"
+      +","+
+      "["+parseFloat(tdTam10Var)+","+parseFloat(pasa10Var)+"]"
+      +","+
+      "["+parseFloat(tdTam9Var)+","+parseFloat(pasa9Var)+"]"
+      +","+
+      "["+parseFloat(tdTam8Var)+","+parseFloat(pasa8Var)+"]"
+      +","+
+      "["+parseFloat(tdTam7Var)+","+parseFloat(pasa7Var)+"]"
+      +","+
+      "["+parseFloat(tdTam6Var)+","+parseFloat(pasa6Var)+"]"
+      +","+
+      "["+parseFloat(tdTam5Var)+","+parseFloat(pasa5Var)+"]"
+      +","+
+      "["+parseFloat(tdTam4Var)+","+parseFloat(pasa4Var)+"]"
+      +","+
+      "["+parseFloat(tdTam3Var)+","+parseFloat(pasa3Var)+"]"
+      +","+
+      "["+parseFloat(tdTam2Var)+","+parseFloat(pasa2Var)+"]"
+      +","+
+      "["+parseFloat(tdTam1Var)+","+parseFloat(pasa1Var)+"]"
+      +","+
+      "["+parseFloat(tdTam0Var)+","+parseFloat(pasa0Var)+"]";
+
+      var arrayGranulometria = eval("["+datosGranulometria+"]");
+      
+    var i = 0;
+    var arrayGranulometriaFinal = new Array();
+    while ( i < arrayGranulometria.length ) {
+
+      if ( 0 != arrayGranulometria[i][0] && 0 != arrayGranulometria[i][1] ) {
+        arrayGranulometriaFinal.push("["+arrayGranulometria[i]+"]");
+      }
+      i++;
+    }
 
 
+     inputGraficaGranulometria.val(arrayGranulometriaFinal).trigger('change');
+     optimizadorGraficas = 0;
+    }  
 
-
+        //Fin grafica de granulometria  
 
 
 //td  retenido %

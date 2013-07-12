@@ -372,7 +372,7 @@
                             if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
                               $resultado = 0;
                             }
-                              echo ceil(round($resultado,2));
+                              echo round($resultado);
                             ?>
                         </td>
                       </tr>
@@ -545,7 +545,7 @@
 
                                     $LimiteLiquido=($limite1+$limite2+$limite3)/3;
                                     if($LimiteLiquido>=0){
-                                        echo round($LimiteLiquido,2);
+                                        echo round($LimiteLiquido);
                                     }
                                     else{
                                         echo 0;
@@ -708,7 +708,7 @@
                             if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
                               $resultado = 0;
                             }
-                               echo $limitePlastico=round($resultado,2);
+                               echo $limitePlastico=round($resultado);
                             ?>
                         </td>
                       </tr>
@@ -818,7 +818,7 @@
                       <td>
                         <?php
                           if($LimiteLiquido>=0){
-                             echo round($LimiteLiquido-$limitePlastico,2);
+                             echo round($LimiteLiquido-$limitePlastico);
                           }
                           else{
                             echo 0;
@@ -1177,7 +1177,7 @@
                         <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
                          <?php 
                            if($retenidos->pesoRetenido>0){
-                               $pr[]=$retenidos->pesoRetenido;
+                               $pr[]=$retenidos->tamanoTamiz;
                            }
                           ?>
                         <?php $fondopesoretenido=$DatosGranulometria->pesoRecipienteMasMuestra-$pesoretenidomasrecipiente;
@@ -1206,7 +1206,7 @@
                         </td>
                         <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
                         <td class="acumulado" ><?php echo $temp[$j]; ?></td>
-                        <td>
+                        <td >
                             <?php echo $pasa=100 - $temp[$j];
                                 if($retenidos->pesoRetenido>0){
                                    $p[]=$pasa;
@@ -1268,6 +1268,11 @@
                 <!-- ############# GRAFICA DE GRANULOMETRIA ############### -->
                         <?php 
                             $tamano=count($pr);
+                            if(isset($pr) && isset($p)){
+                              $pr=array_reverse($pr);
+                              $p=array_reverse($p);
+                            }
+                            
                             $t=$tamano-1;
                             for($l=0; $l<=$t; $l++){
                                if(isset($pr[$l]) AND isset($p[$l])){
@@ -1280,7 +1285,7 @@
                                }
                             }
                         ?>
-                <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgrafica"  type="text" value="<?php  echo $datos; ?>">
+                <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgraficaGranulometria"  type="text" value="<?php  echo $datos; ?>">
                 <div id="graficagranulometria<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                 <!-- ############# RESULTADOS ############### -->
@@ -2068,12 +2073,33 @@
       $('#graficagranulometria<?php echo $i; ?>').highcharts({
 
           chart: {
-            renderTo: 'linear'
+            renderTo: 'linear',
+            events: {
+                load: function() {
+
+
+                        // data series
+                        var series = this.series[0];
+                        $("#datosgraficagranulometria<?php echo $i; ?>").change(function() {
+                            
+                             // update grafica
+                            var inputGranulometria2=$('#datosgraficagranulometria<?php echo $i; ?>').val();
+                            datosGranulometria2 = eval("["+inputGranulometria2+"]");           
+                            series.update({ 
+                              data: datosGranulometria2
+                              } 
+                            );
+
+                            console.log("Grafica de granulometria");
+
+                        });
+                    }
+            }
             
           },
           
           title: {
-              text: 'Grafica de Compresion'
+              text: 'Grafica de granulometria'
           },
           credits : {
             enabled : false
