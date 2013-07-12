@@ -1342,6 +1342,76 @@
                 </table>
         
                 <h3>Resultados</h3>
+                <table class="table table-hover table-striped table-bordered ">
+                  <thead>
+                    <tr>
+                      <th> Tamiz N°4</th>
+                      <th> Tamiz N°200</th>
+                      <th> Limite liquido</th>
+                      <th> Limite plastico</th>
+                      <th> Indice de grupo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <?php
+                        $d60=0.1;
+                        $d60=7;
+                        $d60=21;
+                      ?>
+                      <td> <?php echo $tamizN4=round($tamices[7]/100,2) ?></td>
+                      <td> <?php echo $tamizN200=round($tamices[13]/100,2) ?> </td>
+                      <td> <?php echo $liquido=44; ?> </td>
+                      <td> <?php echo $plastico=18; ?></td>
+                           <?php  $ip=18.00; ?>
+                      <td> 0 </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-hover table-striped table-bordered ">
+                  <thead>
+                    <tr>
+                      <th> Clasificación Sistema unificado</th>
+                      <th> Clasificación AASHTO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                          <?php 
+                              $lineaA=0.73*($ll-20);
+                              $gravas=100-$tamizN4;
+                              $arenas=$tamizN4-$tamizN200;
+                              $finos=$tamizN200;
+                              if($gravas>$arenas && $gravas>$finos){
+                                echo "Estoy en gravas".$gravas;
+                              }
+                              else if($arenas>$gravas && $arenas>$finos){
+                                echo "Estoy en arenas".$arenas;
+                              }
+                              else if($finos>$arenas && $finos>$gravas){
+                                   if($ll<50){
+                                        if($ip>7 || $ip>=$lineaA ){
+                                              echo $notacion="CL"; 
+                                        }
+                                        else if($ip>=4 && $ip<=7 && $ip>=$lineaA){
+                                              echo $notacion="CL-ML";
+                                        }
+                                        else if($ip<4 || $ip<$lineaA){
+                                              echo $notacion="ML";
+                                        }
+                                    } 
+                                    else{
+                                        
+                                    }
+                              }
+                             
+                          ?>
+                      </td>
+                      <td> - </td>
+                    </tr>
+                  </tbody>
+                </table>
                 
                 <!-- ############# FIN RESULTADOS ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
