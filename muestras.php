@@ -1210,6 +1210,7 @@
                             <?php echo $pasa=100 - $temp[$j];
                                 if($retenidos->pesoRetenido>0){
                                    $p[]=$pasa;
+                                   $tamices[]=$pasa;
                                 }
                              ?>
                         </td>
@@ -1306,9 +1307,9 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td> <input name="" type="text" value="0.13"> </td>
-                      <td> <input name="" type="text" value="1.5"> </td>
-                      <td> <input name="" type="text" value="3.1"> </td>
+                      <td> <input name="" type="text" value="0.1"> </td>
+                      <td> <input name="" type="text" value="7"> </td>
+                      <td> <input name="" type="text" value="21"> </td>
                     </tr>
                   </tbody>
                 </table>
@@ -1327,14 +1328,14 @@
                   <tbody>
                     <tr>
                       <?php
-                        $d60=0.13;
-                        $d60=1.5;
-                        $d60=3.1;
+                        $d60=0.1;
+                        $d60=7;
+                        $d60=21;
                       ?>
-                      <td> <?php echo $tamañoTamiz[7] ?></td>
-                      <td> <?php echo $tamañoTamiz[13] ?> </td>
-                      <td> 10 </td>
-                      <td> 21</td>
+                      <td> <?php echo $tamizN4=round($tamices[7]/100,2) ?></td>
+                      <td> <?php echo $tamizN200=round($tamices[13]/100,2) ?> </td>
+                      <td> <?php echo $ll=44; ?> </td>
+                      <td> <?php echo $lp=18; ?></td>
                       <td> 36 </td>
                     </tr>
                   </tbody>
