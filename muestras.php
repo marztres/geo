@@ -1348,7 +1348,7 @@
                       <th> Tamiz N°4</th>
                       <th> Tamiz N°200</th>
                       <th> Limite liquido</th>
-                      <th> Limite plastico</th>
+                      <th> Indice de plasticidad</th>
                       <th> Indice de grupo</th>
                     </tr>
                   </thead>
@@ -1359,12 +1359,11 @@
                         $d60=7;
                         $d60=21;
                       ?>
-                      <td> <?php echo $tamizN4=round($tamices[7]/100,2) ?></td>
-                      <td> <?php echo $tamizN200=round($tamices[13]/100,2) ?> </td>
-                      <td> <?php echo $liquido=$resultado->limiteLiquido;; ?> </td>
-                      <td> <?php echo $plastico=$resultado->limitePlastico;; ?></td>
-
-                      <?php  $ip=18.00; ?>
+                      <td><?php echo $tamizN4=round($tamices[7]/100,2) ?></td>
+                      <td><?php echo $tamizN200=round($tamices[13]/100,2) ?> </td>
+                      <td><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
+                      <td><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
+                           
                       <td> 0 </td>
                     </tr>
                   </tbody>
