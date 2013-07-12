@@ -1361,9 +1361,10 @@
                       ?>
                       <td> <?php echo $tamizN4=round($tamices[7]/100,2) ?></td>
                       <td> <?php echo $tamizN200=round($tamices[13]/100,2) ?> </td>
-                      <td> <?php echo $liquido=44; ?> </td>
-                      <td> <?php echo $plastico=18; ?></td>
-                           <?php  $ip=18.00; ?>
+                      <td> <?php echo $liquido=$resultado->limiteLiquido;; ?> </td>
+                      <td> <?php echo $plastico=$resultado->limitePlastico;; ?></td>
+
+                      <?php  $ip=18.00; ?>
                       <td> 0 </td>
                     </tr>
                   </tbody>
