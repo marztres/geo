@@ -326,6 +326,18 @@ var acciones = {
       resultadoliquido = trResultados.eq(1),
       resultadoIndicePlasticidad = trResultados.eq(3);
 
+    //Input hidden de resultados 
+    var InputHumedadFinal = $(this).closest("div").find("form.formResultados").find("input.HumedadNaturalFinal"),
+      InputLimiteLiquidoFinal= $(this).closest("div").find("form.formResultados").find("input.LimiteLiquidoFinal"),
+      InputLimitePlasticoFinal= $(this).closest("div").find("form.formResultados").find("input.LimitePlasticoFinal"),
+      InputIndicePlasticidad= $(this).closest("div").find("form.formResultados").find("input.IndicePlasticidadFinal");
+
+      InputHumedadFinal.val(humedadVar.toPrecision(4)),
+      InputLimiteLiquidoFinal.val(liquidoVar.toPrecision(4)),
+      InputLimitePlasticoFinal.val(plasticoVar.toPrecision(4)),
+      InputIndicePlasticidad.val(liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4));
+
+
     //resultados grafica 
     var inputGraficaLimites = $(this).closest("div").find("input.datosgraficaLimites");
 
@@ -403,6 +415,18 @@ var acciones = {
       resultadoPlastico = trResultados.eq(1),
       resultadoliquido = trResultados.eq(2),
       resultadoIndicePlasticidad = trResultados.eq(3);
+
+
+      //Input hidden de resultados 
+    var InputHumedadFinal = $(this).closest("div").find("form.formResultados").find("input.HumedadNaturalFinal"),
+      InputLimiteLiquidoFinal= $(this).closest("div").find("form.formResultados").find("input.LimiteLiquidoFinal"),
+      InputLimitePlasticoFinal= $(this).closest("div").find("form.formResultados").find("input.LimitePlasticoFinal"),
+      InputIndicePlasticidad= $(this).closest("div").find("form.formResultados").find("input.IndicePlasticidadFinal");
+
+      InputHumedadFinal.val(humedadVar.toPrecision(4)),
+      InputLimiteLiquidoFinal.val(liquidoVar.toPrecision(4)),
+      InputLimitePlasticoFinal.val(plasticoVar.toPrecision(4)),
+      InputIndicePlasticidad.val(liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4));  
 
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
@@ -494,6 +518,17 @@ var acciones = {
 
     inputGrafica.val("["+parseFloat(tdgolpes1Var)+","+parseFloat(tdFinalLiquido1Var)+"]"+","+"["+parseFloat(tdgolpes2Var)+","+parseFloat(tdFinalLiquido2Var)+"]"+","+"["+parseFloat(tdgolpes3Var)+","+parseFloat(tdFinalLiquido3Var)+"]").trigger('change');  
 
+
+      //Input hidden de resultados 
+    var InputHumedadFinal = $(this).closest("div").find("form.formResultados").find("input.HumedadNaturalFinal"),
+      InputLimiteLiquidoFinal= $(this).closest("div").find("form.formResultados").find("input.LimiteLiquidoFinal"),
+      InputLimitePlasticoFinal= $(this).closest("div").find("form.formResultados").find("input.LimitePlasticoFinal"),
+      InputIndicePlasticidad= $(this).closest("div").find("form.formResultados").find("input.IndicePlasticidadFinal");
+
+      InputHumedadFinal.val(humedadVar.toPrecision(4)),
+      InputLimiteLiquidoFinal.val(liquidoVar.toPrecision(4)),
+      InputLimitePlasticoFinal.val(plasticoVar.toPrecision(4)),
+      InputIndicePlasticidad.val(liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4));
 
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
@@ -759,6 +794,12 @@ var acciones = {
     resultadoPesoUnitario = trResultados.eq(6), 
     resultadoCohesion = trResultados.eq(7);
 
+
+    //input de resultados 
+     var InputCohesionFinal = $(this).closest("div").find("form.formResultadosCompresion").find("input.cohesionFinal"),
+      InputPesoUnitarioFinal= $(this).closest("div").find("form.formResultadosCompresion").find("input.pesoUnitarioFinal");
+
+
     resultadoDiametro.text(diametroVar.toPrecision(4));
     resultadoAltura.text(alturaVar.toPrecision(4));
     resultadoPeso.text(pesoVar.toPrecision(4));
@@ -768,6 +809,10 @@ var acciones = {
     resultadoArea.text(areaVar.toPrecision(4));
     resultadoVolumen.text(volumenVar.toPrecision(4));
     resultadoCohesion.text(cohesionVar.toPrecision(4));
+
+    //asignacion de variables a inputs resultados
+    InputCohesionFinal.val(cohesionVar.toPrecision(4)),
+    InputPesoUnitarioFinal.val(pesoUnitarioVar.toPrecision(4));
   },
   calculosGranulometria: function(){
     //tabla de pesos

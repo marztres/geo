@@ -7,6 +7,7 @@
 	require_once 'includes/compresion.php';
 	require_once 'includes/granulometria.php';
 	require_once 'includes/pesos_retenidos.php';
+	require_once 'includes/resultados.php';
 
 
 	if ( isset( $_POST['func'] ) ) {
@@ -99,6 +100,8 @@
   			$testCompresionClass = new Compresion();
   			$granulometriaClass= new granulometria();
   			$pesosRetenidoClass= new pesos_retenidos();
+  			$resultadosClass= new resultados();
+
   			$descripcion_muestra = $_POST['descripcion_muestra'];
   			$profundidad_inicial = $_POST['profundidad_inicial'];
   			$profundidad_final = $_POST['profundidad_final'];
@@ -154,7 +157,10 @@
   			$pesosRetenidoClass->addPesoRetenido("N°40",0.43, NULL, $idGranulometria);
   			$pesosRetenidoClass->addPesoRetenido("N°100",0.15, NULL, $idGranulometria);
   			$pesosRetenidoClass->addPesoRetenido("N°200",0.08, NULL, $idGranulometria);
-  			
+
+
+  			$resultadosClass->addResultados($idMuestra);
+
   			if ( $respuesta ) {
   				$response["status"] = "OK";
   				$response["message"] = "Muestra guardada correctamente";
@@ -187,6 +193,7 @@
 				break;
 				case 'testlimites':
 					$testLimitesClass = new testlimintes();
+					$resultadosClass= new resultados();
 					if ( $_POST['muestra'] == 0 ) {
 						$humedadCapsula = array();
 						$humedadPesoCapsular = array();
@@ -198,7 +205,7 @@
 						$test1= $idtest[0];
 						$test2= $idtest[1];
 						$test3= $idtest[2];
-		
+
 						foreach ( $_POST['humedadCapsula'] as $valor ) {
 							$humedadCapsula[] = $valor;
 						}
@@ -214,6 +221,9 @@
 						$respuesta1 = $testLimitesClass->modificarTest($test1, $humedadCapsula[0], $humedadPesoCapsular[0], $humedadPesoSueloHumedo[0], $humedadPesoSueloSeco[0], 0);
 						$respuesta2 = $testLimitesClass->modificarTest($test2, $humedadCapsula[1], $humedadPesoCapsular[1], $humedadPesoSueloHumedo[1], $humedadPesoSueloSeco[1], 0);
 						$respuesta3 = $testLimitesClass->modificarTest($test3, $humedadCapsula[2], $humedadPesoCapsular[2], $humedadPesoSueloHumedo[2], $humedadPesoSueloSeco[2], 0);
+						
+
+
 					if ( $respuesta1 ) {
 					$response["status"] = "OK";
 					$response["message"] = "Muestra guardada correctamente";
@@ -277,6 +287,12 @@
 						$test1= $idtest[0];
 						$test2= $idtest[1];
 						$test3= $idtest[2];
+
+						$humedaFinal=$_POST['humedadFinal'];
+						$limiteLiquidoFinal=$_POST['limiteLiquidoFinal'];
+						$limitePlasticoFinal=$_POST['limitePlasticoFinal'];
+						$indicePlasticidadFinal=$_POST['indicePlasticidadFinal'];
+						$fk_idMuestra=$_POST['fkMuestra'];
 		
 						foreach ( $_POST['plasticoNombreCapsula'] as $valor ) {
 							$plasticoNombreCapsula[] = $valor;
@@ -293,6 +309,9 @@
 						$respuesta1 = $testLimitesClass->modificarTest($test1, $plasticoNombreCapsula[0], $plasticoPeso[0], $plasticoPesoSueloHumedo[0], $plasticoPesoSueloSeco[0], 0);
 						$respuesta2 = $testLimitesClass->modificarTest($test2, $plasticoNombreCapsula[1], $plasticoPeso[1], $plasticoPesoSueloHumedo[1], $plasticoPesoSueloSeco[1], 0);
 						$respuesta3 = $testLimitesClass->modificarTest($test3, $plasticoNombreCapsula[2], $plasticoPeso[2], $plasticoPesoSueloHumedo[2], $plasticoPesoSueloSeco[2], 0);
+						
+						$resultadosClass->updateResultados($humedaFinal,$limiteLiquidoFinal,$limitePlasticoFinal,$indicePlasticidadFinal,$fk_idMuestra);
+
 					if ( $respuesta1 ) {
 					$response["status"] = "OK";
 					$response["message"] = "Muestra guardada correctamente";
@@ -306,8 +325,9 @@
 					}
 					break;
 
-				case "UpdateCompresion":	
+				case "UpdateCompresion":
 						$testCompresionClass = new Compresion();
+						$resultadosClass= new resultados();
 						$compresionIdDeformacion = array();
 						$compresionDeformaciones = array();
 						$id_compresion=$_POST['compresionId'];
@@ -319,8 +339,23 @@
 								  $carga=$_POST['compresionDeformaciones'];
 								  $compresionIdDeformacion= $valor;
 						}
+						$pesoUnitarioFinal= $_POST['pesoUnitarioFinal'];
+						$cohesionFinal= $_POST['cohesionFinal'];
+						$fk_idMuestra= $_POST['fk_idmuestra'];
+
 						$testCompresionClass->modificarDeformaciones($carga,$compresionIdDeformacion);
 						$testCompresionClass->modificarCompresion($compresionDiametro,$compresionAltura,$compresionPeso,$compresionTipofalla,$id_compresion);
+						
+						$resultadosClass->updateResultadosCompresion($cohesionFinal,$pesoUnitarioFinal,$fk_idMuestra);
+
+					if ( $testCompresionClass ) {
+					$response["status"] = "OK";
+					$response["message"] = "Compresion actulizada correctamente correctamente";
+					
+				} else {
+					$response["status"] = "ERROR";
+					$response["message"] = "Error actualizando compresion";
+				}					
 				break;
 			
 				case 'granulometria':
