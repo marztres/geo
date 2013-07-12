@@ -1334,9 +1334,10 @@
                       ?>
                       <td> <?php echo $tamizN4=round($tamices[7]/100,2) ?></td>
                       <td> <?php echo $tamizN200=round($tamices[13]/100,2) ?> </td>
-                      <td> <?php echo $ll=44; ?> </td>
-                      <td> <?php echo $lp=18; ?></td>
-                      <td> 36 </td>
+                      <td> <?php echo $liquido=44; ?> </td>
+                      <td> <?php echo $plastico=18; ?></td>
+                           <?php  $ip=18.00; ?>
+                      <td> 0 </td>
                     </tr>
                   </tbody>
                 </table>
@@ -1349,7 +1350,37 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td> - </td>
+                      <td>
+                          <?php 
+                              $lineaA=0.73*($ll-20);
+                              $gravas=100-$tamizN4;
+                              $arenas=$tamizN4-$tamizN200;
+                              $finos=$tamizN200;
+                              if($gravas>$arenas && $gravas>$finos){
+                                echo "Estoy en gravas".$gravas;
+                              }
+                              else if($arenas>$gravas && $arenas>$finos){
+                                echo "Estoy en arenas".$arenas;
+                              }
+                              else if($finos>$arenas && $finos>$gravas){
+                                   if($ll<50){
+                                        if($ip>7 || $ip>=$lineaA ){
+                                              echo $notacion="CL"; 
+                                        }
+                                        else if($ip>=4 && $ip<=7 && $ip>=$lineaA){
+                                              echo $notacion="CL-ML";
+                                        }
+                                        else if($ip<4 || $ip<$lineaA){
+                                              echo $notacion="ML";
+                                        }
+                                    } 
+                                    else{
+
+                                    }
+                              }
+                             
+                          ?>
+                      </td>
                       <td> - </td>
                     </tr>
                   </tbody>
