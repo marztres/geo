@@ -1234,11 +1234,11 @@
                         <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
                         <td class="acumulado" ><?php echo $temp[$j]; ?></td>
                         <td >
-                            <?php echo $pasa=100 - $temp[$j];
+                            <?php echo $pasa= 100 - $temp[$j];
                                 if($retenidos->pesoRetenido>0){
                                    $p[]=$pasa;
-                                   $tamices[]=$pasa;
                                 }
+                                   $tamices[]=$pasa;
                              ?>
                         </td>
                       </tr>
@@ -1355,12 +1355,12 @@
                   <tbody>
                     <tr>
                       <?php
-                        $d60=0.1;
-                        $d60=7;
                         $d60=21;
+                        $d30=7;
+                        $d10=0.1;
                       ?>
-                      <td><?php echo $tamizN4=round($tamices[7]/100,2) ?></td>
-                      <td><?php echo $tamizN200=round($tamices[13]/100,2) ?> </td>
+                      <td><?php echo $tamizN4=round($tamices[6]/100,2); ?></td>
+                      <td><?php echo $tamizN200=round($tamices[13]/100,2); ?> </td>
                       <td><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
                       <td><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
                            
@@ -1383,12 +1383,25 @@
                               $gravas=100-$tamizN4;
                               $arenas=$tamizN4-$tamizN200;
                               $finos=$tamizN200;
+                              $cu=$d60/$d10;
+                              $cc=(($d30*$d30)/($d10*$d60));
                               if($gravas>$arenas && $gravas>$finos){
-                                echo "Estoy en gravas".$gravas;
+                                   if($finos<5){
+                                      echo round($cu,2);
+                                   }
+                                   else
+                                    if($finos>5 && $finos<12){
+                                      echo "nada";
+                                   }
+                                   else
+                                    if($finos>12){
+                                      echo "raro";
+                                    }
                               }
                               else if($arenas>$gravas && $arenas>$finos){
-                                echo "Estoy en arenas".$arenas;
+                                      echo "Estoy en arenas".$arenas;
                               }
+
                               else if($finos>$arenas && $finos>$gravas){
                                    if($ll<50){
                                         if($ip>7 || $ip>=$lineaA ){
