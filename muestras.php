@@ -1359,8 +1359,8 @@
                         $d30=7;
                         $d10=0.1;
                       ?>
-                      <td><?php echo $tamizN4=round($tamices[6]/100,2); ?></td>
-                      <td><?php echo $tamizN200=round($tamices[13]/100,2); ?> </td>
+                      <td><?php echo $tamizN4=round($tamices[7],2); ?></td>
+                      <td><?php echo $tamizN200=round($tamices[13],2); ?> </td>
                       <td><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
                       <td><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
                            
@@ -1379,7 +1379,7 @@
                     <tr>
                       <td>
                           <?php 
-                              $lineaA=0.73*($ll-20);
+                              $lineaA=0.73*($Liquido-20);
                               $gravas=100-$tamizN4;
                               $arenas=$tamizN4-$tamizN200;
                               $finos=$tamizN200;
@@ -1387,7 +1387,24 @@
                               $cc=(($d30*$d30)/($d10*$d60));
                               if($gravas>$arenas && $gravas>$finos){
                                    if($finos<5){
-                                      echo round($cu,2);
+                                      if($cu>=4 && $cc>=1 && $cc<=3){
+                                          $notacion="GW";
+                                          if($arenas<15){
+                                            echo "Grava bien graduada";
+                                          }
+                                          else if($arenas>=15){
+                                            echo "Grava bien graduada con arena";
+                                          }
+                                      }
+                                      else if($cu<4 || $cc>1 && $cc<3){
+                                           $notacion="GP";
+                                            if($arenas<15){
+                                              echo "Grava mal graduada";
+                                            }
+                                            else if($arenas>=15){
+                                              echo "Grava mal graduada con arena";
+                                            }
+                                      }
                                    }
                                    else
                                     if($finos>5 && $finos<12){
@@ -1404,14 +1421,20 @@
 
                               else if($finos>$arenas && $finos>$gravas){
                                    if($ll<50){
-                                        if($ip>7 || $ip>=$lineaA ){
-                                              echo $notacion="CL"; 
+                                        if($indicePlasticidad>7 || $indicePlasticidad>=$lineaA ){
+                                              $notacion="CL";
+                                              if($tamizN200<30){
+
+                                              } 
+                                              else if($tamizN200>=30){
+
+                                              }
                                         }
-                                        else if($ip>=4 && $ip<=7 && $ip>=$lineaA){
+                                        else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
                                               echo $notacion="CL-ML";
                                         }
-                                        else if($ip<4 || $ip<$lineaA){
-                                              echo $notacion="ML";
+                                        else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                              echo $arenas;
                                         }
                                     } 
                                     else{
