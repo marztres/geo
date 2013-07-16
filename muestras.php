@@ -1378,71 +1378,126 @@
                   <tbody>
                     <tr>
                       <td>
-                          <?php 
-                              $lineaA=0.73*($Liquido-20);
-                              $gravas=100-$tamizN4;
-                              $arenas=$tamizN4-$tamizN200;
-                              $finos=$tamizN200;
-                              $cu=$d60/$d10;
-                              $cc=(($d30*$d30)/($d10*$d60));
-                              if($gravas>$arenas && $gravas>$finos){
-                                   if($finos<5){
-                                      if($cu>=4 && $cc>=1 && $cc<=3){
-                                          $notacion="GW";
-                                          if($arenas<15){
-                                            echo "Grava bien graduada";
-                                          }
-                                          else if($arenas>=15){
-                                            echo "Grava bien graduada con arena";
-                                          }
-                                      }
-                                      else if($cu<4 || $cc>1 && $cc<3){
-                                           $notacion="GP";
-                                            if($arenas<15){
-                                              echo "Grava mal graduada";
-                                            }
-                                            else if($arenas>=15){
-                                              echo "Grava mal graduada con arena";
-                                            }
-                                      }
-                                   }
-                                   else
-                                    if($finos>5 && $finos<12){
-                                      echo "nada";
-                                   }
-                                   else
-                                    if($finos>12){
-                                      echo "raro";
+                      <?php 
+                        $lineaA=0.73*($liquido-20);
+                        $gravas=100-$tamizN4;
+                        $arenas=$tamizN4-$tamizN200;
+                        $finos=$tamizN200;
+                        $cu=$d60/$d10;
+                        $cc=(($d30*$d30)/($d10*$d60));
+                        if($gravas>$arenas && $gravas>$finos){
+                             if($finos<5){
+                                if($cu>=4 && $cc>=1 && $cc<=3){
+                                    $notacion="GW";
+                                    if($arenas<15){
+                                      $descrsub="Grava bien graduada";
+                                      echo  $notacion."-".$descrsub;
                                     }
+                                    else if($arenas>=15){
+                                      $descrsub="Grava bien graduada con arena";
+                                      echo  $notacion."-".$descrsub;
+                                    }
+                                }
+                                else if($cu<4 || $cc>1 && $cc<3){
+                                      $notacion="GP";
+                                      if($arenas<15){
+                                        $descrsub="Grava mal graduada";
+                                        echo  $notacion."-".$descrsub;
+                                      }
+                                      else if($arenas>=15){
+                                        $descrsub="Grava mal graduada con arena";
+                                        echo  $notacion."-".$descrsub;
+                                      }
+                                }
+                             }
+                             else if($finos>5 && $finos<12){
+                                echo "Si finos es mayor que 5 y menor que 12";
+                             }
+                             else if($finos>12){
+                                  if($liquido<50){
+                                      if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                            $notacionFinos="CL";
+                                      }
+                                      else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                            $notacion="CL-ML";
+                                      }
+                                      else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                             $notacionFinos="ML";
+                                      }
+                                  } 
+                                  else{
+                                      if($indicePlasticidad>=$lineaA){
+                                              $notacionFinos="CH";  
+                                      }
+                                      else{
+                                          $notacionFinos="MH";
+                                      }
+                                  }                                    
                               }
-                              else if($arenas>$gravas && $arenas>$finos){
-                                      echo "Estoy en arenas".$arenas;
+                              if($notacionFinos=="CL" || $notacionFinos=="CH"){
+                                                $notacion="GC";
+                                                if($arenas<15){
+                                                  $descrsub="GRAVA ARCILLOSA";
+                                                  echo $notacion."-".$descrsub;
+                                                }
+                                                else{
+                                                  $descrsub="GRAVA ARCILLOSA CON ARENA";
+                                                  echo $notacion."-".$descrsub;
+                                                }
+                              }
+                              else if($notacionFinos=="ML" || $notacionFinos=="MH" ){
+                                                $notacion="GM";
+                                                if($arenas<15){
+                                                  $descrsub="GRAVA LIMOSA";
+                                                  echo $notacion."-".$descrsub;
+                                                }
+                                                else{
+                                                  $descrsub="GRAVA LIMOSA CON ARENA";
+                                                  echo $notacion."-".$descrsub;
+                                                }
                               }
 
-                              else if($finos>$arenas && $finos>$gravas){
-                                   if($ll<50){
-                                        if($indicePlasticidad>7 || $indicePlasticidad>=$lineaA ){
-                                              $notacion="CL";
-                                              if($tamizN200<30){
+                        }
+                        else if($arenas>$gravas && $arenas>$finos){
+                                echo "Estoy en arenas".$arenas;
+                        }                        
+                        else if($finos>$arenas && $finos>$gravas){
+                             if($liquido<50){
+                                  if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                         echo $notacion="CL";
+                                        if($tamizN200<30){
+                                         echo "Cuando el tamiz es menor que 30";
+                                        } 
+                                        else if($tamizN200>=30){
+                                          echo "Cuando el tamiz es mayor o igual a 30";
+                                        }
+                                  }
+                                  else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                        echo $notacion="Cuando el limite de plasticidad es menor o igual que 4";
+                                  }
+                                  else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                         $notacion="ML";
+                                         $descrsub="LIMO ARENOSO";
+                                         if($tamizN200<30){
 
-                                              } 
-                                              else if($tamizN200>=30){
-
+                                         }
+                                         else{
+                                            if($arenas>=$gravas){
+                                              if($gravas<15){
+                                                echo $notacion."-".$descrsub;
                                               }
-                                        }
-                                        else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
-                                              echo $notacion="CL-ML";
-                                        }
-                                        else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
-                                              echo $arenas;
-                                        }
-                                    } 
-                                    else{
-                                        
-                                    }
+                                              else{
+                                                echo $notacion."-".$descrsub;
+                                              }
+                                            }
+                                         }
+                                  }
+                              } 
+                              else{
+                                  
                               }
-                             
-                          ?>
+                        }
+                      ?>
                       </td>
                       <td> - </td>
                     </tr>
@@ -1457,6 +1512,9 @@
                 <!-- ############# FIN GUARDAR INFORMACION BOTON ############### -->
               </div>
               <?php $i++; ?>
+              <?php unset($tamices);
+                unset($notacion);
+              ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?> 
