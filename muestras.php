@@ -27,7 +27,7 @@
   $datosGranulometria= new granulometria();
   $pesosRetenidosClass= new pesos_retenidos();
   $resultadosClass= new resultados();
-
+  
   ?>
 <!DOCTYPE html>
 <html lang="es" class="no-js">
@@ -385,7 +385,6 @@
                 <!-- ############# FIN HUMEDAD NATURAL ############### -->
                 <!-- #############  LIMITE LIQUIDO ############### -->
                 <h3>Limite liquido</h3>
-
                 <a href="#"  class="btn btn-info pull-right title noliquido" >Pulsar si el suelo es NO LIQUIDO</a>
                 <br>
                 <br>
@@ -531,40 +530,38 @@
                         <td></td>
                         <td><strong>Total</strong></td>
                         <td>
-                            <?php 
-                                    $humedad1=$porcentajeLiquido1;
-                                    $humedad2=$porcentajeLiquido2;
-                                    $humedad3=$porcentajeLiquido3;
-                                    $golpes1=$TestLimitesMuestra[$i-1][3]->num_golpes;
-                                    $golpes2=$TestLimitesMuestra[$i-1][4]->num_golpes;
-                                    $golpes3=$TestLimitesMuestra[$i-1][5]->num_golpes;
-                                    if($golpes1!=0 AND $golpes2!=0 AND $golpes3!=0    ){
-                                        $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
-                                        $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
-                                        $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
-                                    }
-                                    $limite1=($pendiente1*25)-($pendiente1*$golpes1)+$humedad1;
-                                    $limite2=($pendiente2*25)-($pendiente2*$golpes3)+$humedad3;
-                                    $limite3=($pendiente3*25)-($pendiente3*$golpes2)+$humedad2;
-
-                                    $LimiteLiquido=($limite1+$limite2+$limite3)/3;
-                                    if($LimiteLiquido>=0){
-                                        echo round($LimiteLiquido);
-                                    }
-                                    else{
-                                        echo 0;
-                                    }
-
-                              ?>
+                          <?php 
+                            $humedad1=$porcentajeLiquido1;
+                            $humedad2=$porcentajeLiquido2;
+                            $humedad3=$porcentajeLiquido3;
+                            $golpes1=$TestLimitesMuestra[$i-1][3]->num_golpes;
+                            $golpes2=$TestLimitesMuestra[$i-1][4]->num_golpes;
+                            $golpes3=$TestLimitesMuestra[$i-1][5]->num_golpes;
+                            if($golpes1!=0 AND $golpes2!=0 AND $golpes3!=0    ){
+                                $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
+                                $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
+                                $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
+                            }
+                            $limite1=($pendiente1*25)-($pendiente1*$golpes1)+$humedad1;
+                            $limite2=($pendiente2*25)-($pendiente2*$golpes3)+$humedad3;
+                            $limite3=($pendiente3*25)-($pendiente3*$golpes2)+$humedad2;
+                            
+                            $LimiteLiquido=($limite1+$limite2+$limite3)/3;
+                            if($LimiteLiquido>=0){
+                                echo round($LimiteLiquido);
+                            }
+                            else{
+                                echo 0;
+                            }
+                            
+                            ?>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </form>
-                
                 <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="text" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
                 <div id="graficaLimites<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
-                
                 <!-- #############  LIMITE PLASTICO ############### -->
                 <h3>Limite plastico</h3>
                 <a href="#"  class="btn btn-info pull-right title noplastico">Pulsar si el suelo es NO PLASTICO</a>
@@ -718,146 +715,138 @@
                       </tr>
                     </tbody>
                   </table>
-                
-                <!-- ############# FIN LIMITE PLASTICO ############### -->
-                <!-- ############# RESULTADOS ############### -->
-                <h3>Resultados</h3>
-                <table class="table table-hover table-striped table-bordered resultados">
-                  <thead>
-                    <tr>
-                      <th>Humedad natural %</th>
-                      <th>Limite liquido %</th>
-                      <th>Limite plastico %</th>
-                      <th>Indice de plasticidad %</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <?php
-                          $resultado = 0;
-                                $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
-                                $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
-                                if($mayor!=0 AND $menor!=0){
-                                $divMayorMenor1 = $mayor / $menor;
-                                }
-                                if ( $divMayorMenor1 < 1.29 ) {
-                                  $resultado = ($mayor + $menor)/2;
-                                }
-                                $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
-                                $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
-                                if($mayor!=0 AND $menor!=0){
-                                  $divMayorMenor2 = $mayor / $menor;
-                                }
-                                if ( $divMayorMenor2 < 1.29 ) {
-                                  $resultado = ($mayor + $menor)/2;
-                                }
-                                $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
-                                $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
-                                if($mayor!=0 AND $menor!=0){
-                                    $divMayorMenor3 = $mayor / $menor;
-                                 }
-                                if ( $divMayorMenor3 < 1.29 ) {
-                                  $resultado = ($mayor + $menor)/2;
-                                }
-                                if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
-                                  $resultado = 0;
-                                }
-                                  $HumedadNaturalFinal=ceil(round($resultado,2));
-                                  echo $HumedadNaturalFinal;
-                                  $porcentajeAgua1=0;
-                                  $porcentajeAgua2=0;
-                                  $porcentajeAgua3=0;
-                            
-
-                          ?>
-                          
-                      </td>
-                      <td>
-                                <?php
-                                      if($LimiteLiquido>=0){
-                                        
-                                        $LimiteLiquidoFinal=round($LimiteLiquido,2);  
-                                        echo $LimiteLiquidoFinal;
-                                      }  
-                                      else{
-                                         echo 0;
-                                      }
-                                        $porcentajeLiquido1=0;
-                                        $porcentajeLiquido2=0;
-                                        $porcentajeLiquido3=0; 
-                                        $golpes1=0;
-                                        $golpes2=0;
-                                        $golpes3=0;                                                         
-                                ?>
-                        
-                      </td>
-                      <td>
-                        <?php
-                          $resultado = 0;
-                          $menor = min( array( $porcentajePlastico1, $porcentajePlastico2 ) );
-                          $mayor = max( array( $porcentajePlastico1, $porcentajePlastico2 ) );
-                          if($mayor!=0 AND $menor!=0){                          
-                            $divMayorMenor1 = $mayor / $menor;
-                          }
-                          if ( $divMayorMenor1 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          $menor = min( array( $porcentajePlastico2, $porcentajePlastico3 ) );
-                          $mayor = max( array( $porcentajePlastico2, $porcentajePlastico3 ) );
-                          if($mayor!=0 AND $menor!=0){
-                            $divMayorMenor2 = $mayor / $menor;
-                          }    
-                          if ( $divMayorMenor2 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          $menor = min( array( $porcentajePlastico1, $porcentajePlastico3 ) );
-                          $mayor = max( array( $porcentajePlastico1, $porcentajePlastico3 ) );
-                          if($mayor!=0 AND $menor!=0){
-                            $divMayorMenor3 = $mayor / $menor;
-                           } 
-                          if ( $divMayorMenor3 < 1.29 ) {
-                            $resultado = ($mayor + $menor)/2;
-                          }
-                          if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                  <!-- ############# FIN LIMITE PLASTICO ############### -->
+                  <!-- ############# RESULTADOS ############### -->
+                  <h3>Resultados</h3>
+                  <table class="table table-hover table-striped table-bordered resultados">
+                    <thead>
+                      <tr>
+                        <th>Humedad natural %</th>
+                        <th>Limite liquido %</th>
+                        <th>Limite plastico %</th>
+                        <th>Indice de plasticidad %</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <?php
                             $resultado = 0;
-                          }
-                          echo $limitePlastico=round($resultado,2);
-                             
-                          ?>
-                          
-                      </td>
-                      <td>
-                        <?php
-                          if($LimiteLiquido>=0){
-                             $indicePlasticidadFinal= round($LimiteLiquido-$limitePlastico);    
-                             echo  $indicePlasticidadFinal;
-                          }
-                          else{
-                            echo 0;
-                          }
-                                $porcentajePlastico1=0;
-                                $porcentajePlastico2=0;
-                                $porcentajePlastico3=0;
-                        ?>
-               
-                      </td>
-                    
-                    </tr>
-                  </tbody>
-                </table>
-                <input name="humedadFinal" type="text" class="HumedadNaturalFinal" value="<?php echo $HumedadNaturalFinal; ?>">
-                <input name="limiteLiquidoFinal" type="text" class="LimiteLiquidoFinal" value="<?php echo $LimiteLiquidoFinal; ?>">          
-                <input name="limitePlasticoFinal" type="text" class="LimitePlasticoFinal" value="<?php echo $limitePlastico; ?>"> 
-                <input name="indicePlasticidadFinal" type="text" class="IndicePlasticidadFinal" value="<?php echo $indicePlasticidadFinal; ?>"> 
-                    
+                                  $menor = min( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                                  $mayor = max( array( $porcentajeAgua1, $porcentajeAgua2 ) );
+                                  if($mayor!=0 AND $menor!=0){
+                                  $divMayorMenor1 = $mayor / $menor;
+                                  }
+                                  if ( $divMayorMenor1 < 1.29 ) {
+                                    $resultado = ($mayor + $menor)/2;
+                                  }
+                                  $menor = min( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                                  $mayor = max( array( $porcentajeAgua2, $porcentajeAgua3 ) );
+                                  if($mayor!=0 AND $menor!=0){
+                                    $divMayorMenor2 = $mayor / $menor;
+                                  }
+                                  if ( $divMayorMenor2 < 1.29 ) {
+                                    $resultado = ($mayor + $menor)/2;
+                                  }
+                                  $menor = min( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                                  $mayor = max( array( $porcentajeAgua1, $porcentajeAgua3 ) );
+                                  if($mayor!=0 AND $menor!=0){
+                                      $divMayorMenor3 = $mayor / $menor;
+                                   }
+                                  if ( $divMayorMenor3 < 1.29 ) {
+                                    $resultado = ($mayor + $menor)/2;
+                                  }
+                                  if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                                    $resultado = 0;
+                                  }
+                                    $HumedadNaturalFinal=ceil(round($resultado,2));
+                                    echo $HumedadNaturalFinal;
+                                    $porcentajeAgua1=0;
+                                    $porcentajeAgua2=0;
+                                    $porcentajeAgua3=0;
+                              
+                            
+                            ?>
+                        </td>
+                        <td>
+                          <?php
+                            if($LimiteLiquido>=0){
+                              
+                              $LimiteLiquidoFinal=round($LimiteLiquido,2);  
+                              echo $LimiteLiquidoFinal;
+                            }  
+                            else{
+                               echo 0;
+                            }
+                              $porcentajeLiquido1=0;
+                              $porcentajeLiquido2=0;
+                              $porcentajeLiquido3=0; 
+                              $golpes1=0;
+                              $golpes2=0;
+                              $golpes3=0;                                                         
+                            ?>
+                        </td>
+                        <td>
+                          <?php
+                            $resultado = 0;
+                            $menor = min( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                            $mayor = max( array( $porcentajePlastico1, $porcentajePlastico2 ) );
+                            if($mayor!=0 AND $menor!=0){                          
+                              $divMayorMenor1 = $mayor / $menor;
+                            }
+                            if ( $divMayorMenor1 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            $menor = min( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                            $mayor = max( array( $porcentajePlastico2, $porcentajePlastico3 ) );
+                            if($mayor!=0 AND $menor!=0){
+                              $divMayorMenor2 = $mayor / $menor;
+                            }    
+                            if ( $divMayorMenor2 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            $menor = min( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                            $mayor = max( array( $porcentajePlastico1, $porcentajePlastico3 ) );
+                            if($mayor!=0 AND $menor!=0){
+                              $divMayorMenor3 = $mayor / $menor;
+                             } 
+                            if ( $divMayorMenor3 < 1.29 ) {
+                              $resultado = ($mayor + $menor)/2;
+                            }
+                            if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
+                              $resultado = 0;
+                            }
+                            echo $limitePlastico=round($resultado,2);
+                               
+                            ?>
+                        </td>
+                        <td>
+                          <?php
+                            if($LimiteLiquido>=0){
+                               $indicePlasticidadFinal= round($LimiteLiquido-$limitePlastico);    
+                               echo  $indicePlasticidadFinal;
+                            }
+                            else{
+                              echo 0;
+                            }
+                                  $porcentajePlastico1=0;
+                                  $porcentajePlastico2=0;
+                                  $porcentajePlastico3=0;
+                            ?>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <input name="humedadFinal" type="text" class="HumedadNaturalFinal" value="<?php echo $HumedadNaturalFinal; ?>">
+                  <input name="limiteLiquidoFinal" type="text" class="LimiteLiquidoFinal" value="<?php echo $LimiteLiquidoFinal; ?>">          
+                  <input name="limitePlasticoFinal" type="text" class="LimitePlasticoFinal" value="<?php echo $limitePlastico; ?>"> 
+                  <input name="indicePlasticidadFinal" type="text" class="IndicePlasticidadFinal" value="<?php echo $indicePlasticidadFinal; ?>"> 
                 </form>
                 <!-- ############# FIN RESULTADOS HUMEDAD Y LIMITE ############### -->
                 <div class="form-actions">
                   <a href="#" rel="muestra<?php echo $i; ?>" class="guardaLimites btn btn-primary input-xlarge">Guardar información</a>
                 </div>
               </div>
-
               <?php $i++;?>  
               <?php endforeach; ?>
               <?php else: ?>
@@ -887,12 +876,11 @@
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $DatosCompresion = $datosCompresion->GetDatosCompresion( $datoMuestra->id_muestra );  ?>
-
               <div class="tab-pane <?php echo (($i==1)?'active':''); ?> text-center" id="compresion<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA ############### -->
                 <h3>Medidas de la muestra</h3>
                 <form class="compresion<?php echo $i; ?> formResultadosCompresion" action="save.php" method="post" accept-charset="utf-8">
-                <input name="fk_idmuestra" type="hidden" value="<?php echo $datoMuestra->id_muestra; ?>">
+                  <input name="fk_idmuestra" type="hidden" value="<?php echo $datoMuestra->id_muestra; ?>">
                   <table class="table table-hover table-striped table-bordered tablacompresion ">
                     <thead>
                       <tr>
@@ -953,7 +941,6 @@
                       <?php $DatosDeformaciones = $datosCompresion->GetDatosDeformaciones( $DatosCompresion->id_compresion); ?>
                       <?php if ($DatosDeformaciones>0): ?>
                       <?php $k=0; $m=1;?>
-
                       <?php foreach ( $DatosDeformaciones as $deformaciones ):?>                    
                       <tr>
                         <td>
@@ -1009,34 +996,33 @@
                             ?>
                         </td>
                       </tr>
-                        
-                        <?php $k++ ?>
+                      <?php $k++ ?>
                       <?php endforeach; ?>
                       <?php endif; ?>
                     </tbody>
                   </table>
                   <!-- ############# TABLA DE COMPRESIÓN ############### -->
                   <!-- ############# GRAFICA DE COMPRESIÓN ############### -->
-                        <?php 
-                            $tamano=count($gdt);
-                            $t=$tamano-1;
-                            for($l=0; $l<=$t; $l++){
-                               if(isset($gdt[$l]) AND isset($ge[$l])){
-                                  if($l<$t){
-                                    $datos=$datos."[".$gdt[$l].",".$ge[$l]."],";
-                                  }
-                                  else{
-                                    $datos=$datos."[".$gdt[$l].",".$ge[$l]."]"; 
-                                  }
-                               }
-                            }
-                        ?>
+                  <?php 
+                    $tamano=count($gdt);
+                    $t=$tamano-1;
+                    for($l=0; $l<=$t; $l++){
+                       if(isset($gdt[$l]) AND isset($ge[$l])){
+                          if($l<$t){
+                            $datos=$datos."[".$gdt[$l].",".$ge[$l]."],";
+                          }
+                          else{
+                            $datos=$datos."[".$gdt[$l].",".$ge[$l]."]"; 
+                          }
+                       }
+                    }
+                    ?>
                   <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="text" value="<?php echo $datos?>">
                   <div id="graficacompresion<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
-                    <?php 
-                        unset($gdt);
-                        unset($ge);
-                        unset($datos);
+                  <?php 
+                    unset($gdt);
+                    unset($ge);
+                    unset($datos);
                     ?>
                   <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
                   <!-- ############# RESULTADOS ############### -->
@@ -1202,10 +1188,10 @@
                         </td>
                         <td class="tamTamiz"><?php echo $tamañoTamiz[]=$retenidos->tamanoTamiz ?></td>
                         <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
-                         <?php 
-                           if($retenidos->pesoRetenido>0){
-                               $pr[]=$retenidos->tamanoTamiz;
-                           }
+                        <?php 
+                          if($retenidos->pesoRetenido>0){
+                              $pr[]=$retenidos->tamanoTamiz;
+                          }
                           ?>
                         <?php $fondopesoretenido=$DatosGranulometria->pesoRecipienteMasMuestra-$pesoretenidomasrecipiente;
                           $totalpesoretenido=$sumapesoretenidos+$fondopesoretenido;
@@ -1234,12 +1220,12 @@
                         <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
                         <td class="acumulado" ><?php echo $temp[$j]; ?></td>
                         <td >
-                            <?php echo $pasa= 100 - $temp[$j];
-                                if($retenidos->pesoRetenido>0){
-                                   $p[]=$pasa;
-                                }
-                                   $tamices[]=$pasa;
-                             ?>
+                          <?php echo $pasa= 100 - $temp[$j];
+                            if($retenidos->pesoRetenido>0){
+                               $p[]=$pasa;
+                            }
+                               $tamices[]=$pasa;
+                            ?>
                         </td>
                       </tr>
                       <?php $j++; ?>
@@ -1292,37 +1278,35 @@
                   </table>
                 </form>
                 <!-- ############# TABLA DE GRANULOMETRIA ############### -->
-
                 <!-- ############# GRAFICA DE GRANULOMETRIA ############### -->
-                        <?php 
-                            $tamano=count($pr);
-                            if(isset($pr) && isset($p)){
-                              $pr=array_reverse($pr);
-                              $p=array_reverse($p);
-                            }
-                            
-                            $t=$tamano-1;
-                            for($l=0; $l<=$t; $l++){
-                               if(isset($pr[$l]) AND isset($p[$l])){
-                                  if($l<$t){
-                                    $datos=$datos."[".$pr[$l].",".$p[$l]."],";
-                                  }
-                                  else{
-                                    $datos=$datos."[".$pr[$l].",".$p[$l]."]"; 
-                                  }
-                               }
-                            }
-                        ?>
+                <?php 
+                  $tamano=count($pr);
+                  if(isset($pr) && isset($p)){
+                    $pr=array_reverse($pr);
+                    $p=array_reverse($p);
+                  }
+                  
+                  $t=$tamano-1;
+                  for($l=0; $l<=$t; $l++){
+                     if(isset($pr[$l]) AND isset($p[$l])){
+                        if($l<$t){
+                          $datos=$datos."[".$pr[$l].",".$p[$l]."],";
+                        }
+                        else{
+                          $datos=$datos."[".$pr[$l].",".$p[$l]."]"; 
+                        }
+                     }
+                  }
+                  ?>
                 <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgraficaGranulometria"  type="text" value="<?php  echo $datos; ?>">
                 <div id="graficagranulometria<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                 <!-- ############# RESULTADOS ############### -->
                 <?php 
-                    unset($pr);
-                    unset($p);
-                    unset($datos); 
-                ?>
-                
+                  unset($pr);
+                  unset($p);
+                  unset($datos); 
+                  ?>
                 <h3>Observaciones de la tabla</h3>
                 <table class="table table-hover table-striped table-bordered ">
                   <thead>
@@ -1340,7 +1324,6 @@
                     </tr>
                   </tbody>
                 </table>
-        
                 <h3>Resultados</h3>
                 <table class="table table-hover table-striped table-bordered ">
                   <thead>
@@ -1358,13 +1341,33 @@
                         $d60=21;
                         $d30=7;
                         $d10=0.1;
-                      ?>
-                      <td><?php echo $tamizN4=round($tamices[7],2); ?></td>
-                      <td><?php echo $tamizN200=round($tamices[13],2); ?> </td>
+                        ?>
+                      <td>
+                          <?php
+                                   if($resultado->indicePlasticidad==0){
+                                      $tamizN4=0;
+                                   }
+                                   else{
+                                        echo $tamizN4=round($tamices[7],2);
+                                   }
+                          ?>
+                      </td>
+                      <td>
+                          <?php ; 
+                                  if($resultado->indicePlasticidad==0){
+                                        $tamizN200=0;
+                                  }
+                                  else{
+                                      echo $tamizN200=round($tamices[13],2);
+                                  }
+                                      $tamizN10=round($tamices[8]);
+                                      $tamizN40=round($tamices[11]);                             
+                          ?> 
+                      </td>
                       <td><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
+                      <?php $plastico=$resultado->limitePlastico;?>
                       <td><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
-                           
-                      <td> 0 </td>
+                      <td>  </td>
                     </tr>
                   </tbody>
                 </table>
@@ -1378,132 +1381,672 @@
                   <tbody>
                     <tr>
                       <td>
-                      <?php 
-                        $lineaA=0.73*($liquido-20);
-                        $gravas=100-$tamizN4;
-                        $arenas=$tamizN4-$tamizN200;
-                        $finos=$tamizN200;
-                        $cu=$d60/$d10;
-                        $cc=(($d30*$d30)/($d10*$d60));
-                        if($gravas>$arenas && $gravas>$finos){
-                             if($finos<5){
-                                if($cu>=4 && $cc>=1 && $cc<=3){
-                                    $notacion="GW";
-                                    if($arenas<15){
-                                      $descrsub="Grava bien graduada";
-                                      echo  $notacion."-".$descrsub;
-                                    }
-                                    else if($arenas>=15){
-                                      $descrsub="Grava bien graduada con arena";
-                                      echo  $notacion."-".$descrsub;
-                                    }
-                                }
-                                else if($cu<4 || $cc>1 && $cc<3){
-                                      $notacion="GP";
+                        <?php 
+                          $gravas=0;
+                          $arenas=0;
+                          $finos=0;
+                          $lineaA=0.73*($liquido-20);
+                          $gravas=100-$tamizN4;
+                          $arenas=$tamizN4-$tamizN200;
+                          $finos=$tamizN200;
+                          $cu=$d60/$d10;
+                          $cc=(($d30*$d30)/($d10*$d60));
+                          if($gravas>$arenas && $gravas>$finos){
+                               if($finos<5){
+                                  if($cu>=4 && $cc>=1 && $cc<=3){
+                                      $notacion="GW";
                                       if($arenas<15){
-                                        $descrsub="Grava mal graduada";
+                                        $descrsub="Grava bien graduada";
                                         echo  $notacion."-".$descrsub;
                                       }
                                       else if($arenas>=15){
-                                        $descrsub="Grava mal graduada con arena";
+                                        $descrsub="Grava bien graduada con arena";
                                         echo  $notacion."-".$descrsub;
                                       }
-                                }
-                             }
-                             else if($finos>5 && $finos<12){
-                                echo "Si finos es mayor que 5 y menor que 12";
-                             }
-                             else if($finos>12){
-                                  if($liquido<50){
-                                      if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
-                                            $notacionFinos="CL";
-                                      }
-                                      else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
-                                            $notacion="CL-ML";
-                                      }
-                                      else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
-                                             $notacionFinos="ML";
-                                      }
-                                  } 
-                                  else{
-                                      if($indicePlasticidad>=$lineaA){
-                                              $notacionFinos="CH";  
-                                      }
-                                      else{
-                                          $notacionFinos="MH";
-                                      }
-                                  }                                    
-                              }
-                              if($notacionFinos=="CL" || $notacionFinos=="CH"){
-                                                $notacion="GC";
-                                                if($arenas<15){
-                                                  $descrsub="GRAVA ARCILLOSA";
-                                                  echo $notacion."-".$descrsub;
-                                                }
-                                                else{
-                                                  $descrsub="GRAVA ARCILLOSA CON ARENA";
-                                                  echo $notacion."-".$descrsub;
-                                                }
-                              }
-                              else if($notacionFinos=="ML" || $notacionFinos=="MH" ){
-                                                $notacion="GM";
-                                                if($arenas<15){
-                                                  $descrsub="GRAVA LIMOSA";
-                                                  echo $notacion."-".$descrsub;
-                                                }
-                                                else{
-                                                  $descrsub="GRAVA LIMOSA CON ARENA";
-                                                  echo $notacion."-".$descrsub;
-                                                }
-                              }
-
-                        }
-                        else if($arenas>$gravas && $arenas>$finos){
-                                echo "Estoy en arenas".$arenas;
-                        }                        
-                        else if($finos>$arenas && $finos>$gravas){
-                             if($liquido<50){
-                                  if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
-                                         echo $notacion="CL";
-                                        if($tamizN200<30){
-                                         echo "Cuando el tamiz es menor que 30";
-                                        } 
-                                        else if($tamizN200>=30){
-                                          echo "Cuando el tamiz es mayor o igual a 30";
+                                  }
+                                  else if($cu<4 || $cc>1 && $cc<3){
+                                        $notacion="GP";
+                                        if($arenas<15){
+                                          $descrsub="Grava mal graduada";
+                                          echo  $notacion."-".$descrsub;
+                                        }
+                                        else if($arenas>=15){
+                                          $descrsub="Grava mal graduada con arena";
+                                          echo  $notacion."-".$descrsub;
                                         }
                                   }
-                                  else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
-                                        echo $notacion="Cuando el limite de plasticidad es menor o igual que 4";
+                               }
+                               else if($finos>5 && $finos<12){
+                                    if($cu>=4 && $cc>=1 && $cc<=3){
+                                        if($liquido<50){
+                                            if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                                  $notacionFinos="CL";
+                                            }
+                                            else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                                  $notacion="CL-ML";
+                                            }
+                                            else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                                  $notacionFinos="ML";
+                                            }   
+                                        }
+                                        else{
+                                            if($indicePlasticidad>=$lineaA){
+                                                  $notacionFinos="CH";  
+                                            }
+                                            else{
+                                                  $notacionFinos="MH";
+                                            }
+                                        } 
+                          
+                                        if($notacionFinos=="ML" || $notacionFinos=="MH"){
+                                                      $notacion="GW-GM";
+                                                      if($arenas<15){
+                                                          $descrsub="Grava bien graduada con limo";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                      else{
+                                                          $descrsub="Grava bien graduada con limo y arena";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                        }
+                                        else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
+                                                            $notacion="GW-GC";
+                                                            if($arenas<15){
+                                                                $descrsub="Grava bien graduada con arcilla ( o arcilla limosa)";
+                                                                echo $notacion."-".$descrsub;
+                                                            }
+                                                            else{
+                                                                $descrsub="Grava bien graduada con arcilla y arena (o arcilla limosa y arena)";
+                                                                echo $notacion."-".$descrsub;
+                                                            }
+                                        }
+                                    }
+                                    else if($cu<4 || $cc>1 && $cc<3){
+                                        if($liquido<50){
+                                            if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                                  $notacionFinos="CL";
+                                            }
+                                            else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                                  $notacion="CL-ML";
+                                            }
+                                            else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                                  $notacionFinos="ML";
+                                            }   
+                                        }
+                                        else{
+                                            if($indicePlasticidad>=$lineaA){
+                                                  $notacionFinos="CH";  
+                                            }
+                                            else{
+                                                  $notacionFinos="MH";
+                                            }
+                                        }   
+                                    }
+                                    if($notacionFinos=="ML" || $notacionFinos=="MH"){
+                                                      $notacion="GP-GM";
+                                                      if($arenas<15){
+                                                          $descrsub="Grava mal graduada con limo";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                      else{
+                                                          $descrsub="Grava mal graduada con limo y arena";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                        }
+                                        else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
+                                                            $notacion="GP-GC";
+                                                            if($arenas<15){
+                                                                $descrsub="Grava mal graduada con arcilla ( o arcilla limosa)";
+                                                                echo $notacion."-".$descrsub;
+                                                            }
+                                                            else{
+                                                                $descrsub="Grava mal graduada con arcilla y arena (o arcilla limosa y arena)";
+                                                                echo $notacion."-".$descrsub;
+                                                            }
+                                        }
+                               }
+                               else if($finos>12){
+                                    if($liquido<50){
+                                        if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                              $notacionFinos="CL";
+                                        }
+                                        else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                              $notacion="CL-ML";
+                                        }
+                                        else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                               $notacionFinos="ML";
+                                        }
+                                    } 
+                                    else{
+                                        if($indicePlasticidad>=$lineaA){
+                                                $notacionFinos="CH";  
+                                        }
+                                        else{
+                                            $notacionFinos="MH";
+                                        }
+                                    }                                    
+                                }
+                                if($notacionFinos=="CL" || $notacionFinos=="CH"){
+                                                  $notacion="GC";
+                                                  if($arenas<15){
+                                                    $descrsub="Grava Arcillosa";
+                                                    echo $notacion."-".$descrsub;
+                                                  }
+                                                  else{
+                                                    $descrsub="Grava Arcillosa con Arena";
+                                                    echo $notacion."-".$descrsub;
+                                                  }
+                                }
+                                else if($notacionFinos=="ML" || $notacionFinos=="MH" ){
+                                                  $notacion="GM";
+                                                  if($arenas<15){
+                                                    $descrsub="Grava Limosa";
+                                                    echo $notacion."-".$descrsub;
+                                                  }
+                                                  else{
+                                                    $descrsub="Grava Limosa con Arena";
+                                                    echo $notacion."-".$descrsub;
+                                                  }
+                                }
+                                else if($notacionFinos=="CL-ML"){
+                                                 $notacion="GC-GM";
+                                                 if($arenas<15){
+                                                    $descrsub="Grava Limosa-Arcillosa";
+                                                    echo $notacion."-".$descrsub;
+                                                 }
+                                                 else{
+                                                    $descrsub="Grava Limosa-Arcillosa con Arena";
+                                                    echo $notacion."-".$descrsub;
+                                                 }
+                                }
+                          
+                          }
+                          else if($arenas>$gravas && $arenas>$finos){
+                                  if($finos<5){
+                                      if($cu>=4 && $cc>=1 && $cc<=3){
+                                          $notacion="SW";
+                                          if($arenas<15){
+                                            $descrsub="Arena bien graduada";
+                                            echo  $notacion."-".$descrsub;
+                                          }
+                                          else if($arenas>=15){
+                                            $descrsub="Arena bien graduada con grava";
+                                            echo  $notacion."-".$descrsub;
+                                          }
+                                      }
+                                      else if($cu<4 || $cc>1 && $cc<3){
+                                            $notacion="SP";
+                                            if($arenas<15){
+                                              $descrsub="Arena mal graduada";
+                                              echo  $notacion."-".$descrsub;
+                                            }
+                                            else if($arenas>=15){
+                                              $descrsub="Arena mal graduada con grava";
+                                              echo  $notacion."-".$descrsub;
+                                            }
+                                      }
                                   }
-                                  else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
-                                         $notacion="ML";
-                                         $descrsub="LIMO ARENOSO";
-                                         if($tamizN200<30){
-
-                                         }
-                                         else{
-                                            if($arenas>=$gravas){
-                                              if($gravas<15){
+                                  else if($finos>5 && $finos<12){
+                                            if($cu>=4 && $cc>=1 && $cc<=3){
+                                                if($liquido<50){
+                                                      if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                                          $notacionFinos="CL";
+                                                      }
+                                                      else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                                          $notacion="CL-ML";
+                                                      }
+                                                      else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                                          $notacionFinos="ML";
+                                                      }   
+                                                }
+                                                else{
+                                                      if($indicePlasticidad>=$lineaA){
+                                                          $notacionFinos="CH";  
+                                                      }
+                                                      else{
+                                                          $notacionFinos="MH";
+                                                      }
+                                                } 
+                                                      if($notacionFinos=="ML" || $notacionFinos=="MH"){
+                                                          $notacion="SW-SM";
+                                                          if($arenas<15){
+                                                              $descrsub="Arena bien graduada con limo";
+                                                              echo $notacion."-".$descrsub;
+                                                          }
+                                                          else{
+                                                              $descrsub="Arena bien graduada con limo y Grava";
+                                                              echo $notacion."-".$descrsub;
+                                                          }
+                                                      }
+                                                      else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
+                                                              $notacion="SW-SC";
+                                                              if($arenas<15){
+                                                                  $descrsub="Arena bien graduada con arcilla ( o arcilla limosa)";
+                                                                  echo $notacion."-".$descrsub;
+                                                              }
+                                                              else{
+                                                                  $descrsub="Arena bien graduada con arcilla y arena (o arcilla limosa y grava)";
+                                                                  echo $notacion."-".$descrsub;
+                                                              }
+                                                      }
+                                            }
+                                            else if($cu<4 || $cc>1 && $cc<3){
+                                                    if($liquido<50){
+                                                            if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                                                    $notacionFinos="CL";
+                                                             }
+                                                                else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                                                    $notacion="CL-ML";
+                                                                }
+                                                                else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                                                    $notacionFinos="ML";
+                                                                }   
+                                                    }
+                                                     else{
+                                                            if($indicePlasticidad>=$lineaA){
+                                                              $notacionFinos="CH";  
+                                                            }
+                                                            else{
+                                                              $notacionFinos="MH";
+                                                            }
+                                                      }   
+                                          }
+                                                      if($notacionFinos=="ML" || $notacionFinos=="MH"){
+                                                              $notacion="SP-SM";
+                                                              if($arenas<15){
+                                                                  $descrsub="Arena mal graduada con limo";
+                                                                  echo $notacion."-".$descrsub;
+                                                              }
+                                                              else{
+                                                                  $descrsub="Arena mal graduada con limo y grava";
+                                                                  echo $notacion."-".$descrsub;
+                                                              }
+                                                      }
+                                                      else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
+                                                                  $notacion="SP-SC";
+                                                                  if($arenas<15){
+                                                                      $descrsub="Arena mal graduada con arcilla ( o arcilla limosa)";
+                                                                      echo $notacion."-".$descrsub;
+                                                                  }
+                                                                  else{
+                                                                      $descrsub="Arena mal graduada con arcilla y arena (o arcilla limosa y grava)";
+                                                                      echo $notacion."-".$descrsub;
+                                                                  }
+                                                      }
+                                   }
+                                   else if($finos>12){
+                                            if($liquido<50){
+                                                  if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                                      $notacionFinos="CL";
+                                                  }
+                                                  else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                                      $notacion="CL-ML";
+                                                  }
+                                                  else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                                      $notacionFinos="ML";
+                                                  }
+                                            } 
+                                            else{
+                                                  if($indicePlasticidad>=$lineaA){
+                                                      $notacionFinos="CH";  
+                                                  }
+                                                  else{
+                                                      $notacionFinos="MH";
+                                                  }
+                                            }                                    
+                                    }
+                                                      if($notacionFinos=="CL" || $notacionFinos=="CH"){
+                                                              $notacion="SC";
+                                                              if($arenas<15){
+                                                                      $descrsub="Arena Arcillosa";
+                                                                      echo $notacion."-".$descrsub;
+                                                              }
+                                                              else{
+                                                                      $descrsub="Arena Arcillosa con grava";
+                                                                      echo $notacion."-".$descrsub;
+                                                              }
+                                                      }
+                                                      else if($notacionFinos=="ML" || $notacionFinos=="MH" ){
+                                                             $notacion="SM";
+                                                             if($arenas<15){
+                                                                  $descrsub="Arena Limosa";
+                                                                  echo $notacion."-".$descrsub;
+                                                             }
+                                                             else{
+                                                                  $descrsub="Arema Limosa con Grava";
+                                                                  echo $notacion."-".$descrsub;
+                                                              }
+                                                      }
+                                                      else if($notacionFinos=="CL-ML"){
+                                                              $notacion="SC-SM";
+                                                              if($arenas<15){
+                                                                  $descrsub="Arena Limosa-Arcillosa";
+                                                                  echo $notacion."-".$descrsub;
+                                                              }
+                                                              else{
+                                                                  $descrsub="Arena Limosa-Arcillosa con Grava";
+                                                                  echo $notacion."-".$descrsub;
+                                                              }
+                                                      }
+                          }                        
+                          else if($finos>$arenas && $finos>$gravas){
+                               if($liquido<50){
+                                    if($indicePlasticidad>7 && $indicePlasticidad>=$lineaA ){
+                                          $notacion="CL";
+                                          if($tamizN200<30){
+                                             if($tamizN200<15){
+                                                $descrsub="Arcilla fina";
                                                 echo $notacion."-".$descrsub;
+                                             }
+                                             else if($tamizN200>=15 && $tamizN200<=29){
+                                                if($arenas>=$gravas){
+                                                  $descrsub="Arcilla fina con arena";
+                                                  echo $notacion.$descrsub;
+                                                }
+                                                else{
+                                                  $descrsub="Arcilla fina con grava";
+                                                  echo $notacion.$descrsub;
+                                                }
+                                             }
+                                          } 
+                                          else if($tamizN200>=30){
+                                             if($arenas>=$gravas){
+                                                if($gravas<15){
+                                                   $descrsub="Arcilla fina arenosa";
+                                                   echo $notacion."-".$descrsub;
+                                                }
+                                                else{
+                                                   $descrsub="Arcilla fina arenosa con grava";
+                                                   echo $notacion."-".$descrsub;
+                                                }
+                                             }
+                                             else{
+                                                  $descrsub="Arcilla fina gravosa";
+                                                if($arenas<15){
+                                                   echo $notacion."-".$descrsub;
+                                                }
+                                                else{
+                                                  $descrsub="Arcilla fina gravosa con arena";
+                                                   echo $notacion."-".$descrsub;
+                                                }
+                                             }
+                                          }
+                                    }
+                                    else if($indicePlasticidad>=4 && $indicePlasticidad<=7 && $indicePlasticidad>=$lineaA){
+                                               $notacion="CL-ML";
+                                               if($tamizN200<30){
+                                                  if($tamizN200<15){
+                                                     $descrsub="Arcilla Limosa"; 
+                                                     echo $notacion."-".$descrsub;
+                                                  }
+                                                  else if($tamizN200>=15 && $tamizN200<=29){
+                                                      if($arenas>=$gravas){
+                                                          $descrsub="Limo con Arcilla";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                      else{
+                                                          $descrsub="Limo con Grava";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                  }
+                                               }
+                                               else{
+                                                  if($arenas >= $gravas){
+                                                      if($gravas<15){
+                                                          $descrsub="Arcilla Arenosa Limosa";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                      else{
+                                                          $descrsub="Arcilla Arenosa Limosa con Grava";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                  }
+                                                  else{
+                                                      if($arenas<15){
+                                                          $descrsub="Arcilla Gravosa Limosa";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                      else{
+                                                          $descrsub="Arcilla Gravosa-Limosa con Arena";
+                                                          echo $notacion."-".$descrsub;
+                                                      }
+                                                  }
+                                               }
+                                    }
+                                    else if($indicePlasticidad<4 || $indicePlasticidad<$lineaA){
+                                           $notacion="ML";
+                                           if($tamizN200<30){
+                                              if($tamizN200<15){
+                                                  $descrsub="Limo";
+                                                  echo $notacion."-".$descrsub;
+                                              }
+                                              else if($tamizN200>=15 && $tamizN200<=29){
+                                                  if($arenas>=$gravas){
+                                                    $descrsub="Limo con Arcilla";
+                                                    echo $notacion."-".$descrsub;
+                                                  }
+                                                  else{
+                                                    $descrsub="Limo con Grava";
+                                                    echo $notacion."-".$descrsub;
+                                                  }
+                                              }
+                                           }
+                                           else{
+                                              if($arenas>=$gravas){
+                                                if($gravas<15){
+                                                  $descrsub="Limo Arenoso";
+                                                  echo $notacion."-".$descrsub;
+                                                }
+                                                else{
+                                                  $descrsub="Limo Arenoso con Grava";
+                                                  echo $notacion."-".$descrsub;
+                                                }
                                               }
                                               else{
-                                                echo $notacion."-".$descrsub;
+                                                  if($arenas<15){
+                                                      $descrsub="Limo Gravoso";
+                                                      echo $notacion."-".$descrsub;  
+                                                  }
+                                                  else{
+                                                      $descrsub="Limo Gravoso con Arena";
+                                                      echo $notacion."-".$descrsub;  
+                                                  }
                                               }
+                                           }
+                                    }
+                                } /* Cuando el limite liquido es mayor  o igual a 50 */
+                                else{
+                                    if($indicePlasticidad>=$lineaA){
+                                        $notacion="CH";
+                                        if($tamizN200<30){
+                                            if($tamizN200<15){
+                                                $descrsub="Arcilla gruesa";
+                                                echo $notacion."-".$descrsub;  
                                             }
-                                         }
-                                  }
-                              } 
-                              else{
-                                  
-                              }
-                        }
-                      ?>
+                                            if($tamizN200>=15 && $tamizN200<=29){
+                                                if($arenas>=$gravas){
+                                                  $descrsub="Arcilla gruesa con Arena";
+                                                  echo $notacion."-".$descrsub;  
+                                                }
+                                                else{
+                                                  $descrsub="Arcilla gruesa con Grava";
+                                                  echo $notacion."-".$descrsub;  
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            if($arenas>=$gravas){
+                                                  if($gravas<15){
+                                                       $descrsub="Arcilla gruesa Arenosa";
+                                                       echo $notacion."-".$descrsub;  
+                                                  }
+                                                  else{
+                                                       $descrsub="Arcilla gruesa Arenosa con Grava";
+                                                       echo $notacion."-".$descrsub;  
+                                                  }
+                                            }
+                                            else{
+                                                if($arenas<15){
+                                                    $descrsub="Arcilla gruesa Gravosa";
+                                                    echo $notacion."-".$descrsub;  
+                                                }
+                                                else{
+                                                    $descrsub="Arcilla gruesa Gravosa con Arena";
+                                                    echo $notacion."-".$descrsub;  
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        $notacion="CH";
+                                        if($tamizN200<30){
+                                              if($tamizN200<15){
+                                                  $descrsub="Limo Elástico";
+                                                  echo $notacion."-".$descrsub;
+                                              }
+                                              else if($tamizN200>=15 && $tamizN200<=29){
+                                                      if($arenas>=$gravas){
+                                                         $descrsub="Limo Elástico con Arena";
+                                                         echo $notacion."-".$descrsub; 
+                                                      }
+                                                      else{
+                                                         $descrsub="Limo Elástico con Grava";
+                                                         echo $notacion."-".$descrsub; 
+                                                      }
+                                              }
+                                        }
+                                        else{
+                                            if($arenas>=$gravas){
+                                                if($gravas<15){
+                                                    $descrsub="Limo Elástico Arenoso";
+                                                    echo $notacion."-".$descrsub;
+                                                }
+                                                else{
+                                                    $descrsub="Limo Elástico Arenoso con Grava";
+                                                    echo $notacion."-".$descrsub;
+                                                }
+                                            }
+                                            else{
+                                                if($arenas<15){
+                                                    $descrsub="Limo Elástico Gravoso";
+                                                    echo $notacion."-".$descrsub;
+                                                }
+                                                else{
+                                                    $descrsub="Limo Elástico Gravoso con Arena";
+                                                    echo $notacion."-".$descrsub;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                          }
+                          ?>
                       </td>
-                      <td> - </td>
+                      <td>
+                          <?php
+                              $notacionAsto=0;
+                           if($tamizN200<=35){   
+                              if($indicePlasticidad<=6 && $liquido<=0){
+                                    $grupo="A-1";
+                                    if($tamizN10<=50 && $tamizN40<=40 && $tamizN200<=100){
+                                          echo $notacionAsto="A-1a";
+                                    }
+                                    else if($tamizN40<=50 && $tamizN200<=25){
+                                         echo $notacionAsto="A-1b";
+                                    }
+                              }
+                              else if($indicePlasticidad<=0 && $liquido<=0){
+                                          $grupo="A-3";
+                                          if($tamizN40>=51 && $tamizN200<=10){
+                                              echo $notacionAsto="A-3";
+                                          }  
+                                          else{
+                                             echo "dos";
+                                          }    
+                              }
+                              else if($indicePlasticidad<=10 && $liquido<=40){
+                                    
+                                      if($tamizN200<=35){
+                                              $grupo="A-2";
+                                              echo $notacionAsto="A-2-4";
+                                      } 
+                                      else{
+                                          echo "tres";
+                                      }
+                              } 
+                              else if($indicePlasticidad<=10 && $liquido>=41){
+                                      if($tamizN200<=35){
+                                              $grupo="A-2";
+                                              echo $notacionAsto="A-2-5";
+                                      } 
+                                      else{
+                                          echo "cuatro";
+                                      }
+                              }  
+                              else if($indicePlasticidad>=11 && $liquido<=40){                                      
+                                      if($tamizN200<=35){
+                                              $grupo="A-2";
+                                              echo $notacionAsto="A-2-6";
+                                      } 
+                                      else{
+                                          echo "cinco";
+                                      }
+                              } 
+                              else if($indicePlasticidad>=11 && $liquido>=41){
+                                      if($tamizN200<=35){
+                                              $grupo="A-2";
+                                              echo $notacionAsto="A-2-7";
+                                      } 
+                                      else{
+                                         echo "seis";
+                                      }
+                              } 
+                            }
+                            else{  
+                             if($indicePlasticidad<=10 && $liquido<=40){
+                                      if($tamizN200>=36){
+                                              $grupo="A-4";
+                                              echo $notacionAsto="A-4";
+                                      } 
+                                      else{
+                                         echo "siete";
+                                      }
+                              }
+                              else if($indicePlasticidad<=10 && $liquido>=41){
+                                      if($tamizN200>=36){
+                                              $grupo="A-5";
+                                              echo $notacionAsto="A-5";
+                                      } 
+                                      else{
+                                           echo "ocho";
+                                      }
+                              }
+                              else if($indicePlasticidad>=11 && $liquido<=40){
+                                      if($tamizN200>=36){
+                                              $grupo="A-6";
+                                              echo $notacionAsto="A-6";
+                                      } 
+                                      else{
+                                         echo "nueve";
+                                      }
+                              }
+                              else if($indicePlasticidad>=11 && $liquido>=41){
+                                      if($tamizN200>=36){
+                                              $grupo="A-7";
+                                              if($plastico>=30){
+                                                  echo $notacionAsto="A-7-6".$plastico;
+                                              }
+                                              else{
+                                                  echo $notacionAsto="A-7-5";
+                                              }
+                                      } 
+                              }
+                            }
+                           ?>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
-                
                 <!-- ############# FIN RESULTADOS ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
                 <div class="form-actions">
@@ -1512,9 +2055,14 @@
                 <!-- ############# FIN GUARDAR INFORMACION BOTON ############### -->
               </div>
               <?php $i++; ?>
-              <?php unset($tamices);
+              <?php 
+                unset($tamices);
                 unset($notacion);
-              ?>
+                unset($descrsub);
+                unset($temp);
+                unset($retenidoporcentaje);
+                unset($notacionFinos);
+                ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?> 
@@ -1574,15 +2122,12 @@
                 <td> - </td>
                 <td> <?php echo "Superficie ".$datos_sondeo ->tipo_superficie; ?> </td>
               </tr>
-
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
-                <tr>
+              <tr>
                 <td> <?php echo $i; ?> </td>
-
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                
                 <td style=" height: <?php echo $tamano;?>px;" >  </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
@@ -1606,16 +2151,8 @@
                   <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
                 </td>
               </tr>
-
-
-
               <?php $i++; ?>
               <?php endforeach; ?>
-
-              
-      
-     
-          
             </tbody>
           </table>
           <h5 >Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
@@ -1796,15 +2333,11 @@
     <!-- #############  BOOTSTRAP JS ############### -->
     <!--script type="text/javascript" src="assets/js/jqplot/plugins/example.js"></script-->
     <script src="assets/js/muestras.js"></script>
-    
     <script type="text/javascript">
       $(function graficador() {
       
-        
-       
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
-      
       
       
       var datosgrafica=$('#datosgraficaLimites<?php echo $i; ?>').val();
@@ -1829,7 +2362,7 @@
                               data: sourceData2
                               } 
                             );
-
+      
                             series2.update({ 
                               data: (function() {
                                 return fitData(sourceData2).data;
@@ -1837,7 +2370,7 @@
                               } 
                             );
                             console.log("Grafica de limites actualizada");
-
+      
                         });
                     }
             }
@@ -1894,29 +2427,29 @@
       <?php $i++; ?>
       <?php endforeach; ?>
       
-     
-  
-
+      
+      
+      
       $('.brand').tooltip('hide');   
-
-    //graficas compresion
-    
+      
+      //graficas compresion
+      
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
-    
+      
       var inputCompresion=$('#datosgraficacompresion<?php echo $i; ?>').val();
       var datosCompresion = eval("["+inputCompresion+"]");
-
-
+      
+      
       var datosCompresion2;
       $('#graficacompresion<?php echo $i; ?>').highcharts({
-
+      
           chart: {
             renderTo: 'linear',
             events: {
                 load: function() {
-
-
+      
+      
                         // data series
                         var series = this.series[0];
                         var series2= this.series[1];
@@ -1929,13 +2462,13 @@
                               data: datosCompresion2
                               } 
                             );
-
+      
                             series2.update({ 
                               data: datosCompresion2
                               } 
                             );
                             console.log("Grafica de compresion");
-
+      
                         });
                     }
             }
@@ -1981,25 +2514,25 @@
       <?php $i++; ?>
       <?php endforeach; ?>
       
-
-
-
+      
+      
+      
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
       var inputGranulometria=$('#datosgraficagranulometria<?php echo $i; ?>').val();
-  
+      
       var datosGranulometria = eval("["+inputGranulometria+"]");
-   
+      
       var datosGranulometria2;
       $('#graficagranulometria<?php echo $i; ?>').highcharts({
-
+      
           chart: {
             renderTo: 'linear',
             events: {
                 load: function() {
-
-
+      
+      
                         // data series
                         var series = this.series[0];
                         $("#datosgraficagranulometria<?php echo $i; ?>").change(function() {
@@ -2011,9 +2544,9 @@
                               data: datosGranulometria2
                               } 
                             );
-
+      
                             console.log("Grafica de granulometria");
-
+      
                         });
                     }
             }
@@ -2071,12 +2604,9 @@
           }
           ]
       });  
-    
       <?php $i++; ?>
-      <?php endforeach; ?>
-
-    });
+      <?php endforeach; ?> 
+      });
     </script>
-
   </body>
 </html>
