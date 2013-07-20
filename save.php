@@ -1,5 +1,6 @@
 <?php
 
+	require_once 'includes/usuarios.php';
 	require_once 'includes/proyectos.php';
 	require_once 'includes/muestras.php';
 	require_once 'includes/sondeos.php';
@@ -13,6 +14,38 @@
 	if ( isset( $_POST['func'] ) ) {
 		$response = array();
 		switch( $_POST['func'] ) {
+			case 'addUsuario':
+				$usuariosClass = new usuarios();				
+				$cedula= $_POST['cedula'];
+				$usuario = $_POST['usuario'];
+				$clave = $_POST['clave'];
+				$confirmar_clave = $_POST['confirmar_clave'];
+				$nombres = $_POST['nombres'];
+				$apellidos = $_POST['apellidos'];
+				$cargo = $_POST['cargo'];
+				$respuesta = $usuariosClass->addUsuarios($cedula, $usuario, $clave, $confirmar_clave, $nombres, $apellidos, $cargo);
+				if ( $respuesta ) {
+					$response["status"] = "OK";
+					$response["message"] = "Usuario guardado";
+				} else {
+					$response["status"] = "ERROR";
+					$response["message"] = "Error guardando el usuario";
+				}
+			break;
+
+			case 'eliminarUsuario':
+					$usuariosClass = new usuarios();				
+					$idusuario= $_POST['idusuario'];
+					$respuesta = $usuariosClass->eliminarUsuario($idusuario);
+					if ( $respuesta ) {
+						$response["status"] = "OK";
+						$response["message"] = "Usuario eliminado correctamente";
+					} else {
+						$response["status"] = "ERROR";
+						$response["message"] = "Error eliminado usuario";
+					}
+			break;
+
 			case 'addProyecto':
 				$proyectosClass = new proyectos();				
 				$codigoProyecto= $_POST['codigoProyecto'];
@@ -30,7 +63,7 @@
 					$response["status"] = "ERROR";
 					$response["message"] = "Error guardando el proyecto";
 				}
-				break;
+			break;
 
 				case 'eliminarProyecto':
 				$proyectosCLass = new proyectos();
@@ -44,9 +77,9 @@
 					$response["status"] = "ERROR";
 					$response["message"] = "Error al eliminar el proyecto";
 				}
-				break;
+			break;
 
-				case 'modificarProyecto':
+			case 'modificarProyecto':
 				$proyectosClass = new proyectos();
 				$idProyecto = $_POST['idProyecto'];
 				$codigo_proyecto= $_POST['codigo_proyecto'];
@@ -63,9 +96,9 @@
 					$response["status"] = "ERROR";
 					$response["message"] = "Error al modificar el proyecto proyecto";
 				}
-				break;
+			break;
 
-				case 'addSondeo':
+			case 'addSondeo':
 				$sondeosClass = new sondeos();
 				$nivelFreatico = $_POST['nivelFreatico'];
 				$profundidadSuperficie = $_POST['profundidadSuperficie'];
@@ -79,9 +112,9 @@
 					$response["status"] = "ERROR";
 					$response["message"] = "Error al agregar el evento";
 				}
-				break;
+			break;
 
-				case 'eliminarSondeo':
+			case 'eliminarSondeo':
 				$sondeosClass = new sondeos();
 				$idSondeo = $_POST['idSondeo'];
 				$respuesta = $sondeosClass->eliminarSondeo($idSondeo); 
@@ -92,86 +125,86 @@
 					$response["status"] = "ERROR";
 					$response["message"] = "Error al eliminar el Sondeo $tipoSuperficie";
 				}
-				break;
+			break;
 
-				case 'addMuestras':
-  			$muestrasClass = new muestras();
-  			$testLimitesClass = new testlimintes();
-  			$testCompresionClass = new Compresion();
-  			$granulometriaClass= new granulometria();
-  			$pesosRetenidoClass= new pesos_retenidos();
-  			$resultadosClass= new resultados();
+			case 'addMuestras':
+		  			$muestrasClass = new muestras();
+		  			$testLimitesClass = new testlimintes();
+		  			$testCompresionClass = new Compresion();
+		  			$granulometriaClass= new granulometria();
+		  			$pesosRetenidoClass= new pesos_retenidos();
+		  			$resultadosClass= new resultados();
 
-  			$descripcion_muestra = $_POST['descripcion_muestra'];
-  			$profundidad_inicial = $_POST['profundidad_inicial'];
-  			$profundidad_final = $_POST['profundidad_final'];
-  			$numero_de_golpes= $_POST['numero_de_golpes'];
-  			$box_relleno = $_POST['box_relleno'];
-  			$idsondeos = $_POST['idsondeos'];
-  			$respuesta = $muestrasClass->addMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_relleno ,$idsondeos);
-  			$idMuestra = $muestrasClass->insert_id;
-  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(1, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(1, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(1, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(2, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(2, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testLimitesClass->addTest(2, NULL, NULL, NULL,NULL, NULL, $idMuestra);
-  			$testCompresionClass->addCompresion(0,NULL, NULL, NULL,NULL,$idMuestra);
-  			$idCompresion=$testCompresionClass->insert_id;
-  			$testCompresionClass->addDeformacion(0,10,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,30,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,50,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,75,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,100,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,150,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,200,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,250,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,300,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,350,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,400,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,450,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,500,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,550,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,600,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,650,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,700,NULL,$idCompresion);
-  			$testCompresionClass->addDeformacion(0,750,NULL,$idCompresion);
-  			
-  
-  			$granulometriaClass->addGranulometria(NULL, NULL, $idMuestra);
-  			$idGranulometria= $granulometriaClass->insert_id;
-  			$pesosRetenidoClass->addPesoRetenido("(2 1/2\")",63.5, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("(2\")",50.80,NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("(1 1/2\")",38.10,NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("(1\")",25.40, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("(3/4\")",19.05, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("(1/2\")",12.70,NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("(3/8\")",9.52,NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("N°4",4.75, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("N°10",2.00, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("N°16",1.19, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("N°30",0.60, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("N°40",0.43, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("N°100",0.15, NULL, $idGranulometria);
-  			$pesosRetenidoClass->addPesoRetenido("N°200",0.08, NULL, $idGranulometria);
+		  			$descripcion_muestra = $_POST['descripcion_muestra'];
+		  			$profundidad_inicial = $_POST['profundidad_inicial'];
+		  			$profundidad_final = $_POST['profundidad_final'];
+		  			$numero_de_golpes= $_POST['numero_de_golpes'];
+		  			$box_relleno = $_POST['box_relleno'];
+		  			$idsondeos = $_POST['idsondeos'];
+		  			$respuesta = $muestrasClass->addMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_relleno ,$idsondeos);
+		  			$idMuestra = $muestrasClass->insert_id;
+		  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(1, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(1, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(1, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(2, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(2, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testLimitesClass->addTest(2, NULL, NULL, NULL,NULL, NULL, $idMuestra);
+		  			$testCompresionClass->addCompresion(0,NULL, NULL, NULL,NULL,$idMuestra);
+		  			$idCompresion=$testCompresionClass->insert_id;
+		  			$testCompresionClass->addDeformacion(0,10,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,30,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,50,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,75,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,100,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,150,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,200,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,250,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,300,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,350,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,400,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,450,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,500,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,550,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,600,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,650,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,700,NULL,$idCompresion);
+		  			$testCompresionClass->addDeformacion(0,750,NULL,$idCompresion);
+		  			
+		  
+		  			$granulometriaClass->addGranulometria(NULL, NULL, $idMuestra);
+		  			$idGranulometria= $granulometriaClass->insert_id;
+		  			$pesosRetenidoClass->addPesoRetenido("(2 1/2\")",63.5, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("(2\")",50.80,NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("(1 1/2\")",38.10,NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("(1\")",25.40, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("(3/4\")",19.05, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("(1/2\")",12.70,NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("(3/8\")",9.52,NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°4",4.75, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°10",2.00, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°16",1.19, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°30",0.60, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°40",0.43, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°100",0.15, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°200",0.08, NULL, $idGranulometria);
 
 
-  			$resultadosClass->addResultados($idMuestra);
+		  			$resultadosClass->addResultados($idMuestra);
 
-  			if ( $respuesta ) {
-  				$response["status"] = "OK";
-  				$response["message"] = "Muestra guardada correctamente";
-  				$response["idMuestras"] = $muestrasClass->insert_id;
-  			} else {
-  				$response["status"] = "ERROR";
-  				$response["message"] = "Error guardando muestra";
-  			}
+		  			if ( $respuesta ) {
+		  				$response["status"] = "OK";
+		  				$response["message"] = "Muestra guardada correctamente";
+		  				$response["idMuestras"] = $muestrasClass->insert_id;
+		  			} else {
+		  				$response["status"] = "ERROR";
+		  				$response["message"] = "Error guardando muestra";
+		  			}
   			break;
 
-				case 'ModificarMuestra':
+			case 'ModificarMuestra':
 				$muestrasClass = new muestras();
 				$descripcion_muestra = $_POST['descripcion_muestra'];
 				$profundidad_inicial = $_POST['profundidad_inicial'];
@@ -190,8 +223,8 @@
 					$response["status"] = "ERROR";
 					$response["message"] = "Error guardando muestra";
 				}
-				break;
-				case 'testlimites':
+			break;
+			case 'testlimites':
 					$testLimitesClass = new testlimintes();
 					$resultadosClass= new resultados();
 					if ( $_POST['muestra'] == 0 ) {
