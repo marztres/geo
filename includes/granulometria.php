@@ -6,9 +6,9 @@ class granulometria extends DataBase {
 	
 	function addGranulometria( $pesoRecipiente, $pesoRecipienteMuestra, $idMuestra ) {
 		$retorno = false;
-		$sql = "INSERT INTO granulometria (id_granulometria,pesoRecipiente,pesoRecipienteMasMuestra,estado,fechaIngreso,fk_idmuestra)"
+		$sql = "INSERT INTO granulometria (id_granulometria,pesoRecipiente,pesoRecipienteMasMuestra,d60,d30,d10,estado,fechaIngreso,fk_idmuestra)"
 					."VALUES (NULL,'".$this->real_escape_string($pesoRecipiente)."','".$this->real_escape_string($pesoRecipienteMuestra)
-					."', 1, NOW(), '".$this->real_escape_string($idMuestra)."')";
+					."',NULL,NULL,NULL, 1, NOW(), '".$this->real_escape_string($idMuestra)."')";
 		$respuesta = $this -> query($sql);
 		if ( $respuesta ) {
 			$retorno = true;
@@ -28,11 +28,15 @@ class granulometria extends DataBase {
 		return $retorno;
 	}
 
-	function updateGranulometria($id_granulometria,$pesoRecipiente,$pesoRecipienteMasMuestra){
+	function updateGranulometria($id_granulometria,$pesoRecipiente,$pesoRecipienteMasMuestra,$d60,$d30,$d10){
 	  $retorno = false;
 		$sql = "UPDATE granulometria SET 
 		  pesoRecipiente = '".$this->real_escape_string($pesoRecipiente)."',
-  		pesoRecipienteMasMuestra = '".$this->real_escape_string($pesoRecipienteMasMuestra)."'
+  		pesoRecipienteMasMuestra = '".$this->real_escape_string($pesoRecipienteMasMuestra)."',
+  		d60 = '".$this->real_escape_string($d60)."',
+  		d30 = '".$this->real_escape_string($d30)."',
+  		d10 = '".$this->real_escape_string($d10)."'
+
 		WHERE 
       id_granulometria = '".$this->real_escape_string($id_granulometria)."' ";
 		$respuesta = $this -> query($sql);

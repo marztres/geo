@@ -817,6 +817,8 @@ var acciones = {
   calculosGranulometria: function(){
     //tabla de pesos
     var trGranulometria = $(this).closest("div").find("table.tablapesos").find("tbody").children();
+
+   
     
       // Todos los tr    
       var tr1 = trGranulometria.eq(0).children(),
@@ -1006,6 +1008,8 @@ var acciones = {
           tdPasa11 = trGranulometria.eq(11).find("td:last"),
           tdPasa12 = trGranulometria.eq(12).find("td:last"),
           tdPasa13 = trGranulometria.eq(13).find("td:last");
+
+
           
 
 
@@ -1024,6 +1028,25 @@ var acciones = {
         pasa11Var = parseFloat(tdPasa11.text()),
         pasa12Var = parseFloat(tdPasa12.text()),
         pasa13Var = parseFloat(tdPasa13.text());
+
+        //variables de los tamizes N4 , N200 
+
+       
+
+        // td de resultados indice de grupo , tamizes 4 y 200 , clasificaciones sucs y aashto 
+        var tdTamiz4 = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdTamiz4"),
+          tdTamiz200 = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdTamiz200"),
+          indiceGrupo= $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.indiceGrupo");
+
+        // td tabla de clasificaciones 
+        var clasSucs= $(this).closest("div").find("table.tablaClasificaciones").find("td.classSucs");
+          clasAashto= $(this).closest("div").find("table.tablaClasificaciones").find("td.classAsshto");
+
+        // asignando valores a las td de N4 y N200 
+        
+        tdTamiz4.text(fin7Var);
+        tdTamiz200.text(fin12Var);  
+
 
 
         //td tamaño de tamiz en mn
@@ -1196,9 +1219,15 @@ var acciones = {
       fondoPasa.text(fondoPasaVar.toPrecision(4));
     
       }
+
+
+
+
   },
 
   clasificacionAASHTO: function(){
+
+
     
   }
 

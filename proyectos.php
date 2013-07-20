@@ -59,6 +59,12 @@
           <li class="divider"></li>
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">
+              <i class="icon-wrench"></i> Administrar usuarios
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#Ayuda" role="button"  data-toggle="modal">
               <i class="icon-question-sign"></i> Ayuda
             </a>
           </li>
@@ -175,6 +181,7 @@
         <p class="span6 offset1">
           <a href="#legal" role="button" data-toggle="modal" class="links-footer">Información legal</a>
           <a href="#Ayuda" role="button" data-toggle="modal" class="links-footer">Ayuda</a>
+
         </p>    
                          
       </footer>

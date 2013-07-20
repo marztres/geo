@@ -1276,7 +1276,7 @@
                       </tr>
                     </tbody>
                   </table>
-                </form>
+               
                 <!-- ############# TABLA DE GRANULOMETRIA ############### -->
                 <!-- ############# GRAFICA DE GRANULOMETRIA ############### -->
                 <?php 
@@ -1318,14 +1318,14 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td> <input name="" type="text" value="0.1"> </td>
-                      <td> <input name="" type="text" value="7"> </td>
-                      <td> <input name="" type="text" value="21"> </td>
+                      <td> <input name="d60" type="text" value="<?php echo $DatosGranulometria->d60?>"> </td>
+                      <td> <input name="d30" type="text" value="<?php echo $DatosGranulometria->d30?>"> </td>
+                      <td> <input name="d10" type="text" value="<?php echo $DatosGranulometria->d10?>"> </td>
                     </tr>
                   </tbody>
                 </table>
                 <h3>Resultados</h3>
-                <table class="table table-hover table-striped table-bordered ">
+                <table class="table table-hover table-striped table-bordered tablaResultadosGranulometria">
                   <thead>
                     <tr>
                       <th> Tamiz N°4</th>
@@ -1338,11 +1338,11 @@
                   <tbody>
                     <tr>
                       <?php
-                        $d60=21;
-                        $d30=7;
-                        $d10=0.1;
+                        $d60=$DatosGranulometria->d60;
+                        $d30=$DatosGranulometria->d30;
+                        $d10=$DatosGranulometria->d10;
                         ?>
-                      <td>
+                      <td class="tdTamiz4">
                           <?php
                                    if($resultado->indicePlasticidad==0){
                                       $tamizN4=0;
@@ -1352,7 +1352,7 @@
                                    }
                           ?>
                       </td>
-                      <td>
+                      <td class="tdTamiz200">
                           <?php ; 
                                   if($resultado->indicePlasticidad==0){
                                         $tamizN200=0;
@@ -1367,11 +1367,12 @@
                       <td><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
                       <?php $plastico=$resultado->limitePlastico;?>
                       <td><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
-                      <td>  </td>
+                      <td class="indiceGrupo">  </td>
                     </tr>
                   </tbody>
                 </table>
-                <table class="table table-hover table-striped table-bordered ">
+
+                <table class="table table-hover table-striped table-bordered tablaClasificaciones">
                   <thead>
                     <tr>
                       <th> Clasificación Sistema unificado</th>
@@ -1380,7 +1381,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>
+                      <td class="classSucs">
                         <?php 
                           $gravas=0;
                           $arenas=0;
@@ -1942,7 +1943,7 @@
                           }
                           ?>
                       </td>
-                      <td>
+                      <td class="classAsshto">
                           <?php
                               $notacionAsto=0;
                            if($tamizN200<=35){   
@@ -2047,6 +2048,8 @@
                     </tr>
                   </tbody>
                 </table>
+
+                </form>
                 <!-- ############# FIN RESULTADOS ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
                 <div class="form-actions">

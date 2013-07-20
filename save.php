@@ -365,6 +365,10 @@
 
   						$idPesoRetenido = array();
   						$PesosRetenido = array();
+  						$d60=$_POST['d60'];
+  						$d30=$_POST['d30'];
+  						$d10=$_POST['d10'];
+
   						$id_granulometria=$_POST['idgranulometria'];
   						$pesoRecipiente=$_POST['pesoRecipiente'];
   						$pesoRecipienteMasMuestra=$_POST['pesoRecipienteMasMuestra'];
@@ -382,7 +386,7 @@
   						foreach ( $_POST['PesosRetenido'] as $valor ) {
   							$PesosRetenido[] = $valor;
   						}
-  							$respuesta = $granulometriaClass->updateGranulometria($id_granulometria,$pesoRecipiente,$pesoRecipienteMasMuestra);
+  							$respuesta = $granulometriaClass->updateGranulometria($id_granulometria,$pesoRecipiente,$pesoRecipienteMasMuestra,$d60,$d30,$d10);
   							$respuesta1 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[0],$PesosRetenido[0]);
   							$respuesta2 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[1],$PesosRetenido[1]);
   							$respuesta3 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[2],$PesosRetenido[2]);
