@@ -58,10 +58,14 @@
             </a>
           </li>
           <li class="divider"></li>
+          
+          <?php if ( $data['tipo']=='Administrador') : ?>
           <li>
             <a href="usuarios.php"><i class="icon-user"></i> Usuarios</a>
           </li>
           <li class="divider"></li>
+          <?php endif ?>
+          
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">
               <i class="icon-question-sign"></i> Ayuda
