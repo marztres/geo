@@ -142,7 +142,9 @@
               <span class="muted pull-left"><?php echo $usuarios->tipo ?></span>
             </td>
             <td>
-              <a href="sondeos.php?idp=<?php echo $proyecto->id_proyecto; ?>"><i class="icon-pencil"></i></a>
+              <a href="#editar_usuario" rel='<?php echo $usuarios->id_usuario.",".$usuarios->cedula.",".$usuarios->nombres.",".$usuarios->apellidos.",".$usuarios->tipo.",".$usuarios->nombre_usuario;?>' class="editarUsuario" role="button" id="<?php echo $usuarios->id_usuario;?>" data-toggle="modal">
+                    <i class="icon-pencil"></i>
+                    </a>
             </td>
             <td>
               <a class="eliminar_usuario" href="#"><i class="icon-remove"></i></a>
@@ -266,6 +268,64 @@
       </div>
     </div>
     <!-- fin nuevo form -->
+    <!--  Editar usuario -->
+    <div id="editar_usuario" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Editar Usuario</h3>
+      </div>
+      <div class="modal-body">
+      <form id="ModificarUsuarios" name='formulario' method='post' action="save.php" class="form-vertical">
+      <div class="control-group">
+            <div class="controls inputs">
+              <input  name='cedula' type='text' id="cedula"  placeholder='Cédula' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='usuario' type='text' id="nombre_usuario" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='clave' type='password'  placeholder='Nueva Contraseña' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='confirmar_clave' type='password'  placeholder='Confirmar nueva contraseña' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='nombres' type='text' id="nombres" placeholder='Nombres' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='apellidos' type='text' id="apellidos" placeholder='Apellidos' class='input-block-level limpiar' required >
+            </div>
+            <div class="controls inputs">
+              <select name="cargo" id="cargo" class="input-block-level" >
+                <option>Seleccione el cargo</option>
+                <option>Administrador</option>
+                <option>Ingeniero</option>
+                <option>Laboratorista</option>
+              </select >
+            </div>
+            <div class="controls inputs">
+              <input name='func'  type="hidden"  value='modificar_usuario' >
+              <input name='id_usuario'  type="hidden" id="id_usuario"  >
+            </div>
+            <!-- Mensaje exito y error , la clase hide es la que las oculta usen el Id de cada mensaje -->
+            <div id="error_modificar_usuario" class="alert alert-error hide">                             
+              <strong> 
+              <small>error al modificar el usuario</small>  
+              </strong>
+            </div>
+            <div id="exito_modificar_usuario" class="alert alert-success hide ">
+              <strong>Usuario modificado correctamente.</strong>  
+            </div>
+            <!-- Fin mensaje exito y error -->
+          </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button type="submit" id="EnviarModificarUsuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+      </div>
+    </div>
+    <!--  Fin editar usuario-->
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script> 
       $('.brand').tooltip('hide');

@@ -58,10 +58,26 @@ class usuarios extends DataBase {
 		return $retorno;
 	}
 
-	function eliminarUsuario($id) {
+	function eliminarProyecto($id) {
 		$retorno = false;
-		$sql = "UPDATE usuarios SET estado='0' WHERE id_usuario='".$this->real_escape_string($id)."' ";
+		$sql = "UPDATE proyectos SET estado='0' WHERE id_proyecto='".$this->real_escape_string($id)."' ";
 		$respuesta = $this-> query($sql);
+		if ( $respuesta ) {
+			$retorno = true;
+		}
+		return $retorno;
+	}
+
+	function ModificarUsuarios($id_usuario,$cedula, $usuario, $clave, $confirmar_clave, $nombres, $apellidos, $cargo) {
+		$retorno = false;
+		if($clave==""){
+			$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+			$respuesta = $this-> query($sql);
+		}
+		else if($clave!="" && $clave==$confirmar_clave){
+			$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+			$respuesta = $this-> query($sql);	
+		}
 		if ( $respuesta ) {
 			$retorno = true;
 		}

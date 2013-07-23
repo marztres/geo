@@ -80,6 +80,8 @@ class proyectos extends DataBase {
 		return $retorno;
 	}
 
+	
+
 	function eliminarProyecto($id) {
 		$retorno = false;
 		$sql = "UPDATE proyectos SET estado='0' WHERE id_proyecto='".$this->real_escape_string($id)."' ";

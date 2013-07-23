@@ -33,6 +33,26 @@
 				}
 			break;
 
+			case 'modificar_usuario':
+				$usuariosClass = new usuarios();
+				$cedula= $_POST['cedula'];
+				$usuario = $_POST['usuario'];
+				$clave = $_POST['clave'];
+				$confirmar_clave = $_POST['confirmar_clave'];
+				$nombres = $_POST['nombres'];
+				$apellidos = $_POST['apellidos'];
+				$cargo = $_POST['cargo'];
+				$id_usuario = $_POST['id_usuario'];
+				$respuesta = $usuariosClass->ModificarUsuarios($id_usuario,$cedula, $usuario, $clave, $confirmar_clave, $nombres, $apellidos, $cargo);
+				if ( $respuesta ) {
+					$response["status"] = "OK";
+					$response["message"] = "Usuario modificado";
+				} else {
+					$response["status"] = "ERROR";
+					$response["message"] = "Error modificando el usuario";
+				}	
+			break;
+
 			case 'eliminarUsuario':
 					$usuariosClass = new usuarios();				
 					$idusuario= $_POST['idusuario'];
