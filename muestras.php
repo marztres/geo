@@ -1219,7 +1219,7 @@
                         </td>
                         <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
                         <td class="acumulado" ><?php echo $temp[$j]; ?></td>
-                        <td >
+                        <td class="pasa">
                           <?php echo $pasa= 100 - $temp[$j];
                             if($retenidos->pesoRetenido>0){
                                $p[]=$pasa;
@@ -1308,7 +1308,7 @@
                   unset($datos); 
                   ?>
                 <h3>Observaciones de la tabla</h3>
-                <table class="table table-hover table-striped table-bordered ">
+                <table class="table table-hover table-striped table-bordered tablaobs">
                   <thead>
                     <tr>
                       <th> D60</th>
@@ -1318,12 +1318,13 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td> <input name="d60" type="text" value="<?php echo $DatosGranulometria->d60?>"> </td>
-                      <td> <input name="d30" type="text" value="<?php echo $DatosGranulometria->d30?>"> </td>
-                      <td> <input name="d10" type="text" value="<?php echo $DatosGranulometria->d10?>"> </td>
+                      <td> <input name="d60" type="text" class="d60 granulo" value="<?php echo $DatosGranulometria->d60?>"> </td>
+                      <td> <input name="d30" type="text" class="d30 granulo" value="<?php echo $DatosGranulometria->d30?>"> </td>
+                      <td> <input name="d10" type="text" class="d10 granulo" value="<?php echo $DatosGranulometria->d10?>"> </td>
                     </tr>
                   </tbody>
                 </table>
+                
                 <h3>Resultados</h3>
                 <table class="table table-hover table-striped table-bordered tablaResultadosGranulometria">
                   <thead>
@@ -1364,9 +1365,9 @@
                                       $tamizN40=round($tamices[11]);                             
                           ?> 
                       </td>
-                      <td><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
+                      <td class="tdLimiteLiquido"><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
                       <?php $plastico=$resultado->limitePlastico;?>
-                      <td><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
+                      <td class="tdIndicePlaticidad"><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
                       <td class="indiceGrupo">  </td>
                     </tr>
                   </tbody>

@@ -993,145 +993,7 @@ var acciones = {
         fin13Var = parseFloat(tdFinal13.text()),
         FondoFinalVar = parseFloat(tdFinal4.text());
 
-        //tds Pasa %
-        var tdPasa0 = trGranulometria.eq(0).find("td:last"),
-          tdPasa1 = trGranulometria.eq(1).find("td:last"),
-          tdPasa2 = trGranulometria.eq(2).find("td:last"),
-          tdPasa3 = trGranulometria.eq(3).find("td:last"),
-          tdPasa4 = trGranulometria.eq(4).find("td:last"),
-          tdPasa5 = trGranulometria.eq(5).find("td:last"),
-          tdPasa6 = trGranulometria.eq(6).find("td:last"),
-          tdPasa7 = trGranulometria.eq(7).find("td:last"),
-          tdPasa8 = trGranulometria.eq(8).find("td:last"),
-          tdPasa9 = trGranulometria.eq(9).find("td:last"),
-          tdPasa10 = trGranulometria.eq(10).find("td:last"),
-          tdPasa11 = trGranulometria.eq(11).find("td:last"),
-          tdPasa12 = trGranulometria.eq(12).find("td:last"),
-          tdPasa13 = trGranulometria.eq(13).find("td:last");
-
-
-          
-
-
-      //Variables de todos los td Finales
-      var pasa0Var = parseFloat(tdPasa0.text()),
-        pasa1Var = parseFloat(tdPasa1.text()),
-        pasa2Var = parseFloat(tdPasa2.text()),
-        pasa3Var = parseFloat(tdPasa3.text()),
-        pasa4Var = parseFloat(tdPasa4.text()),
-        pasa5Var = parseFloat(tdPasa5.text()),
-        pasa6Var = parseFloat(tdPasa6.text()),
-        pasa7Var = parseFloat(tdPasa7.text()),
-        pasa8Var = parseFloat(tdPasa8.text()),
-        pasa9Var = parseFloat(tdPasa9.text()),
-        pasa10Var = parseFloat(tdPasa10.text()),
-        pasa11Var = parseFloat(tdPasa11.text()),
-        pasa12Var = parseFloat(tdPasa12.text()),
-        pasa13Var = parseFloat(tdPasa13.text());
-
-        //variables de los tamizes N4 , N200 
-
-       
-
-        // td de resultados indice de grupo , tamizes 4 y 200 , clasificaciones sucs y aashto 
-        var tdTamiz4 = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdTamiz4"),
-          tdTamiz200 = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdTamiz200"),
-          indiceGrupo= $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.indiceGrupo");
-
-        // td tabla de clasificaciones 
-        var clasSucs= $(this).closest("div").find("table.tablaClasificaciones").find("td.classSucs");
-          clasAashto= $(this).closest("div").find("table.tablaClasificaciones").find("td.classAsshto");
-
-        // asignando valores a las td de N4 y N200 
-        
-        tdTamiz4.text(fin7Var);
-        tdTamiz200.text(fin12Var);  
-
-
-
-        //td tamaño de tamiz en mn
-        var tdTam0 = trGranulometria.eq(0).find("td.tamTamiz"),
-          tdTam1 = trGranulometria.eq(1).find("td.tamTamiz"),
-          tdTam2 = trGranulometria.eq(2).find("td.tamTamiz"),
-          tdTam3 = trGranulometria.eq(3).find("td.tamTamiz"),
-          tdTam4 = trGranulometria.eq(4).find("td.tamTamiz"),
-          tdTam5 = trGranulometria.eq(5).find("td.tamTamiz"),
-          tdTam6 = trGranulometria.eq(6).find("td.tamTamiz"),
-          tdTam7 = trGranulometria.eq(7).find("td.tamTamiz"),
-          tdTam8 = trGranulometria.eq(8).find("td.tamTamiz"),
-          tdTam9 = trGranulometria.eq(9).find("td.tamTamiz"),
-          tdTam10 = trGranulometria.eq(10).find("td.tamTamiz"),
-          tdTam11 = trGranulometria.eq(11).find("td.tamTamiz"),
-          tdTam12 = trGranulometria.eq(12).find("td.tamTamiz"),
-          tdTam13 = trGranulometria.eq(13).find("td.tamTamiz");
-
-
-        var tdTam0Var = parseFloat(tdTam0.text()),
-          tdTam1Var = parseFloat(tdTam1.text()),
-          tdTam2Var = parseFloat(tdTam2.text()),
-          tdTam3Var = parseFloat(tdTam3.text()),
-          tdTam4Var = parseFloat(tdTam4.text()),
-          tdTam5Var = parseFloat(tdTam5.text()),
-          tdTam6Var = parseFloat(tdTam6.text()),
-          tdTam7Var = parseFloat(tdTam7.text()),
-          tdTam8Var = parseFloat(tdTam8.text()),
-          tdTam9Var = parseFloat(tdTam9.text()),
-          tdTam10Var = parseFloat(tdTam10.text()),
-          tdTam11Var = parseFloat(tdTam11.text()),
-          tdTam12Var = parseFloat(tdTam12.text()),
-          tdTam13Var = parseFloat(tdTam13.text()); 
-
-        //grafica de granulometria
-    // grafica de deformacion 
-    var inputGraficaGranulometria = $(this).closest("div").find("input.datosgraficaGranulometria");    
-
-    optimizadorGraficas++
-    if(optimizadorGraficas==5){
-      var datosGranulometria = 
-      "["+parseFloat(tdTam13Var)+","+parseFloat(pasa13Var)+"]"
-      +","+
-      "["+parseFloat(tdTam12Var)+","+parseFloat(pasa12Var)+"]"
-      +","+
-      "["+parseFloat(tdTam11Var)+","+parseFloat(pasa11Var)+"]"
-      +","+
-      "["+parseFloat(tdTam10Var)+","+parseFloat(pasa10Var)+"]"
-      +","+
-      "["+parseFloat(tdTam9Var)+","+parseFloat(pasa9Var)+"]"
-      +","+
-      "["+parseFloat(tdTam8Var)+","+parseFloat(pasa8Var)+"]"
-      +","+
-      "["+parseFloat(tdTam7Var)+","+parseFloat(pasa7Var)+"]"
-      +","+
-      "["+parseFloat(tdTam6Var)+","+parseFloat(pasa6Var)+"]"
-      +","+
-      "["+parseFloat(tdTam5Var)+","+parseFloat(pasa5Var)+"]"
-      +","+
-      "["+parseFloat(tdTam4Var)+","+parseFloat(pasa4Var)+"]"
-      +","+
-      "["+parseFloat(tdTam3Var)+","+parseFloat(pasa3Var)+"]"
-      +","+
-      "["+parseFloat(tdTam2Var)+","+parseFloat(pasa2Var)+"]"
-      +","+
-      "["+parseFloat(tdTam1Var)+","+parseFloat(pasa1Var)+"]"
-      +","+
-      "["+parseFloat(tdTam0Var)+","+parseFloat(pasa0Var)+"]";
-
-      var arrayGranulometria = eval("["+datosGranulometria+"]");
       
-    var i = 0;
-    var arrayGranulometriaFinal = new Array();
-    while ( i < arrayGranulometria.length ) {
-
-      if ( 0 != arrayGranulometria[i][0] && 0 != arrayGranulometria[i][1] ) {
-        arrayGranulometriaFinal.push("["+arrayGranulometria[i]+"]");
-      }
-      i++;
-    }
-
-
-     inputGraficaGranulometria.val(arrayGranulometriaFinal).trigger('change');
-     optimizadorGraficas = 0;
-    }  
 
         //Fin grafica de granulometria  
 
@@ -1217,18 +1079,859 @@ var acciones = {
       //Variable  fondo pasa
       var fondoPasaVar=100-fondoRetenidoAcumuladoVar;
       fondoPasa.text(fondoPasaVar.toPrecision(4));
-    
+
+
+
+         //tds Pasa %
+        var tdPasa0 = trGranulometria.eq(0).find("td.pasa"),
+          tdPasa1 = trGranulometria.eq(1).find("td.pasa"),
+          tdPasa2 = trGranulometria.eq(2).find("td.pasa"),
+          tdPasa3 = trGranulometria.eq(3).find("td.pasa"),
+          tdPasa4 = trGranulometria.eq(4).find("td.pasa"),
+          tdPasa5 = trGranulometria.eq(5).find("td.pasa"),
+          tdPasa6 = trGranulometria.eq(6).find("td.pasa");
+          tdPasa7 = trGranulometria.eq(7).find("td.pasa");
+          tdPasa8 = trGranulometria.eq(8).find("td.pasa"),
+          tdPasa9 = trGranulometria.eq(9).find("td.pasa"),
+          tdPasa10 = trGranulometria.eq(10).find("td.pasa"),
+          tdPasa11 = trGranulometria.eq(11).find("td.pasa"),
+          tdPasa12 = trGranulometria.eq(12).find("td.pasa"),
+          tdPasa13 = trGranulometria.eq(13).find("td.pasa");
+
+
+          
+
+
+      //Variables de todos los td Finales
+      var pasa0Var = parseFloat(tdPasa0.text()),
+        pasa1Var = parseFloat(tdPasa1.text()),
+        pasa2Var = parseFloat(tdPasa2.text()),
+        pasa3Var = parseFloat(tdPasa3.text()),
+        pasa4Var = parseFloat(tdPasa4.text()),
+        pasa5Var = parseFloat(tdPasa5.text()),
+        pasa6Var = parseFloat(tdPasa6.text()),
+        pasa7Var = parseFloat(tdPasa7.text()),
+        pasa8Var = parseFloat(tdPasa8.text()),
+        pasa9Var = parseFloat(tdPasa9.text()),
+        pasa10Var = parseFloat(tdPasa10.text()),
+        pasa11Var = parseFloat(tdPasa11.text()),
+        pasa12Var = parseFloat(tdPasa12.text()),
+        pasa13Var = parseFloat(tdPasa13.text());
+
+        //variables de los tamizes N4 , N200 
+        Tamiz200Var = pasa13Var,
+        tamiz4Var = pasa7Var,
+        tamiz10Var = pasa8Var ,
+        tamiz40Var = pasa11Var;
+
+        // td de resultados indice de grupo , tamizes 4 y 200 , clasificaciones sucs y aashto 
+        var tdTamiz4 = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdTamiz4"),
+          tdTamiz200 = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdTamiz200"),
+          indiceGrupo = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.indiceGrupo"),
+          tdLimiteLiquido = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdLimiteLiquido"),
+          tdIndicePlasticidad = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdIndicePlaticidad");
+
+        // tabla de observaciones 
+        tD60 =$(this).closest("div").find("table.tablaobs").find("input.d60"), 
+        tD30 =$(this).closest("div").find("table.tablaobs").find("input.d30"),  
+        tD10 =$(this).closest("div").find("table.tablaobs").find("input.d10");
+
+        var D60Var = parseFloat(tD60.val()), 
+          D30Var = parseFloat(tD30.val()), 
+          D10Var = parseFloat(tD10.val());
+
+        // td tabla de clasificaciones 
+        var clasSucs= $(this).closest("div").find("table.tablaClasificaciones").find("td.classSucs");
+          clasAashto= $(this).closest("div").find("table.tablaClasificaciones").find("td.classAsshto");
+
+        var LimiteLiquidoVar = parseFloat(tdLimiteLiquido.text()), 
+          IndicePlasticidadVar = parseFloat(tdIndicePlasticidad.text());
+          
+        // asignando valores a las td de N4 y N200 
+        tdTamiz4.text(tamiz4Var),
+        tdTamiz200.text(Tamiz200Var);
+
+
+        // Ejecucion de clasificacion Sucs
+        acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs);
+        acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto);
+
+        //td tamaño de tamiz en mn
+        var tdTam0 = trGranulometria.eq(0).find("td.tamTamiz"),
+          tdTam1 = trGranulometria.eq(1).find("td.tamTamiz"),
+          tdTam2 = trGranulometria.eq(2).find("td.tamTamiz"),
+          tdTam3 = trGranulometria.eq(3).find("td.tamTamiz"),
+          tdTam4 = trGranulometria.eq(4).find("td.tamTamiz"),
+          tdTam5 = trGranulometria.eq(5).find("td.tamTamiz"),
+          tdTam6 = trGranulometria.eq(6).find("td.tamTamiz"),
+          tdTam7 = trGranulometria.eq(7).find("td.tamTamiz"),
+          tdTam8 = trGranulometria.eq(8).find("td.tamTamiz"),
+          tdTam9 = trGranulometria.eq(9).find("td.tamTamiz"),
+          tdTam10 = trGranulometria.eq(10).find("td.tamTamiz"),
+          tdTam11 = trGranulometria.eq(11).find("td.tamTamiz"),
+          tdTam12 = trGranulometria.eq(12).find("td.tamTamiz"),
+          tdTam13 = trGranulometria.eq(13).find("td.tamTamiz");
+
+
+        var tdTam0Var = parseFloat(tdTam0.text()),
+          tdTam1Var = parseFloat(tdTam1.text()),
+          tdTam2Var = parseFloat(tdTam2.text()),
+          tdTam3Var = parseFloat(tdTam3.text()),
+          tdTam4Var = parseFloat(tdTam4.text()),
+          tdTam5Var = parseFloat(tdTam5.text()),
+          tdTam6Var = parseFloat(tdTam6.text()),
+          tdTam7Var = parseFloat(tdTam7.text()),
+          tdTam8Var = parseFloat(tdTam8.text()),
+          tdTam9Var = parseFloat(tdTam9.text()),
+          tdTam10Var = parseFloat(tdTam10.text()),
+          tdTam11Var = parseFloat(tdTam11.text()),
+          tdTam12Var = parseFloat(tdTam12.text()),
+          tdTam13Var = parseFloat(tdTam13.text()); 
+
+        //grafica de granulometria
+    // grafica de deformacion 
+    var inputGraficaGranulometria = $(this).closest("div").find("input.datosgraficaGranulometria");    
+
+    optimizadorGraficas++
+    if(optimizadorGraficas==5){
+      var datosGranulometria = 
+      "["+parseFloat(tdTam13Var)+","+parseFloat(pasa13Var)+"]"
+      +","+
+      "["+parseFloat(tdTam12Var)+","+parseFloat(pasa12Var)+"]"
+      +","+
+      "["+parseFloat(tdTam11Var)+","+parseFloat(pasa11Var)+"]"
+      +","+
+      "["+parseFloat(tdTam10Var)+","+parseFloat(pasa10Var)+"]"
+      +","+
+      "["+parseFloat(tdTam9Var)+","+parseFloat(pasa9Var)+"]"
+      +","+
+      "["+parseFloat(tdTam8Var)+","+parseFloat(pasa8Var)+"]"
+      +","+
+      "["+parseFloat(tdTam7Var)+","+parseFloat(pasa7Var)+"]"
+      +","+
+      "["+parseFloat(tdTam6Var)+","+parseFloat(pasa6Var)+"]"
+      +","+
+      "["+parseFloat(tdTam5Var)+","+parseFloat(pasa5Var)+"]"
+      +","+
+      "["+parseFloat(tdTam4Var)+","+parseFloat(pasa4Var)+"]"
+      +","+
+      "["+parseFloat(tdTam3Var)+","+parseFloat(pasa3Var)+"]"
+      +","+
+      "["+parseFloat(tdTam2Var)+","+parseFloat(pasa2Var)+"]"
+      +","+
+      "["+parseFloat(tdTam1Var)+","+parseFloat(pasa1Var)+"]"
+      +","+
+      "["+parseFloat(tdTam0Var)+","+parseFloat(pasa0Var)+"]";
+
+      var arrayGranulometria = eval("["+datosGranulometria+"]");
+      
+    var i = 0;
+    var arrayGranulometriaFinal = new Array();
+    while ( i < arrayGranulometria.length ) {
+
+      if ( 0 != arrayGranulometria[i][0] && 0 != arrayGranulometria[i][1] ) {
+        arrayGranulometriaFinal.push("["+arrayGranulometria[i]+"]");
       }
+      i++;
+    }
 
 
-
-
+     inputGraficaGranulometria.val(arrayGranulometriaFinal).trigger('change');
+     optimizadorGraficas = 0;
+    } 
+      
+    }
   },
 
-  clasificacionAASHTO: function(){
+  clasificacionSucs: function (Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,$clasSucs){
+    console.log("Clasificacion de suelos SUCS");
+    var notacionSucs = "N/A";
+    var descSucs = " N/A";
+    console.log(" Notacion sucs por defecto "+notacionSucs+" Descripcion Sucs por defecto "+descSucs);
+    console.log("Tamiz 200 "+Tamiz200Var);
+    console.log("Tamiz 4 "+tamiz4Var); 
+    console.log("Limite liquido "+LimiteLiquidoVar); 
+    console.log("IP "+IndicePlasticidadVar); 
+    console.log("d60 "+D60Var); 
+    console.log("d30 "+D30Var); 
+    console.log("d10 "+D10Var); 
 
+    if(Tamiz200Var!=undefined){
 
-    
+      var gravas = 100 - tamiz4Var, 
+        arenas = tamiz4Var-Tamiz200Var,
+        finos = Tamiz200Var;
+      console.log("Porcentaje de gravas "+gravas);
+      console.log("Porcentaje de arenas "+arenas);
+      console.log("Porcentaje de finos "+finos);
+
+      LineaA = (0.73*(LimiteLiquidoVar-20));
+      console.log("La linea A es "+LineaA);
+
+      var CU=0; 
+      if(D60Var!=0 && D30Var!=0 && D10Var!=0){
+        CU = D60Var/D10Var;
+        console.log("El CU es : "+CU);
+      }
+      
+      if(D60Var!=0 && D30Var!=0 && D10Var!=0){
+        CC = (D30Var*D30Var)/(D10Var*D60Var);
+        console.log("El CC es : "+CC);
+      }
+
+      var mayor = Math.max(gravas,arenas,finos);
+      
+      if(gravas==mayor){
+        console.log("Las Gravas son mayores");
+        Gravas();  
+      } else if(arenas==mayor){
+        console.log("Las Arenas son mayores");
+        Arenas();
+      } else if(finos==mayor){
+        console.log("Los finos son mayores");
+        Finos();
+      }
+
+    } else{
+      
+      $clasSucs.text("N/A");
+    } 
+
+    function Gravas(){
+       console.log("Inicio de condicional de Gravas");
+       notacionSucs= Finos();
+       console.log("notacion finos para grava"+notacionSucs);
+       if(finos<5){
+         console.log("Finos menores que 5%");
+         if(CU>=4 && CC>=1 && CC<=3){
+           console.log("CU mayor a 4 y CC entre 1 y 3");
+           notacionSucs="GW";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas>15){
+             console.log("Arenas mayores que 15%");
+             descSucs="Grava bien graduada";
+             console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+           }else if(arenas<=15){
+             console.log("Arenas mayores o iguales a 15%");
+             descSucs="Grava bien graduada con arena";
+             console.log("Descripcion clasificacion Sucs : "+descSucs);    
+           }
+
+         } else if(CU<4 || (CC>1 && CC<3) ){
+           console.log("CU menor que 4 y CC mayor que 1 y menor que 3");
+           notacionSucs="GP";
+           if(arenas>15){
+             console.log("Arenas mayores que 15%");
+             descSucs="Grava mal graduada";
+             console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+           }else if(arenas<=15){
+             console.log("Arenas mayores o iguales a 15%");
+             descSucs="Grava mal graduada con arena";
+             console.log("Descripcion clasificacion Sucs : "+descSucs);    
+           }
+         }
+
+       } else if(finos>=5 && finos<=12){
+         console.log("Finos entre 5 y 12");  
+         if(CU>=4 && CC>=1 && CC<=3){
+           console.log("CU mayor a 4 y CC entre 1 y 3");
+           if(notacionSucs=="MH" || notacionSucs=="ML"){
+             notacionSucs="GW-GM";
+             console.log("Notacion asignada "+notacionSucs);
+             if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Grava bien graduada con limo";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Grava bien graduada con limo y arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+             }
+
+           } else if (notacionSucs=="CL" || notacionSucs=="CH" || notacionSucs=="CL-ML"){
+             notacionSucs="GW-GC";
+             console.log("Notacion asignada "+notacionSucs);
+             if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Grava bien graduada con Arcilla (o Arcilla limosa)";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Grava bien graduada con Arcilla y Arena (o Arcilla limosa y arena)";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+             }
+
+           } 
+         } else if(CU>4 || (CC>1 && CC>3) ){
+           console.log("CU menor que 4 y CC mayor que 1 y menor que 3");
+           if(notacionSucs=="ML" || notacionSucs=="MH"){
+             notacionSucs="GP-GM";
+             console.log("Notacion asignada "+notacionSucs);
+             if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Grava mal graduada con limo";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Grava mal graduada con limo y arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+             }
+           } else if(notacionSucs=="CL" || notacionSucs=="CH" || notacionSucs=="CL-ML"){
+             notacionSucs="GP-GC";
+             console.log("Notacion asignada "+notacionSucs);
+             if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Grava mal graduada con arcilla (o arcilla limosa)";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Grava mal graduada con arcilla y arena (o arcilla limosa con arena)";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+             }
+
+           }
+
+         }
+
+       } else if(finos>12){
+         console.log("Finos mayores que 12");
+         if(notacionSucs=="ML" || notacionSucs=="MH"){
+             notacionSucs="GM";
+             console.log("Notacion asignada "+notacionSucs);
+             if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Grava limosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Grava limosa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+             }
+           } else if(notacionSucs=="CL" || notacionSucs=="CH"){
+             notacionSucs="GC";
+             console.log("Notacion asignada "+notacionSucs);
+             if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Grava arcillosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Grava arcillosa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+             }
+
+           } else if(notacionSucs=="CL-ML"){
+             notacionSucs="GC-GM";
+             console.log("Notacion asignada "+notacionSucs);
+             if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Grava limosa-arcillosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Grava limosa-arcillosa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+             }
+           } 
+       }
+       console.log("----Finalizacion de condicional gravas----");
+       console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
+       $clasSucs.text(notacionSucs+"-"+descSucs);
+    }
+    function Arenas(){
+      console.log("Inicio de condicional de Arenas"); 
+      notacionSucs= Finos();
+      console.log("notacion finos para arenas"+notacionSucs);
+      if(finos<5){
+       console.log("Finos menores que 5%");
+       if(CU>=6 && CC>=1 && CC<=3){
+         console.log("CU mayor a 4 y CC entre 1 y 3");
+         notacionSucs="SW";
+         console.log("Notacion asignada "+notacionSucs);
+         if(arenas>15){
+           console.log("Arenas mayores que 15%");
+           descSucs="Arena bien graduada";
+           console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+         }else if(arenas<=15){
+           console.log("Arenas mayores o iguales a 15%");
+           descSucs="Arena bien graduada con grava";
+           console.log("Descripcion clasificacion Sucs : "+descSucs);    
+         }
+
+       } else if(CU<6 || (CC>1 && CC<3) ){
+         console.log("CU menor que 4 y CC mayor que 1 y menor que 3");
+         notacionSucs="SP";
+         if(arenas>15){
+           console.log("Arenas mayores que 15%");
+           descSucs="Arena mal graduada";
+           console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+         }else if(arenas<=15){
+           console.log("Arenas mayores o iguales a 15%");
+           descSucs="Arena mal graduada con grava";
+           console.log("Descripcion clasificacion Sucs : "+descSucs);    
+         }
+       }
+
+      } else if(finos>=5 && finos<=12){
+       console.log("Finos entre 5 y 12"); 
+       if(CU>=6 && CC>=1 && CC<=3){
+         console.log("CU mayor a 4 y CC entre 1 y 3");
+         if(notacionSucs=="MH" || notacionSucs=="ML"){
+           notacionSucs="SW-SM";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas<15){
+              console.log("arenas menores que 15");
+              descSucs="Arena bien graduada con limo";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+            } else if(arenas>=15){
+              console.log("arenas mayores o iguales a 15");
+              descSucs="Arena bien graduada con limo y grava";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+           }
+
+         } else if (notacionSucs=="CL" || notacionSucs=="CH" || notacionSucs=="CL-ML"){
+           notacionSucs="SW-SC";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas<15){
+              console.log("arenas menores que 15");
+              descSucs="Arena bien graduada con arcilla (o arcilla limosa)";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+            } else if(arenas>=15){
+              console.log("arenas mayores o iguales a 15");
+              descSucs="Arena bien graduaba con arcilla y grava (o arcilla limosa y grava)";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+           }
+
+         } 
+       } else if(CU>6 || (CC>1 && CC>3) ){
+         console.log("CU menor que 4 y CC mayor que 1 y menor que 3");
+         if(notacionSucs=="ML" || notacionSucs=="MH"){
+           notacionSucs="SP-SM";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas<15){
+              console.log("arenas menores que 15");
+              descSucs="Arena mal graduada con limo";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+            } else if(arenas>=15){
+              console.log("arenas mayores o iguales a 15");
+              descSucs="Arena mal graduada con limo y grava";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+           }
+         } else if(notacionSucs=="CL" || notacionSucs=="CH" || notacionSucs=="CL-ML"){
+           notacionSucs="SP-SC";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas<15){
+              console.log("arenas menores que 15");
+              descSucs="Arena mal graduada con arcilla (o arcilla limosa)";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+            } else if(arenas>=15){
+              console.log("arenas mayores o iguales a 15");
+              descSucs="Arena mal grauada con arcilla y grava (o arcilla limosa y grava)";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+           }
+         }
+       }
+      } else if(finos>12){
+       console.log("Finos mayores que 12");
+       if(notacionSucs=="ML" || notacionSucs=="MH"){
+           notacionSucs="SM";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas<15){
+              console.log("arenas menores que 15");
+              descSucs="Arena limosa";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+            } else if(arenas>=15){
+              console.log("arenas mayores o iguales a 15");
+              descSucs="Arena limosa con grava";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+           }
+         } else if(notacionSucs=="CL" || notacionSucs=="CH"){
+           notacionSucs="SC";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas<15){
+              console.log("arenas menores que 15");
+              descSucs="Arena arcillosa";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+            } else if(arenas>=15){
+              console.log("arenas mayores o iguales a 15");
+              descSucs="Arena arcillosa con grava";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+           }
+
+         } else if(notacionSucs=="CL-ML"){
+           notacionSucs="SC-SM";
+           console.log("Notacion asignada "+notacionSucs);
+           if(arenas<15){
+              console.log("arenas menores que 15");
+              descSucs="Arena limosa-arcillosa";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+            } else if(arenas>=15){
+              console.log("arenas mayores o iguales a 15");
+              descSucs="Arena limosa-arcillosa con grava";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+           }
+         } 
+      }
+      console.log("----Finalizacion de condicional arenas----");
+      console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
+      $clasSucs.text(notacionSucs+"-"+descSucs);
+
+    }
+    function Finos(){
+      console.log("Inicio de condicional de Finos");
+
+      if(LimiteLiquidoVar<50){
+        console.log("Limite liquido menor a 50");
+        if(IndicePlasticidadVar>7 && IndicePlasticidadVar>=LineaA){
+          console.log("IP es mayor que 7 y es mayor o igual a la linea A");
+          notacionSucs="CL";
+          console.log("Notacion asignada "+notacionSucs);
+          if(Tamiz200Var<30){
+            console.log("N200 menor a 30");
+            if(Tamiz200Var<15){
+              console.log("N200 menor a 15");
+              descSucs="Arcilla fina";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+            } else if(Tamiz200Var>15 && Tamiz200Var<29){
+              console.log("N200 entre 15 y 29");
+              if(arenas>=gravas){
+                console.log("arenas mayores o iguales que gravas");
+                descSucs="Arcilla fina con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              } else if(arenas<gravas){
+                console.log("arenas menores que gravas");
+                descSucs="Arcilla fina con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              }
+            }
+          }else if(Tamiz200Var>=30){
+            console.log("N200 mayor o igual a 30");
+            if(arenas>=gravas){
+              console.log("arenas mayores o iguales que gravas");
+              if(gravas<15){
+                console.log("gravas menores que 15");
+                descSucs="Arcilla fina arenosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(gravas>=15){
+                console.log("gravas mayores o iguales a 15");
+                descSucs="Arcilla fina arenosa con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+              
+            } else if(arenas<gravas){
+              console.log("arenas menores que gravas");
+              if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Arcilla fina gravosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Arcilla fina gravosa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+            }
+          }
+
+        } else if(IndicePlasticidadVar>=4 && IndicePlasticidadVar<=7 && IndicePlasticidadVar>=LineaA ){
+          console.log("IP entre 4 y 7 y es mayor o igual a la linea A");
+          notacionSucs="CL-ML";
+          console.log("Notacion asignada "+notacionSucs);
+          if(Tamiz200Var<30){
+            console.log("N200 menor a 30");
+            if(Tamiz200Var<15){
+              console.log("N200 menor a 15");
+              descSucs="Arcilla limosa";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+            } else if(Tamiz200Var>15 && Tamiz200Var<29){
+              console.log("N200 entre 15 y 29");
+              if(arenas>=gravas){
+                console.log("arenas mayores o iguales que gravas");
+                descSucs="Arcilla limosa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              } else if(arenas<gravas){
+                console.log("arenas menores que gravas");
+                descSucs="Arcilla limosa con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              }
+            }
+          }else if(Tamiz200Var>=30){
+            console.log("N200 mayor o igual a 30");
+            if(arenas>=gravas){
+              console.log("arenas mayores o iguales que gravas");
+              if(gravas<15){
+                console.log("gravas menores que 15");
+                descSucs="Arcilla areno-limosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(gravas>=15){
+                console.log("gravas mayores o iguales a 15");
+                descSucs="Arcilla areno-limosa con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+              
+            } else if(arenas<gravas){
+              console.log("arenas menores que gravas");
+              if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Arcilla gravosa limosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Arcilla gravosa-limosa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+            }
+
+          }   
+
+        } else if(IndicePlasticidadVar<4 || IndicePlasticidadVar<LineaA){
+          console.log("IP menos que 4 y es menor que la linea A");
+          notacionSucs="ML";
+          console.log("Notacion asignada "+notacionSucs);
+
+          if(Tamiz200Var<30){
+            console.log("N200 menor a 30");
+            if(Tamiz200Var<15){
+              console.log("N200 menor a 15");
+              descSucs="limo";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+            } else if(Tamiz200Var>15 && Tamiz200Var<29){
+              console.log("N200 entre 15 y 29");
+              if(arenas>=gravas){
+                console.log("arenas mayores o iguales que gravas");
+                descSucs="Limo con arcilla";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              } else if(arenas<gravas){
+                console.log("arenas menores que gravas");
+                descSucs="Limo con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              }
+            }
+          }else if(Tamiz200Var>=30){
+            console.log("N200 mayor o igual a 30");
+            if(arenas>=gravas){
+              console.log("arenas mayores o iguales que gravas");
+              if(gravas<15){
+                console.log("gravas menores que 15");
+                descSucs="Limo arenoso";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(gravas>=15){
+                console.log("gravas mayores o iguales a 15");
+                descSucs="Limo arenoso con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+              
+            } else if(arenas<gravas){
+              console.log("arenas menores que gravas");
+              if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Limo gravoso";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Limo gravoso con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+            }
+
+          } 
+        }
+
+      } else if(LimiteLiquidoVar>=50){
+        console.log("Limite liquido mayor a 50");
+        if(IndicePlasticidadVar>=LineaA){
+          console.log("IP es mayor a la linea A");
+          notacionSucs="CH";
+          console.log("Notacion asignada "+notacionSucs);
+          if(Tamiz200Var<30){
+            console.log("N200 menor a 30");
+            if(Tamiz200Var<15){
+              console.log("N200 menor a 15");
+              descSucs="Arcilla gruesa";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+            } else if(Tamiz200Var>15 && Tamiz200Var<29){
+              console.log("N200 entre 15 y 29");
+              if(arenas>=gravas){
+                console.log("arenas mayores o iguales que gravas");
+                descSucs="Arcilla gruesa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              } else if(arenas<gravas){
+                console.log("arenas menores que gravas");
+                descSucs="Arcilla gruesa con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              }
+            }
+          }else if(Tamiz200Var>=30){
+            console.log("N200 mayor o igual a 30");
+            if(arenas>=gravas){
+              console.log("arenas mayores o iguales que gravas");
+              if(gravas<15){
+                console.log("gravas menores que 15");
+                descSucs="Arcilla gruesa arenosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(gravas>=15){
+                console.log("gravas mayores o iguales a 15");
+                descSucs="Arcilla gruesa arenosa con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+              
+            } else if(arenas<gravas){
+              console.log("arenas menores que gravas");
+              if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Arcilla gruesa gravosa";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Arcilla gruesa gravosa con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+            }
+          }
+
+        } else if(IndicePlasticidadVar<LineaA){
+          console.log("IP menos que 4 y es menor que la linea A");
+          notacionSucs="MH";
+          console.log("Notacion asignada "+notacionSucs);
+
+          if(Tamiz200Var<30){
+            console.log("N200 menor a 30");
+            if(Tamiz200Var<15){
+              console.log("N200 menor a 15");
+              descSucs="Limo elástico";
+              console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+            } else if(Tamiz200Var>15 && Tamiz200Var<29){
+              console.log("N200 entre 15 y 29");
+              if(arenas>=gravas){
+                console.log("arenas mayores o iguales que gravas");
+                descSucs="Limo elástico con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              } else if(arenas<gravas){
+                console.log("arenas menores que gravas");
+                descSucs="Limo elástico con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+
+              }
+            }
+          }else if(Tamiz200Var>=30){
+            console.log("N200 mayor o igual a 30");
+            if(arenas>=gravas){
+              console.log("arenas mayores o iguales que gravas");
+              if(gravas<15){
+                console.log("gravas menores que 15");
+                descSucs="Limo elástico arenoso";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(gravas>=15){
+                console.log("gravas mayores o iguales a 15");
+                descSucs="Limo elástico arenoso con grava";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+              
+            } else if(arenas<gravas){
+              console.log("arenas menores que gravas");
+              if(arenas<15){
+                console.log("arenas menores que 15");
+                descSucs="Limo elástico gravoso";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              } else if(arenas>=15){
+                console.log("arenas mayores o iguales a 15");
+                descSucs="Limo elástico gravoso con arena";
+                console.log("Descripcion clasificacion Sucs : "+descSucs);
+              }
+            }
+
+          } 
+        }
+      }
+
+      console.log("----Finalizacion de condicional finos----");
+      console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
+      $clasSucs.text(notacionSucs+"-"+descSucs);
+      return notacionSucs;
+    }
+
+  }, clasificacionAashto: function(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,$clasAashto){
+    console.log("Clasificacion de suelos Aashto");
+    var notacionAashto = "N/A";
+    console.log(" Notacion Aashto por defecto es : "+notacionAashto);
+    console.log("Tamiz 200 "+Tamiz200Var);
+    console.log("Tamiz 10 "+tamiz10Var);
+    console.log("Tamiz 40 "+tamiz40Var); 
+    console.log("Limite liquido "+LimiteLiquidoVar);
+    console.log("Indice de plasticidad : "+IndicePlasticidadVar);
+
+    if(Tamiz200Var<=35){
+      console.log("N200 es menor o igual a 35");
+      if(IndicePlasticidadVar<=6 && LimiteLiquidoVar==undefined){
+        if(tamiz10Var<=50 && tamiz40Var<=30 &&  Tamiz200Var<=15){
+          notacionAashto="A-1a";  
+          console.log("Notacion aashto asignada es : "+notacionAashto);
+        } else if(tamiz40Var<=50 &&  Tamiz200Var<=25){
+          notacionAashto="A-1b";  
+          console.log("Notacion aashto asignada es : "+notacionAashto);
+        }
+      } else if(IndicePlasticidadVar==0 && LimiteLiquidoVar==undefined){
+        notacionAashto="A-3";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      } else if(IndicePlasticidadVar<=10 && LimiteLiquidoVar<=40 && Tamiz200Var<=35){
+        notacionAashto="A-2-4";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      } else if(IndicePlasticidadVar<=10 && LimiteLiquidoVar>=41 && Tamiz200Var<=35){
+        notacionAashto="A-2-5";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      } else if(IndicePlasticidadVar>=11 && LimiteLiquidoVar<=40 && Tamiz200Var<=35){
+        notacionAashto="A-2-6";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      } else if(IndicePlasticidadVar>=11 && LimiteLiquidoVar>=41 && Tamiz200Var<=35){
+        notacionAashto="A-2-7";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      }
+    } else if(Tamiz200Var>35){
+      console.log("N200 es mayor a 35");
+      if(IndicePlasticidadVar<=10 && LimiteLiquidoVar<=40 && Tamiz200Var>=36){
+        notacionAashto="A-4";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      } else if(IndicePlasticidadVar<=10 && LimiteLiquidoVar>=41 && Tamiz200Var>=36){
+        notacionAashto="A-5";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      } else if(IndicePlasticidadVar>=11 && LimiteLiquidoVar<=40 && Tamiz200Var>=36){
+        notacionAashto="A-6";  
+        console.log("Notacion aashto asignada es : "+notacionAashto);
+      } else if(IndicePlasticidadVar>=11 && LimiteLiquidoVar>=41 && Tamiz200Var>=36){
+        console.log("Notacion A-7, se define por ecuacion Ip menor o igual a Limite liquido - 30");
+        if(IndicePlasticidadVar<=(LimiteLiquidoVar-30)){
+          console.log("Ip menor o igual a limite liquido -30");
+          notacionAashto="A-7-5";  
+          console.log("Notacion aashto asignada es : "+notacionAashto);
+        } else if(IndicePlasticidadVar>(LimiteLiquidoVar-30)){
+          console.log("Ip mayor a limite liquido -30");
+          notacionAashto="A-7-6";  
+          console.log("Notacion aashto asignada es : "+notacionAashto);
+        }
+      }
+    }
+
+    console.log("----Finalizacion de condicional gravas----");
+    console.log("La notacion Aashto es : "+notacionAashto);
+    $clasAashto.text(notacionAashto);
+  
   }
 
 }
