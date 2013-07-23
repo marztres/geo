@@ -48,7 +48,7 @@
       <div class="btn-group span3 offset2 datos-perfil ">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           
-        <span><i class="icon-user"></i><?php echo $data['tipo']." - ".$data['nombres']." ".$data['apellidos']; ?></span>
+        <span><i class="icon-user"></i> <?php echo $data['tipo']." - ".$data['nombres']." ".$data['apellidos']; ?></span>
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -59,7 +59,7 @@
           </li>
           <li class="divider"></li>
           <li>
-            <a href="usuarios.php">Usuarios</a>
+            <a href="usuarios.php"><i class="icon-user"></i> Usuarios</a>
           </li>
           <li class="divider"></li>
           <li>
