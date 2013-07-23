@@ -560,7 +560,7 @@
                     </tbody>
                   </table>
                 </form>
-                <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="text" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
+                <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="hidden" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
                 <div id="graficaLimites<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- #############  LIMITE PLASTICO ############### -->
                 <h3>Limite plastico</h3>
@@ -837,10 +837,10 @@
                       </tr>
                     </tbody>
                   </table>
-                  <input name="humedadFinal" type="text" class="HumedadNaturalFinal" value="<?php echo $HumedadNaturalFinal; ?>">
-                  <input name="limiteLiquidoFinal" type="text" class="LimiteLiquidoFinal" value="<?php echo $LimiteLiquidoFinal; ?>">          
-                  <input name="limitePlasticoFinal" type="text" class="LimitePlasticoFinal" value="<?php echo $limitePlastico; ?>"> 
-                  <input name="indicePlasticidadFinal" type="text" class="IndicePlasticidadFinal" value="<?php echo $indicePlasticidadFinal; ?>"> 
+                  <input name="humedadFinal" type="hidden" class="HumedadNaturalFinal" value="<?php echo $HumedadNaturalFinal; ?>">
+                  <input name="limiteLiquidoFinal" type="hidden" class="LimiteLiquidoFinal" value="<?php echo $LimiteLiquidoFinal; ?>">          
+                  <input name="limitePlasticoFinal" type="hidden" class="LimitePlasticoFinal" value="<?php echo $limitePlastico; ?>"> 
+                  <input name="indicePlasticidadFinal" type="hidden" class="IndicePlasticidadFinal" value="<?php echo $indicePlasticidadFinal; ?>"> 
                 </form>
                 <!-- ############# FIN RESULTADOS HUMEDAD Y LIMITE ############### -->
                 <div class="form-actions">
@@ -1017,7 +1017,7 @@
                        }
                     }
                     ?>
-                  <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="text" value="<?php echo $datos?>">
+                  <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="hidden" value="<?php echo $datos?>">
                   <div id="graficacompresion<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                   <?php 
                     unset($gdt);
@@ -1077,8 +1077,8 @@
                       </tr>
                     </tbody>
                   </table>
-                  <input name="pesoUnitarioFinal" class="pesoUnitarioFinal" type="text" value="<?php echo $pesoUnitarioFinal; ?>">
-                  <input name="cohesionFinal" Class="cohesionFinal" type="text" value="<?php echo $cohesionFinal; ?>">
+                  <input name="pesoUnitarioFinal" class="pesoUnitarioFinal" type="hidden" value="<?php echo $pesoUnitarioFinal; ?>">
+                  <input name="cohesionFinal" Class="cohesionFinal" type="hidden" value="<?php echo $cohesionFinal; ?>">
                 </form>
                 <!-- ############# FIN RESULTADOS compresion ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
@@ -1121,7 +1121,7 @@
               <div class="tab-pane <?php echo (($i==1)?'active':''); ?> text-center" id="granulometria<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA GRANULOMETRIA############### -->
                 <h3> Analisis granulometrico </h3>
-                <form class="granulometria<?php echo $i; ?>" action="save.php" method="post" accept-charset="utf-8">
+                <form class="granulometria<?php echo $i; ?> resultadosGranulometria" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="granulometria">
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
                   <input type="hidden" name="idgranulometria" value="<?php echo $DatosGranulometria->id_granulometria ?>">
@@ -1298,7 +1298,7 @@
                      }
                   }
                   ?>
-                <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgraficaGranulometria"  type="text" value="<?php  echo $datos; ?>">
+                <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgraficaGranulometria"  type="hidden" value="<?php  echo $datos; ?>">
                 <div id="graficagranulometria<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                 <!-- ############# RESULTADOS ############### -->
@@ -1391,8 +1391,12 @@
                           $gravas=100-$tamizN4;
                           $arenas=$tamizN4-$tamizN200;
                           $finos=$tamizN200;
-                          $cu=$d60/$d10;
-                          $cc=(($d30*$d30)/($d10*$d60));
+                          if($d60!=0 && $d10!=0){
+                              $cu=$d60/$d10;
+                          }
+                          if($d10!=0 && $d30!=0 && $d60!=0 ){
+                              $cc=(($d30*$d30)/($d10*$d60));
+                          }
                           if($gravas>$arenas && $gravas>$finos){
                                if($finos<5){
                                   if($cu>=4 && $cc>=1 && $cc<=3){
@@ -2035,8 +2039,8 @@
                               else if($indicePlasticidad>=11 && $liquido>=41){
                                       if($tamizN200>=36){
                                               $grupo="A-7";
-                                              if($plastico>=30){
-                                                  echo $notacionAsto="A-7-6".$plastico;
+                                              if($indicePlasticidad>=$liquido-30){
+                                                  echo $notacionAsto="A-7-6";
                                               }
                                               else{
                                                   echo $notacionAsto="A-7-5";
@@ -2049,7 +2053,14 @@
                     </tr>
                   </tbody>
                 </table>
-
+                <input name="aashto" class="aashto" type="hidden" value="<?php echo $notacionAsto; ?>">
+                <input name="notacionSucs" class="notacionSucs" type="hidden" value="<?php echo $notacion; ?>">
+                <input name="descripcionSucs" class="descripcionSucs"  type="hidden" value="<?php echo $descrsub; ?>">
+                <input name="N4" type="hidden" class="N4"  value="<?php echo $tamizN4; ?>">
+                <input name="N10" type="hidden" class="N10" value="<?php echo $tamizN10; ?>">
+                <input name="N40" type="hidden" class="N40" value="<?php echo $tamizN40; ?>">
+                <input name="N200" type="hidden" class="N200" value="<?php echo $tamizN200; ?>">
+  
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
@@ -2081,7 +2092,6 @@
           <table class="table table-hover table-striped table-bordered letra-s">
             <thead>
               <tr>
-                <th>Profundidad</th>
                 <th>Muestra</th>
                 <th>Perfil estratigrafico</th>
                 <th>Peso unitario (KN/m3)</th>
@@ -2098,23 +2108,8 @@
             </thead>
             <tbody>
               <tr>
-                <td class="tds" style=" margin: 0 0 0 0;" rowspan="13">
-                  <p class="nivel_freatico"><i class="icon-ok"></i> </p>
-                  <p class="centimetros">0.5 m</p>
-                  <p class="centimetros">1 m</p>
-                  <p class="centimetros">1.5 metros</p>
-                  <p class="centimetros">2 metros</p>
-                  <p class="centimetros">2.5 metros</p>
-                  <p class="centimetros">3 metros</p>
-                  <p class="centimetros">3.5 metros</p>
-                  <p class="centimetros">4 metros</p>
-                  <p class="centimetros">4.5 metros</p>
-                  <p class="centimetros">5 metros</p>
-                  <p class="centimetros">5.5 metros</p>
-                  <p class="centimetros">6 metros</p>
-                </td>
                 <td> - </td>
-                <td style=" height:<?php echo round($datos_sondeo->profundidad_superficie); ?>px;" >  </td>
+                <td>   </td>
                 <td> - </td>
                 <td> - </td>
                 <td> - </td>
@@ -2132,7 +2127,7 @@
               <tr>
                 <td> <?php echo $i; ?> </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td style=" height: <?php echo $tamano;?>px;" >  </td>
+                <td>  </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
                 <td> <?php echo $datoMuestra->numero_golpes; ?> </td>

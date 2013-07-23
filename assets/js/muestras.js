@@ -1151,10 +1151,30 @@ var acciones = {
         tdTamiz4.text(tamiz4Var),
         tdTamiz200.text(Tamiz200Var);
 
+        // input de resultados finales 
+        var resultadoAashto= $(this).closest("div").find("form.resultadosGranulometria").find("input.aashto"),
+          resultadoNotacionSucs= $(this).closest("div").find("form.resultadosGranulometria").find("input.notacionSucs"),
+          resultadoDescripcionSucs= $(this).closest("div").find("form.resultadosGranulometria").find("input.descripcionSucs");
+
+        
 
         // Ejecucion de clasificacion Sucs
-        acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs);
-        acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto);
+        acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs);
+        acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto);
+
+        resultadoN4= $(this).closest("div").find("form.resultadosGranulometria").find("input.N4"),
+        resultadoN10= $(this).closest("div").find("form.resultadosGranulometria").find("input.N10"),
+        resultadoN40= $(this).closest("div").find("form.resultadosGranulometria").find("input.N40"),
+        resultadoN200= $(this).closest("div").find("form.resultadosGranulometria").find("input.N200");
+
+
+        resultadoN4.val(tamiz4Var),
+        resultadoN10.val(tamiz10Var),
+        resultadoN40.val(tamiz40Var),
+        resultadoN200.val(Tamiz200Var);
+        
+          
+
 
         //td tamaño de tamiz en mn
         var tdTam0 = trGranulometria.eq(0).find("td.tamTamiz"),
@@ -1243,7 +1263,7 @@ var acciones = {
     }
   },
 
-  clasificacionSucs: function (Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,$clasSucs){
+  clasificacionSucs: function (Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,$clasSucs,$resultadoNotacionSucs,$resultadoDescripcionSucs){
     console.log("Clasificacion de suelos SUCS");
     var notacionSucs = "N/A";
     var descSucs = " N/A";
@@ -1299,7 +1319,7 @@ var acciones = {
 
     function Gravas(){
        console.log("Inicio de condicional de Gravas");
-       notacionSucs= Finos();
+       notacionSucs= FinosNotacion();
        console.log("notacion finos para grava"+notacionSucs);
        if(finos<5){
          console.log("Finos menores que 5%");
@@ -1442,7 +1462,7 @@ var acciones = {
     }
     function Arenas(){
       console.log("Inicio de condicional de Arenas"); 
-      notacionSucs= Finos();
+      notacionSucs= FinosNotacion();
       console.log("notacion finos para arenas"+notacionSucs);
       if(finos<5){
        console.log("Finos menores que 5%");
@@ -1864,10 +1884,57 @@ var acciones = {
       console.log("----Finalizacion de condicional finos----");
       console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
       $clasSucs.text(notacionSucs+"-"+descSucs);
+      $resultadoNotacionSucs.val(notacionSucs),
+      $resultadoDescripcionSucs.val(descSucs);
+      
+    }
+    function FinosNotacion(){
+      console.log("Inicio de condicional de Finos");
+
+      if(LimiteLiquidoVar<50){
+        console.log("Limite liquido menor a 50");
+        if(IndicePlasticidadVar>7 && IndicePlasticidadVar>=LineaA){
+          console.log("IP es mayor que 7 y es mayor o igual a la linea A");
+          notacionSucs="CL";
+          console.log("Notacion asignada "+notacionSucs);
+
+        } else if(IndicePlasticidadVar>=4 && IndicePlasticidadVar<=7 && IndicePlasticidadVar>=LineaA ){
+          console.log("IP entre 4 y 7 y es mayor o igual a la linea A");
+          notacionSucs="CL-ML";
+          console.log("Notacion asignada "+notacionSucs);
+            
+
+        } else if(IndicePlasticidadVar<4 || IndicePlasticidadVar<LineaA){
+          console.log("IP menos que 4 y es menor que la linea A");
+          notacionSucs="ML";
+          console.log("Notacion asignada "+notacionSucs);
+
+           
+        }
+
+      } else if(LimiteLiquidoVar>=50){
+        console.log("Limite liquido mayor a 50");
+        if(IndicePlasticidadVar>=LineaA){
+          console.log("IP es mayor a la linea A");
+          notacionSucs="CH";
+          console.log("Notacion asignada "+notacionSucs);
+          
+
+        } else if(IndicePlasticidadVar<LineaA){
+          console.log("IP menos que 4 y es menor que la linea A");
+          notacionSucs="MH";
+          console.log("Notacion asignada "+notacionSucs);
+        }
+      }
+
+      console.log("----Finalizacion de condicional  de determinacion de notacion de finos----");
+      console.log("La notacion sucs es : "+notacionSucs);
+
       return notacionSucs;
+
     }
 
-  }, clasificacionAashto: function(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,$clasAashto){
+  }, clasificacionAashto: function(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,$clasAashto,$resultadoAashto){
     console.log("Clasificacion de suelos Aashto");
     var notacionAashto = "N/A";
     console.log(" Notacion Aashto por defecto es : "+notacionAashto);
@@ -1931,6 +1998,7 @@ var acciones = {
     console.log("----Finalizacion de condicional gravas----");
     console.log("La notacion Aashto es : "+notacionAashto);
     $clasAashto.text(notacionAashto);
+    $resultadoAashto.val(notacionAashto);
   
   }
 

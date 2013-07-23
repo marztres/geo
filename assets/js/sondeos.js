@@ -77,6 +77,7 @@ var acciones = {
 			   	$('#exitoNuevoSondeo').removeClass('hide');
 				setTimeout(function() {
 					$("#exitoNuevoSondeo").addClass("hide");
+					location.reload();
 				}, 3000);
 			} else {
 				console.log(respuesta.message);

@@ -47,7 +47,8 @@
       <h3 class="span4 header-title"> </h3>
       <div class="btn-group span3 offset2 datos-perfil ">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          <span><i class="icon-user"></i><?php echo $data['tipo']." - ".$data['nombres']." ".$data['apellidos']; ?></span>
+          
+        <span><i class="icon-user"></i><?php echo $data['tipo']." - ".$data['nombres']." ".$data['apellidos']; ?></span>
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">

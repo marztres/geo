@@ -20,15 +20,12 @@
       <div class="span2">
         <figure class="logo"></figure>
       </div>
-      <h4 class="span4 header-title"> Sistema de sondeo de suelos</h4>
+      <h4 class="span5 header-title"> Sistema de sondeo de suelos</h4>
       <a href="#Ayuda" role="button"  data-toggle="modal" class="link-header span1 offset2">
       Ayuda 
       </a>
       <a href="#legal" role="button" data-toggle="modal" class="link-header span2">
       Información legal 
-      </a>
-      <a href="#"  class="link-header span1">
-      Admin 
       </a>
     </div>
     <div class="row-fluid cuerpo-login">
@@ -68,7 +65,7 @@
     <div class="row-fluid footer">
       <footer class="span12">
         <p class="copiright span4" >Geotecnia y Ambiente S.A.S &copy; Copyright 2013</p>
-        <p class="span6 offset1"><a href="#legal" role="button" data-toggle="modal" class="links-footer">Información legal</a><a href="#Ayuda" role="button" data-toggle="modal" class="links-footer">Ayuda</a><a href="#" class="links-footer">Admin</a>
+        <p class="span6 offset1"><a href="#legal" role="button" data-toggle="modal" class="links-footer">Información legal</a><a href="#Ayuda" role="button" data-toggle="modal" class="links-footer">Ayuda</a>
         </p>
       </footer>
     </div>

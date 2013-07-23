@@ -432,6 +432,7 @@
   						$notacionSucs=$_POST['notacionSucs'];
   						$descripcionSucs=$_POST['descripcionSucs'];
   						$aashto=$_POST['aashto'];
+  						$fk_idMuestra=$_POST['fkMuestra'];
 
   						foreach ( $_POST['idPesoRetenido'] as $valor ) {
   							$idPesoRetenido[] = $valor;
