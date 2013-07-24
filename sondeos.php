@@ -61,6 +61,12 @@
               <i class="icon-wrench"></i> Configuracion cuenta
             </a>
           </li>
+           <?php if ( $data['tipo']=='Administrador') : ?>
+          <li>
+            <a href="usuarios.php"><i class="icon-user"></i> Usuarios</a>
+          </li>
+          <li class="divider"></li>
+          <?php endif ?>
           <li class="divider"></li>
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">

@@ -1,20 +1,20 @@
 <?php
-  session_start();
-  require_once('includes/proyectos.php');
-  require_once('includes/usuarios.php');
-  $data=$_SESSION['usuario'];
-  $usuariosClass = new usuarios();
-  $proyectosClass = new proyectos();
-  if(isset($_GET['busqueda'])){
-    $ListaUsuarios = $usuariosClass->getTodosUsuarios($data['id_usuario'],$_GET['busqueda']);
-  }
-  else{
-    $ListaUsuarios = $usuariosClass->getTodosUsuarios($data['id_usuario'],$busqueda='');
-  }
-  $usuarios = $usuariosClass->getUsuariosProyectos();
-  $user = $usuariosClass->getUsuarioActual($data['id_usuario']);
+    session_start();
+    require_once('includes/proyectos.php');
+    require_once('includes/usuarios.php');
+    $data=$_SESSION['usuario'];
+    $usuariosClass = new usuarios();
+    $proyectosClass = new proyectos();
+    if(isset($_GET['busqueda'])){
+      $ListaUsuarios = $usuariosClass->getTodosUsuarios($data['id_usuario'],$_GET['busqueda']);
+    }
+    else{
+      $ListaUsuarios = $usuariosClass->getTodosUsuarios($data['id_usuario'],$busqueda='');
+    }
+    $usuarios = $usuariosClass->getUsuariosProyectos();
+    $user = $usuariosClass->getUsuarioActual($data['id_usuario']);
   
-  ?>
+?>
 <!DOCTYPE html>
 <html class="no-js">
   <head>
@@ -58,9 +58,12 @@
             </a>
           </li>
           <li class="divider"></li>
+           <?php if ( $data['tipo']=='Administrador') : ?>
           <li>
-            <a href="usuarios.php">Usuarios</a>
+            <a href="usuarios.php"><i class="icon-user"></i> Usuarios</a>
           </li>
+          <li class="divider"></li>
+          <?php endif ?>
           <li class="divider"></li>
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">

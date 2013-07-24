@@ -71,6 +71,12 @@
             </a>
           </li>
           <li class="divider"></li>
+           <?php if ( $data['tipo']=='Administrador') : ?>
+          <li>
+            <a href="usuarios.php"><i class="icon-user"></i> Usuarios</a>
+          </li>
+          <li class="divider"></li>
+          <?php endif ?>
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">
             <i class="icon-question-sign"></i> Ayuda
@@ -2218,13 +2224,29 @@
         <form id="datosProyecto" name='formulario' method='post' action="index.php?controller=navegacion&amp;action=guardarProyectos" class="form-vertical">
           <div class="control-group">
             <div class="controls inputs">
-              <input type='text' name='nivel_freatico' placeholder='Nivel freatico ' class="input-block-level limpiar required" autofocus >
+              <input type='text' name='nivel_freatico' value="<?php echo $datos_sondeo->nivel_freatico;?>" placeholder='Nivel freatico ' class="input-block-level limpiar required" autofocus >
             </div>
             <div class="row-fluid">
               <select name='responsable' id='lista_usuarios' class="span8"  >
-                <option value="">Selecciona tipo de superficie </option>
+                <option>Selecciona tipo de superficie </option>
+                <?php
+                    if($datos_sondeo->tipo_superficie=='Ninguna'){ 
+                        echo "<option selected='selected'>Ninguna</option>";
+                        echo "<option>Capa vegetal</option>";
+                    }
+                    else{
+                        echo "<option selected='selected'>Capa vegetal</option>";
+                        echo "<option>Ninguna</option>";
+                    }
+                ?>
               </select >
-              <input type='text' name='Profundidad' placeholder='Profundidad' class="span4" >   
+              <?php
+              if($datos_sondeo->tipo_superficie=='Ninguna'){
+              ?> 
+              <input type='text' name='Profundidad' value="0" disabled="disabled" placeholder='Profundidad' class="span4" >
+              <?php } else{?>
+                 <input type='text' name='Profundidad' value="" placeholder='Profundidad' class="span4" > 
+              <?php }?>
             </div>
             <!-- Mensaje exito y error , la clase hide es la que las oculta usen el Id de cada mensaje -->
             <div id="error" class="alert alert-error hide">                             
