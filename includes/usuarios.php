@@ -4,6 +4,19 @@ require_once 'database.php';
 
 class usuarios extends DataBase {
 
+	function getUsuarioActual($id_usuario) {
+		$retorno = false;
+		$sql = "SELECT * FROM usuarios WHERE id_usuario='$id_usuario' ";
+		$respuesta = $this->query($sql);
+		if ( $respuesta ) {
+			$matriz = array();
+			while ( $fila = $respuesta->fetch_object() ) {
+				return $fila;
+			}	
+		}
+
+	}
+
 	function getUsuariosProyectos() {
 		$retorno = false;
 		$sql = "SELECT * FROM usuarios where tipo='Ingeniero' ";
@@ -71,12 +84,24 @@ class usuarios extends DataBase {
 	function ModificarUsuarios($id_usuario,$cedula, $usuario, $clave, $confirmar_clave, $nombres, $apellidos, $cargo) {
 		$retorno = false;
 		if($clave==""){
-			$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
-			$respuesta = $this-> query($sql);
+			if(isset($cargo)){
+				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+				$respuesta = $this-> query($sql);
+			}
+			else{
+				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos',nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+				$respuesta = $this-> query($sql);
+			}
 		}
 		else if($clave!="" && $clave==$confirmar_clave){
-			$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
-			$respuesta = $this-> query($sql);	
+			if(isset($cargo)){
+				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+				$respuesta = $this-> query($sql);
+			}
+			else{
+				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos',nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+				$respuesta = $this-> query($sql);
+			}
 		}
 		if ( $respuesta ) {
 			$retorno = true;

@@ -10,6 +10,7 @@ var acciones = {
 		$(".eliminar_usuario").on('click', acciones.eliminarUsuario );
 		$('.editarUsuario').on('click', acciones.clickEditarUsuario);	
 		$("#EnviarModificarUsuario").on('click', acciones.clickModificarUsuario);
+		$("#Mod_Usuario").on('click', acciones.clickConfigurarUsuario);
 	},
 	
 	prevenirClickSinDestino: function( e ) {
@@ -72,6 +73,27 @@ var acciones = {
         $('#error_modificar_usuario').removeClass('hide');
         setTimeout(function () {
           $("#error_modificar_usuario").addClass("hide");
+        }, 3000);
+      }
+    }, 'json');
+  },
+
+  clickConfigurarUsuario: function (e) {
+    e.preventDefault();
+    $post = $('#ConfigurarUsuarios');
+    $.post($post.attr('action'), $post.serialize(), function (respuesta) {
+      if (respuesta.status === 'OK') {
+        $('#exito_configurando_cuenta').removeClass('hide');
+        setTimeout(function () {
+          $("#exito_configurando_cuenta").addClass("hide");
+          location.reload();
+        }, 3000);
+        $(".limpiar").val('');
+      } else {
+        $('#respuesta_guardado').text(respuesta.mensaje);
+        $('#error_configurando_cuenta').removeClass('hide');
+        setTimeout(function () {
+          $("#error_configurando_cuenta").addClass("hide");
         }, 3000);
       }
     }, 'json');

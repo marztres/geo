@@ -8,9 +8,11 @@
   require_once('includes/granulometria.php');
   require_once('includes/pesos_retenidos.php');
   require_once('includes/resultados.php');
-  
+  require_once('includes/usuarios.php');
   
   $data = $_SESSION['usuario'];
+  $usuariosClass = new usuarios();
+  $user = $usuariosClass->getUsuarioActual($data['id_usuario']);
   $proyectosClass = new proyectos();
   $proyectos = $proyectosClass->getDatosProyecto($_GET['idp']);
   $sondeosClass = new sondeos();
@@ -56,13 +58,13 @@
       <h3 class="span4 header-title"> </h3>
       <div class="btn-group span3 offset2 datos-perfil ">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        <span><i class="icon-user"></i><?php echo $data['tipo']." - ".$data['nombres']." ".$data['apellidos']; ?></span>
+        <span><i class="icon-user"></i><?php echo $user->tipo." - ".$user->nombres." ".$user->apellidos; ?></span>
         <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a href="#">
-            <i class="icon-wrench"></i> Configuración de cuenta
+            <a href="#ConfiguracionCuenta" role="button"  data-toggle="modal">
+              <i class="icon-wrench"></i> Configuracion cuenta
             </a>
           </li>
           <li class="divider"></li>
@@ -2329,9 +2331,60 @@
       </div>
     </div>
     <!-- #############  FIN FORM EDITAR MUESTRA ############### -->
+    <!-- Configuracion cuenta-->
+    <div id="ConfiguracionCuenta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Editar Usuario</h3>
+      </div>
+      <div class="modal-body">
+      <form id="ConfigurarUsuarios" name='formulario' method='post' action="save.php" class="form-vertical">
+      <div class="control-group">
+            <div class="controls inputs">
+              <input  name='cedula' type='text' id="cedula" value="<?php echo $user->cedula ?>"  placeholder='Cédula' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='clave' type='password'  placeholder='Nueva Contraseña' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='confirmar_clave' type='password'  placeholder='Confirmar nueva contraseña' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='nombres' type='text' id="nombres" value="<?php echo $user->nombres ?>"  placeholder='Nombres' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='apellidos' type='text' id="apellidos" value="<?php echo $user->apellidos ?>"  placeholder='Apellidos' class='input-block-level limpiar' required >
+            </div>
+            <div class="controls inputs">
+              <input name='func'  type="hidden"  value='modificar_usuario' >
+              <input name='id_usuario'  type="hidden" id="id_usuario" value="<?php echo $data['id_usuario'] ?>" >
+            </div>
+            <!-- Mensaje exito y error , la clase hide es la que las oculta usen el Id de cada mensaje -->
+            <div id="error_configurando_cuenta" class="alert alert-error hide">                             
+              <strong> 
+              <small>error al modificar el usuario</small>  
+              </strong>
+            </div>
+            <div id="exito_configurando_cuenta" class="alert alert-success hide ">
+              <strong>Usuario modificado correctamente.</strong>  
+            </div>
+            <!-- Fin mensaje exito y error -->
+          </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button type="submit" id="Mod_Usuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+      </div>
+    </div>
+    <!-- Fin de configuracion cuenta -->
     <!-- #############  BOOTSTRAP JS ############### -->
     <!--script type="text/javascript" src="assets/js/jqplot/plugins/example.js"></script-->
     <script src="assets/js/muestras.js"></script>
+    <script src="assets/js/usuarios.js"></script>
     <script type="text/javascript">
       $(function graficador() {
       
