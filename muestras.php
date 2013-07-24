@@ -61,7 +61,7 @@
       <h3 class="span4 header-title"> </h3>
       <div class="btn-group span3 offset2 datos-perfil ">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        <span><i class="icon-user"></i><?php echo $user->tipo." - ".$user->nombres." ".$user->apellidos; ?></span>
+        <span><i class="icon-user"></i> <?php echo $user->tipo." - ".$user->nombres." ".$user->apellidos; ?></span>
         <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -2417,6 +2417,37 @@
       </div>
     </div>
     <!-- Fin de configuracion cuenta -->
+
+    
+    <!-- Impresion -->
+      <!-- Configuracion cuenta-->
+    <div id="informe" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Impresión de informe sondeo </h3>
+      </div>
+      <div class="modal-body">
+      <form id="ConfigurarUsuarios" name='formulario' method='post' action="save.php" class="form-vertical">
+      <div class="control-group">
+        
+
+
+
+
+        
+      </div>
+      </form>
+      <div class="modal-footer">
+        <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button type="submit" id="Mod_Usuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Imprimir informe</button> 
+      </div>
+    </div>
+
+    <!-- Fin Impresion  -->
+    
+    
+
+
     <!-- #############  BOOTSTRAP JS ############### -->
     <!--script type="text/javascript" src="assets/js/jqplot/plugins/example.js"></script-->
     <script src="assets/js/muestras.js"></script>
