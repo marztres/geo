@@ -18,6 +18,10 @@ var acciones = {
     $('.GuardarCompresion').on('click', acciones.clickGuardarCompresion);
     $('.icompresion,.ideformacion').on('keyup', acciones.calculosCompresion);
     $('.analisis,.granulo').on('keyup', acciones.calculosGranulometria);
+    $('.boxImpresion').on('change' , acciones.Preimpresion);
+    $('.impresionBtn').on('click' , acciones.imprimir);
+    
+    
   },
 
   updateLimites: function (e) {
@@ -30,11 +34,13 @@ var acciones = {
         if(contadorLimites==2){
           if (respuesta.status === 'OK') {
           console.log(respuesta.message);
+          
           alertify.log("Datos guardados exitosamente.");
           } else {
           console.log(respuesta.message);
           alertify.error("opps..Hubo un error al guardar");
           }
+          contadorLimites=0;  
         } 
         contadorLimites++;
       }, 'json');
@@ -2014,6 +2020,26 @@ var acciones = {
     $clasAashto.text(notacionAashto);
     $resultadoAashto.val(notacionAashto);
   
+  },
+
+  Preimpresion: function(){
+  
+    var idProyectoImpresion = $("#idProyectoImpresion").val(), 
+      idSondeoImpresion = $("#idSondeoImpresion").val(),
+      numeroSondeo = $("#numeroSondeo").val(),
+      checkLimites = $("input#checkLimites"),
+      checkCompresion = $("input#checkCompresion"),
+      checkGranulometria = $("input#checkGranulometria");
+
+      if(checkLimites.is(':checked')){ boxLimites=1; } else{ boxLimites=0; }
+      if(checkCompresion.is(':checked')){ boxCompresion=1; } else{ boxCompresion=0; }
+      if(checkGranulometria.is(':checked')){ boxGranulometria=1; } else{ boxGranulometria=0; }
+    var enlaceImpresion = $('a#enlaceImpresion');    
+
+    enlaceImpresion.attr("href", "informe.php?idp="+idProyectoImpresion+"&ids="+idSondeoImpresion+"&numsondeo="+numeroSondeo+"&boxLim="+boxLimites+"&boxComp="+boxCompresion+"&boxGran="+boxGranulometria);
+  },
+  imprimir: function(){
+    $(this).attr('target','_blank');  
   }
 
 }
