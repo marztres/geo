@@ -102,20 +102,22 @@ var acciones = {
 	eliminarUsuario: function( e ) {
 		e.preventDefault();
 		$post = $(this).parent().find("form");
-		$.post($post.attr('action'), $post.serialize(), function(respuesta) {
-			if (respuesta.status === 'OK') {
-				console.log(respuesta.message);
-			   	$('#exitoGeneral').removeClass('hide');
-			   	location.reload();
+		if(confirm('Estas seguro que quieres eliminar este usuario')) {
+			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
+				if (respuesta.status === 'OK') {
+					console.log(respuesta.message);
+				   	$('#exitoGeneral').removeClass('hide');
+				   	location.reload();
 
-			} else {
-				console.log(respuesta.message);
-				$('#errorGeneral').removeClass('hide');
-				setTimeout(function() {
-					$("#error").addClass("hide");
-				}, 3000);
-			}
-		}, 'json');
+				} else {
+					console.log(respuesta.message);
+					$('#errorGeneral').removeClass('hide');
+					setTimeout(function() {
+						$("#error").addClass("hide");
+					}, 3000);
+				}
+			}, 'json');
+		}
 	}
 	
 }

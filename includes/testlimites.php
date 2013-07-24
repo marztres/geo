@@ -23,7 +23,7 @@ class testlimintes extends DataBase {
 
 	function modificarTest( $idTest,$nom_capsula, $peso_capsula, $peso_capsula_suelo_humedo, $peso_capsula_suelo_seco, $num_golpes){
 		$retorno = false;
-		echo $sql = "UPDATE testlimites  SET nom_capsula  = '".$this->real_escape_string($nom_capsula)."',
+		$sql = "UPDATE testlimites  SET nom_capsula  = '".$this->real_escape_string($nom_capsula)."',
 					   peso_capsula  = '".$this->real_escape_string($peso_capsula)."',
 					   peso_capsula_suelo_humedo  ='".$this->real_escape_string($peso_capsula_suelo_humedo)."',
 					   peso_capsula_suelo_seco  = '".$this->real_escape_string($peso_capsula_suelo_seco)."',

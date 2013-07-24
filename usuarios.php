@@ -107,11 +107,11 @@
       <!-- Mensaje exito y error Generales -->
       <div id="errorGeneral" class="alert alert-error hide">                             
         <strong> 
-        <small>Error al eliminar el proyecto</small>  
+        <small>Error al eliminar el usuario</small>  
         </strong>
       </div>
       <div id="exitoGeneral" class="alert alert-success hide ">
-        <strong>Proyecto eliminado correctamente.</strong>  
+        <strong>Usuario eliminado correctamente.</strong>  
       </div>
       <!-- Fin mensaje exito y error -->
       <table id="proyectos" class="table table-hover table-striped table-bordered ">
@@ -222,6 +222,12 @@
               <input  name='cedula' type='text'  placeholder='Cédula' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
+              <input name='nombres' type='text'  placeholder='Nombres' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='apellidos' type='text'  placeholder='Apellidos' class='input-block-level limpiar' required >
+            </div>
+            <div class="controls inputs">
               <input  name='usuario' type='text'  placeholder='Nombre de usuario' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
@@ -230,12 +236,7 @@
             <div class="controls inputs">
               <input  name='confirmar_clave' type='password'  placeholder='Confirmar contraseña' class="input-block-level limpiar" required >
             </div>
-            <div class="controls inputs">
-              <input name='nombres' type='text'  placeholder='Nombres' class="input-block-level limpiar" required >
-            </div>
-            <div class="controls inputs">
-              <input name='apellidos' type='text'  placeholder='Apellidos' class='input-block-level limpiar' required >
-            </div>
+            
             <div class="controls inputs">
               <select name="cargo"  class="input-block-level" >
                 <option>Seleccione el cargo</option>
@@ -281,6 +282,12 @@
               <input  name='cedula' type='text' id="cedula"  placeholder='Cédula' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
+              <input name='nombres' type='text' id="nombres" placeholder='Nombres' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='apellidos' type='text' id="apellidos" placeholder='Apellidos' class='input-block-level limpiar' required >
+            </div>
+            <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
@@ -289,12 +296,7 @@
             <div class="controls inputs">
               <input  name='confirmar_clave' type='password'  placeholder='Confirmar nueva contraseña' class="input-block-level limpiar" required >
             </div>
-            <div class="controls inputs">
-              <input name='nombres' type='text' id="nombres" placeholder='Nombres' class="input-block-level limpiar" required >
-            </div>
-            <div class="controls inputs">
-              <input name='apellidos' type='text' id="apellidos" placeholder='Apellidos' class='input-block-level limpiar' required >
-            </div>
+            
             <div class="controls inputs">
               <select name="cargo" id="cargo" class="input-block-level" >
                 <option>Seleccione el cargo</option>

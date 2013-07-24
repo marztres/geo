@@ -48,6 +48,11 @@
     <script src="assets/js/vendor/bootstrap.js"></script>
     <script src="assets/js/vendor/highcharts.js"></script>
     <script src="assets/js/vendor/regression.js"></script>
+
+
+
+    <link rel="stylesheet" href="assets/css/alertify.core.css" />
+    <link rel="stylesheet" href="assets/css/alertify.default.css" />
   </head>
   <body>
     <!-- ############# HEADER ############### -->
@@ -2330,6 +2335,17 @@
         <button type="submit" id="EnviarModificarMuestra"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar muestra</button> 
       </div>
     </div>
+
+
+    <section class="block">
+      <div class="container">
+        <nav class="button-group">
+          <a class="button-primary" href="#" id="notification">Standard Log</a>
+          <a class="button-primary" href="#" id="success">Success Log</a>
+          <a class="button-primary" href="#" id="error">Error Log</a>
+        </nav>
+      </div>
+    </section>
     <!-- #############  FIN FORM EDITAR MUESTRA ############### -->
     <!-- Configuracion cuenta-->
     <div id="ConfiguracionCuenta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -2660,5 +2676,7 @@
       <?php endforeach; ?> 
       });
     </script>
+
+    <script src="assets/js/alertify/alertify.js"></script>
   </body>
 </html>

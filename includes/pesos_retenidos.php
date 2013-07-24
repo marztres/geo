@@ -33,7 +33,7 @@ class pesos_retenidos extends DataBase {
 	
 	function updatePesosRetenido($idPesoRetenido,$pesoRetenido){
 		$retorno = false;
-		echo $sql = "UPDATE pesosretenidos SET 
+		$sql = "UPDATE pesosretenidos SET 
   	  pesoRetenido = '".$this->real_escape_string($pesoRetenido)."'
     	WHERE 
       idPesoRetenido = '".$this->real_escape_string($idPesoRetenido)."' ";

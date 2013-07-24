@@ -16,7 +16,7 @@ class sondeos extends DataBase {
   (SELECT count(*) FROM muestras WHERE fk_idsondeo=s.id_sondeo ) AS cantidad
 FROM 
   `sondeos` `s`
-  where fk_idproyecto='$idp'";
+  where fk_idproyecto='$idp' and estado='1' ";
 		$respuesta = $this->query($sql);
 		if ( $respuesta ) {
 			$matriz = array();

@@ -41,19 +41,21 @@ var acciones = {
 	eliminarSondeo: function( e ) {
 		e.preventDefault();
 		$post = $(this).parent().find("form");
-		$.post($post.attr('action'), $post.serialize(), function(respuesta) {
-			if (respuesta.status === 'OK') {
-				console.log(respuesta.message);
-			   	$('#exitoGeneral').removeClass('hide');
-			   	location.reload();
-			} else {
-				console.log(respuesta.message);
-				$('#errorGeneral').removeClass('hide');
-				setTimeout(function() {
-					$("#error").addClass("hide");
-				}, 3000);
-			}
-		}, 'json');
+		if(confirm('Estas seguro que quieres eliminar este Sondeo')) {
+			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
+				if (respuesta.status === 'OK') {
+					console.log(respuesta.message);
+				   	$('#exitoGeneral').removeClass('hide');
+				   	location.reload();
+				} else {
+					console.log(respuesta.message);
+					$('#errorGeneral').removeClass('hide');
+					setTimeout(function() {
+						$("#error").addClass("hide");
+					}, 3000);
+				}
+			}, 'json');
+		}
 	},
 	superficie: function(){
 		var superficie = $(this).find("option:selected").val();

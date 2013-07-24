@@ -1,5 +1,6 @@
 
 var optimizadorGraficas=0;
+var contadorLimites=0;
 var acciones = {
   init: function () {
     acciones.clicks();
@@ -26,7 +27,16 @@ var acciones = {
     $.each($formularios, function (index, formulario) {
       form = $(formulario);
       $.post(form.attr('action'), form.serialize(), function (respuesta) {
-        console.log(respuesta);
+        if(contadorLimites==2){
+          if (respuesta.status === 'OK') {
+          console.log(respuesta.message);
+          alertify.log("Datos guardados exitosamente.");
+          } else {
+          console.log(respuesta.message);
+          alertify.error("opps..Hubo un error al guardar");
+          }
+        } 
+        contadorLimites++;
       }, 'json');
     });
 
@@ -565,9 +575,11 @@ var acciones = {
       $post = $('.' + idFormulario);
       $.post($post.attr('action'), $post.serialize(), function (respuesta) {
         if (respuesta.status === 'OK') {
-
+          console.log(respuesta.message);
+          alertify.log("Datos guardados exitosamente.");  
         } else {
-
+          console.log(respuesta.message);
+          alertify.error("opps..Hubo un error al guardar");
         }
       }, 'json');
     },
@@ -578,8 +590,10 @@ var acciones = {
     $.post($post.attr('action'), $post.serialize(), function (respuesta) {
       if (respuesta.status === 'OK') {
         console.log(respuesta.message);
+        alertify.log("Datos guardados exitosamente.");
       } else {
         console.log(respuesta.message);
+        alertify.error("opps..Hubo un error al guardar");
       }
     }, 'json');
   },
