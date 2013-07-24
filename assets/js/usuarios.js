@@ -1,16 +1,16 @@
-var acciones = {
+var accionesUsuario = {
 	
 	init: function(){
-		acciones.clicks();
+		accionesUsuario.clicks();
 	},
 	
 	clicks: function(){
-		$('a[href="#"]').on( 'click', acciones.prevenirClickSinDestino );
-		$("#enviar_usuario").on('click', acciones.guardarUsuario );
-		$(".eliminar_usuario").on('click', acciones.eliminarUsuario );
-		$('.editarUsuario').on('click', acciones.clickEditarUsuario);	
-		$("#EnviarModificarUsuario").on('click', acciones.clickModificarUsuario);
-		$("#Mod_Usuario").on('click', acciones.clickConfigurarUsuario);
+		$('a[href="#"]').on( 'click', accionesUsuario.prevenirClickSinDestino );
+		$("#enviar_usuario").on('click', accionesUsuario.guardarUsuario );
+		$(".eliminar_usuario").on('click', accionesUsuario.eliminarUsuario );
+		$('.editarUsuario').on('click', accionesUsuario.clickEditarUsuario);	
+		$("#EnviarModificarUsuario").on('click', accionesUsuario.clickModificarUsuario);
+		$("#Mod_Usuario").on('click', accionesUsuario.clickConfigurarUsuario);
 	},
 	
 	prevenirClickSinDestino: function( e ) {
@@ -122,4 +122,4 @@ var acciones = {
 	
 }
 
-$(document).on( 'ready', acciones.init );
+$(document).on( 'ready', accionesUsuario.init );

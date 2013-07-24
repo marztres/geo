@@ -48,11 +48,9 @@
     <script src="assets/js/vendor/bootstrap.js"></script>
     <script src="assets/js/vendor/highcharts.js"></script>
     <script src="assets/js/vendor/regression.js"></script>
-
-
-
     <link rel="stylesheet" href="assets/css/alertify.core.css" />
     <link rel="stylesheet" href="assets/css/alertify.default.css" />
+    
   </head>
   <body>
     <!-- ############# HEADER ############### -->
@@ -2676,7 +2674,6 @@
       <?php endforeach; ?> 
       });
     </script>
-
     <script src="assets/js/alertify/alertify.js"></script>
   </body>
 </html>
