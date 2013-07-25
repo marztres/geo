@@ -2502,7 +2502,9 @@
               }  
           },
           yAxis: {
-              tickInterval: 1,
+              min: 0.01,
+              max: 100,
+              minorTickInterval: 10,
               title: {
                   text: 'Contenido de humedad (%)'
               },
@@ -2530,7 +2532,15 @@
           data: (function() {
             return fitData(sourceData).data;
           })()
-        }]
+        },{
+              name: '25 golpes',
+              color: '#595959',
+              marker: { enabled: false },
+              lineWidth: 0.5,
+              type: 'line',            
+              pointStart: 1,
+              data: [[25,0.01],[25,100]]
+          }]
       });
       
       <?php $i++; ?>

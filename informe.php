@@ -128,6 +128,9 @@
           <!-- #############  FIN TABLA MUESTRAS ############### -->
         </div>
         <!-- ############# tabs de muestras internas limites ############### -->
+        
+
+        <?php if ( $_GET['boxLim']==1) : ?>
         <div  id="Limites">
           
               
@@ -762,6 +765,9 @@
         
           <!-- ############# fin limites ############### -->
         </div>
+        <?php endif ?>
+        
+        <?php if ( $_GET['boxComp']==1) : ?>
         <div  id="Compresion">
           <!-- ############# COMPRESION ############### -->
          
@@ -983,6 +989,9 @@
           
              <!-- ############# fin Compresion ############### -->
         </div>
+        <?php endif ?>
+
+        <?php if ( $_GET['boxGran']==1) : ?>
         <div  id="Granulometria">
           <!-- ############# tabs de muestras internas GRANULOMETRIA ############### -->  
               <?php if( count($muestrasSondeo) > 0 ): ?>
@@ -1931,7 +1940,8 @@
               <?php endif; ?> 
           <!-- ############# fin GRANULOMETRIA ############### -->
         </div>
-
+        <?php endif; ?> 
+        
         <!-- ############# INFORME DE ESTRATIGRAFIA ############### -->
         <div  id="Informe">
           
@@ -2019,10 +2029,10 @@
     <script type="text/javascript">
       $(function graficador() {
       
+
+      <?php if ( $_GET['boxLim']==1) : ?>
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
-      
-      
       var datosgrafica=$('#datosgraficaLimites<?php echo $i; ?>').val();
       var sourceData = eval("["+datosgrafica+"]");
       var sourceData2;
@@ -2076,7 +2086,9 @@
               }  
           },
           yAxis: {
-              tickInterval: 1,
+              min: 0.01,
+              max: 100,
+              minorTickInterval: 10,
               title: {
                   text: 'Contenido de humedad (%)'
               },
@@ -2104,19 +2116,28 @@
           data: (function() {
             return fitData(sourceData).data;
           })()
-        }]
+        },{
+              name: '25 golpes',
+              color: '#595959',
+              marker: { enabled: false },
+              lineWidth: 0.5,
+              type: 'line',            
+              pointStart: 1,
+              data: [[25,0.01],[25,100]]
+          }]
       });
       
       <?php $i++; ?>
       <?php endforeach; ?>
+      <?php endif ?>
       
       
       
-      
-      $('.brand').tooltip('hide');   
+        
       
       //graficas compresion
       
+      <?php if ( $_GET['boxComp']==1) : ?>
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
@@ -2196,10 +2217,10 @@
       
       <?php $i++; ?>
       <?php endforeach; ?>
+      <?php endif ?>
       
       
-      
-      
+      <?php if ( $_GET['boxGran']==1) : ?>
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
@@ -2289,6 +2310,7 @@
       });  
       <?php $i++; ?>
       <?php endforeach; ?> 
+      <?php endif ?>
       });
     </script>
     <script src="assets/js/alertify/alertify.js"></script>
