@@ -1,23 +1,48 @@
-body {
+.logo{
+	margin-left: 10px;
+	margin-top: 5px;
+}
 
-	font-size: 0.8em;
+.header {
+	
+	border-bottom: 1px solid #CCC;
+	margin-bottom: 2px;
+}
+.header-title {
+
+	margin-top: 80px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 500;
+	
 }
 
 
-h3 {
-	margin:0 0 0 0;
-	padding: 0 0 0 0;
+
+
+.copiright {
+		
+		color: #c7c7c7;
+		padding-left: 10px;
+}
+.footer {
+	border-top: 1px solid #CCC;
+	padding: 5px 0 0 0 ;
+}
+a.links-footer {
 	font-size: 1.1em;
+	font-weight: 500;
+	padding-right: 30px;
+	transition:all 0.5s ease-in;
 }
 
-#allMuestras{
-	height: 700px;
-	padding-left: 20px;
+a.links-footer:hover {
+	color: #ea5d5d;
+	font-weight: 500;
+	text-decoration: none;
 }
 
 
-input {
-	margin-bottom: 0px;
-	padding-bottom: 0px;
-}
 
+.brand:hover {
+	color: #ea5d5d;
+}

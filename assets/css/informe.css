@@ -1,30 +1,29 @@
-
 .table td  {
-   text-align: center;
-   margin: 0 0 0 0;
-   padding: 2px 0 0 0;
-   height: 10px;   
+   text-align: center;   
 }
-.table tr  {
-   text-align: center;
-   margin: 0 0 0 0;
-   padding: 0 0 0 0;   
-}
+
 .table th {
+
 	text-align: center;
-	padding: 0 0 0 0;
-	margin: 0 0 0 0;
 }
-.table {
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
+
+.buscador {
+
+	margin-right: 30px;
+}
+
+.titulo-proyectos
+{
+	font-weight:600;
+	font-size: 1.2em;
+	color: #505050;
 }
 
 .cuerpo-proyectos {
  min-height:450px;
 }
-
 .title  {
+
 	font-weight: bold;  
 }
 
@@ -34,18 +33,26 @@
 	padding-left: 10px;
 }
 .info_sondeos {
+
 	border-bottom: 2px solid #CCC;
+	margin-bottom: 10px;
+}
+.tituloprofundidad {
+	margin-top: 5px;
+	font-size: 1.2em;
 }
 
 .texture {
 
-	 background:url(../assets/img/fondo.jpg) ;
+	 background:url(../img/fondo.jpg) ;
 }
 .texture1 {
 
-	 background:url(../assets/img/fondo1.jpg) ;
+	 background:url(../img/fondo1.jpg) ;
 }
-
+.letra-s {
+	font-size: 0.8em;
+}
 
 .tds {
 	height: 100%;
@@ -68,13 +75,21 @@
 
 }
 
-.graficas {
-	height:150px; 
-	width:400px; 
-	margin: 0 auto 0 auto;
-	padding: 0 0 0 0;
+
+#Muestras {
+
+	height:1300px;
 
 }
 
+.divLimites{
+	margin-bottom: 100px;
+}
 
+.divCompresion {
+	margin-bottom: 100px;	
+}
 
+.divGranulometria { 
+	margin-bottom: 100px;	
+}
