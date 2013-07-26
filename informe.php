@@ -29,14 +29,14 @@
   $datosGranulometria= new granulometria();
   $pesosRetenidosClass= new pesos_retenidos();
   $resultadosClass= new resultados();
-  
+  $pagina = 1;  
   ?>
 <!DOCTYPE html>
 <html lang="es" class="no-js">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Login - Geotecnia y Ambiente Systems</title>
+    <title>Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> - <?php echo $proyectos->fecha; ?> - Geotecnia y Ambiente S.A.S</title>
     <meta name="description" content="El software de Geotecnia y Ambiente es el encargado de procesar los datos obtenidos por los laboratoristas de las muestras de los suelos">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
@@ -90,7 +90,7 @@
         </div>
       </div>
     
-      
+        
         <div class="text-center"  id="Muestras">
           <h3>Muestras</h3>  
           <!-- #############  TABLA MUESTRAS ############### -->
@@ -102,7 +102,7 @@
                 <th># Muestra</th>
                 <th>Profundidad</th>
                 <th>Numero de golpes</th>
-                <th>Color</th>
+                <th>Color  </th>
               </tr>
             </thead>
             <tbody>
@@ -126,7 +126,10 @@
             </tbody>
           </table>
           <!-- #############  FIN TABLA MUESTRAS ############### -->
+        
+        <span class="pull-right paginadorMuestras">Pagina <?php echo $pagina; ?></span>
         </div>
+        <?php $pagina++; ?>
         <!-- ############# tabs de muestras internas limites ############### -->
         
 
@@ -141,7 +144,8 @@
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <div class="text-center divLimites"  id="muestra<?php echo $i; ?>">
                 <!-- #############  HUMEDAD NATURAL ############### -->
-                <h3>Humedad natural</h3>
+              
+                <h3>Humedad natural - Muestra <?php echo $i; ?> </h3>
                 <form class="muestra<?php echo $i; ?>" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="testlimites">
                   <input type="hidden" name="muestra" value="0">
@@ -161,7 +165,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr >
                         <td>1</td>
                         <td>
                           <?php echo $TestLimitesMuestra[$i-1][0]->nom_capsula; ?>
@@ -301,10 +305,7 @@
                 </form>
                 <!-- ############# FIN HUMEDAD NATURAL ############### -->
                 <!-- #############  LIMITE LIQUIDO ############### -->
-                <h3>Limite liquido</h3>
-                <a href="#"  class="btn btn-info pull-right title noliquido" >Pulsar si el suelo es NO LIQUIDO</a>
-                <br>
-                <br>
+                <h3>Limite liquido - Muestra <?php echo $i; ?></h3>
                 <form class="muestra<?php echo $i; ?>" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="testlimites" />
                   <input type="hidden" name="muestra" value="1" />
@@ -480,10 +481,7 @@
                 <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="hidden" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
                 <div id="graficaLimites<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- #############  LIMITE PLASTICO ############### -->
-                <h3>Limite plastico</h3>
-                <a href="#"  class="btn btn-info pull-right title noplastico">Pulsar si el suelo es NO PLASTICO</a>
-                <br>
-                <br>
+                <h3>Limite plastico - Muestra <?php echo $i; ?></h3>
                 <form class="muestra<?php echo $i; ?> formResultados" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="testlimites" />
                   <input type="hidden" name="muestra" value="2" />
@@ -754,16 +752,20 @@
                       </tr>
                     </tbody>
                   </table>
+                  
        
                 </form>
                 <!-- ############# FIN RESULTADOS HUMEDAD Y LIMITE ############### -->
+              <span class="paginadorLimites">Pagina <?php echo $pagina; ?></span>
               </div>
-              <?php $i++;?>  
+              <?php $i++;?>
+              <?php $pagina++;?>   
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>
-        
+          
           <!-- ############# fin limites ############### -->
+
         </div>
         <?php endif ?>
         
@@ -777,7 +779,7 @@
               <?php $DatosCompresion = $datosCompresion->GetDatosCompresion( $datoMuestra->id_muestra );  ?>
               <div class="text-center divCompresion" id="compresion<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA ############### -->
-                <h3>Medidas de la muestra</h3>
+                <h3>Compresión - Medidas de la muestra - Muestra <?php echo $i; ?></h3>
                 <form class="compresion<?php echo $i; ?> formResultadosCompresion" action="save.php" method="post" accept-charset="utf-8">
                   <input name="fk_idmuestra" type="hidden" value="<?php echo $datoMuestra->id_muestra; ?>">
                   <table class="table  tablacompresion ">
@@ -824,7 +826,7 @@
                   </table>
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA ############### -->
                   <!-- #############  TABLA DE COMPRESIÓN ############### -->
-                  <h3>Tabla de deformación</h3>
+                  <h3>Tabla de deformación - Muestra <?php echo $i; ?></h3>
                   <table class="table  tabladeformacion">
                     <thead>
                       <tr>
@@ -981,8 +983,10 @@
                 </form>
                 <!-- ############# FIN RESULTADOS compresion ############### -->
                 <!-- ############# FIN GUARDAR INFORMACION BOTON ############### -->  
+              <span class="paginadorCompresion">Pagina <?php echo $pagina; ?></span>
               </div>
               <?php $i++; ?>
+              <?php $pagina++; ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>              
@@ -1001,7 +1005,7 @@
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
               <div class="text-center divGranulometria" id="granulometria<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA GRANULOMETRIA############### -->
-                <h3> Analisis granulometrico </h3>
+                <h3> Analisis granulometrico - Muestra <?php echo $i; ?></h3>
                 <form class="granulometria<?php echo $i; ?> resultadosGranulometria" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="granulometria">
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
@@ -1046,7 +1050,7 @@
                   </table>
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA GRANULOMETRIA ############### -->
                   <!-- #############  TABLA DE GRANULOMETRIA ############### -->
-                  <h3>Tabla de granulometria</h3>
+                  <h3>Tabla de granulometria - Muestra <?php echo $i; ?></h3>
                   <table class="table  tablapesos">
                     <thead>
                       <tr>
@@ -1924,9 +1928,10 @@
                   <input name="N200" type="hidden" class="N200" value="<?php echo $tamizN200; ?>">
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
-
+              <span class="paginadorGranulometria">Pagina <?php echo $pagina; ?></span>
               </div>
               <?php $i++; ?>
+              <?php $pagina++; ?>
               <?php 
                 unset($tamices);
                 unset($notacion);
@@ -1943,7 +1948,7 @@
         <?php endif; ?> 
         
         <!-- ############# INFORME DE ESTRATIGRAFIA ############### -->
-        <div  id="Informe">
+        <div  id="Informe" class="divInforme">
           
           
           <h3 class="text-center">Informe de estratigrafia</h3>
@@ -2014,7 +2019,32 @@
           </table>
           <h5 >Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
           <!-- ############# FIN INFORME DE ESTRATIGRAFIA ############### -->
+
           <!-- ############# fin tabs de muestras internas estratigrafia ############### --> 
+          <table class="table firmas">
+            <tr>
+                <td> 
+                 <img src="assets/firmas/ing_natalia.jpg" alt="firma ingeniero"> 
+                 <br>
+                 <span class="lineafirma"></span>
+                 <br>
+                 <span>Ing. Civil NATHALIA HERNANDEZ R</span>
+                 <br>
+                 <span class="title">M.P. 22202166765COR</span>
+                </td>
+                <td>
+                 <img src="assets/firmas/IngPabloCastilla.jpg" alt="Firma gerente">  
+                 <br>
+                 <span class="lineafirma"></span> 
+                 <br>
+                 <span>Ing. Geotecnista  PABLO CASTILLA NEGRETE</span>
+                 <br>
+                 <span class="title">M.P. 1320251172BLV</span>
+                </td>
+            </tr>  
+
+          </table>
+          <span class="paginadorInforme">Pagina <?php echo $pagina; ?></span>
         </div>
       
       <!-- ############# FIN CUERPO ############### --> 
@@ -2120,7 +2150,7 @@
               name: '25 golpes',
               color: '#595959',
               marker: { enabled: false },
-              lineWidth: 0.5,
+              lineWidth: 0.2,
               type: 'line',            
               pointStart: 1,
               data: [[25,0.01],[25,100]]

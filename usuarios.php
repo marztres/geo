@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/proyectos.css">
+    <link rel="stylesheet" href="assets/css/usuarios.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>     
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
@@ -48,7 +48,7 @@
       <h3 class="span4 header-title"> </h3>
       <div class="btn-group span3 offset2 datos-perfil ">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        <span><i class="icon-user"></i><?php echo $user->tipo." - ".$user->nombres." ".$user->apellidos; ?></span>
+        <span> <i class="icon-user"></i> <?php echo $user->tipo." - ".$user->nombres." ".$user->apellidos; ?></span>
         <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -133,16 +133,16 @@
           <?php foreach ( $ListaUsuarios as $usuarios ) : ?>
           <tr>
             <td>
-              <span class="muted pull-left"><?php echo $usuarios->cedula ?></span>
+              <span ><?php echo $usuarios->cedula ?></span>
             </td>
             <td>
-              <span class="muted pull-left"><?php echo $usuarios->nombres ?></span>
+              <span ><?php echo $usuarios->nombres ?></span>
             </td>
             <td>
-              <span class="muted pull-left"><?php echo $usuarios->apellidos ?></span>
+              <span ><?php echo $usuarios->apellidos ?></span>
             </td>
             <td>
-              <span class="muted pull-left"><?php echo $usuarios->tipo ?></span>
+              <span ><?php echo $usuarios->tipo ?></span>
             </td>
             <td>
               <a href="#editar_usuario" rel='<?php echo $usuarios->id_usuario.",".$usuarios->cedula.",".$usuarios->nombres.",".$usuarios->apellidos.",".$usuarios->tipo.",".$usuarios->nombre_usuario;?>' class="editarUsuario" role="button" id="<?php echo $usuarios->id_usuario;?>" data-toggle="modal">

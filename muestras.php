@@ -2162,6 +2162,7 @@
           </table>
           <h5 >Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
           <!-- ############# FIN INFORME DE ESTRATIGRAFIA ############### -->
+  
           <!-- ############# fin tabs de muestras internas estratigrafia ############### --> 
         </div>
       </div>
