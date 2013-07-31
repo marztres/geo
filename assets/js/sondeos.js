@@ -1,7 +1,7 @@
-var acciones = {
+var accionesSondeos = {
 	
 	init: function(){
-		acciones.clicks();
+		accionesSondeos.clicks();
 	},
 	
 	clicks: function(){
@@ -10,6 +10,7 @@ var acciones = {
 		$(".eliminarSondeo").on('click', acciones.eliminarSondeo );
 		$("#lista_superficie").on('change',acciones.superficie);
 		$("#btnnuevoSondeo").on('click',acciones.nuevoSondeo);
+		$("#enviar_modificar_sondeo").on('click',acciones.modificarSondeo);
 	},
 	
 	prevenirClickSinDestino: function( e ) {
@@ -35,7 +36,27 @@ var acciones = {
 				}, 3000);
 			}
 		}, 'json');
+	},
 
+	modificarSondeo: function( e ){
+		e.preventDefault();
+		$post = $("#ModificarSondeo");
+		$.post($post.attr('action'), $post.serialize(), function(respuesta) {
+			if (respuesta.status === 'OK') {
+				console.log(respuesta.message);
+				$('#exito_modificar_sondeo').removeClass('hide');
+				setTimeout(function() {
+					$("#exito_modificar_sondeo").addClass("hide");
+					location.reload();
+				}, 3000);
+			} else {
+				console.log(respuesta.message);
+				$('#error_modificar_sondeo').removeClass('hide');
+				setTimeout(function() {
+					$("#error_modificar_sondeo").addClass("hide");
+				}, 3000);
+			}
+		}, 'json');
 	},
 
 	eliminarSondeo: function( e ) {
@@ -57,6 +78,7 @@ var acciones = {
 			}, 'json');
 		}
 	},
+
 	superficie: function(){
 		var superficie = $(this).find("option:selected").val();
 		if(superficie=="2"){
@@ -93,4 +115,4 @@ var acciones = {
 	
 }
 
-$(document).on( 'ready', acciones.init );
+$(document).on( 'ready', accionesSondeos.init );

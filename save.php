@@ -53,6 +53,23 @@
 				}	
 			break;
 
+			case 'ModificarSondeo':
+				$sondeosClass = new sondeos();
+				$nivel_freatico= $_POST['nivel_freatico'];
+				$tipo_superficie = $_POST['tipo_superficie'];
+				$Profundidad = $_POST['Profundidad'];
+				$id_sondeo = $_POST['id_sondeo'];
+				$id_tipo_superficie = $_POST['id_tipo_superficie'];
+				$respuesta = $sondeosClass->ModificarSondeos($nivel_freatico,$tipo_superficie, $Profundidad, $id_tipo_superficie, $id_sondeo);
+				if ( $respuesta ) {
+					$response["status"] = "OK";
+					$response["message"] = "Sondeo modificado";
+				} else {
+					$response["status"] = "ERROR";
+					$response["message"] = "Error modificando el sondeo";
+				}	
+			break;
+
 			case 'eliminarUsuario':
 					$usuariosClass = new usuarios();				
 					$idusuario= $_POST['idusuario'];

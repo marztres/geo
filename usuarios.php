@@ -6,10 +6,10 @@
     $usuariosClass = new usuarios();
     $proyectosClass = new proyectos();
     if(isset($_GET['busqueda'])){
-      $ListaUsuarios = $usuariosClass->getTodosUsuarios($data['id_usuario'],$_GET['busqueda']);
+      $ListaUsuarios = $usuariosClass->getTodosUsuarios($_GET['busqueda']);
     }
     else{
-      $ListaUsuarios = $usuariosClass->getTodosUsuarios($data['id_usuario'],$busqueda='');
+      $ListaUsuarios = $usuariosClass->getTodosUsuarios();
     }
     $usuarios = $usuariosClass->getUsuariosProyectos();
     $user = $usuariosClass->getUsuarioActual($data['id_usuario']);

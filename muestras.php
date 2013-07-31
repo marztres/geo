@@ -16,7 +16,7 @@
   $proyectosClass = new proyectos();
   $proyectos = $proyectosClass->getDatosProyecto($_GET['idp']);
   $sondeosClass = new sondeos();
-  $datos_sondeo=$sondeosClass->getDatosSondeo($_GET['ids']);
+  $datos_sondeo=$sondeosClass->getDatosSondeo($_GET['idp'],$_GET['ids']);
   $muestras = new muestras();
   $muestrasSondeo = $muestras->getMuestrasSondeo($_GET['ids']);
   $testLimitesClass = new testlimintes();
@@ -2217,22 +2217,22 @@
         <h3 id="myModalLabel">Modificar sondeo</h3>
       </div>
       <div class="modal-body">
-        <form id="datosProyecto" name='formulario' method='post' action="index.php?controller=navegacion&amp;action=guardarProyectos" class="form-vertical">
+        <form id="ModificarSondeo" name='formulario' method='post' action="save.php" class="form-vertical">
           <div class="control-group">
             <div class="controls inputs">
               <input type='text' name='nivel_freatico' value="<?php echo $datos_sondeo->nivel_freatico;?>" placeholder='Nivel freatico ' class="input-block-level limpiar required" autofocus >
             </div>
             <div class="row-fluid">
-              <select name='responsable' id='lista_usuarios' class="span8"  >
+              <select name='tipo_superficie' id='lista_usuarios' class="span8"  >
                 <option>Selecciona tipo de superficie </option>
                 <?php
                   if($datos_sondeo->tipo_superficie=='Ninguna'){ 
-                      echo "<option selected='selected'>Ninguna</option>";
-                      echo "<option>Capa vegetal</option>";
+                      echo "<option selected='selected' value='1'>Ninguna</option>";
+                      echo "<option value='2'>Capa vegetal</option>";
                   }
                   else{
-                      echo "<option selected='selected'>Capa vegetal</option>";
-                      echo "<option>Ninguna</option>";
+                      echo "<option selected='selected' value='2'>Capa vegetal</option>";
+                      echo "<option value='1'>Ninguna</option>";
                   }
                   ?>
               </select >
@@ -2241,14 +2241,17 @@
                 ?> 
               <input type='text' name='Profundidad' value="0" disabled="disabled" placeholder='Profundidad' class="span4" >
               <?php } else{?>
-              <input type='text' name='Profundidad' value="" placeholder='Profundidad' class="span4" > 
+              <input type='text' name='Profundidad' value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="span4" > 
               <?php }?>
+              <input type='hidden' name='func' value="ModificarSondeo"  class="span4" > 
+              <input type='hidden' name='id_sondeo' value="<?php echo $datos_sondeo->id_sondeo;?>"  class="span4" > 
+              <input type='hidden' name='id_tipo_superficie' value="<?php echo $datos_sondeo->fk_id_tipo_superficie;?>"  class="span4" >
             </div>
             <!-- Mensaje exito y error , la clase hide es la que las oculta usen el Id de cada mensaje -->
-            <div id="error" class="alert alert-error hide">                             
-              <strong> <small>error al guardar el proyecto</small>  </strong>
+            <div id="error_modificar_sondeo" class="alert alert-error hide">                             
+              <strong> <small>error modificando sondeo</small> </strong>
             </div>
-            <div id="exito" class="alert alert-success hide ">
+            <div id="exito_modificar_sondeo" class="alert alert-success hide ">
               <strong>Datos correctos.</strong>  
             </div>
             <!-- Fin mensaje exito y error -->
@@ -2258,7 +2261,7 @@
       <!-- fin form  nuevo sondeo-->
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="enviar"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar proyecto</button> 
+        <button type="submit" id="enviar_modificar_sondeo"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar proyecto</button> 
       </div>
     </div>
     <!-- ############# FIN FORM MODIFICAR SONDEO ############### -->
@@ -2443,6 +2446,7 @@
     <!--script type="text/javascript" src="assets/js/jqplot/plugins/example.js"></script-->
     <script src="assets/js/muestras.js"></script>
     <script src="assets/js/usuarios.js"></script>
+    <script src="assets/js/sondeos.js"></script>
     <script type="text/javascript">
       $(function graficador() {
       

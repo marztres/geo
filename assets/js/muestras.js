@@ -9,7 +9,7 @@ var acciones = {
     $('a[href="#"]').on('click', acciones.prevenirClickSinDestino);
     $("#enviar_muestra").on('click', acciones.clickGuardarMuestra);
     $("#EnviarModificarMuestra").on('click', acciones.clickModificarMuestra);
-    $('.modalMuestra').on('click', acciones.clickEditarMuestra);
+    $('.editMuestra').on('click', acciones.clickEditarMuestra);
     $('.guardaLimites').on('click', acciones.updateLimites);
     $('.limites').on('keyup', acciones.calculosLimites);
     $('.noplastico').on('click', acciones.noplastico);
@@ -91,26 +91,7 @@ var acciones = {
   },
 
   clickEditarMuestra: function (e) {
-    e.preventDefault();
-    var id = this.id,
-      datos = this.rel;
-    var profundidades = this.rel.split(','),
-      idm = profundidades[0],
-      pinicial = profundidades[1],
-      pfinal = profundidades[2],
-      descripcionm = profundidades[3],
-      material_de_relleno = profundidades[4],
-      num_golpes = profundidades[5];
-    if (material_de_relleno == 1) {
-      $('#material_de_relleno').prop('checked', true);
-    } else {
-      $('#material_de_relleno').prop('checked', false);
-    }
-    $('#descripcion_modificarm').val(descripcionm);
-    $('#profundidad_inicial_modificar').val(pinicial);
-    $('#profundidad_final_modificar').val(pfinal);
-    $('#numero_golpes_modificar').val(num_golpes);
-    $('#id_muestra_modificar').val(idm);
+    console.log("k");
   },
   calculosLimites:  function () {
 
