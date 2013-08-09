@@ -34,11 +34,20 @@
 
 	padding-left: 10px;
 }
-.info_sondeos {
 
-	border-bottom: 2px solid #CCC;
-	margin-bottom: 10px;
+.encabezados {
+	border : 1px solid #CCC;
+	margin-bottom: 0px;
 }
+
+.div-separador {
+	border-left: 1px solid #CCC;
+}
+
+.div-separador div.datosinforme {
+	margin-left: 4px;
+}
+
 .tituloprofundidad {
 	margin-top: 5px;
 	font-size: 1.2em;
@@ -79,35 +88,34 @@
 
 
 #Muestras {
-	height: 1300px;
+	height: 1390px;
 	margin-bottom: 20px;
-	/*border: 1px solid #f9b2bd;*/
+	border: 1px solid #f9b2bd;
 
 }
 
 .divLimites{
-
 	padding-bottom: 0px;
-	margin-bottom: 100px;
-	/*border: 1px solid #de00ff;*/
+	margin-bottom: 120px;
+	border: 1px solid #de00ff;
 }
 
 .divCompresion {
 	padding-bottom: 0px;
 	margin-bottom: 0px;
-  /*border: 1px solid #03ff2c;*/
+  border: 1px solid #03ff2c;
 }
 
 .divGranulometria { 
 	padding-bottom: 0px;	
 	margin-bottom: 20px;
-	/*border: 1px solid #0074ff;*/
+	border: 1px solid #0074ff;
 }
 
 .divInforme {
 
 	padding-bottom: 100px;	
-	/*border: 1px solid #f9b2bd;*/
+	border: 1px solid #f9b2bd;
 
 
 }
@@ -132,7 +140,7 @@
 .paginadorLimites {
 	display: block;
 	text-align: right;
-	margin-top: 100px;
+	margin-top: 0px;
 }
 
 .paginadorCompresion {
@@ -152,5 +160,7 @@
 	text-align: right;
 	
 }
+
+
 
 

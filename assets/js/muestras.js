@@ -9,7 +9,7 @@ var acciones = {
     $('a[href="#"]').on('click', acciones.prevenirClickSinDestino);
     $("#enviar_muestra").on('click', acciones.clickGuardarMuestra);
     $("#EnviarModificarMuestra").on('click', acciones.clickModificarMuestra);
-    $('.editMuestra').on('click', acciones.clickEditarMuestra);
+    $('.modalMuestra').on('click', acciones.clickEditarMuestra);
     $('.guardaLimites').on('click', acciones.updateLimites);
     $('.limites').on('keyup', acciones.calculosLimites);
     $('.noplastico').on('click', acciones.noplastico);
@@ -20,6 +20,7 @@ var acciones = {
     $('.analisis,.granulo').on('keyup', acciones.calculosGranulometria);
     $('.boxImpresion').on('change' , acciones.Preimpresion);
     $('.impresionBtn').on('click' , acciones.imprimir);
+    $('.estratos').on('change',acciones.clickEstratos);
     
     
   },
@@ -89,14 +90,53 @@ var acciones = {
       }
     }, 'json');
   },
+  clickEstratos: function(){
 
+    var box_roca =  $(this).closest("form").find(".box_roca"),
+      box_relleno = $(this).closest("form").find(".box_relleno"),
+      box_clicked = $(this).attr('name');
+
+    if(box_clicked=="box_relleno"){
+      if(box_relleno.is(':checked')){ 
+        box_roca.attr('checked', false);
+      } 
+    } else if(box_clicked=='box_roca'){
+      box_relleno.attr('checked', false);
+    }
+},
   clickEditarMuestra: function (e) {
-    console.log("k");
+    e.preventDefault();
+    var id = this.id,
+      datos = this.rel;
+
+    var box_roca =  $(this).closest('body').find('#editarmuestra').find('.box_roca'),
+      box_relleno =  $(this).closest('body').find('#editarmuestra').find('.box_relleno');
+
+    var profundidades = this.rel.split(','),
+      idm = profundidades[0],
+      pinicial = profundidades[1],
+      pfinal = profundidades[2],
+      descripcionm = profundidades[3],
+      material_de_relleno = profundidades[4],
+      num_golpes = profundidades[5];
+    if (material_de_relleno == 1) {
+      box_relleno.attr('checked', true);
+    } else {
+      box_relleno.attr('checked', false);
+    } if(material_de_relleno == 2){
+      box_roca.attr('checked', true);
+    } else {
+      box_roca.attr('checked', false);
+    }
+    $('#descripcion_modificarm').val(descripcionm);
+    $('#profundidad_inicial_modificar').val(pinicial);
+    $('#profundidad_final_modificar').val(pfinal);
+    $('#numero_golpes_modificar').val(num_golpes);
+    $('#id_muestra_modificar').val(idm);
   },
   calculosLimites:  function () {
 
     if ($(this).hasClass('iliquido')) {
-
       //elementos columnas finales tablas
       var trbody = $(this).parent().parent().parent(),
         trTodos = trbody.children(),
@@ -548,7 +588,6 @@ var acciones = {
     } else {
       resultadoliquido.text(liquidoVar.toPrecision(4));
     }
-
     if (liquidoVar == null || plasticoVar == null) {
       resultadoIndicePlasticidad.text("N/A");
     } else {
@@ -557,19 +596,19 @@ var acciones = {
     }
   },
   updateGranulometria: function (e) {
-      e.preventDefault();
-      var idFormulario = this.rel;
-      $post = $('.' + idFormulario);
-      $.post($post.attr('action'), $post.serialize(), function (respuesta) {
-        if (respuesta.status === 'OK') {
-          console.log(respuesta.message);
-          alertify.log("Datos guardados exitosamente.");  
-        } else {
-          console.log(respuesta.message);
-          alertify.error("opps..Hubo un error al guardar");
-        }
-      }, 'json');
-    },
+    e.preventDefault();
+    var idFormulario = this.rel;
+    $post = $('.' + idFormulario);
+    $.post($post.attr('action'), $post.serialize(), function (respuesta) {
+      if (respuesta.status === 'OK') {
+        console.log(respuesta.message);
+        alertify.log("Datos guardados exitosamente.");  
+      } else {
+        console.log(respuesta.message);
+        alertify.error("opps..Hubo un error al guardar");
+      }
+    }, 'json');
+  },
   clickGuardarCompresion: function (e) {
     e.preventDefault();
     idFormularios = this.rel;
@@ -819,8 +858,6 @@ var acciones = {
     //tabla de pesos
     var trGranulometria = $(this).closest("div").find("table.tablapesos").find("tbody").children();
 
-   
-    
       // Todos los tr    
       var tr1 = trGranulometria.eq(0).children(),
           tr2 = trGranulometria.eq(1).children(),
@@ -837,7 +874,11 @@ var acciones = {
           tr13 = trGranulometria.eq(12).children(),
           tr14 = trGranulometria.eq(13).children(),
           tr15 = trGranulometria.eq(14).children(),
-          tr16 = trGranulometria.eq(15).children();
+          tr16 = trGranulometria.eq(15).children(),
+          tr17 = trGranulometria.eq(16).children(),
+          tr18 = trGranulometria.eq(17).children(),
+          tr19 = trGranulometria.eq(18).children(),
+          tr20 = trGranulometria.eq(19).children();
          
       //Todos los td de la columna pesos retenidos    
       var tdReT1=tr1.eq(2).find("input"),
@@ -854,40 +895,48 @@ var acciones = {
         tdReT12=tr12.eq(2).find("input"),
         tdReT13=tr13.eq(2).find("input"),
         tdReT14=tr14.eq(2).find("input"),
-        tdReT15=tr15.eq(2),
-        tdReT16=tr16.eq(2);
+        tdReT15=tr15.eq(2).find("input"),
+        tdReT16=tr16.eq(2).find("input"),
+        tdReT17=tr17.eq(2).find("input"),
+        tdReT18=tr18.eq(2).find("input"),
+        tdReT19=tr19.eq(2),
+        tdReT20=tr20.eq(2);
 
       // Variables de pesos retenidos   
-      var pesoRet1Var= parseFloat(tdReT1.val()),
-        pesoRet2Var= parseFloat(tdReT2.val()),
-        pesoRet3Var= parseFloat(tdReT3.val()),
-        pesoRet4Var= parseFloat(tdReT4.val()),
-        pesoRet5Var= parseFloat(tdReT5.val()),
-        pesoRet6Var= parseFloat(tdReT6.val()),
-        pesoRet7Var= parseFloat(tdReT7.val()),
-        pesoRet8Var= parseFloat(tdReT8.val()),
-        pesoRet9Var= parseFloat(tdReT9.val()),
-        pesoRet10Var= parseFloat(tdReT10.val()),
-        pesoRet11Var= parseFloat(tdReT11.val()),
-        pesoRet12Var= parseFloat(tdReT12.val()),
-        pesoRet13Var= parseFloat(tdReT13.val()),
-        pesoRet14Var= parseFloat(tdReT14.val());
+      var pesoRet1Var = parseFloat(tdReT1.val()),
+        pesoRet2Var = parseFloat(tdReT2.val()),
+        pesoRet3Var = parseFloat(tdReT3.val()),
+        pesoRet4Var = parseFloat(tdReT4.val()),
+        pesoRet5Var = parseFloat(tdReT5.val()),
+        pesoRet6Var = parseFloat(tdReT6.val()),
+        pesoRet7Var = parseFloat(tdReT7.val()),
+        pesoRet8Var = parseFloat(tdReT8.val()),
+        pesoRet9Var = parseFloat(tdReT9.val()),
+        pesoRet10Var = parseFloat(tdReT10.val()),
+        pesoRet11Var = parseFloat(tdReT11.val()),
+        pesoRet12Var = parseFloat(tdReT12.val()),
+        pesoRet13Var = parseFloat(tdReT13.val()),
+        pesoRet14Var = parseFloat(tdReT14.val()),
+        pesoRet15Var = parseFloat(tdReT15.val()),
+        pesoRet16Var = parseFloat(tdReT16.val()),
+        pesoRet17Var = parseFloat(tdReT17.val()),
+        pesoRet18Var = parseFloat(tdReT18.val());
 
         //Sumatoria Pesos Retenidos
-        var todosPesosRetenidos= pesoRet1Var+pesoRet2Var+pesoRet3Var+pesoRet4Var+pesoRet5Var+pesoRet6Var+pesoRet7Var+pesoRet8Var+pesoRet9Var+pesoRet10Var+pesoRet11Var+pesoRet12Var+pesoRet13Var+pesoRet14Var;
+        var todosPesosRetenidos= pesoRet1Var+pesoRet2Var+pesoRet3Var+pesoRet4Var+pesoRet5Var+pesoRet6Var+pesoRet7Var+pesoRet8Var+pesoRet9Var+pesoRet10Var+pesoRet11Var+pesoRet12Var+pesoRet13Var+pesoRet14Var+pesoRet15Var+pesoRet16Var+pesoRet17Var+pesoRet18Var;
 
       //td fondo corregido y total corregido  
-      var fondoRetenidoCorregido=tr15.eq(3),
-        totalRetenidoCorregido= tr16.eq(3); 
+      var fondoRetenidoCorregido=tr19.eq(3),
+        totalRetenidoCorregido= tr20.eq(3); 
 
       //td fondo RETENIDO % 
-      var fondoRetenido=tr15.eq(4);
+      var fondoRetenido=tr19.eq(4);
 
       //td fondo RETENIDO % 
-      var fondoRetenidoAcumulado=tr15.eq(5);
+      var fondoRetenidoAcumulado=tr19.eq(5);
 
       //td fondo pasa
-      var fondoPasa=tr15.eq(6);
+      var fondoPasa=tr19.eq(6);
       
       //calculos tabla de analisis
      var tdAnalisis = $(this).closest("div").find("table.tablaanalisis").find("tbody").find("tr:first").children();
@@ -973,7 +1022,13 @@ var acciones = {
       tdFinal11 = trGranulometria.eq(11).find("td.acumulado"),
       tdFinal12 = trGranulometria.eq(12).find("td.acumulado"),
       tdFinal13 = trGranulometria.eq(13).find("td.acumulado"),
-      tdFinal14 = trGranulometria.eq(14).find("td.acumulado");
+      tdFinal14 = trGranulometria.eq(14).find("td.acumulado"),
+      tdFinal15 = trGranulometria.eq(15).find("td.acumulado"),
+      tdFinal16 = trGranulometria.eq(16).find("td.acumulado"),
+      tdFinal17 = trGranulometria.eq(17).find("td.acumulado"),
+      tdFinal18 = trGranulometria.eq(18).find("td.acumulado");
+
+
  
 
 
@@ -992,9 +1047,11 @@ var acciones = {
         fin11Var = parseFloat(tdFinal11.text()),
         fin12Var = parseFloat(tdFinal12.text()),
         fin13Var = parseFloat(tdFinal13.text()),
-        FondoFinalVar = parseFloat(tdFinal4.text());
-
-      
+        fin14Var = parseFloat(tdFinal14.text()),
+        fin15Var = parseFloat(tdFinal15.text()),
+        fin16Var = parseFloat(tdFinal16.text()),
+        fin17Var = parseFloat(tdFinal17.text()),
+        FondoFinalVar = parseFloat(tdFinal18.text());
 
         //Fin grafica de granulometria  
 
@@ -1014,7 +1071,12 @@ var acciones = {
       tdRetenido11 = trGranulometria.eq(11).find("td.retenido"),
       tdRetenido12 = trGranulometria.eq(12).find("td.retenido"),
       tdRetenido13 = trGranulometria.eq(13).find("td.retenido"),
-      tdRetenido14 = trGranulometria.eq(14).find("td.retenido");
+      tdRetenido14 = trGranulometria.eq(14).find("td.retenido"),
+      tdRetenido15 = trGranulometria.eq(15).find("td.retenido"),
+      tdRetenido16 = trGranulometria.eq(16).find("td.retenido"),
+      tdRetenido17 = trGranulometria.eq(17).find("td.retenido"),
+      tdRetenido18 = trGranulometria.eq(18).find("td.retenido");
+
  
 
       //Variables de td retenido
@@ -1032,7 +1094,11 @@ var acciones = {
         tdRetenido11Var = parseFloat(tdRetenido11.text()),
         tdRetenido12Var = parseFloat(tdRetenido12.text()),
         tdRetenido13Var = parseFloat(tdRetenido13.text()),
-        tdRetenido14Var = parseFloat(tdRetenido14.text());
+        tdRetenido14Var = parseFloat(tdRetenido14.text()),
+        tdRetenido15Var = parseFloat(tdRetenido15.text()),
+        tdRetenido16Var = parseFloat(tdRetenido16.text()),
+        tdRetenido17Var = parseFloat(tdRetenido17.text()),
+        tdRetenido18Var = parseFloat(tdRetenido18.text());
 
       //Calculo de acumulado
       acumulado0=tdRetenido0Var,
@@ -1049,7 +1115,11 @@ var acciones = {
       acumulado11=tdRetenido11Var+fin10Var,
       acumulado12=tdRetenido12Var+fin11Var,
       acumulado13=tdRetenido13Var+fin12Var,
-      acumulado14=tdRetenido14Var+fin13Var;
+      acumulado14=tdRetenido14Var+fin13Var,
+      acumulado15=tdRetenido15Var+fin14Var,
+      acumulado16=tdRetenido16Var+fin15Var,
+      acumulado17=tdRetenido17Var+fin16Var,
+      acumulado18=tdRetenido18Var+fin17Var;
 
       //asignacion a la tabla
       tdFinal0.text(acumulado0.toPrecision(4)),
@@ -1066,7 +1136,11 @@ var acciones = {
       tdFinal11.text(acumulado11.toPrecision(4)),
       tdFinal12.text(acumulado12.toPrecision(4)),
       tdFinal13.text(acumulado13.toPrecision(4)),
-      tdFinal14.text(acumulado14.toPrecision(4));
+      tdFinal14.text(acumulado14.toPrecision(4)),
+      tdFinal15.text(acumulado15.toPrecision(4)),
+      tdFinal16.text(acumulado16.toPrecision(4)),
+      tdFinal17.text(acumulado17.toPrecision(4)),
+      tdFinal18.text(acumulado18.toPrecision(4));
         // Fin calculos acumulados
       
       // Calculos de pasa %  
@@ -1083,24 +1157,25 @@ var acciones = {
 
 
 
-         //tds Pasa %
-        var tdPasa0 = trGranulometria.eq(0).find("td.pasa"),
-          tdPasa1 = trGranulometria.eq(1).find("td.pasa"),
-          tdPasa2 = trGranulometria.eq(2).find("td.pasa"),
-          tdPasa3 = trGranulometria.eq(3).find("td.pasa"),
-          tdPasa4 = trGranulometria.eq(4).find("td.pasa"),
-          tdPasa5 = trGranulometria.eq(5).find("td.pasa"),
-          tdPasa6 = trGranulometria.eq(6).find("td.pasa");
-          tdPasa7 = trGranulometria.eq(7).find("td.pasa");
-          tdPasa8 = trGranulometria.eq(8).find("td.pasa"),
-          tdPasa9 = trGranulometria.eq(9).find("td.pasa"),
-          tdPasa10 = trGranulometria.eq(10).find("td.pasa"),
-          tdPasa11 = trGranulometria.eq(11).find("td.pasa"),
-          tdPasa12 = trGranulometria.eq(12).find("td.pasa"),
-          tdPasa13 = trGranulometria.eq(13).find("td.pasa");
-
-
-          
+       //tds Pasa %
+      var tdPasa0 = trGranulometria.eq(0).find("td.pasa"),
+        tdPasa1 = trGranulometria.eq(1).find("td.pasa"),
+        tdPasa2 = trGranulometria.eq(2).find("td.pasa"),
+        tdPasa3 = trGranulometria.eq(3).find("td.pasa"),
+        tdPasa4 = trGranulometria.eq(4).find("td.pasa"),
+        tdPasa5 = trGranulometria.eq(5).find("td.pasa"),
+        tdPasa6 = trGranulometria.eq(6).find("td.pasa");
+        tdPasa7 = trGranulometria.eq(7).find("td.pasa");
+        tdPasa8 = trGranulometria.eq(8).find("td.pasa"),
+        tdPasa9 = trGranulometria.eq(9).find("td.pasa"),
+        tdPasa10 = trGranulometria.eq(10).find("td.pasa"),
+        tdPasa11 = trGranulometria.eq(11).find("td.pasa"),
+        tdPasa12 = trGranulometria.eq(12).find("td.pasa"),
+        tdPasa13 = trGranulometria.eq(13).find("td.pasa"),
+        tdPasa14 = trGranulometria.eq(14).find("td.pasa"),
+        tdPasa15 = trGranulometria.eq(15).find("td.pasa"),
+        tdPasa16 = trGranulometria.eq(16).find("td.pasa"),
+        tdPasa17 = trGranulometria.eq(17).find("td.pasa");
 
 
       //Variables de todos los td Finales
@@ -1117,13 +1192,20 @@ var acciones = {
         pasa10Var = parseFloat(tdPasa10.text()),
         pasa11Var = parseFloat(tdPasa11.text()),
         pasa12Var = parseFloat(tdPasa12.text()),
-        pasa13Var = parseFloat(tdPasa13.text());
+        pasa13Var = parseFloat(tdPasa13.text()),
+        pasa14Var = parseFloat(tdPasa14.text()),
+        pasa15Var = parseFloat(tdPasa15.text()),
+        pasa16Var = parseFloat(tdPasa16.text()),
+        pasa17Var = parseFloat(tdPasa17.text());
 
+        
         //variables de los tamizes N4 , N200 
-        Tamiz200Var = pasa13Var,
-        tamiz4Var = pasa7Var,
-        tamiz10Var = pasa8Var ,
-        tamiz40Var = pasa11Var;
+        Tamiz200Var = pasa17Var,
+        tamiz4Var = pasa9Var,
+        tamiz10Var = pasa10Var,
+        tamiz40Var = pasa14Var;
+
+        
 
         // td de resultados indice de grupo , tamizes 4 y 200 , clasificaciones sucs y aashto 
         var tdTamiz4 = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdTamiz4"),
@@ -1157,7 +1239,6 @@ var acciones = {
           resultadoNotacionSucs= $(this).closest("div").find("form.resultadosGranulometria").find("input.notacionSucs"),
           resultadoDescripcionSucs= $(this).closest("div").find("form.resultadosGranulometria").find("input.descripcionSucs");
 
-        
 
         // Ejecucion de clasificacion Sucs
         acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs);
@@ -1191,7 +1272,11 @@ var acciones = {
           tdTam10 = trGranulometria.eq(10).find("td.tamTamiz"),
           tdTam11 = trGranulometria.eq(11).find("td.tamTamiz"),
           tdTam12 = trGranulometria.eq(12).find("td.tamTamiz"),
-          tdTam13 = trGranulometria.eq(13).find("td.tamTamiz");
+          tdTam13 = trGranulometria.eq(13).find("td.tamTamiz"),
+          tdTam14 = trGranulometria.eq(14).find("td.tamTamiz"),
+          tdTam15 = trGranulometria.eq(15).find("td.tamTamiz"),
+          tdTam16 = trGranulometria.eq(16).find("td.tamTamiz"),
+          tdTam17 = trGranulometria.eq(17).find("td.tamTamiz");
 
 
         var tdTam0Var = parseFloat(tdTam0.text()),
@@ -1207,7 +1292,11 @@ var acciones = {
           tdTam10Var = parseFloat(tdTam10.text()),
           tdTam11Var = parseFloat(tdTam11.text()),
           tdTam12Var = parseFloat(tdTam12.text()),
-          tdTam13Var = parseFloat(tdTam13.text()); 
+          tdTam13Var = parseFloat(tdTam13.text()),
+          tdTam14Var = parseFloat(tdTam14.text()),
+          tdTam15Var = parseFloat(tdTam15.text()),
+          tdTam16Var = parseFloat(tdTam16.text()),
+          tdTam17Var = parseFloat(tdTam17.text());
 
         //grafica de granulometria
     // grafica de deformacion 
@@ -1216,6 +1305,14 @@ var acciones = {
     optimizadorGraficas++
     if(optimizadorGraficas==5){
       var datosGranulometria = 
+      "["+parseFloat(tdTam17Var)+","+parseFloat(pasa17Var)+"]"
+      +","+
+      "["+parseFloat(tdTam16Var)+","+parseFloat(pasa16Var)+"]"
+      +","+
+      "["+parseFloat(tdTam15Var)+","+parseFloat(pasa15Var)+"]"
+      +","+
+      "["+parseFloat(tdTam14Var)+","+parseFloat(pasa14Var)+"]"
+      +","+
       "["+parseFloat(tdTam13Var)+","+parseFloat(pasa13Var)+"]"
       +","+
       "["+parseFloat(tdTam12Var)+","+parseFloat(pasa12Var)+"]"
@@ -1885,9 +1982,6 @@ var acciones = {
       console.log("----Finalizacion de condicional finos----");
       console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
       $clasSucs.text(notacionSucs+"-"+descSucs);
-      $resultadoNotacionSucs.val(notacionSucs),
-      $resultadoDescripcionSucs.val(descSucs);
-      
     }
     function FinosNotacion(){
       console.log("Inicio de condicional de Finos");
@@ -1934,6 +2028,11 @@ var acciones = {
       return notacionSucs;
 
     }
+    
+    // asignando resultados a cajas de resultados
+    $resultadoNotacionSucs.val(notacionSucs),
+    $resultadoDescripcionSucs.val(descSucs);
+
 
   }, clasificacionAashto: function(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,$clasAashto,$resultadoAashto){
     console.log("Clasificacion de suelos Aashto");

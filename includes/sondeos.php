@@ -26,9 +26,9 @@ FROM
 			$retorno = $matriz;
 		}
 		return $retorno;
-	}
+}
 
-	function getDatosSondeo($idp,$ids) {
+	function getDatosSondeo($ids) {
 		$retorno = false;
 		$sql = "SELECT 
 								  `s`.`id_sondeo`,
@@ -40,7 +40,7 @@ FROM
 								  `s`.`fk_idproyecto`
 
 						FROM 	`sondeos` `s`,`tipo_superficie` sup
- 					  WHERE  fk_idproyecto='$idp' AND s.`fk_id_tipo_superficie`=sup.`id_tipo_superficie` LIMIT 1";
+ 					  WHERE  id_sondeo='$ids' AND s.`fk_id_tipo_superficie`=sup.`id_tipo_superficie` LIMIT 1";
 		$respuesta = $this->query($sql);
 		if ( $respuesta ) {
 			$retorno = $respuesta->fetch_object();

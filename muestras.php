@@ -16,7 +16,7 @@
   $proyectosClass = new proyectos();
   $proyectos = $proyectosClass->getDatosProyecto($_GET['idp']);
   $sondeosClass = new sondeos();
-  $datos_sondeo=$sondeosClass->getDatosSondeo($_GET['idp'],$_GET['ids']);
+  $datos_sondeo=$sondeosClass->getDatosSondeo($_GET['ids']);
   $muestras = new muestras();
   $muestrasSondeo = $muestras->getMuestrasSondeo($_GET['ids']);
   $testLimitesClass = new testlimintes();
@@ -2143,17 +2143,22 @@
                 <td> <?php echo $resultado->notacionSucs; ?> </td>
                 <td> <?php echo $resultado->aashto; ?> </td>
                 <td> 
-                  <span class="badge">N° 4 = <?php echo $resultado->N4; ?>% 
-                  </span>
-                  <span class="badge">N° 10 = <?php echo $resultado->N10; ?>% 
-                  </span>
-                  <span class="badge">N° 40 = <?php echo $resultado->N40; ?>% 
-                  </span>
-                  <span class="badge">N° 200 = <?php echo $resultado->N200; ?>% 
-                  </span>
+                  <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+
+                    <span class="badge">N° 4 = <?php echo $resultado->N4; ?>% 
+                    </span>
+                    <span class="badge">N° 10 = <?php echo $resultado->N10; ?>% 
+                    </span>
+                    <span class="badge">N° 40 = <?php echo $resultado->N40; ?>% 
+                    </span>
+                    <span class="badge">N° 200 = <?php echo $resultado->N200; ?>% 
+                    </span>
+                  <?php else: ?>
+                    <span>-</span>
+                  <?php endif ?>
                 </td>
                 <td>
-                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } else if($datoMuestra->material_de_relleno==2){ echo "Estrato de roca";} ?>  <?php if($datoMuestra->material_de_relleno==2){ echo $resultado->descripcionSucs; } ?> 
                 </td>
               </tr>
               <?php $i++; ?>
@@ -2287,8 +2292,14 @@
             </div>
             <div class="controls inputs">
               <label class="checkbox">
-              <input name="box_relleno" type="checkbox" value="1">
+              <input name="box_relleno" class="box_relleno estratos" type="checkbox" value="1">
               Es parte de la capa de relleno
+              </label>
+            </div>
+            <div class="controls inputs">
+              <label class="checkbox">
+              <input name="box_roca" class="box_roca estratos" type="checkbox" value="1">
+              Esta muestra esta conformada solo por roca.
               </label>
             </div>
             <input type='hidden' name='idsondeos' value="<?php echo $_GET['ids'] ?>">
@@ -2332,9 +2343,15 @@
               <input id="numero_golpes_modificar" type='text' name='numero_de_golpes' placeholder='Numero de golpes' class="input-block-level limpiar " >
             </div>
             <label class="checkbox">
-            <input id="material_de_relleno" name="box_relleno" type="checkbox" value="1">
+            <input  name="box_relleno" class="box_relleno estratos" type="checkbox" value="1">
             Es parte de la capa de relleno
             </label>
+            <div class="controls inputs">
+              <label class="checkbox">
+              <input name="box_roca" class="box_roca estratos" type="checkbox" value="1">
+              Esta muestra esta conformada solo por roca.
+              </label>
+            </div>
             <input id="id_muestra_modificar" type='hidden' name='id_muestra' value="">
             <input type='hidden' name='idsondeos' value="<?php echo $_GET['ids'] ?>">
             <input type='hidden' name="func" value="ModificarMuestra">      
@@ -2368,6 +2385,12 @@
               <input  name='cedula' type='text' id="cedula" value="<?php echo $user->cedula ?>"  placeholder='Cédula' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
+              <input name='nombres' type='text' id="nombres" value="<?php echo $user->nombres ?>"  placeholder='Nombres' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='apellidos' type='text' id="apellidos" value="<?php echo $user->apellidos ?>"  placeholder='Apellidos' class='input-block-level limpiar' required >
+            </div>
+            <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
@@ -2376,12 +2399,7 @@
             <div class="controls inputs">
               <input  name='confirmar_clave' type='password'  placeholder='Confirmar nueva contraseña' class="input-block-level limpiar" required >
             </div>
-            <div class="controls inputs">
-              <input name='nombres' type='text' id="nombres" value="<?php echo $user->nombres ?>"  placeholder='Nombres' class="input-block-level limpiar" required >
-            </div>
-            <div class="controls inputs">
-              <input name='apellidos' type='text' id="apellidos" value="<?php echo $user->apellidos ?>"  placeholder='Apellidos' class='input-block-level limpiar' required >
-            </div>
+            
             <div class="controls inputs">
               <input name='func'  type="hidden"  value='modificar_usuario' >
               <input name='id_usuario'  type="hidden" id="id_usuario" value="<?php echo $data['id_usuario'] ?>" >

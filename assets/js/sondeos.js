@@ -5,12 +5,12 @@ var accionesSondeos = {
 	},
 	
 	clicks: function(){
-		$('a[href="#"]').on( 'click', acciones.prevenirClickSinDestino );
-		$('#btnModificarProyecto').on('click', acciones.modificarProyecto);
-		$(".eliminarSondeo").on('click', acciones.eliminarSondeo );
-		$("#lista_superficie").on('change',acciones.superficie);
-		$("#btnnuevoSondeo").on('click',acciones.nuevoSondeo);
-		$("#enviar_modificar_sondeo").on('click',acciones.modificarSondeo);
+		$('a[href="#"]').on( 'click', accionesSondeos.prevenirClickSinDestino );
+		$('#btnModificarProyecto').on('click', accionesSondeos.modificarProyecto);
+		$(".eliminarSondeo").on('click', accionesSondeos.eliminarSondeo );
+		$("#lista_superficie").on('change',accionesSondeos.superficie);
+		$("#btnnuevoSondeo").on('click',accionesSondeos.nuevoSondeo);
+		$("#enviar_modificar_sondeo").on('click',accionesSondeos.modificarSondeo);
 	},
 	
 	prevenirClickSinDestino: function( e ) {

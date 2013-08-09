@@ -52,47 +52,48 @@
     <link rel="stylesheet" href="assets/css/alertify.default.css" />
   </head>
   <body>
-    <!-- ############# HEADER ############### -->
-    <div class="row-fluid header">
-      <div class="span2">
-        <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
-      </div>
-      <h3 class="span7 offset2 header-title"> 
-        Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
-      </h3>
-      
-    </div>
-    <!-- ############# FIN HEADER ############### -->
     <!-- #############  CUERPO ############### --> 
     <div class="row-fluid cuerpo-proyectos">
       
       <!-- #############  DATOS DE SONDEO ############### -->   
-      <div class="info_sondeos">
+      <div class="encabezados">
         <div class="row-fluid">
-          <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
-          <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
-          <?php echo $proyectos->nombre_proyecto; ?>
-          </label>
-          <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
-          <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
-          <?php echo $proyectos->fecha; ?>
-          </label>
-        </div>
-        <div class="row-fluid">
-          <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
-          <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
-          <?php echo $proyectos->codigo_proyecto; ?>
-          </label>
-          <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
-          <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
-          <?php echo $proyectos->lugar; ?>
-          </label>
+          <div class="span1 "> 
+            <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
+          </div>
+          <div class="span11 div-separador">
+            <div class="row-fluid"> 
+              <h4 class="header-title text-center"> 
+                Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+              </h4>
+            </div>
+            <div class="row-fluid datosinforme">
+              <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
+              <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
+              <?php echo $proyectos->nombre_proyecto; ?>
+              </label>
+              <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
+              <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
+              <?php echo $proyectos->fecha; ?>
+              </label>
+            </div>
+            <div class="row-fluid datosinforme">
+              <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
+              <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
+              <?php echo $proyectos->codigo_proyecto; ?>
+              </label>
+              <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
+              <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
+              <?php echo $proyectos->lugar; ?>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     
         
         <div class="text-center"  id="Muestras">
-          <h3>Muestras</h3>  
+          <p>Muestras</p>  
           <!-- #############  TABLA MUESTRAS ############### -->
           <input type='hidden' id='idp' value="<?php echo $_GET['idp']; ?>">
           <input type='hidden' id='ids' value="<?php echo $_GET['ids']; ?>">
@@ -135,17 +136,50 @@
 
         <?php if ( $_GET['boxLim']==1) : ?>
         <div  id="Limites">
-          
-              
+                 
+
               
               <?php if( count($muestrasSondeo) > 0 ): ?>
               <?php $i = 1; $arrLimites = array(); $arrCompresion= array(); ?>
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+              <div class="encabezados">
+                  <div class="row-fluid">
+                    <div class="span1 "> 
+                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
+                    </div>
+                    <div class="span11 div-separador">
+                      <div class="row-fluid"> 
+                        <h4 class="header-title text-center"> 
+                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                        </h4>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
+                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->nombre_proyecto; ?>
+                        </label>
+                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
+                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
+                        <?php echo $proyectos->fecha; ?>
+                        </label>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
+                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
+                        <?php echo $proyectos->codigo_proyecto; ?>
+                        </label>
+                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
+                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->lugar; ?>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
               <div class="text-center divLimites"  id="muestra<?php echo $i; ?>">
                 <!-- #############  HUMEDAD NATURAL ############### -->
-              
-                <h3>Humedad natural - Muestra <?php echo $i; ?> </h3>
+                <p >Humedad natural - Muestra <?php echo $i; ?> </p>
                 <form class="muestra<?php echo $i; ?>" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="testlimites">
                   <input type="hidden" name="muestra" value="0">
@@ -305,7 +339,7 @@
                 </form>
                 <!-- ############# FIN HUMEDAD NATURAL ############### -->
                 <!-- #############  LIMITE LIQUIDO ############### -->
-                <h3>Limite liquido - Muestra <?php echo $i; ?></h3>
+                <p>Limite liquido - Muestra <?php echo $i; ?></p>
                 <form class="muestra<?php echo $i; ?>" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="testlimites" />
                   <input type="hidden" name="muestra" value="1" />
@@ -481,7 +515,7 @@
                 <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="hidden" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
                 <div id="graficaLimites<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
                 <!-- #############  LIMITE PLASTICO ############### -->
-                <h3>Limite plastico - Muestra <?php echo $i; ?></h3>
+                <p>Limite plastico - Muestra <?php echo $i; ?></p>
                 <form class="muestra<?php echo $i; ?> formResultados" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="testlimites" />
                   <input type="hidden" name="muestra" value="2" />
@@ -632,7 +666,7 @@
                   </table>
                   <!-- ############# FIN LIMITE PLASTICO ############### -->
                   <!-- ############# RESULTADOS ############### -->
-                  <h3>Resultados</h3>
+                  <p>Resultados</p>
                   <table class="table  resultados">
                     <thead>
                       <tr>
@@ -679,8 +713,6 @@
                                     $porcentajeAgua1=0;
                                     $porcentajeAgua2=0;
                                     $porcentajeAgua3=0;
-                              
-                            
                             ?>
                         </td>
                         <td>
@@ -777,9 +809,43 @@
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $DatosCompresion = $datosCompresion->GetDatosCompresion( $datoMuestra->id_muestra );  ?>
+              <div class="encabezados">
+                  <div class="row-fluid">
+                    <div class="span1 "> 
+                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
+                    </div>
+                    <div class="span11 div-separador">
+                      <div class="row-fluid"> 
+                        <h4 class="header-title text-center"> 
+                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                        </h4>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
+                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->nombre_proyecto; ?>
+                        </label>
+                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
+                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
+                        <?php echo $proyectos->fecha; ?>
+                        </label>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
+                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
+                        <?php echo $proyectos->codigo_proyecto; ?>
+                        </label>
+                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
+                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->lugar; ?>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
               <div class="text-center divCompresion" id="compresion<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA ############### -->
-                <h3>Compresión - Medidas de la muestra - Muestra <?php echo $i; ?></h3>
+                <p>Compresión - Medidas de la muestra - Muestra <?php echo $i; ?></p>
                 <form class="compresion<?php echo $i; ?> formResultadosCompresion" action="save.php" method="post" accept-charset="utf-8">
                   <input name="fk_idmuestra" type="hidden" value="<?php echo $datoMuestra->id_muestra; ?>">
                   <table class="table  tablacompresion ">
@@ -826,7 +892,7 @@
                   </table>
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA ############### -->
                   <!-- #############  TABLA DE COMPRESIÓN ############### -->
-                  <h3>Tabla de deformación - Muestra <?php echo $i; ?></h3>
+                  <p>Tabla de deformación - Muestra <?php echo $i; ?></p>
                   <table class="table  tabladeformacion">
                     <thead>
                       <tr>
@@ -927,7 +993,7 @@
                     ?>
                   <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
                   <!-- ############# RESULTADOS ############### -->
-                  <h3>Resultados</h3>
+                  <p>Resultados</p>
                   <table class="table  resultadoscompresion">
                     <thead>
                       <tr>
@@ -1003,9 +1069,43 @@
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $DatosGranulometria = $datosGranulometria->getDatoGranulometria( $datoMuestra->id_muestra );  ?>
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
+              <div class="encabezados">
+                  <div class="row-fluid">
+                    <div class="span1 "> 
+                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
+                    </div>
+                    <div class="span11 div-separador">
+                      <div class="row-fluid"> 
+                        <h4 class="header-title text-center"> 
+                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                        </h4>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
+                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->nombre_proyecto; ?>
+                        </label>
+                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
+                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
+                        <?php echo $proyectos->fecha; ?>
+                        </label>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
+                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
+                        <?php echo $proyectos->codigo_proyecto; ?>
+                        </label>
+                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
+                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->lugar; ?>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
               <div class="text-center divGranulometria" id="granulometria<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA GRANULOMETRIA############### -->
-                <h3> Analisis granulometrico - Muestra <?php echo $i; ?></h3>
+                <p> Analisis granulometrico - Muestra <?php echo $i; ?></p>
                 <form class="granulometria<?php echo $i; ?> resultadosGranulometria" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="granulometria">
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
@@ -1050,7 +1150,7 @@
                   </table>
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA GRANULOMETRIA ############### -->
                   <!-- #############  TABLA DE GRANULOMETRIA ############### -->
-                  <h3>Tabla de granulometria - Muestra <?php echo $i; ?></h3>
+                  <p>Tabla de granulometria - Muestra <?php echo $i; ?></p>
                   <table class="table  tablapesos">
                     <thead>
                       <tr>
@@ -1192,7 +1292,7 @@
                     unset($datos); 
                     ?>
                   
-                  <h3>Resultados</h3>
+                  <p>Resultados</p>
                   <table class="table  tablaResultadosGranulometria">
                     <thead>
                       <tr>
@@ -1950,8 +2050,41 @@
         <!-- ############# INFORME DE ESTRATIGRAFIA ############### -->
         <div  id="Informe" class="divInforme">
           
-          
-          <h3 class="text-center">Informe de estratigrafia</h3>
+          <div class="encabezados">
+                  <div class="row-fluid">
+                    <div class="span1 "> 
+                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
+                    </div>
+                    <div class="span11 div-separador">
+                      <div class="row-fluid"> 
+                        <h4 class="header-title text-center"> 
+                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                        </h4>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
+                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->nombre_proyecto; ?>
+                        </label>
+                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
+                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
+                        <?php echo $proyectos->fecha; ?>
+                        </label>
+                      </div>
+                      <div class="row-fluid datosinforme">
+                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
+                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
+                        <?php echo $proyectos->codigo_proyecto; ?>
+                        </label>
+                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
+                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
+                        <?php echo $proyectos->lugar; ?>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
+          <p class="text-center">Informe de estratigrafia</p>
           <table class="table  letra-s">
             <thead>
               <tr>

@@ -176,9 +176,23 @@
 		  			$profundidad_inicial = $_POST['profundidad_inicial'];
 		  			$profundidad_final = $_POST['profundidad_final'];
 		  			$numero_de_golpes= $_POST['numero_de_golpes'];
-		  			$box_relleno = $_POST['box_relleno'];
 		  			$idsondeos = $_POST['idsondeos'];
-		  			$respuesta = $muestrasClass->addMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_relleno ,$idsondeos);
+
+		  			if(isset($_POST['box_relleno'])){
+		  				$box_roca = $_POST['box_relleno'];	  				
+		  			}
+		  			if(isset($_POST['box_roca'])){
+							$box_roca = $_POST['box_roca'];	  				
+		  			}
+		  			if($box_relleno==1){
+		  				$box_estrato=1;	
+		  			} else if($box_roca==1){
+		  				$box_estrato=2;	
+		  			} else {
+		  				$box_estrato=0;	
+		  			}
+		  			
+		  			$respuesta = $muestrasClass->addMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_estrato ,$idsondeos);
 		  			$idMuestra = $muestrasClass->insert_id;
 		  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
 		  			$testLimitesClass->addTest(0, NULL, NULL, NULL,NULL, NULL, $idMuestra);
@@ -213,6 +227,7 @@
 		  
 		  			$granulometriaClass->addGranulometria(NULL, NULL, $idMuestra);
 		  			$idGranulometria= $granulometriaClass->insert_id;
+		  			$pesosRetenidoClass->addPesoRetenido("(3\")",76.20, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("(2 1/2\")",63.5, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("(2\")",50.80,NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("(1 1/2\")",38.10,NULL, $idGranulometria);
@@ -220,11 +235,14 @@
 		  			$pesosRetenidoClass->addPesoRetenido("(3/4\")",19.05, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("(1/2\")",12.70,NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("(3/8\")",9.52,NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("(1/4\")",6.35,NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("N°4",4.75, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("N°10",2.00, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("N°16",1.19, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°20",0.84, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("N°30",0.60, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("N°40",0.43, NULL, $idGranulometria);
+		  			$pesosRetenidoClass->addPesoRetenido("N°60",0.25, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("N°100",0.15, NULL, $idGranulometria);
 		  			$pesosRetenidoClass->addPesoRetenido("N°200",0.08, NULL, $idGranulometria);
 
@@ -247,10 +265,24 @@
 				$profundidad_inicial = $_POST['profundidad_inicial'];
 				$profundidad_final = $_POST['profundidad_final'];
 				$numero_de_golpes= $_POST['numero_de_golpes'];
-				$box_relleno = (isset($_POST['box_relleno']));
 				$idsondeos = $_POST['idsondeos'];
 				$id_muestra = $_POST['id_muestra'];
-				$respuesta = $muestrasClass->ModificarMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_relleno ,$idsondeos,$id_muestra);
+
+				if(isset($_POST['box_relleno'])){
+		  				$box_roca = $_POST['box_relleno'];	  				
+		  	}
+  			if(isset($_POST['box_roca'])){
+					$box_roca = $_POST['box_roca'];	  				
+  			}
+  			if($box_relleno==1){
+  				$box_estrato=1;	
+  			} else if($box_roca==1){
+  				$box_estrato=2;	
+  			} else {
+  				$box_estrato=0;	
+  			}
+  			
+				$respuesta = $muestrasClass->ModificarMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_estrato ,$idsondeos,$id_muestra);
 				
 				if ( $respuesta ) {
 					$response["status"] = "OK";
@@ -471,8 +503,11 @@
   							$respuesta11 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[10],$PesosRetenido[10]);
   							$respuesta12 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[11],$PesosRetenido[11]);
   							$respuesta13= $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[12],$PesosRetenido[12]);
-  							$respuesta14 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[13],$PesosRetenido[13]);	
-
+  							$respuesta14 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[13],$PesosRetenido[13]);
+  							$respuesta15 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[14],$PesosRetenido[14]);
+  							$respuesta16 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[15],$PesosRetenido[15]);
+  							$respuesta17 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[16],$PesosRetenido[16]);	
+  							$respuesta18 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[17],$PesosRetenido[17]);
 
   							$resultadosClass->updateResultadosGranulometria($N200,$N4,$N10,$N40,$notacionSucs,$descripcionSucs,$aashto,$fk_idMuestra);
   							
