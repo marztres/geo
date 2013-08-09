@@ -113,7 +113,7 @@
               <tr>
                 <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
                 <td>
-                  <span class="badge">Desde <span> <?php echo $datoMuestra->profundidad_inicial ?> metros</span>----<span class='badge' >Hasta <?php echo $datoMuestra->profundidad_final ?> metros</span>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
                 </td>
                 <td><?php echo $datoMuestra->numero_golpes ?></td>
                 <td><?php echo $datoMuestra->descripcion ?></td>
@@ -1167,53 +1167,56 @@
                       <?php if ($DatosRetenidos>0): ?>
                       <?php $j = 0; $temp = array(); ?>
                       <?php foreach ( $DatosRetenidos as $retenidos ):?>
-                      <tr>
-                        <td><?php echo $retenidos->tamiz ?>
-                          <input name="idPesoRetenido[]" class="input-mini" type="hidden" value="<?php echo $retenidos->idPesoRetenido ?>">
-                        </td>
-                        <td class="tamTamiz"><?php echo $tamañoTamiz[]=$retenidos->tamanoTamiz ?></td>
-                        <td> <?php echo $retenidos->pesoRetenido ?> </td>
-                        <?php 
-                          if($retenidos->pesoRetenido>0){
-                              $pr[]=$retenidos->tamanoTamiz;
-                          }
-                          ?>
-                        <?php $fondopesoretenido=$DatosGranulometria->pesoRecipienteMasMuestra-$pesoretenidomasrecipiente;
-                          $totalpesoretenido=$sumapesoretenidos+$fondopesoretenido;
-                          ?>
-                        <td><?php 
-                          if($pesoretenidoN200!=0){
-                              echo $pesoretenidocorregido=$retenidos->pesoRetenido-(($sumapesoretenidos-$pesoretenidoN200)*$retenidos->pesoRetenido/$pesoretenidoN200);
-                          }
-                          else{
-                              echo 0;
-                          }
-                          ?>
-                        </td>
-                        <?php  
-                          if($sumapesoretenidos!=0){
-                               $totalpesoretenidocorregido=$totalpesoretenido-($sumapesoretenidos-$pesoretenidoN200)*$totalpesoretenido/$sumapesoretenidos;
-                          }
-                          ?>
-                        <td class="retenido" >
-                          <?php
-                            if($totalpesoretenidocorregido!=0){
-                                echo $retenidoporcentaje = round($pesoretenidocorregido/$totalpesoretenidocorregido*100,2);
-                            }
-                            ?>
-                        </td>
-                        <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
-                        <td class="acumulado" ><?php echo $temp[$j]; ?></td>
-                        <td class="pasa">
-                          <?php echo $pasa= 100 - $temp[$j];
-                            if($retenidos->pesoRetenido>0){
-                               $p[]=$pasa;
-                            }
-                               $tamices[]=$pasa;
-                            ?>
-                        </td>
-                      </tr>
+                        <?php if ($retenidos->pesoRetenido>0): ?>  
+                          <tr>
+                            <td><?php echo $retenidos->tamiz ?>
+                              <input name="idPesoRetenido[]" class="input-mini" type="hidden" value="<?php echo $retenidos->idPesoRetenido ?>">
+                            </td>
+                            <td class="tamTamiz"><?php echo $tamañoTamiz[]=$retenidos->tamanoTamiz ?></td>
+                            <td> <?php echo $retenidos->pesoRetenido ?> </td>
+                            <?php 
+                              if($retenidos->pesoRetenido>0){
+                                  $pr[]=$retenidos->tamanoTamiz;
+                              }
+                              ?>
+                            <?php $fondopesoretenido=$DatosGranulometria->pesoRecipienteMasMuestra-$pesoretenidomasrecipiente;
+                              $totalpesoretenido=$sumapesoretenidos+$fondopesoretenido;
+                              ?>
+                            <td><?php 
+                              if($pesoretenidoN200!=0){
+                                  echo $pesoretenidocorregido=$retenidos->pesoRetenido-(($sumapesoretenidos-$pesoretenidoN200)*$retenidos->pesoRetenido/$pesoretenidoN200);
+                              }
+                              else{
+                                  echo 0;
+                              }
+                              ?>
+                            </td>
+                            <?php  
+                              if($sumapesoretenidos!=0){
+                                   $totalpesoretenidocorregido=$totalpesoretenido-($sumapesoretenidos-$pesoretenidoN200)*$totalpesoretenido/$sumapesoretenidos;
+                              }
+                              ?>
+                            <td class="retenido" >
+                              <?php
+                                if($totalpesoretenidocorregido!=0){
+                                    echo $retenidoporcentaje = round($pesoretenidocorregido/$totalpesoretenidocorregido*100,2);
+                                }
+                                ?>
+                            </td>
+                            <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
+                            <td class="acumulado" ><?php echo $temp[$j]; ?></td>
+                            <td class="pasa">
+                              <?php echo $pasa= 100 - $temp[$j];
+                                if($retenidos->pesoRetenido>0){
+                                   $p[]=$pasa;
+                                }
+                                   $tamices[]=$pasa;
+                                ?>
+                            </td>
+                          </tr>
+                        
                       <?php $j++; ?>
+                      <?php endif; ?>
                       <?php endforeach?>
                       <?php endif; ?>
                       <tr>
@@ -1301,6 +1304,8 @@
                         <th> Limite liquido</th>
                         <th> Indice de plasticidad</th>
                         <th> Indice de grupo</th>
+                        <th> Clasificación Sistema unificado</th>
+                        <th> Clasificación AASHTO</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1336,18 +1341,6 @@
                         <?php $plastico=$resultado->limitePlastico;?>
                         <td class="tdIndicePlaticidad"><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
                         <td class="indiceGrupo">  </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="table  tablaClasificaciones">
-                    <thead>
-                      <tr>
-                        <th> Clasificación Sistema unificado</th>
-                        <th> Clasificación AASHTO</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
                         <td class="classSucs">
                           <?php 
                             $gravas=0;
@@ -2123,7 +2116,7 @@
               <tr>
                 <td> <?php echo $i; ?> </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td>  </td>
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/gravas.png" alt="patron" > </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
                 <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
@@ -2133,13 +2126,13 @@
                 <td> <?php echo $resultado->notacionSucs; ?> </td>
                 <td> <?php echo $resultado->aashto; ?> </td>
                 <td> 
-                  <span class="badge">N° 4 = <?php echo $resultado->N4; ?>% 
+                  <span class="ninguna">N° 4 = <?php echo $resultado->N4; ?>% 
                   </span>
-                  <span class="badge">N° 10 = <?php echo $resultado->N10; ?>% 
+                  <span class="ninguna">N° 10 = <?php echo $resultado->N10; ?>% 
                   </span>
-                  <span class="badge">N° 40 = <?php echo $resultado->N40; ?>% 
+                  <span class="ninguna">N° 40 = <?php echo $resultado->N40; ?>% 
                   </span>
-                  <span class="badge">N° 200 = <?php echo $resultado->N200; ?>% 
+                  <span class="ninguna">N° 200 = <?php echo $resultado->N200; ?>% 
                   </span>
                 </td>
                 <td>

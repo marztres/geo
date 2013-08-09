@@ -89,33 +89,34 @@
 
 #Muestras {
 	height: 1390px;
-	margin-bottom: 20px;
-	border: 1px solid #f9b2bd;
+	margin-bottom: 25px;
+	/*border: 1px solid #f9b2bd;*/
 
 }
 
 .divLimites{
 	padding-bottom: 0px;
 	margin-bottom: 150px;
-	border: 1px solid #de00ff;
+	/*border: 1px solid #de00ff;*/
 }
 
 .divCompresion {
 	padding-bottom: 0px;
-	margin-bottom: 0px;
-  border: 1px solid #03ff2c;
+	margin-bottom: 30px;
+ /* border: 1px solid #03ff2c;*/
 }
 
 .divGranulometria { 
+	height: 1410px;
 	padding-bottom: 0px;	
-	margin-bottom: 20px;
-	border: 1px solid #0074ff;
+	margin-bottom: 10px;
+/*	border: 1px solid #0074ff;*/
 }
 
 .divInforme {
 
 	padding-bottom: 100px;	
-	border: 1px solid #f9b2bd;
+	/*border: 1px solid #f9b2bd;*/
 
 
 }
@@ -159,6 +160,12 @@
 	display: block;
 	text-align: right;
 	
+}
+
+.patrones {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	border: 1px solid #CCC;
 }
 
 
