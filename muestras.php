@@ -1394,6 +1394,7 @@
                             $gravas=0;
                             $arenas=0;
                             $finos=0;
+                            $imagenPerfil="0";
                             $lineaA=0.73*($liquido-20);
                             $gravas=100-$tamizN4;
                             $arenas=$tamizN4-$tamizN200;
@@ -1421,6 +1422,7 @@
                                           $notacion="GP";
                                           if($arenas<15){
                                             $descrsub="Grava mal graduada";
+                                            $imagenPerfil="2";
                                             echo  $notacion."-".$descrsub;
                                           }
                                           else if($arenas>=15){
@@ -2067,6 +2069,7 @@
                   <input name="N10" type="hidden" class="N10" value="<?php echo $tamizN10; ?>">
                   <input name="N40" type="hidden" class="N40" value="<?php echo $tamizN40; ?>">
                   <input name="N200" type="hidden" class="N200" value="<?php echo $tamizN200; ?>">
+                  <input name="imagenPerfil" type="hidden" class="imagenPerfil" value="<?php echo $imagenPerfil; ?>">
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
@@ -2133,7 +2136,7 @@
               <tr>
                 <td> <?php echo $i; ?> </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td>  </td>
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $i; ?>.png" alt="patron" style="border:1px solid #CCC;" > </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
                 <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
@@ -2467,6 +2470,7 @@
     <script src="assets/js/sondeos.js"></script>
     <script type="text/javascript">
       $(function graficador() {
+
       
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
@@ -2748,6 +2752,8 @@
       });  
       <?php $i++; ?>
       <?php endforeach; ?> 
+      
+
       });
     </script>
     <script src="assets/js/alertify/alertify.js"></script>

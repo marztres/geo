@@ -179,7 +179,7 @@
 		  			$idsondeos = $_POST['idsondeos'];
 
 		  			if(isset($_POST['box_relleno'])){
-		  				$box_roca = $_POST['box_relleno'];	  				
+		  				$box_relleno = $_POST['box_relleno'];	  				
 		  			}
 		  			if(isset($_POST['box_roca'])){
 							$box_roca = $_POST['box_roca'];	  				
@@ -269,7 +269,7 @@
 				$id_muestra = $_POST['id_muestra'];
 
 				if(isset($_POST['box_relleno'])){
-		  				$box_roca = $_POST['box_relleno'];	  				
+		  		$box_relleno = $_POST['box_relleno'];	  				
 		  	}
   			if(isset($_POST['box_roca'])){
 					$box_roca = $_POST['box_roca'];	  				
@@ -481,6 +481,7 @@
   						$notacionSucs=$_POST['notacionSucs'];
   						$descripcionSucs=$_POST['descripcionSucs'];
   						$aashto=$_POST['aashto'];
+  						$imagenPerfil=$_POST['imagenPerfil'];
   						$fk_idMuestra=$_POST['fkMuestra'];
 
   						foreach ( $_POST['idPesoRetenido'] as $valor ) {
@@ -509,7 +510,7 @@
   							$respuesta17 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[16],$PesosRetenido[16]);	
   							$respuesta18 = $pesosRetenidosClass->updatePesosRetenido($idPesoRetenido[17],$PesosRetenido[17]);
 
-  							$resultadosClass->updateResultadosGranulometria($N200,$N4,$N10,$N40,$notacionSucs,$descripcionSucs,$aashto,$fk_idMuestra);
+  							$resultadosClass->updateResultadosGranulometria($N200,$N4,$N10,$N40,$notacionSucs,$descripcionSucs,$aashto,$imagenPerfil,$fk_idMuestra);
   							
   					if ( $respuesta ) {
   						$response["status"] = "OK";

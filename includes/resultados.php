@@ -5,7 +5,7 @@
 		function addResultados( $idMuestra ) {
 		$retorno = false;
 		$sql = "INSERT INTO resultados (id_resultados,humedad,limiteLiquido,limitePlastico,indicePlasticidad,cohesion,pesoUnitario,N200,N4,N10,N40,notacionSucs,descripcionSucs,aashto,fechaIngreso,estado,fk_idMuestra)"
-					."VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NOW(),1, '".$this->real_escape_string($idMuestra)."')";
+					."VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NOW(),1, '".$this->real_escape_string($idMuestra)."')";
 		$respuesta = $this -> query($sql);
 		if ( $respuesta ) {
 			$retorno = true;
@@ -47,7 +47,7 @@
 			return $retorno;
 		}
 
-		function updateResultadosGranulometria($N200,$N4,$N10,$N40,$notacionSucs,$descripcionSucs,$aashto,$fk_idMuestra){
+		function updateResultadosGranulometria($N200,$N4,$N10,$N40,$notacionSucs,$descripcionSucs,$aashto,$imagenPerfil,$fk_idMuestra){
 	  	$retorno = false;
 
 			$sql0="	SELECT id_resultados FROM resultados where fk_idMuestra='".$this->real_escape_string($fk_idMuestra)."' limit 1 ";
@@ -65,7 +65,8 @@
 			N40 = '".$this->real_escape_string($N40)."',
 			notacionSucs = '".$this->real_escape_string($notacionSucs)."',
 			descripcionSucs = '".$this->real_escape_string($descripcionSucs)."',
-			aashto = '".$this->real_escape_string($aashto)."' 
+			aashto = '".$this->real_escape_string($aashto)."',
+			imagenPerfil = '".$this->real_escape_string($imagenPerfil)."' 
 			WHERE id_resultados = '".$this->real_escape_string($idResult->id_resultados)."' ";
 			
 			$respuesta = $this -> query($sql);

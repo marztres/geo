@@ -1,32 +1,13 @@
 <?php
-/*
-* Copyright (c) 2008 http://www.webmotionuk.com
-* "PHP & Jquery image upload & crop"
-* Date: 2008-09-05
-* Ver 1.1
-* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-* ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-* IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
-* INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
-* PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-* INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
-* STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
-* THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* http://www.opensource.org/licenses/bsd-license.php
-*/
+
 error_reporting (E_ALL ^ E_NOTICE);
 session_start(); //Do not remove this
-//only assign a new timestamp if the session variable is empty
+
 if (!isset($_SESSION['random_key']) || strlen($_SESSION['random_key'])==0){
-    $_SESSION['random_key'] = strtotime(date('Y-m-d H:i:s')); //assign the timestamp to the session variable
+    $_SESSION['random_key'] = strtotime(date('Y-m-d H:i:s'));
 }
-//Constants
-//You can alter these options
+
+
 $upload_dir = "assets/uploads"; 				// The directory for the images to be saved in
 $upload_path = $upload_dir."/";				// The path to where the image will be saved
 $large_image_prefix = "resize_"; 			// The prefix name to large image
@@ -38,8 +19,8 @@ $max_width = "500";							// Max width allowed for the large image
 $thumb_width = "100";						// Width of thumbnail image
 $thumb_height = "100";						// Height of thumbnail image
 
-//Image functions
-//You do not need to alter these functions
+
+
 function resizeImage($image,$width,$height,$scale) {
 	$newImageWidth = ceil($width * $scale);
 	$newImageHeight = ceil($height * $scale);
@@ -50,7 +31,8 @@ function resizeImage($image,$width,$height,$scale) {
 	chmod($image, 0777);
 	return $image;
 }
-//You do not need to alter these functions
+
+
 function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start_width, $start_height, $scale){
 	$newImageWidth = ceil($width * $scale);
 	$newImageHeight = ceil($height * $scale);
@@ -61,28 +43,33 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 	chmod($thumb_image_name, 0777);
 	return $thumb_image_name;
 }
-//You do not need to alter these functions
+
+
+
 function getHeight($image) {
 	$sizes = getimagesize($image);
 	$height = $sizes[1];
 	return $height;
 }
-//You do not need to alter these functions
+
+
 function getWidth($image) {
 	$sizes = getimagesize($image);
 	$width = $sizes[0];
 	return $width;
 }
 
-//Image Locations
+
 $large_image_location = $upload_path.$large_image_name;
 $thumb_image_location = $upload_path.$thumb_image_name;
+
 
 //Create the upload directory with the right permissions if it doesn't exist
 if(!is_dir($upload_dir)){
 	mkdir($upload_dir, 0777);
 	chmod($upload_dir, 0777);
 }
+
 
 //Check to see if any images with the same names already exist
 if (file_exists($large_image_location)){
@@ -96,6 +83,8 @@ if (file_exists($large_image_location)){
    	$large_photo_exists = "";
 	$thumb_photo_exists = "";
 }
+
+
 
 if (isset($_POST["upload"])) { 
 	//Get the file information

@@ -1342,10 +1342,11 @@
                         <td class="tdIndicePlaticidad"><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
                         <td class="indiceGrupo">  </td>
                         <td class="classSucs">
-                          <?php 
+                          <?php
                             $gravas=0;
                             $arenas=0;
                             $finos=0;
+                            $imagenPerfil="0";
                             $lineaA=0.73*($liquido-20);
                             $gravas=100-$tamizN4;
                             $arenas=$tamizN4-$tamizN200;
@@ -1363,6 +1364,7 @@
                                         if($arenas<15){
                                           $descrsub="Grava bien graduada";
                                           echo  $notacion."-".$descrsub;
+                                          $imagenPerfil="gravas";
                                         }
                                         else if($arenas>=15){
                                           $descrsub="Grava bien graduada con arena";
@@ -2019,6 +2021,8 @@
                   <input name="N10" type="hidden" class="N10" value="<?php echo $tamizN10; ?>">
                   <input name="N40" type="hidden" class="N40" value="<?php echo $tamizN40; ?>">
                   <input name="N200" type="hidden" class="N200" value="<?php echo $tamizN200; ?>">
+                  <input name="imagenPerfil" type="hidden" class="imagenPerfil" value="<?php echo $imagenPerfil; ?>">
+                  
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
               <span class="paginadorGranulometria">Pagina <?php echo $pagina; ?></span>
@@ -2116,7 +2120,7 @@
               <tr>
                 <td> <?php echo $i; ?> </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/gravas.png" alt="patron" > </td>
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $i; ?>.png" alt="patron" style="border:1px solid #CCC;" > </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
                 <td> <?php echo $datoMuestra->numero_golpes; ?> </td>

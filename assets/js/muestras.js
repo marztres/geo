@@ -1362,6 +1362,9 @@ var acciones = {
   },
 
   clasificacionSucs: function (Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,$clasSucs,$resultadoNotacionSucs,$resultadoDescripcionSucs){
+
+    
+
     console.log("Clasificacion de suelos SUCS");
     var notacionSucs = "N/A";
     var descSucs = " N/A";
@@ -1416,6 +1419,8 @@ var acciones = {
     } 
 
     function Gravas(){
+
+
        console.log("Inicio de condicional de Gravas");
        notacionSucs= FinosNotacion();
        console.log("notacion finos para grava"+notacionSucs);
@@ -1557,8 +1562,10 @@ var acciones = {
        console.log("----Finalizacion de condicional gravas----");
        console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
        $clasSucs.text(notacionSucs+"-"+descSucs);
+
     }
     function Arenas(){
+
       console.log("Inicio de condicional de Arenas"); 
       notacionSucs= FinosNotacion();
       console.log("notacion finos para arenas"+notacionSucs);
@@ -1697,9 +1704,11 @@ var acciones = {
       console.log("----Finalizacion de condicional arenas----");
       console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
       $clasSucs.text(notacionSucs+"-"+descSucs);
-
+      
     }
     function Finos(){
+
+      
       console.log("Inicio de condicional de Finos");
 
       if(LimiteLiquidoVar<50){
@@ -1982,8 +1991,10 @@ var acciones = {
       console.log("----Finalizacion de condicional finos----");
       console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
       $clasSucs.text(notacionSucs+"-"+descSucs);
+      
     }
     function FinosNotacion(){
+
       console.log("Inicio de condicional de Finos");
 
       if(LimiteLiquidoVar<50){
@@ -2033,8 +2044,11 @@ var acciones = {
     $resultadoNotacionSucs.val(notacionSucs),
     $resultadoDescripcionSucs.val(descSucs);
 
+    
 
   }, clasificacionAashto: function(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,$clasAashto,$resultadoAashto){
+   
+
     console.log("Clasificacion de suelos Aashto");
     var notacionAashto = "N/A";
     console.log(" Notacion Aashto por defecto es : "+notacionAashto);
@@ -2100,6 +2114,7 @@ var acciones = {
     $clasAashto.text(notacionAashto);
     $resultadoAashto.val(notacionAashto);
   
+    
   },
 
   Preimpresion: function(){

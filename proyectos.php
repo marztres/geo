@@ -303,6 +303,12 @@
               <input  name='cedula' type='text' id="cedula" value="<?php echo $user->cedula ?>"  placeholder='Cédula' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
+              <input name='nombres' type='text' id="nombres" value="<?php echo $user->nombres ?>"  placeholder='Nombres' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='apellidos' type='text' id="apellidos" value="<?php echo $user->apellidos ?>"  placeholder='Apellidos' class='input-block-level limpiar' required >
+            </div>
+            <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
@@ -310,12 +316,6 @@
             </div>
             <div class="controls inputs">
               <input  name='confirmar_clave' type='password'  placeholder='Confirmar nueva contraseña' class="input-block-level limpiar" required >
-            </div>
-            <div class="controls inputs">
-              <input name='nombres' type='text' id="nombres" value="<?php echo $user->nombres ?>"  placeholder='Nombres' class="input-block-level limpiar" required >
-            </div>
-            <div class="controls inputs">
-              <input name='apellidos' type='text' id="apellidos" value="<?php echo $user->apellidos ?>"  placeholder='Apellidos' class='input-block-level limpiar' required >
             </div>
             <div class="controls inputs">
               <input name='func'  type="hidden"  value='modificar_usuario' >
