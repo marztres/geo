@@ -335,13 +335,19 @@
     <div id="ConfiguracionCuenta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Editar Usuario</h3>
+        <h3 id="myModalLabel">Configurar cuenta</h3>
       </div>
       <div class="modal-body">
       <form id="ConfigurarUsuarios" name='formulario' method='post' action="save.php" class="form-vertical">
       <div class="control-group">
             <div class="controls inputs">
               <input  name='cedula' type='text' id="cedula" value="<?php echo $user->cedula ?>"  placeholder='Cédula' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='nombres' type='text' id="nombres" value="<?php echo $user->nombres ?>"  placeholder='Nombres' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input name='apellidos' type='text' id="apellidos" value="<?php echo $user->apellidos ?>"  placeholder='Apellidos' class='input-block-level limpiar' required >
             </div>
             <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
@@ -351,12 +357,6 @@
             </div>
             <div class="controls inputs">
               <input  name='confirmar_clave' type='password'  placeholder='Confirmar nueva contraseña' class="input-block-level limpiar" required >
-            </div>
-            <div class="controls inputs">
-              <input name='nombres' type='text' id="nombres" value="<?php echo $user->nombres ?>"  placeholder='Nombres' class="input-block-level limpiar" required >
-            </div>
-            <div class="controls inputs">
-              <input name='apellidos' type='text' id="apellidos" value="<?php echo $user->apellidos ?>"  placeholder='Apellidos' class='input-block-level limpiar' required >
             </div>
             <div class="controls inputs">
               <input name='func'  type="hidden"  value='modificar_usuario' >
