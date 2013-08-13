@@ -578,6 +578,31 @@
   						$response["message"] = "Error al actualizar granulometria ";
   					}
   			break;
+  			case 'addFirma';
+
+  				$persona=$_POST['persona'];
+ 					$nombre=$_FILES['imagen']['name'];
+
+ 					if(isset($_FILES['imagen']['name']))
+ 					{
+ 						$respuesta=true;
+ 					} else {
+ 						$respuesta=false;
+ 					}
+
+
+
+ 					if ( $respuesta ) 
+ 					{
+  						$response["status"] = "OK";
+  						$response["message"] = "Firma guardada correctamente";
+  				} else 
+  				{
+  					$response["status"] = "ERROR";
+  					$response["message"] = "Error al guardar la firma";
+  				}
+
+  			break;
 			default:
 				$response["status"] = "ERROR";
 				$response["message"] = "Funcion no encontrada";

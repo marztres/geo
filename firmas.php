@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/usuarios.css">
+    <link rel="stylesheet" href="assets/css/firmas.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>     
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
@@ -34,11 +34,52 @@
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="assets/js/firmas.js"></script>
     <script src="assets/js/usuarios.js"></script>
-    <script >
-      $(document).ready(function() {
-        $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' }); 
-      })
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+
+    <script>
+      $(document).ready(function()
+      {
+
+        var options = { 
+          beforeSend: function() 
+          {
+            $("#progress").show();
+            //clear everything
+            $("#bar").width('0%');
+            $("#message").html("");
+          $("#percent").html("0%");
+          },
+          uploadProgress: function(event, position, total, percentComplete) 
+          {
+            $("#bar").width(percentComplete+'%');
+            $("#percent").html(percentComplete+'%');
+
+          
+          },
+          success: function() 
+          {
+              $("#bar").width('100%');
+            $("#percent").html('100%');
+
+          },
+        complete: function(response) 
+        {
+          $("#message").html("<font color='green'>"+response.responseText+"</font>");
+        },
+        error: function()
+        {
+          $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
+
+        }
+           
+      }; 
+
+           $("#nuevaFirma").ajaxForm(options);
+
+      });
+
     </script>
+
   </head>
   <body>
     <div class="row-fluid header">
@@ -211,32 +252,38 @@
         <h3 id="myModalLabel">Nueva firma</h3>
       </div>
       <div class="modal-body">
-      <form id="ModificarUsuarios" name='formulario' method='post' action="save.php" class="form-vertical">
-      <div class="control-group">
+      <form id="nuevaFirma" name='formulario' enctype="multipart/form-data" method='POST' action="save.php" class="form-vertical">
+        <div class="control-group">
+            
             <div class="controls inputs">
-              <input  name='cedula' type='text' id="cedula"  placeholder='Cédula' class="input-block-level limpiar" required >
+              <input  name='persona' id="persona" type='text' class="input-block-level"   >
             </div>
-        
             <div class="controls inputs">
-              <input name='func'  type="hidden"  value='modificar_firma' >
-              <input name='id_firma'  type="hidden" id="id_firma"  >
+              <input  name='tarjetaProfesional' type='text' class="input-block-level"   >
+            </div>    
+            <div class="controls inputs">
+              <input  name='imagen' id="imagen" type='file' class="input-block-level"  >
+            </div>      
+  
+            <div class="controls inputs">
+              <input name='func'  type="hidden"  value='addFirma' >
             </div>
-            <!-- Mensaje exito y error , la clase hide es la que las oculta usen el Id de cada mensaje -->
-            <div id="error_modificar_usuario" class="alert alert-error hide">                             
-              <strong> 
-              <small>error al modificar la firma</small>  
-              </strong>
+
+            <div id="progress" class="controls">
+              <div id="bar"></div>
+              <div id="percent">0%</div >
+              </div>
+              <div id="message">
+                
+              </div>
+
             </div>
-            <div id="exito_modificar_usuario" class="alert alert-success hide ">
-              <strong>Firma modificada correctamente.</strong>  
-            </div>
-            <!-- Fin mensaje exito y error -->
-          </div>
-          </form>
+      
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="EnviarModificarUsuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+        <button type="submit" id="EnviarGuardarFirma"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar firma</button> 
+        </form>
       </div>
     </div>
     <!--  Fin nueva firma-->
