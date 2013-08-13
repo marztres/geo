@@ -184,6 +184,7 @@
                 <th>Numero de golpes</th>
                 <th>Color</th>
                 <th>Editar</th>
+                <th>Clonar</th>
               </tr>
             </thead>
             <tbody>
@@ -199,6 +200,11 @@
                 <td><?php echo $datoMuestra->descripcion ?></td>
                 <td>
                   <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="modalMuestra" role="button" data-toggle="modal" href="#editarmuestra">
+                  <i class='icon-wrench'></i>
+                  </a>
+                </td>
+                <td>
+                  <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="clonarMuestra" role="button" data-toggle="modal" href="#clonarmuestra">
                   <i class='icon-wrench'></i>
                   </a>
                 </td>
@@ -1157,7 +1163,7 @@
                             $j=0;
                             foreach ( $DatosRetenidos as $retenidos ):
                             $suma+=$retenidos->pesoRetenido;
-                            if($j==13){
+                            if($j==17){
                             $pesoretenidomasrecipiente=$suma+$DatosGranulometria->pesoRecipiente;
                             $sumapesoretenidos=$suma;
                             echo $suma+$DatosGranulometria->pesoRecipiente;
@@ -1352,30 +1358,34 @@
                           $d10=$DatosGranulometria->d10;
                           ?>
                         <td class="tdTamiz4">
-                          <?php
-                            if($resultado->indicePlasticidad==0){
-                               $tamizN4=0;
-                            }
-                            else{
-                                 echo $tamizN4=round($tamices[7],2);
-                            }
-                            ?>
+                          <?php  echo $tamizN4=round($tamices[9],2); ?>
                         </td>
                         <td class="tdTamiz200">
-                          <?php ; 
-                            if($resultado->indicePlasticidad==0){
-                                  $tamizN200=0;
-                            }
-                            else{
-                                echo $tamizN200=round($tamices[13],2);
-                            }
-                                $tamizN10=round($tamices[8]);
-                                $tamizN40=round($tamices[11]);                             
-                            ?> 
+                          <?php  echo $tamizN200=round($tamices[17],2);
+                                 $tamizN10=round($tamices[10]);
+                                 $tamizN40=round($tamices[15]);                             
+                          ?> 
                         </td>
-                        <td class="tdLimiteLiquido"><?php echo $liquido=$resultado->limiteLiquido; ?> </td>
+                        <td class="tdLimiteLiquido">
+                            <?php  if(isset($resultado->limiteLiquido)){
+                                      echo $liquido=$resultado->limiteLiquido;
+                                   }
+                                   else{
+                                    echo $liquido=0;
+                                   }
+                            ?>
+                         </td>
                         <?php $plastico=$resultado->limitePlastico;?>
-                        <td class="tdIndicePlaticidad"><?php echo $indicePlasticidad=$resultado->indicePlasticidad; ?></td>
+                        <td class="tdIndicePlaticidad">
+                            <?php 
+                                if(isset($resultado->indicePlasticidad)){
+                                   echo $indicePlasticidad=$resultado->indicePlasticidad;
+                                }
+                                else{
+                                   echo $indicePlasticidad=0;  
+                                }
+                             ?>
+                        </td>
                         <td class="indiceGrupo">  </td>
                       </tr>
                     </tbody>
@@ -1405,6 +1415,7 @@
                             if($d10!=0 && $d30!=0 && $d60!=0 ){
                                 $cc=(($d30*$d30)/($d10*$d60));
                             }
+                            if($resultado->limiteLiquido!=0 && $resultado->indicePlasticidad){
                             if($gravas>$arenas && $gravas>$finos){
                                  if($finos<5){
                                     if($cu>=4 && $cc>=1 && $cc<=3){
@@ -1955,11 +1966,13 @@
                                       }
                                   }
                             }
+                          }
                             ?>
                         </td>
                         <td class="classAsshto">
                           <?php
                             $notacionAsto=0;
+                            if($resultado->limiteLiquido!=0 && $resultado->indicePlasticidad){
                             if($tamizN200<=35){   
                             if($indicePlasticidad<=6 && $liquido<=0){
                                   $grupo="A-1";
@@ -2056,7 +2069,8 @@
                                             }
                                     } 
                             }
-                            }
+                          }
+                        }
                             ?>
                         </td>
                       </tr>
@@ -2375,6 +2389,56 @@
       </div>
     </div>
     <!-- #############  FIN FORM EDITAR MUESTRA ############### -->
+     <!-- #############  FORM  CLONAR MUESTRA ############### -->
+   <div id="clonarmuestra" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+         <h3 id="myModalLabel">Clonar muestra</h3>
+       </div>
+       <div class="modal-body">
+         <form id="ClonarMuestras" name='formulario' method='post' action="save.php" class="form-vertical">
+           <div class="control-group">
+             <div class="controls inputs">
+               <input id="descripcion_clonarm" name='descripcion_muestra' type='text' name='descripcion_muestra' placeholder='Descripción' class="input-block-level limpiar" required autofocus >
+             </div>
+             <div class="row-fluid">
+              <span class="span3 title tituloprofundidad">Profundidad :</span>
+              <input  type='text' name='profundidad_inicial' placeholder='Desde' class="span3 " >   
+              <input  type='text' name='profundidad_final' placeholder='Hasta' class="span3 " >   
+             </div>
+            <div class="controls inputs">
+               <input id="numero_golpes_clonar" type='text' name='numero_de_golpes' placeholder='Numero de golpes' class="input-block-level limpiar " >
+             </div>
+             <label class="checkbox">
+             <input  name="box_relleno" class="box_relleno estratos" type="checkbox" value="1">
+             Es parte de la capa de relleno
+             </label>
+             <div class="controls inputs">
+               <label class="checkbox">
+               <input name="box_roca" class="box_roca estratos" type="checkbox" value="1">
+               Esta muestra esta conformada solo por roca.
+               </label>
+             </div>
+             <input id="id_muestra_clonar" type='hidden' name='id_muestra' value="">
+             <input type='hidden' name='idsondeos' value="<?php echo $_GET['ids'] ?>">
+             <input type='hidden' name="func" value="ClonarMuestra">      
+             <!-- Mensaje exito y error , la clase hide es la que las oculta usen el Id de cada mensaje -->
+              <div id="error_clonar_muestra" class="alert alert-error hide">                             
+                  <strong> <small>error al guardar el proyecto</small>  </strong>
+             </div>
+             <div id="exito_clonar_muestra" class="alert alert-success hide ">
+               <strong>Datos correctos.</strong>  
+             </div>
+             <!-- Fin mensaje exito y error -->
+           </div>
+         </form>
+       </div>
+       <div class="modal-footer">
+         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
+         <button type="submit" id="EnviarClonarMuestra"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar muestra</button> 
+       </div>
+     </div>
+     <!-- #############  FIN FORM ClONAR MUESTRA ############### -->
     <!-- Configuracion cuenta-->
     <div id="ConfiguracionCuenta" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">

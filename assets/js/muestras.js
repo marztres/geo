@@ -9,7 +9,9 @@ var acciones = {
     $('a[href="#"]').on('click', acciones.prevenirClickSinDestino);
     $("#enviar_muestra").on('click', acciones.clickGuardarMuestra);
     $("#EnviarModificarMuestra").on('click', acciones.clickModificarMuestra);
+    $("#EnviarClonarMuestra").on('click', acciones.clickCopiarMuestra);
     $('.modalMuestra').on('click', acciones.clickEditarMuestra);
+    $('.clonarMuestra').on('click', acciones.clickClonarMuestra);
     $('.guardaLimites').on('click', acciones.updateLimites);
     $('.limites').on('keyup', acciones.calculosLimites);
     $('.noplastico').on('click', acciones.noplastico);
@@ -20,9 +22,7 @@ var acciones = {
     $('.analisis,.granulo').on('keyup', acciones.calculosGranulometria);
     $('.boxImpresion').on('change' , acciones.Preimpresion);
     $('.impresionBtn').on('click' , acciones.imprimir);
-    $('.estratos').on('change',acciones.clickEstratos);
-    
-    
+    $('.estratos').on('change',acciones.clickEstratos); 
   },
 
   updateLimites: function (e) {
@@ -90,6 +90,55 @@ var acciones = {
       }
     }, 'json');
   },
+
+  clickCopiarMuestra: function (e) {
+    e.preventDefault();
+    $post = $('#ClonarMuestras');
+    $.post($post.attr('action'), $post.serialize(), function (respuesta) {
+      if (respuesta.status === 'OK') {
+        $('#exito_clonar_muestra').removeClass('hide');
+        setTimeout(function () {
+          $("#exito_clonar_muestra").addClass("hide");
+          location.reload();
+        }, 3000);
+        $(".limpiar").val('');
+      } else {
+        $('#respuesta_guardado').text(respuesta.mensaje);
+        $('#error_clonar_muestra').removeClass('hide');
+        setTimeout(function () {
+          $("#error_clonar_muestra").addClass("hide");
+        }, 3000);
+      }
+    }, 'json');
+  },
+
+
+   clickClonarMuestra: function (e) {
+        e.preventDefault();
+        var id = this.id,
+        datos = this.rel;
+        var box_roca =  $(this).closest('body').find('#clonarmuestra').find('.box_roca'),
+        box_relleno = $(this).closest('body').find('#clonarmuestra').find('.box_relleno');
+        var profundidades = this.rel.split(','),
+        idm = profundidades[0],
+        descripcionm = profundidades[3],
+        material_de_relleno = profundidades[4],
+        num_golpes = profundidades[5];
+          if (material_de_relleno == 1) {
+              box_relleno.attr('checked', true);
+          } else {
+              box_relleno.attr('checked', false);
+          } if(material_de_relleno == 2){
+              box_roca.attr('checked', true);
+          } else {
+              box_roca.attr('checked', false);
+          }
+        $('#descripcion_clonarm').val(descripcionm);
+        $('#numero_golpes_clonar').val(num_golpes);
+        $('#id_muestra_clonar').val(idm);
+  },
+
+
   clickEstratos: function(){
 
     var box_roca =  $(this).closest("form").find(".box_roca"),

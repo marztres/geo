@@ -293,6 +293,65 @@
 					$response["message"] = "Error guardando muestra";
 				}
 			break;
+			case 'ClonarMuestra':
+  	  			$muestrasClass = new muestras();
+ 		  			$testLimitesClass = new testlimintes();
+ 		  			$testCompresionClass = new Compresion();
+ 		  			$granulometriaClass= new granulometria();
+ 		  			$pesosRetenidoClass= new pesos_retenidos();
+ 		  			$resultadosClass= new resultados();
+ 
+ 		  			$descripcion_muestra = $_POST['descripcion_muestra'];
+ 		  			$profundidad_inicial = $_POST['profundidad_inicial'];
+ 		  			$profundidad_final = $_POST['profundidad_final'];
+ 		  			$numero_de_golpes= $_POST['numero_de_golpes'];
+ 		  			$idsondeos = $_POST['idsondeos'];
+ 		  			$id_muestra = $_POST['id_muestra'];
+ 
+ 		  			if(isset($_POST['box_relleno'])){
+ 		  				$box_relleno = $_POST['box_relleno'];	  				
+ 		  			}
+ 		  			if(isset($_POST['box_roca'])){
+ 							$box_roca = $_POST['box_roca'];	  				
+ 		  			}
+ 		  			if($box_relleno==1){
+ 		  				$box_estrato=1;	
+ 		  			} else if($box_roca==1){
+ 		  				$box_estrato=2;	
+ 		  			} else {
+ 		  				$box_estrato=0;	
+ 		  			}
+ 		  			
+ 		  			$respuesta = $muestrasClass->addMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_estrato ,$idsondeos);
+ 		  			$idMuestra = $muestrasClass->insert_id;
+ 		  			$testlimites= $testLimitesClass->getLimitesMuestra($id_muestra);
+ 		  			foreach( $testlimites as $Listatest ):
+ 		  				$testLimitesClass->addTest($Listatest->tipo_muestra, $Listatest->nom_capsula, $Listatest->peso_capsula, $Listatest->peso_capsula_suelo_humedo,$Listatest->peso_capsula_suelo_seco, $Listatest->num_golpes, $idMuestra);
+ 		  			endforeach;
+ 			  			$Compresion=$testCompresionClass->GetDatosCompresion($id_muestra);
+ 			  			$testCompresionClass->addCompresion(0,$Compresion->diametro, $Compresion->altura, $Compresion->peso,$Compresion->tipoFalla,$idMuestra);
+ 			  			$idCompresion=$testCompresionClass->insert_id;
+ 			  			$deformaciones=$testCompresionClass->GetDatosDeformaciones($Compresion->id_compresion);
+ 		  			foreach( $deformaciones as $ListaDeformaciones ):
+ 		  				$testCompresionClass->addDeformacion(0,$ListaDeformaciones->deformacion,$ListaDeformaciones->carga,$idCompresion);
+ 		  			endforeach;  			
+ 		  			$consultaGranulometria=$granulometriaClass->getDatoGranulometria($id_muestra);
+ 		  			$granulometriaClass->addGranulometria($consultaGranulometria->pesoRecipiente, $consultaGranulometria->pesoRecipienteMasMuestra, $idMuestra);
+ 		  			$idGranulometria= $granulometriaClass->insert_id;
+ 		  			$PesosRetenidos=$pesosRetenidoClass->getDatoPesosRetenidos( $consultaGranulometria->id_granulometria );
+ 		  			foreach( $PesosRetenidos as $ListaPesosRetenidos ):
+ 		  			$pesosRetenidoClass->addPesoRetenido($ListaPesosRetenidos->tamiz,$ListaPesosRetenidos->tamanoTamiz,$ListaPesosRetenidos->pesoRetenido, $idGranulometria);
+ 		  			endforeach;
+ 		  			$resultadosClass->addResultados($idMuestra);
+ 		  			if ( $respuesta ) {
+ 		  				$response["status"] = "OK";
+ 		  				$response["message"] = "Muestra guardada correctamente";
+ 		  				$response["idMuestras"] = $muestrasClass->insert_id;
+ 		  			} else {
+ 		  				$response["status"] = "ERROR";
+ 		  				$response["message"] = "Error guardando muestra";
+ 		  			}
+   			break;
 			case 'testlimites':
 					$testLimitesClass = new testlimintes();
 					$resultadosClass= new resultados();
@@ -425,8 +484,7 @@
 				}
 
 					}
-					break;
-
+				break;
 				case "UpdateCompresion":
 						$testCompresionClass = new Compresion();
 						$resultadosClass= new resultados();
@@ -459,10 +517,9 @@
 					$response["message"] = "Error actualizando compresion";
 				}					
 				break;
-			
 				case 'granulometria':
   						$granulometriaClass=new granulometria();
-  	  			  $pesosRetenidosClass=new pesos_retenidos();
+  	  			  		$pesosRetenidosClass=new pesos_retenidos();
   						$resultadosClass= new resultados();	
 
   						$idPesoRetenido = array();
@@ -521,10 +578,6 @@
   						$response["message"] = "Error al actualizar granulometria ";
   					}
   			break;
-
-
-
-			
 			default:
 				$response["status"] = "ERROR";
 				$response["message"] = "Funcion no encontrada";
