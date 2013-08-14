@@ -9,6 +9,8 @@
 	require_once 'includes/granulometria.php';
 	require_once 'includes/pesos_retenidos.php';
 	require_once 'includes/resultados.php';
+	require_once 'includes/firmas.php';
+
 
 
 	if ( isset( $_POST['func'] ) ) {
@@ -624,23 +626,128 @@
   					}
   			break;
   			case 'addFirma';
+  				$firmasClass=new firmas();
 
-  				$persona=$_POST['persona'];
- 					$nombre=$_FILES['imagen']['name'];
+  				if($_POST['persona']!=NULL && $_POST['tarjetaProfesional']!=NULL && isset($_FILES['imagen'])){
+  					$persona=$_POST['persona'];	
+  					$tarjetaPro=$_POST['tarjetaProfesional'];	
+  					$ruta = "assets/uploads/"; 
 
- 					if(isset($_FILES['imagen']['name']))
- 					{
- 						$respuesta=true;
- 					} else {
- 						$respuesta=false;
- 					}
+  					$nombre=$_FILES['imagen']['name'];
+  					$max=1500000; 
+						$filesize = $_FILES['imagen']['size'];
+						
+						if($filesize < $max){ 
+							$directorio =$ruta; 
+							$nombreAleatorio = strtotime(date('Y-m-d H:i:s'));
+							$nombreImagen= $nombreAleatorio.".jpg";
+ 							$nuevonombre=$directorio.$nombreImagen; 
 
+ 							move_uploaded_file($_FILES['imagen']['tmp_name'],$nuevonombre);	
+ 							$resultado= $firmasClass->addFirma($persona,$tarjetaPro,$nuevonombre);
 
+ 							if($resultado){
+ 								$respuesta =true;	
+ 							}else {
+ 								$respuesta =false;	
+ 							}
+ 						} else{
+ 							$respuesta =false;
+ 						}
+
+  				} else {
+  					$respuesta =false;
+  				}
 
  					if ( $respuesta ) 
  					{
   						$response["status"] = "OK";
   						$response["message"] = "Firma guardada correctamente";
+  						$response["ruta"] =$nuevonombre;
+  				} else 
+  				{
+  					$response["status"] = "ERROR";
+  					$response["message"] = "Error al guardar la firma";
+  				}
+
+  			break;
+  			case 'updateFirma';
+  				$firmasClass=new firmas();
+
+  				if($_POST['editarPersona']!=NULL && $_POST['editarTarjetaPro']!=NULL && $_POST['idFirma']!=NULL && $_POST['imagenActual']!=NULL){
+  					
+  					$idFirma=$_POST['idFirma'];
+  					$persona=$_POST['editarPersona'];	
+  					$tarjetaProfesional=$_POST['editarTarjetaPro'];
+  					$imagenActual=$_POST['imagenActual'];
+
+  					if(isset($_FILES['imagen'])){
+	  					$ruta = "assets/uploads/"; 
+
+	  					$nombre=$_FILES['imagen']['name'];
+	  					$max=1500000; 
+							$filesize = $_FILES['imagen']['size'];
+							
+							if($filesize < $max){ 
+								$directorio =$ruta; 
+								$nombreAleatorio = strtotime(date('Y-m-d H:i:s'));
+								$nombreImagen= $nombreAleatorio.".jpg";
+	 							$nuevonombre=$directorio.$nombreImagen; 
+
+	 							move_uploaded_file($_FILES['imagen']['tmp_name'],$nuevonombre);	
+	 							unlink($imagenActual);
+	 							
+	 							$resultado= $firmasClass->updateFirma($idFirma,$persona,$tarjetaProfesional,$nuevonombre);
+
+	 							if($resultado){
+	 								$respuesta =true;	
+	 							}else {
+	 								$respuesta =false;	
+	 							}
+	 						} else{
+	 							$respuesta =false;
+	 						}
+ 						} else {
+ 							$resultado= $firmasClass->updateFirma($idFirma,$persona,$tarjetaProfesional,$imagenActual);
+
+ 							$nuevonombre=$imagenActual;
+ 							if($resultado){
+	 							$respuesta =true;	
+	 						}else {
+	 							$respuesta =false;	
+	 						}
+ 						}
+
+
+ 						
+  				} else {
+  					$respuesta =false;
+  				}
+
+ 					if ( $respuesta ) 
+ 					{
+  						$response["status"] = "OK";
+  						$response["message"] = "Firma guardada correctamente";
+  						$response["ruta"] =$nuevonombre;
+  				} else 
+  				{
+  					$response["status"] = "ERROR";
+  					$response["message"] = "Error al guardar la firma";
+  				}
+
+  			break;
+  			case 'deleteFirma';
+  				$firmasClass=new firmas();
+
+  				$idFirma=$_POST['idFirma'];
+
+  				$respuesta= $firmasClass->eliminarFirma($idFirma);
+ 					
+ 					if ( $respuesta ) 
+ 					{
+  						$response["status"] = "OK";
+  						$response["message"] = "Firma guardada correctamente";
+  						$response["ruta"] =$nuevonombre;
   				} else 
   				{
   					$response["status"] = "ERROR";
