@@ -35,6 +35,8 @@
     <script src="assets/js/firmas.js"></script>
     <script src="assets/js/usuarios.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
+    <link rel="stylesheet" href="assets/css/alertify.core.css" />
+    <link rel="stylesheet" href="assets/css/alertify.default.css" />
 
     <script>
       $(document).ready(function()
@@ -54,7 +56,6 @@
             $("#bar").width(percentComplete+'%');
             $("#percent").html(percentComplete+'%');
 
-          
           },
           success: function() 
           {
@@ -64,21 +65,78 @@
           },
         complete: function(response) 
         {
-          $("#message").html("<font color='green'>"+response.responseText+"</font>");
+          var respuesta= $.parseJSON(response.responseText);
+
+          console.log(this);
+         
+          if(respuesta.status=="OK"){
+            alertify.log("Firma y datos guardados exitosamente.");
+            $("#message").html("<img src="+respuesta.ruta+" class='img-rounded' height='200px' width='200px' />");
+            setTimeout(function(){
+            location.reload();    
+            },3000);
+          } else {
+            console.error(respuesta.message);
+            alertify.log("Error , rectifique los datos.");
+            $("#bar").width('0%');
+            $("#percent").html('0%');
+          }
         },
-        error: function()
+        error: function(response)
         {
-          $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
-
+          console.error("error"); 
         }
-           
       }; 
+      var options2 = { 
+          beforeSend: function() 
+          {
+            $("#progressEditar").show();
+            //clear everything
+            $("#barEditar").width('0%');
+            $("#messageEditar").html("");
+          $("#percentEditar").html("0%");
+          },
+          uploadProgress: function(event, position, total, percentComplete) 
+          {
+            $("#barEditar").width(percentComplete+'%');
+            $("#percentEditar").html(percentComplete+'%');
 
+          },
+          success: function() 
+          {
+              $("#barEditar").width('100%');
+            $("#percentEditar").html('100%');
+
+          },
+        complete: function(response) 
+        {
+          var respuesta= $.parseJSON(response.responseText);
+
+        
+          if(respuesta.status=="OK"){
+            alertify.log("Firma y datos actualizados exitosamente.");
+            $("#messageEditar").html("<img src="+respuesta.ruta+" class='img-rounded' height='200px' width='200px' />");
+            setTimeout(function(){
+            
+            },3000);
+          } else {
+            console.error(respuesta.message);
+            alertify.log("Error , rectifique los datos.");
+            $("#barEditar").width('0%');
+            $("#percentEditar").html('0%');
+          }
+        },
+        error: function(response)
+        {
+          console.error("error"); 
+        }
+      };
            $("#nuevaFirma").ajaxForm(options);
-
+           $("#editarFirma").ajaxForm(options2);
       });
 
     </script>
+
 
   </head>
   <body>
@@ -107,7 +165,12 @@
           </li>
           <li class="divider"></li>
           <?php endif ?>
+          <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+          <li>
+            <a href="firmas.php"><i class="icon-book"></i> Firmas</a>
+          </li>
           <li class="divider"></li>
+          <?php endif ?>
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">
             <i class="icon-question-sign"></i> Ayuda
@@ -180,15 +243,15 @@
               <span ><?php echo $firmas->tarjetaProfesional ?></span>
             </td>
             <td>
-              <a href="#editar_firma" rel='<?php echo $firmas->idFirma.",".$firmas->persona.",".$firmas->tarjetaProfesional.",".$firmas->imagenFirma; ?>' class="editarFirma" role="button" id="<?php echo $firmas->id_usuario;?>" data-toggle="modal">
-                    <i class="icon-pencil"></i>
-                    </a>
+              <a href="#editar_Firma" rel='<?php echo $firmas->idFirma.",".$firmas->persona.",".$firmas->tarjetaProfesional.",".$firmas->imagenFirma; ?>' class="editarFirma" role="button" data-toggle="modal">
+                <i class="icon-pencil"></i>
+              </a>
             </td>
             <td>
-              <a class="eliminar_firma" href="#"><i class="icon-remove"></i></a>
+              <a class="eliminarFirma" href="#"><i class="icon-remove"></i></a>
               <form action="save.php">
-                <input type="hidden" name="func" value="eliminarFirma">
-                <input type="hidden" name="idusuario" value="<?php echo $firmas->idFirma; ?>">
+                <input type="hidden" name="func" value="deleteFirma">
+                <input type="hidden" name="idFirma" value="<?php echo $firmas->idFirma; ?>">
               </form>
             </td>
           </tr>
@@ -256,29 +319,29 @@
         <div class="control-group">
             
             <div class="controls inputs">
-              <input  name='persona' id="persona" type='text' class="input-block-level"   >
+              <input  name='persona' id="persona" type='text' placeholder="Nombre persona" class="input-block-level" >
             </div>
             <div class="controls inputs">
-              <input  name='tarjetaProfesional' type='text' class="input-block-level"   >
+              <input  name='tarjetaProfesional' type='text' class="input-block-level" placeholder="Tarjeta profesional" >
             </div>    
+            <div class="controls inputs">
+              <label for="imagen" class="title">Imagen de firma</label>
+            </div>
             <div class="controls inputs">
               <input  name='imagen' id="imagen" type='file' class="input-block-level"  >
             </div>      
-  
-            <div class="controls inputs">
-              <input name='func'  type="hidden"  value='addFirma' >
-            </div>
 
+            <br>
             <div id="progress" class="controls">
               <div id="bar"></div>
               <div id="percent">0%</div >
               </div>
-              <div id="message">
-                
-              </div>
-
+              <br>
+              <div id="message"></div>
+            </div> 
+            <div class="controls inputs">
+              <input name='func'  type="hidden"  value='addFirma' >
             </div>
-      
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
@@ -289,39 +352,52 @@
     <!--  Fin nueva firma-->
 
     <!--  Editar firma -->
-    <div id="editar_firma" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="editar_Firma" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Editar Firma</h3>
       </div>
       <div class="modal-body">
-      <form id="ModificarUsuarios" name='formulario' method='post' action="save.php" class="form-vertical">
-      <div class="control-group">
+      <form id="editarFirma" name='formulario' method='post' action="save.php" class="form-vertical">
+        <div class="control-group">
             <div class="controls inputs">
-              <input  name='cedula' type='text' id="cedula"  placeholder='Cédula' class="input-block-level limpiar" required >
+              <input  name='editarPersona' id="editarPersona" type='text' placeholder="Nombre persona" class="input-block-level" >
             </div>
-        
             <div class="controls inputs">
-              <input name='func'  type="hidden"  value='modificar_firma' >
-              <input name='id_firma'  type="hidden" id="id_firma"  >
+              <input  name='editarTarjetaPro' id="editarTarjetaPro" type='text' class="input-block-level" placeholder="Tarjeta profesional" >
+            </div>    
+            <div class="controls inputs">
+              <label for="imagen" class="title">Imagen de firma</label>
             </div>
-            <!-- Mensaje exito y error , la clase hide es la que las oculta usen el Id de cada mensaje -->
-            <div id="error_modificar_usuario" class="alert alert-error hide">                             
-              <strong> 
-              <small>error al modificar el usuario</small>  
-              </strong>
+            <div class="controls inputs">
+              <input  name='imagen' id="imagen" type='file' class="input-block-level"  >
             </div>
-            <div id="exito_modificar_usuario" class="alert alert-success hide ">
-              <strong>Usuario modificado correctamente.</strong>  
+            <br>
+            <div id="progressEditar" class="controls">
+              <div id="barEditar"></div>
+              <div id="percentEditar">0%</div >
+              </div>
+              <br>
+              <div id="messageEditar">
+              </div> 
+            </div> 
+            <div class="controls inputs">
+              <input name='idFirma' id="idFirma"   type="hidden" >
             </div>
-            <!-- Fin mensaje exito y error -->
-          </div>
-          </form>
-      </div>
+            <div class="controls inputs">
+              <input name='imagenActual' id="imagenActual"   type="hidden" >
+            </div>   
+            <div class="controls inputs">
+              <input name='func'  type="hidden"  value='updateFirma' >
+            </div>    
+        </div>
+      
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="EnviarModificarUsuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+        <button type="submit" id="EnviarEditarFirma"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar firma</button> 
+        </form>
       </div>
+
     </div>
     <!--  Fin editar firma-->
 
@@ -379,6 +455,7 @@
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script> 
       $('.brand').tooltip('hide');
-    </script>   
+    </script> 
+    <script src="assets/js/alertify/alertify.js"></script>  
   </body>
 </html>

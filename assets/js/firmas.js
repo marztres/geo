@@ -6,36 +6,33 @@ var accionesFirma = {
 	
 	clicks: function(){
 		$('a[href="#"]').on( 'click', accionesFirma.prevenirClickSinDestino );
-		$("#enviar_usuario").on('click', accionesFirma.guardarUsuario );
-		$(".eliminar_firma").on('click', accionesFirma.eliminarUsuario );
-		$('.editarFirma').on('click', accionesFirma.clickEditarUsuario);	
-		$("#EnviarModificarUsuario").on('click', accionesFirma.clickModificarUsuario);
-		$("#Mod_Usuario").on('click', accionesFirma.clickConfigurarUsuario);
+		$(".eliminarFirma").on('click', accionesFirma.eliminarFirma );
+		$('.editarFirma').on('click', accionesFirma.editarFirma);	
 	},
 	
 	prevenirClickSinDestino: function( e ) {
 		e.preventDefault();
 	},
 	
-	guardarFirma: function( e ) {
+	editarFirma: function(e){
 		e.preventDefault();
-		$post = $('#datosUsuario');
-		$.post($post.attr('action'), $post.serialize(), function(respuesta) {
-			if (respuesta.status === 'OK') {
-				$('#exito').removeClass('hide');
-				setTimeout(function() {
-					$("#exito").addClass("hide");
-					location.reload();
-				}, 3000);
-				$(".limpiar").val('');
-			} else {
-				$('#respuesta_guardado').text(respuesta.mensaje);
-				$('#error').removeClass('hide');
-				setTimeout(function() {
-					$("#error").addClass("hide");
-				}, 3000);
-			}
-		}, 'json');
+        
+    var datosRel = this.rel.split(',');
+      idFirma = datosRel[0],
+      persona = datosRel[1],
+      tarjetaProfesional = datosRel[2],
+      imagenFirma = datosRel[3];
+    
+    var mensaje =  $(this).closest('body').find('#editarFirma').find('#messageEditar');
+
+    $('#idFirma').val(idFirma); 
+    $('#editarPersona').val(persona);
+    $('#editarTarjetaPro').val(tarjetaProfesional);
+    $('#imagenActual').val(imagenFirma);
+
+    mensaje.html("<img src="+imagenFirma+" class='img-rounded' height='200px' width='200px' />");
+
+
 	},
 
 	eliminarFirma: function( e ) {
