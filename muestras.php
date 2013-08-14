@@ -9,6 +9,7 @@
   require_once('includes/pesos_retenidos.php');
   require_once('includes/resultados.php');
   require_once('includes/usuarios.php');
+  require_once('includes/firmas.php');
   
   $data = $_SESSION['usuario'];
   $usuariosClass = new usuarios();
@@ -29,6 +30,9 @@
   $datosGranulometria= new granulometria();
   $pesosRetenidosClass= new pesos_retenidos();
   $resultadosClass= new resultados();
+
+  $firmasClass = new firmas();
+  $ListaFirmas = $firmasClass->getAllFirmas();
   
   ?>
 <!DOCTYPE html>
@@ -115,7 +119,7 @@
             <ul class="nav pull-right">
               <li class="divider-vertical"></li>
               <li>
-                <a href="#informe" role="button"  data-toggle="modal">
+                <a href="#informe" role="button" class="btnInforme"  data-toggle="modal">
                 <i  class="icon-list-alt"></i> Impresión
                 </a>
               </li>
@@ -2589,6 +2593,36 @@
               <input id="checkGranulometria" class="boxImpresion" name="checkGranulometria" type="checkbox" checked value="1">
               Analisis granulometrico.
             </label > 
+
+
+            <label for="titulo Gerente" class="title">Firma Gerente</label>
+            <div class="controls inputs">
+              <select   name='gerente' id='gerente' class="input-block-level firmasBox" >
+                <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                  <?php if ( $firmas->idFirma=="1" ) : ?>
+                    <option value="<?php echo $firmas->idFirma; ?>" selected ><?php echo $firmas->persona; ?></option>
+                  <?php else: ?>
+                    <option value="<?php echo $firmas->idFirma; ?>" ><?php echo $firmas->persona; ?> </option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+                <?php endif; ?>
+              </select >
+            </div>
+            <label for="titulo ingeniero" class="title">Firma Ingeniero encargado</label>
+            <div class="controls inputs">
+              <select  name='ingeniero' id='responsable' class="input-block-level firmasBox" >
+                <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                  <?php if ( $firmas->idFirma=="2" ) : ?>
+                    <option value="<?php echo $firmas->idFirma; ?>" selected ><?php echo $firmas->persona; ?></option>
+                  <?php else: ?>
+                    <option value="<?php echo $firmas->idFirma; ?>" ><?php echo $firmas->persona; ?> </option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+                <?php endif; ?>
+              </select >
+            </div>
 
             <input id="idProyectoImpresion" type="hidden" value="<?php echo $_GET['idp'] ?>">
             <input id="idSondeoImpresion" type="hidden" value="<?php echo $_GET['ids'] ?>">

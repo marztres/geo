@@ -280,10 +280,11 @@
         <h3 id="myModalLabel">Ayuda</h3>
       </div>
       <div class="modal-body">
-        <p> 
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, modi, rem, fugiat dicta error accusantium possimus voluptatum distinctio pariatur perferendis corrupti libero minus iure id architecto eius neque velit est.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, qui, distinctio magni libero quasi molestias accusantium amet temporibus sapiente possimus eligendi quam quis perferendis rerum eos aut beatae nemo harum.
-        </p>
+        <video id="sampleMovie" width="640" height="360" preload controls>
+          <source src="HTML5Sample_H264.mov" />
+          <source src="HTML5Sample_Ogg.ogv" />
+          <source src="HTML5Sample_WebM.webm" />
+        </video>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>

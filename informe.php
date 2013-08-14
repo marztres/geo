@@ -9,6 +9,7 @@
   require_once('includes/pesos_retenidos.php');
   require_once('includes/resultados.php');
   require_once('includes/usuarios.php');
+  require_once('includes/firmas.php');
   
   $data = $_SESSION['usuario'];
   $usuariosClass = new usuarios();
@@ -30,6 +31,10 @@
   $pesosRetenidosClass= new pesos_retenidos();
   $resultadosClass= new resultados();
   $pagina = 1;  
+
+  $firmasClass = new firmas();
+  $ListaFirmas = $firmasClass->getAllFirmas();
+  
   ?>
 <!DOCTYPE html>
 <html lang="es" class="no-js">
@@ -2154,22 +2159,68 @@
           <table class="table firmas">
             <tr>
                 <td> 
-                 <img src="assets/firmas/ing_natalia.jpg" alt="firma ingeniero"> 
+                 <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                       <?php echo $firmas->imagenFirma; ?>
+                     <?php endif; ?>
+                   <?php endforeach; ?>
+                 <?php endif; ?>" alt="firma ingeniero" height="100px" width="100px"> 
                  <br>
                  <span class="lineafirma"></span>
                  <br>
-                 <span>Ing. Civil NATHALIA HERNANDEZ R</span>
+                 <span>
+                 <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                       <?php echo $firmas->persona; ?>
+                     <?php endif; ?>
+                   <?php endforeach; ?>
+                 <?php endif; ?>
+
+                 </span>
                  <br>
-                 <span class="title">M.P. 22202166765COR</span>
+                 <span class="title">
+                 <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                       <?php echo $firmas->tarjetaProfesional; ?>
+                     <?php endif; ?>
+                   <?php endforeach; ?>
+                 <?php endif; ?>
+
+                 </span>
                 </td>
                 <td>
-                 <img src="assets/firmas/IngPabloCastilla.jpg" alt="Firma gerente">  
+                 <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                     <?php if ( $firmas->idFirma==$_GET['Dir']) : ?>
+                       <?php echo $firmas->imagenFirma; ?>
+                     <?php endif; ?>
+                   <?php endforeach; ?>
+                 <?php endif; ?>" alt="Firma gerente">  
                  <br>
                  <span class="lineafirma"></span> 
                  <br>
-                 <span>Ing. Geotecnista  PABLO CASTILLA NEGRETE</span>
+                 <span>
+                   <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                     <?php if ( $firmas->idFirma==$_GET['Dir']) : ?>
+                       <?php echo $firmas->persona; ?>
+                     <?php endif; ?>
+                   <?php endforeach; ?>
+                 <?php endif; ?>
+                 </span>
                  <br>
-                 <span class="title">M.P. 1320251172BLV</span>
+                 <span class="title">
+                   <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                     <?php if ( $firmas->idFirma==$_GET['Dir']) : ?>
+                       <?php echo $firmas->tarjetaProfesional; ?>
+                     <?php endif; ?>
+                   <?php endforeach; ?>
+                 <?php endif; ?>
+                 </span>
                 </td>
             </tr>  
 
