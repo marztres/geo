@@ -2198,7 +2198,7 @@
                        <?php echo $firmas->imagenFirma; ?>
                      <?php endif; ?>
                    <?php endforeach; ?>
-                 <?php endif; ?>" alt="Firma gerente">  
+                 <?php endif; ?>" alt="Firma gerente" height="100px" width="100px">  
                  <br>
                  <span class="lineafirma"></span> 
                  <br>
