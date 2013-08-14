@@ -20,7 +20,8 @@ var acciones = {
     $('.GuardarCompresion').on('click', acciones.clickGuardarCompresion);
     $('.icompresion,.ideformacion').on('keyup', acciones.calculosCompresion);
     $('.analisis,.granulo').on('keyup', acciones.calculosGranulometria);
-    $('.boxImpresion').on('change' , acciones.Preimpresion);
+    $('.boxImpresion,.firmasBox').on('change' , acciones.Preimpresion);
+    $('.btnInforme').on('click' , acciones.Preimpresion);
     $('.impresionBtn').on('click' , acciones.imprimir);
     $('.estratos').on('change',acciones.clickEstratos); 
   },
@@ -2240,19 +2241,21 @@ var acciones = {
 
   Preimpresion: function(){
   
-    var idProyectoImpresion = $("#idProyectoImpresion").val(), 
+     var idProyectoImpresion = $("#idProyectoImpresion").val(), 
       idSondeoImpresion = $("#idSondeoImpresion").val(),
       numeroSondeo = $("#numeroSondeo").val(),
       checkLimites = $("input#checkLimites"),
       checkCompresion = $("input#checkCompresion"),
-      checkGranulometria = $("input#checkGranulometria");
+      checkGranulometria = $("input#checkGranulometria"),
+      gerente = $("#gerente option:selected").val(),
+      ingeniero = $("#responsable option:selected").val();
 
       if(checkLimites.is(':checked')){ boxLimites=1; } else{ boxLimites=0; }
       if(checkCompresion.is(':checked')){ boxCompresion=1; } else{ boxCompresion=0; }
       if(checkGranulometria.is(':checked')){ boxGranulometria=1; } else{ boxGranulometria=0; }
     var enlaceImpresion = $('a#enlaceImpresion');    
 
-    enlaceImpresion.attr("href", "informe.php?idp="+idProyectoImpresion+"&ids="+idSondeoImpresion+"&numsondeo="+numeroSondeo+"&boxLim="+boxLimites+"&boxComp="+boxCompresion+"&boxGran="+boxGranulometria);
+    enlaceImpresion.attr("href", "informe.php?idp="+idProyectoImpresion+"&ids="+idSondeoImpresion+"&numsondeo="+numeroSondeo+"&boxLim="+boxLimites+"&boxComp="+boxCompresion+"&boxGran="+boxGranulometria+"&Dir="+gerente+"&Ing="+ingeniero);
   },
   imprimir: function(){
     $(this).attr('target','_blank');  
