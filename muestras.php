@@ -1079,12 +1079,10 @@
                           <?php
                             $posicion=count($mayoresfuerzo); 
                             if($mayoresfuerzo[$posicion-1]!=0){
-                            
-                               $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;
-                                 
-                                 if($posicion==9){
-                                  $cohesionFinal= round($cohesion,2);
-                                  echo $cohesionFinal;  
+                               $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;                                 
+                                 if($posicion==7){
+                                   $cohesionFinal= round($cohesion,2);
+                                   echo $cohesionFinal;  
                                    unset($mayoresfuerzo);
                                  }
                             }
@@ -1415,7 +1413,7 @@
                             if($d10!=0 && $d30!=0 && $d60!=0 ){
                                 $cc=(($d30*$d30)/($d10*$d60));
                             }
-                            if($resultado->limiteLiquido!=0 && $resultado->indicePlasticidad){
+                            if($resultado->limiteLiquido!=0 && $resultado->indicePlasticidad!=0){
                             if($gravas>$arenas && $gravas>$finos){
                                  if($finos<5){
                                     if($cu>=4 && $cc>=1 && $cc<=3){
@@ -1423,22 +1421,25 @@
                                         if($arenas<15){
                                           $descrsub="Grava bien graduada";
                                           echo  $notacion."-".$descrsub;
+                                          $imagenPerfil="gravas";
                                         }
                                         else if($arenas>=15){
                                           $descrsub="Grava bien graduada con arena";
                                           echo  $notacion."-".$descrsub;
+                                          $imagenPerfil="gravoso";
                                         }
                                     }
                                     else if($cu<4 || $cc>1 && $cc<3){
                                           $notacion="GP";
                                           if($arenas<15){
                                             $descrsub="Grava mal graduada";
-                                            $imagenPerfil="2";
                                             echo  $notacion."-".$descrsub;
+                                            $imagenPerfil="gravas";
                                           }
                                           else if($arenas>=15){
                                             $descrsub="Grava mal graduada con arena";
                                             echo  $notacion."-".$descrsub;
+                                            $imagenPerfil="gravoso";
                                           }
                                     }
                                  }
@@ -1469,10 +1470,12 @@
                                                         if($arenas<15){
                                                             $descrsub="Grava bien graduada con limo";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="gravoso";
                                                         }
                                                         else{
                                                             $descrsub="Grava bien graduada con limo y arena";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="gravas";
                                                         }
                                           }
                                           else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
@@ -1480,10 +1483,12 @@
                                                               if($arenas<15){
                                                                   $descrsub="Grava bien graduada con arcilla ( o arcilla limosa)";
                                                                   echo $notacion."-".$descrsub;
+                                                                  $imagenPerfil="arcillalimosa";
                                                               }
                                                               else{
                                                                   $descrsub="Grava bien graduada con arcilla y arena (o arcilla limosa y arena)";
                                                                   echo $notacion."-".$descrsub;
+                                                                  $imagenPerfil="arcillalimosa";
                                                               }
                                           }
                                       }
@@ -1513,10 +1518,12 @@
                                                         if($arenas<15){
                                                             $descrsub="Grava mal graduada con limo";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="gravalimosa";
                                                         }
                                                         else{
                                                             $descrsub="Grava mal graduada con limo y arena";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="gravalimosa";
                                                         }
                                           }
                                           else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
@@ -1524,10 +1531,12 @@
                                                               if($arenas<15){
                                                                   $descrsub="Grava mal graduada con arcilla ( o arcilla limosa)";
                                                                   echo $notacion."-".$descrsub;
+                                                                  $imagenPerfil="arcillalimosa";
                                                               }
                                                               else{
                                                                   $descrsub="Grava mal graduada con arcilla y arena (o arcilla limosa y arena)";
                                                                   echo $notacion."-".$descrsub;
+                                                                  $imagenPerfil="arcillalimosa";
                                                               }
                                           }
                                  }
@@ -1557,10 +1566,12 @@
                                                     if($arenas<15){
                                                       $descrsub="Grava Arcillosa";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="gravas";
                                                     }
                                                     else{
                                                       $descrsub="Grava Arcillosa con Arena";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="gravoso";
                                                     }
                                   }
                                   else if($notacionFinos=="ML" || $notacionFinos=="MH" ){
@@ -1568,10 +1579,12 @@
                                                     if($arenas<15){
                                                       $descrsub="Grava Limosa";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="gravalimosa";
                                                     }
                                                     else{
                                                       $descrsub="Grava Limosa con Arena";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="gravalimosa";
                                                     }
                                   }
                                   else if($notacionFinos=="CL-ML"){
@@ -1579,10 +1592,12 @@
                                                    if($arenas<15){
                                                       $descrsub="Grava Limosa-Arcillosa";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="gravalimosa";
                                                    }
                                                    else{
                                                       $descrsub="Grava Limosa-Arcillosa con Arena";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="arcillalimosa";
                                                    }
                                   }
                             
@@ -1594,10 +1609,12 @@
                                             if($arenas<15){
                                               $descrsub="Arena bien graduada";
                                               echo  $notacion."-".$descrsub;
+                                              $imagenPerfil="arena";
                                             }
                                             else if($arenas>=15){
                                               $descrsub="Arena bien graduada con grava";
                                               echo  $notacion."-".$descrsub;
+                                              $imagenPerfil="arenoso";
                                             }
                                         }
                                         else if($cu<4 || $cc>1 && $cc<3){
@@ -1605,10 +1622,12 @@
                                               if($arenas<15){
                                                 $descrsub="Arena mal graduada";
                                                 echo  $notacion."-".$descrsub;
+                                                 $imagenPerfil="arena";
                                               }
                                               else if($arenas>=15){
                                                 $descrsub="Arena mal graduada con grava";
                                                 echo  $notacion."-".$descrsub;
+                                                $imagenPerfil="arenoso";
                                               }
                                         }
                                     }
@@ -1638,10 +1657,12 @@
                                                             if($arenas<15){
                                                                 $descrsub="Arena bien graduada con limo";
                                                                 echo $notacion."-".$descrsub;
+                                                                $imagenPerfil="arenoso";
                                                             }
                                                             else{
                                                                 $descrsub="Arena bien graduada con limo y Grava";
                                                                 echo $notacion."-".$descrsub;
+                                                                $imagenPerfil="arenoso";
                                                             }
                                                         }
                                                         else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
@@ -1649,10 +1670,12 @@
                                                                 if($arenas<15){
                                                                     $descrsub="Arena bien graduada con arcilla ( o arcilla limosa)";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="arcillalimosa";
                                                                 }
                                                                 else{
                                                                     $descrsub="Arena bien graduada con arcilla y arena (o arcilla limosa y grava)";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="arcillalimosa";
                                                                 }
                                                         }
                                               }
@@ -1682,10 +1705,12 @@
                                                                 if($arenas<15){
                                                                     $descrsub="Arena mal graduada con limo";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="arenoso";
                                                                 }
                                                                 else{
                                                                     $descrsub="Arena mal graduada con limo y grava";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="arenoso";
                                                                 }
                                                         }
                                                         else if($notacionFinos=="CL" || $notacionFinos=="CH" || $notacionFinos=="CL-ML"){
@@ -1693,10 +1718,12 @@
                                                                     if($arenas<15){
                                                                         $descrsub="Arena mal graduada con arcilla ( o arcilla limosa)";
                                                                         echo $notacion."-".$descrsub;
+                                                                        $imagenPerfil="arcillalimosa";
                                                                     }
                                                                     else{
                                                                         $descrsub="Arena mal graduada con arcilla y arena (o arcilla limosa y grava)";
                                                                         echo $notacion."-".$descrsub;
+                                                                        $imagenPerfil="arcillalimosa";
                                                                     }
                                                         }
                                      }
@@ -1726,10 +1753,12 @@
                                                                 if($arenas<15){
                                                                         $descrsub="Arena Arcillosa";
                                                                         echo $notacion."-".$descrsub;
+                                                                        $imagenPerfil="arenoso";
                                                                 }
                                                                 else{
                                                                         $descrsub="Arena Arcillosa con grava";
                                                                         echo $notacion."-".$descrsub;
+                                                                        $imagenPerfil="arenoso";
                                                                 }
                                                         }
                                                         else if($notacionFinos=="ML" || $notacionFinos=="MH" ){
@@ -1737,10 +1766,12 @@
                                                                if($arenas<15){
                                                                     $descrsub="Arena Limosa";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="arenoso";
                                                                }
                                                                else{
                                                                     $descrsub="Arema Limosa con Grava";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="arenoso";
                                                                 }
                                                         }
                                                         else if($notacionFinos=="CL-ML"){
@@ -1748,10 +1779,12 @@
                                                                 if($arenas<15){
                                                                     $descrsub="Arena Limosa-Arcillosa";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="arenoso";
                                                                 }
                                                                 else{
                                                                     $descrsub="Arena Limosa-Arcillosa con Grava";
                                                                     echo $notacion."-".$descrsub;
+                                                                    $imagenPerfil="limogravoso";
                                                                 }
                                                         }
                             }                        
@@ -1763,15 +1796,18 @@
                                                if($tamizN200<15){
                                                   $descrsub="Arcilla fina";
                                                   echo $notacion."-".$descrsub;
+                                                   $imagenPerfil="arcilla";
                                                }
                                                else if($tamizN200>=15 && $tamizN200<=29){
                                                   if($arenas>=$gravas){
                                                     $descrsub="Arcilla fina con arena";
                                                     echo $notacion.$descrsub;
+                                                    $imagenPerfil="arcilloso";
                                                   }
                                                   else{
                                                     $descrsub="Arcilla fina con grava";
                                                     echo $notacion.$descrsub;
+                                                    $imagenPerfil="arcilloso";
                                                   }
                                                }
                                             } 
@@ -1780,20 +1816,24 @@
                                                   if($gravas<15){
                                                      $descrsub="Arcilla fina arenosa";
                                                      echo $notacion."-".$descrsub;
+                                                     $imagenPerfil="arcilloso";
                                                   }
                                                   else{
                                                      $descrsub="Arcilla fina arenosa con grava";
                                                      echo $notacion."-".$descrsub;
+                                                     $imagenPerfil="arcilloso";
                                                   }
                                                }
                                                else{
                                                     $descrsub="Arcilla fina gravosa";
                                                   if($arenas<15){
                                                      echo $notacion."-".$descrsub;
+                                                     $imagenPerfil="arcilloso";
                                                   }
                                                   else{
                                                     $descrsub="Arcilla fina gravosa con arena";
                                                      echo $notacion."-".$descrsub;
+                                                     $imagenPerfil="arcilloso";
                                                   }
                                                }
                                             }
@@ -1804,15 +1844,18 @@
                                                     if($tamizN200<15){
                                                        $descrsub="Arcilla Limosa"; 
                                                        echo $notacion."-".$descrsub;
+                                                       $imagenPerfil="arcilla";
                                                     }
                                                     else if($tamizN200>=15 && $tamizN200<=29){
                                                         if($arenas>=$gravas){
                                                             $descrsub="Limo con Arcilla";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="limoso";
                                                         }
                                                         else{
                                                             $descrsub="Limo con Grava";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="limoso";
                                                         }
                                                     }
                                                  }
@@ -1821,20 +1864,24 @@
                                                         if($gravas<15){
                                                             $descrsub="Arcilla Arenosa Limosa";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="arcilloso";
                                                         }
                                                         else{
                                                             $descrsub="Arcilla Arenosa Limosa con Grava";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="arcilloso";
                                                         }
                                                     }
                                                     else{
                                                         if($arenas<15){
                                                             $descrsub="Arcilla Gravosa Limosa";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="arcilloso";
                                                         }
                                                         else{
                                                             $descrsub="Arcilla Gravosa-Limosa con Arena";
                                                             echo $notacion."-".$descrsub;
+                                                            $imagenPerfil="arcilloso";
                                                         }
                                                     }
                                                  }
@@ -1845,15 +1892,18 @@
                                                 if($tamizN200<15){
                                                     $descrsub="Limo";
                                                     echo $notacion."-".$descrsub;
+                                                    $imagenPerfil="limos";
                                                 }
                                                 else if($tamizN200>=15 && $tamizN200<=29){
                                                     if($arenas>=$gravas){
                                                       $descrsub="Limo con Arcilla";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="limoso";
                                                     }
                                                     else{
                                                       $descrsub="Limo con Grava";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="limoso";
                                                     }
                                                 }
                                              }
@@ -1862,20 +1912,24 @@
                                                   if($gravas<15){
                                                     $descrsub="Limo Arenoso";
                                                     echo $notacion."-".$descrsub;
+                                                    $imagenPerfil="limos";
                                                   }
                                                   else{
                                                     $descrsub="Limo Arenoso con Grava";
                                                     echo $notacion."-".$descrsub;
+                                                    $imagenPerfil="limoso";
                                                   }
                                                 }
                                                 else{
                                                     if($arenas<15){
                                                         $descrsub="Limo Gravoso";
-                                                        echo $notacion."-".$descrsub;  
+                                                        echo $notacion."-".$descrsub;
+                                                        $imagenPerfil="limoso";  
                                                     }
                                                     else{
                                                         $descrsub="Limo Gravoso con Arena";
-                                                        echo $notacion."-".$descrsub;  
+                                                        echo $notacion."-".$descrsub;
+                                                        $imagenPerfil="limoso";  
                                                     }
                                                 }
                                              }
@@ -1888,15 +1942,18 @@
                                               if($tamizN200<15){
                                                   $descrsub="Arcilla gruesa";
                                                   echo $notacion."-".$descrsub;  
+                                                  $imagenPerfil="arcilla";
                                               }
                                               if($tamizN200>=15 && $tamizN200<=29){
                                                   if($arenas>=$gravas){
                                                     $descrsub="Arcilla gruesa con Arena";
-                                                    echo $notacion."-".$descrsub;  
+                                                    echo $notacion."-".$descrsub;
+                                                    $imagenPerfil="arcilloso";  
                                                   }
                                                   else{
                                                     $descrsub="Arcilla gruesa con Grava";
-                                                    echo $notacion."-".$descrsub;  
+                                                    echo $notacion."-".$descrsub;
+                                                    $imagenPerfil="arcilloso";  
                                                   }
                                               }
                                           }
@@ -1904,21 +1961,25 @@
                                               if($arenas>=$gravas){
                                                     if($gravas<15){
                                                          $descrsub="Arcilla gruesa Arenosa";
-                                                         echo $notacion."-".$descrsub;  
+                                                         echo $notacion."-".$descrsub;
+                                                         $imagenPerfil="arcilloso";  
                                                     }
                                                     else{
                                                          $descrsub="Arcilla gruesa Arenosa con Grava";
-                                                         echo $notacion."-".$descrsub;  
+                                                         echo $notacion."-".$descrsub;
+                                                         $imagenPerfil="arcilloso";  
                                                     }
                                               }
                                               else{
                                                   if($arenas<15){
                                                       $descrsub="Arcilla gruesa Gravosa";
                                                       echo $notacion."-".$descrsub;  
+                                                      $imagenPerfil="arcilloso";
                                                   }
                                                   else{
                                                       $descrsub="Arcilla gruesa Gravosa con Arena";
-                                                      echo $notacion."-".$descrsub;  
+                                                      echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="arcilloso";  
                                                   }
                                               }
                                           }
@@ -1929,15 +1990,18 @@
                                                 if($tamizN200<15){
                                                     $descrsub="Limo Elástico";
                                                     echo $notacion."-".$descrsub;
+                                                    $imagenPerfil="limos";
                                                 }
                                                 else if($tamizN200>=15 && $tamizN200<=29){
                                                         if($arenas>=$gravas){
                                                            $descrsub="Limo Elástico con Arena";
-                                                           echo $notacion."-".$descrsub; 
+                                                           echo $notacion."-".$descrsub;
+                                                           $imagenPerfil="limoarcilloso"; 
                                                         }
                                                         else{
                                                            $descrsub="Limo Elástico con Grava";
-                                                           echo $notacion."-".$descrsub; 
+                                                           echo $notacion."-".$descrsub;
+                                                           $imagenPerfil="limogravoso"; 
                                                         }
                                                 }
                                           }
@@ -1946,20 +2010,24 @@
                                                   if($gravas<15){
                                                       $descrsub="Limo Elástico Arenoso";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="limoarcilloso";
                                                   }
                                                   else{
                                                       $descrsub="Limo Elástico Arenoso con Grava";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="limogravoso"; 
                                                   }
                                               }
                                               else{
                                                   if($arenas<15){
                                                       $descrsub="Limo Elástico Gravoso";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="limogravoso"; 
                                                   }
                                                   else{
                                                       $descrsub="Limo Elástico Gravoso con Arena";
                                                       echo $notacion."-".$descrsub;
+                                                      $imagenPerfil="limogravoso"; 
                                                   }
                                               }
                                           }
