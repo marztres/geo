@@ -76,6 +76,13 @@
           </li>
           <li class="divider"></li>
           <?php endif ?>
+          <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+          <li>
+            <a href="firmas.php"><i class="icon-book"></i> Firmas</a>
+          </li>
+          <li class="divider"></li>
+          <?php endif ?>
+
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">
             <i class="icon-question-sign"></i> Ayuda
@@ -2151,7 +2158,7 @@
                   <input name="N10" type="hidden" class="N10" value="<?php echo $tamizN10; ?>">
                   <input name="N40" type="hidden" class="N40" value="<?php echo $tamizN40; ?>">
                   <input name="N200" type="hidden" class="N200" value="<?php echo $tamizN200; ?>">
-                  <input name="imagenPerfil" type="hidden" class="imagenPerfil" value="<?php echo $imagenPerfil; ?>">
+                  <input name="imagenPerfil" type="text" class="imagenPerfil" value="<?php echo $imagenPerfil; ?>">
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->

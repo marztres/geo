@@ -67,6 +67,12 @@
           </li>
           <li class="divider"></li>
           <?php endif ?>
+          <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+          <li>
+            <a href="firmas.php"><i class="icon-book"></i> Firmas</a>
+          </li>
+          <li class="divider"></li>
+          <?php endif ?>
           
           <li>
             <a href="#Ayuda" role="button"  data-toggle="modal">

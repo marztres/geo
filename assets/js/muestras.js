@@ -1286,11 +1286,12 @@ var acciones = {
         // input de resultados finales 
         var resultadoAashto= $(this).closest("div").find("form.resultadosGranulometria").find("input.aashto"),
           resultadoNotacionSucs= $(this).closest("div").find("form.resultadosGranulometria").find("input.notacionSucs"),
-          resultadoDescripcionSucs= $(this).closest("div").find("form.resultadosGranulometria").find("input.descripcionSucs");
+          resultadoDescripcionSucs= $(this).closest("div").find("form.resultadosGranulometria").find("input.descripcionSucs"),
+          imagenPerfil = $(this).closest("div").find("form.resultadosGranulometria").find("input.imagenPerfil");
 
 
         // Ejecucion de clasificacion Sucs
-        acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs);
+        acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs,imagenPerfil);
         acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto);
 
         resultadoN4= $(this).closest("div").find("form.resultadosGranulometria").find("input.N4"),
@@ -1410,13 +1411,14 @@ var acciones = {
     }
   },
 
-  clasificacionSucs: function (Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,$clasSucs,$resultadoNotacionSucs,$resultadoDescripcionSucs){
+  clasificacionSucs: function (Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,$clasSucs,$resultadoNotacionSucs,$resultadoDescripcionSucs,$imagenPerfil){
 
     
 
     console.log("Clasificacion de suelos SUCS");
     var notacionSucs = "N/A";
     var descSucs = " N/A";
+    var imagen = "0";
     console.log(" Notacion sucs por defecto "+notacionSucs+" Descripcion Sucs por defecto "+descSucs);
     console.log("Tamiz 200 "+Tamiz200Var);
     console.log("Tamiz 4 "+tamiz4Var); 
@@ -1482,6 +1484,7 @@ var acciones = {
            if(arenas>15){
              console.log("Arenas mayores que 15%");
              descSucs="Grava bien graduada";
+             imagen = "ejemplo";
              console.log("Descripcion clasificacion Sucs : "+descSucs);
 
            }else if(arenas<=15){
@@ -2040,6 +2043,7 @@ var acciones = {
       console.log("----Finalizacion de condicional finos----");
       console.log("La notacion sucs es : "+notacionSucs+" y la descripcion es : "+descSucs);
       $clasSucs.text(notacionSucs+"-"+descSucs);
+      $imagenPerfil.val(imagen);
       
     }
     function FinosNotacion(){
