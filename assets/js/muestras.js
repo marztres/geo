@@ -1470,8 +1470,6 @@ var acciones = {
     } 
 
     function Gravas(){
-
-
        console.log("Inicio de condicional de Gravas");
        notacionSucs= FinosNotacion();
        console.log("notacion finos para grava"+notacionSucs);
@@ -1484,12 +1482,13 @@ var acciones = {
            if(arenas>15){
              console.log("Arenas mayores que 15%");
              descSucs="Grava bien graduada";
-             imagen = "ejemplo";
+             imagen = "gravas";
              console.log("Descripcion clasificacion Sucs : "+descSucs);
 
            }else if(arenas<=15){
              console.log("Arenas mayores o iguales a 15%");
              descSucs="Grava bien graduada con arena";
+             imagen = "gravoso";
              console.log("Descripcion clasificacion Sucs : "+descSucs);    
            }
 
@@ -1499,11 +1498,13 @@ var acciones = {
            if(arenas>15){
              console.log("Arenas mayores que 15%");
              descSucs="Grava mal graduada";
+             imagen = "gravas";
              console.log("Descripcion clasificacion Sucs : "+descSucs);
 
            }else if(arenas<=15){
              console.log("Arenas mayores o iguales a 15%");
              descSucs="Grava mal graduada con arena";
+             imagen = "gravoso";
              console.log("Descripcion clasificacion Sucs : "+descSucs);    
            }
          }
@@ -1518,10 +1519,12 @@ var acciones = {
              if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Grava bien graduada con limo";
+                imagen = "gravoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Grava bien graduada con limo y arena";
+                imagen = "gravas";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
              }
 
@@ -1531,10 +1534,12 @@ var acciones = {
              if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Grava bien graduada con Arcilla (o Arcilla limosa)";
+                imagen="arcillalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Grava bien graduada con Arcilla y Arena (o Arcilla limosa y arena)";
+                imagen="arcillalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
              }
 
@@ -1547,10 +1552,12 @@ var acciones = {
              if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Grava mal graduada con limo";
+                imagen="gravalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Grava mal graduada con limo y arena";
+                imagen="gravalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
              }
            } else if(notacionSucs=="CL" || notacionSucs=="CH" || notacionSucs=="CL-ML"){
@@ -1559,10 +1566,12 @@ var acciones = {
              if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Grava mal graduada con arcilla (o arcilla limosa)";
+                imagen="arcillalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Grava mal graduada con arcilla y arena (o arcilla limosa con arena)";
+                imagen="arcillalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
              }
 
@@ -1578,10 +1587,12 @@ var acciones = {
              if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Grava limosa";
+                imagen="gravalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Grava limosa con arena";
+                imagen="gravalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
              }
            } else if(notacionSucs=="CL" || notacionSucs=="CH"){
@@ -1590,10 +1601,12 @@ var acciones = {
              if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Grava arcillosa";
+                imagen="gravas";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Grava arcillosa con arena";
+                imagen="gravoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
              }
 
@@ -1603,10 +1616,12 @@ var acciones = {
              if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Grava limosa-arcillosa";
+                imagen="gravalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Grava limosa-arcillosa con arena";
+                imagen="arcillalimosa";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
              }
            } 
@@ -1630,11 +1645,13 @@ var acciones = {
          if(arenas>15){
            console.log("Arenas mayores que 15%");
            descSucs="Arena bien graduada";
+           imagen="arena";
            console.log("Descripcion clasificacion Sucs : "+descSucs);
 
          }else if(arenas<=15){
            console.log("Arenas mayores o iguales a 15%");
            descSucs="Arena bien graduada con grava";
+           imagen="arenoso";
            console.log("Descripcion clasificacion Sucs : "+descSucs);    
          }
 
@@ -1644,11 +1661,13 @@ var acciones = {
          if(arenas>15){
            console.log("Arenas mayores que 15%");
            descSucs="Arena mal graduada";
+           imagen="arena";
            console.log("Descripcion clasificacion Sucs : "+descSucs);
 
          }else if(arenas<=15){
            console.log("Arenas mayores o iguales a 15%");
            descSucs="Arena mal graduada con grava";
+           imagen="arenoso";
            console.log("Descripcion clasificacion Sucs : "+descSucs);    
          }
        }
@@ -1663,10 +1682,12 @@ var acciones = {
            if(arenas<15){
               console.log("arenas menores que 15");
               descSucs="Arena bien graduada con limo";
+              imagen="arenoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
             } else if(arenas>=15){
               console.log("arenas mayores o iguales a 15");
               descSucs="Arena bien graduada con limo y grava";
+              imagen="arenoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
            }
 
@@ -1676,10 +1697,12 @@ var acciones = {
            if(arenas<15){
               console.log("arenas menores que 15");
               descSucs="Arena bien graduada con arcilla (o arcilla limosa)";
+              imagen="arcillalimosa";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
             } else if(arenas>=15){
               console.log("arenas mayores o iguales a 15");
               descSucs="Arena bien graduaba con arcilla y grava (o arcilla limosa y grava)";
+              imagen="arcillalimosa";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
            }
 
@@ -1692,10 +1715,12 @@ var acciones = {
            if(arenas<15){
               console.log("arenas menores que 15");
               descSucs="Arena mal graduada con limo";
+              imagen="gravalimosa";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
             } else if(arenas>=15){
               console.log("arenas mayores o iguales a 15");
               descSucs="Arena mal graduada con limo y grava";
+              imagen="gravalimosa";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
            }
          } else if(notacionSucs=="CL" || notacionSucs=="CH" || notacionSucs=="CL-ML"){
@@ -1704,10 +1729,12 @@ var acciones = {
            if(arenas<15){
               console.log("arenas menores que 15");
               descSucs="Arena mal graduada con arcilla (o arcilla limosa)";
+              imagen="arcillalimosa";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
             } else if(arenas>=15){
               console.log("arenas mayores o iguales a 15");
               descSucs="Arena mal grauada con arcilla y grava (o arcilla limosa y grava)";
+              imagen="arcillalimosa";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
            }
          }
@@ -1720,10 +1747,12 @@ var acciones = {
            if(arenas<15){
               console.log("arenas menores que 15");
               descSucs="Arena limosa";
+              imagen="arenoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
             } else if(arenas>=15){
               console.log("arenas mayores o iguales a 15");
               descSucs="Arena limosa con grava";
+              imagen="arenoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
            }
          } else if(notacionSucs=="CL" || notacionSucs=="CH"){
@@ -1732,10 +1761,12 @@ var acciones = {
            if(arenas<15){
               console.log("arenas menores que 15");
               descSucs="Arena arcillosa";
+              imagen="arenoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
             } else if(arenas>=15){
               console.log("arenas mayores o iguales a 15");
               descSucs="Arena arcillosa con grava";
+              imagen="arenoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
            }
 
@@ -1745,10 +1776,12 @@ var acciones = {
            if(arenas<15){
               console.log("arenas menores que 15");
               descSucs="Arena limosa-arcillosa";
+              imagen="arenoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
             } else if(arenas>=15){
               console.log("arenas mayores o iguales a 15");
               descSucs="Arena limosa-arcillosa con grava";
+              imagen="limogravoso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
            }
          } 
@@ -1774,6 +1807,7 @@ var acciones = {
             if(Tamiz200Var<15){
               console.log("N200 menor a 15");
               descSucs="Arcilla fina";
+              imagen="arcilloso";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
 
             } else if(Tamiz200Var>15 && Tamiz200Var<29){
@@ -1781,11 +1815,13 @@ var acciones = {
               if(arenas>=gravas){
                 console.log("arenas mayores o iguales que gravas");
                 descSucs="Arcilla fina con arena";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               } else if(arenas<gravas){
                 console.log("arenas menores que gravas");
                 descSucs="Arcilla fina con grava";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               }
@@ -1797,10 +1833,12 @@ var acciones = {
               if(gravas<15){
                 console.log("gravas menores que 15");
                 descSucs="Arcilla fina arenosa";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(gravas>=15){
                 console.log("gravas mayores o iguales a 15");
                 descSucs="Arcilla fina arenosa con grava";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
               
@@ -1809,10 +1847,12 @@ var acciones = {
               if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Arcilla fina gravosa";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Arcilla fina gravosa con arena";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
             }
@@ -1827,6 +1867,7 @@ var acciones = {
             if(Tamiz200Var<15){
               console.log("N200 menor a 15");
               descSucs="Arcilla limosa";
+              $imagen="arcilla";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
 
             } else if(Tamiz200Var>15 && Tamiz200Var<29){
@@ -1834,11 +1875,13 @@ var acciones = {
               if(arenas>=gravas){
                 console.log("arenas mayores o iguales que gravas");
                 descSucs="Arcilla limosa con arena";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               } else if(arenas<gravas){
                 console.log("arenas menores que gravas");
                 descSucs="Arcilla limosa con grava";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               }
@@ -1850,10 +1893,12 @@ var acciones = {
               if(gravas<15){
                 console.log("gravas menores que 15");
                 descSucs="Arcilla areno-limosa";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(gravas>=15){
                 console.log("gravas mayores o iguales a 15");
                 descSucs="Arcilla areno-limosa con grava";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
               
@@ -1862,10 +1907,12 @@ var acciones = {
               if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Arcilla gravosa limosa";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Arcilla gravosa-limosa con arena";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
             }
@@ -1882,6 +1929,7 @@ var acciones = {
             if(Tamiz200Var<15){
               console.log("N200 menor a 15");
               descSucs="limo";
+              imagen="limos";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
 
             } else if(Tamiz200Var>15 && Tamiz200Var<29){
@@ -1889,11 +1937,13 @@ var acciones = {
               if(arenas>=gravas){
                 console.log("arenas mayores o iguales que gravas");
                 descSucs="Limo con arcilla";
+                imagen="limoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               } else if(arenas<gravas){
                 console.log("arenas menores que gravas");
                 descSucs="Limo con grava";
+                imagen="limoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               }
@@ -1905,10 +1955,12 @@ var acciones = {
               if(gravas<15){
                 console.log("gravas menores que 15");
                 descSucs="Limo arenoso";
+                imagen="limos";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(gravas>=15){
                 console.log("gravas mayores o iguales a 15");
                 descSucs="Limo arenoso con grava";
+                imagen="limoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
               
@@ -1917,10 +1969,12 @@ var acciones = {
               if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Limo gravoso";
+                imagen="limoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Limo gravoso con arena";
+                imagen="limoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
             }
@@ -1939,6 +1993,7 @@ var acciones = {
             if(Tamiz200Var<15){
               console.log("N200 menor a 15");
               descSucs="Arcilla gruesa";
+              imagen="arcilla";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
 
             } else if(Tamiz200Var>15 && Tamiz200Var<29){
@@ -1946,11 +2001,13 @@ var acciones = {
               if(arenas>=gravas){
                 console.log("arenas mayores o iguales que gravas");
                 descSucs="Arcilla gruesa con arena";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               } else if(arenas<gravas){
                 console.log("arenas menores que gravas");
                 descSucs="Arcilla gruesa con grava";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               }
@@ -1962,10 +2019,12 @@ var acciones = {
               if(gravas<15){
                 console.log("gravas menores que 15");
                 descSucs="Arcilla gruesa arenosa";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(gravas>=15){
                 console.log("gravas mayores o iguales a 15");
                 descSucs="Arcilla gruesa arenosa con grava";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
               
@@ -1974,10 +2033,12 @@ var acciones = {
               if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Arcilla gruesa gravosa";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Arcilla gruesa gravosa con arena";
+                imagen="arcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
             }
@@ -1993,6 +2054,7 @@ var acciones = {
             if(Tamiz200Var<15){
               console.log("N200 menor a 15");
               descSucs="Limo elástico";
+              imagen="limos";
               console.log("Descripcion clasificacion Sucs : "+descSucs);
 
             } else if(Tamiz200Var>15 && Tamiz200Var<29){
@@ -2000,11 +2062,13 @@ var acciones = {
               if(arenas>=gravas){
                 console.log("arenas mayores o iguales que gravas");
                 descSucs="Limo elástico con arena";
+                imagen="limoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               } else if(arenas<gravas){
                 console.log("arenas menores que gravas");
                 descSucs="Limo elástico con grava";
+                imagen="limogravoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
 
               }
@@ -2016,10 +2080,12 @@ var acciones = {
               if(gravas<15){
                 console.log("gravas menores que 15");
                 descSucs="Limo elástico arenoso";
+                imagen="limoarcilloso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(gravas>=15){
                 console.log("gravas mayores o iguales a 15");
                 descSucs="Limo elástico arenoso con grava";
+                imagen="limogravoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
               
@@ -2028,10 +2094,12 @@ var acciones = {
               if(arenas<15){
                 console.log("arenas menores que 15");
                 descSucs="Limo elástico gravoso";
+                imagen="limogravoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               } else if(arenas>=15){
                 console.log("arenas mayores o iguales a 15");
                 descSucs="Limo elástico gravoso con arena";
+                imagen="limogravoso";
                 console.log("Descripcion clasificacion Sucs : "+descSucs);
               }
             }
