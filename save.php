@@ -212,7 +212,7 @@
 		  			$pesosRetenidoClass= new pesos_retenidos();
 		  			$resultadosClass= new resultados();
 
-		  			if($_POST['descripcion_muestra']!=NULL && $_POST['profundidad_inicial']!=NULL && $_POST['profundidad_final']!=NULL && is_numeric($_POST['profundidad_inicial']) && is_numeric($_POST['profundidad_final']) ){
+		  			if($_POST['descripcion_muestra']!=NULL && $_POST['profundidad_inicial']!=NULL && $_POST['profundidad_final']!=NULL && is_numeric($_POST['profundidad_inicial']) && is_numeric($_POST['profundidad_final']) && $_POST['profundidad_inicial']!=$_POST['profundidad_final'] && $_POST['profundidad_inicial']<$_POST['profundidad_final'] && $_POST['profundidad_inicial']>0 && $_POST['profundidad_final']>0 ){
 
 		  			$descripcion_muestra = $_POST['descripcion_muestra'];
 		  			$profundidad_inicial = $_POST['profundidad_inicial'];
@@ -295,7 +295,6 @@
 
 
 		  			$resultadosClass->addResultados($idMuestra);
-
 		  			} else {
 		  				$respuesta = false;
 		  			}	
@@ -313,12 +312,24 @@
 
 			case 'ModificarMuestra':
 				$muestrasClass = new muestras();
+
+				if($_POST['descripcion_muestra']!=NULL && $_POST['profundidad_inicial']!=NULL && $_POST['profundidad_final']!=NULL && is_numeric($_POST['profundidad_inicial']) && is_numeric($_POST['profundidad_final']) && $_POST['profundidad_inicial']!=$_POST['profundidad_final'] && $_POST['profundidad_inicial']<$_POST['profundidad_final'] && $_POST['profundidad_inicial']>0 && $_POST['profundidad_final']>0 ){
+
+
 				$descripcion_muestra = $_POST['descripcion_muestra'];
 				$profundidad_inicial = $_POST['profundidad_inicial'];
 				$profundidad_final = $_POST['profundidad_final'];
-				$numero_de_golpes= $_POST['numero_de_golpes'];
+				
+				if($_POST['numero_de_golpes']==NULL){
+		  		$numero_de_golpes= 0;
+		  	} else {
+		  		$numero_de_golpes= $_POST['numero_de_golpes'];
+		  	}
+
 				$idsondeos = $_POST['idsondeos'];
 				$id_muestra = $_POST['id_muestra'];
+
+
 
 				if(isset($_POST['box_relleno'])){
 		  		$box_relleno = $_POST['box_relleno'];	  				
@@ -335,7 +346,12 @@
   			}
   			
 				$respuesta = $muestrasClass->ModificarMuestras($descripcion_muestra, $profundidad_inicial, $profundidad_final, $numero_de_golpes, $box_estrato ,$idsondeos,$id_muestra);
-				
+				} else {
+					$respuesta = false;
+				}
+
+
+
 				if ( $respuesta ) {
 					$response["status"] = "OK";
 					$response["message"] = "Muestra guardada correctamente";
@@ -353,10 +369,18 @@
  		  			$pesosRetenidoClass= new pesos_retenidos();
  		  			$resultadosClass= new resultados();
  
+ 						if($_POST['descripcion_muestra']!=NULL && $_POST['profundidad_inicial']!=NULL && $_POST['profundidad_final']!=NULL && is_numeric($_POST['profundidad_inicial']) && is_numeric($_POST['profundidad_final']) && $_POST['profundidad_inicial']!=$_POST['profundidad_final'] && $_POST['profundidad_inicial']<$_POST['profundidad_final'] && $_POST['profundidad_inicial']>0 && $_POST['profundidad_final']>0 ){
+
  		  			$descripcion_muestra = $_POST['descripcion_muestra'];
  		  			$profundidad_inicial = $_POST['profundidad_inicial'];
  		  			$profundidad_final = $_POST['profundidad_final'];
- 		  			$numero_de_golpes= $_POST['numero_de_golpes'];
+ 		  			
+ 		  			if($_POST['numero_de_golpes']==NULL){
+		  				$numero_de_golpes= 0;
+		  			} else {
+		  				$numero_de_golpes= $_POST['numero_de_golpes'];
+		  			}
+ 		  			
  		  			$idsondeos = $_POST['idsondeos'];
  		  			$id_muestra = $_POST['id_muestra'];
  
@@ -440,6 +464,11 @@
  		  			$pesosRetenidoClass->addPesoRetenido($ListaPesosRetenidos->tamiz,$ListaPesosRetenidos->tamanoTamiz,$pesoRetenido, $idGranulometria);
  		  			endforeach;
  		  			$resultadosClass->addResultados($idMuestra);
+
+ 		  			}else {
+ 		  				$respuesta = false;
+ 		  			}
+
  		  			if ( $respuesta ) {
  		  				$response["status"] = "OK";
  		  				$response["message"] = "Muestra guardada correctamente";

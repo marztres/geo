@@ -26,29 +26,7 @@ var acciones = {
     $('.estratos').on('change',acciones.clickEstratos); 
   },
 
-  updateLimites: function (e) {
-    e.preventDefault();
-    idFormularios = this.rel;
-    $formularios = $('.' + idFormularios);
-    $.each($formularios, function (index, formulario) {
-      form = $(formulario);
-      $.post(form.attr('action'), form.serialize(), function (respuesta) {
-        if(contadorLimites==2){
-          if (respuesta.status === 'OK') {
-          console.log(respuesta.message);
-          
-          alertify.log("Datos guardados exitosamente.");
-          } else {
-          console.log(respuesta.message);
-          alertify.error("opps..Hubo un error al guardar");
-          }
-          contadorLimites=0;  
-        } 
-        contadorLimites++;
-      }, 'json');
-    });
-
-  },
+  
 
   clickGuardarMuestra: function (e) {
     e.preventDefault();
@@ -62,6 +40,8 @@ var acciones = {
         }, 3000);
         $(".limpiar").val('');
       } else {
+        alertify.set({ delay: 10000 });
+        alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios <br> -Descripción. <br> -Profundidad inicial y final.  <br> -Profundidad repetida ");
         $('#respuesta_guardado').text(respuesta.mensaje);
         $('#error_muestra').removeClass('hide');
         setTimeout(function () {
@@ -84,6 +64,9 @@ var acciones = {
         $(".limpiar").val('');
       } else {
         $('#respuesta_guardado').text(respuesta.mensaje);
+
+        alertify.set({ delay: 10000 });
+        alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios <br> -Descripción. <br> -Profundidad inicial y final.  <br> -Profundidad repetida ");
         $('#error_modificar_muestra').removeClass('hide');
         setTimeout(function () {
           $("#error_modificar_muestra").addClass("hide");
@@ -105,6 +88,8 @@ var acciones = {
         $(".limpiar").val('');
       } else {
         $('#respuesta_guardado').text(respuesta.mensaje);
+         alertify.set({ delay: 10000 });
+        alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios <br> -Descripción. <br> -Profundidad inicial y final.  <br> -Profundidad repetida ");
         $('#error_clonar_muestra').removeClass('hide');
         setTimeout(function () {
           $("#error_clonar_muestra").addClass("hide");
@@ -138,22 +123,6 @@ var acciones = {
         $('#numero_golpes_clonar').val(num_golpes);
         $('#id_muestra_clonar').val(idm);
   },
-
-
-  clickEstratos: function(){
-
-    var box_roca =  $(this).closest("form").find(".box_roca"),
-      box_relleno = $(this).closest("form").find(".box_relleno"),
-      box_clicked = $(this).attr('name');
-
-    if(box_clicked=="box_relleno"){
-      if(box_relleno.is(':checked')){ 
-        box_roca.attr('checked', false);
-      } 
-    } else if(box_clicked=='box_roca'){
-      box_relleno.attr('checked', false);
-    }
-},
   clickEditarMuestra: function (e) {
     e.preventDefault();
     var id = this.id,
@@ -183,6 +152,46 @@ var acciones = {
     $('#profundidad_final_modificar').val(pfinal);
     $('#numero_golpes_modificar').val(num_golpes);
     $('#id_muestra_modificar').val(idm);
+  },
+
+
+  clickEstratos: function(){
+
+    var box_roca =  $(this).closest("form").find(".box_roca"),
+      box_relleno = $(this).closest("form").find(".box_relleno"),
+      box_clicked = $(this).attr('name');
+
+    if(box_clicked=="box_relleno"){
+      if(box_relleno.is(':checked')){ 
+        box_roca.attr('checked', false);
+      } 
+    } else if(box_clicked=='box_roca'){
+      box_relleno.attr('checked', false);
+    }
+},
+  
+  updateLimites: function (e) {
+    e.preventDefault();
+    idFormularios = this.rel;
+    $formularios = $('.' + idFormularios);
+    $.each($formularios, function (index, formulario) {
+      form = $(formulario);
+      $.post(form.attr('action'), form.serialize(), function (respuesta) {
+        if(contadorLimites==2){
+          if (respuesta.status === 'OK') {
+          console.log(respuesta.message);
+          
+          alertify.log("Datos guardados exitosamente.");
+          } else {
+          console.log(respuesta.message);
+          alertify.error("opps..Hubo un error al guardar");
+          }
+          contadorLimites=0;  
+        } 
+        contadorLimites++;
+      }, 'json');
+    });
+
   },
   calculosLimites:  function () {
 

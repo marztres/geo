@@ -54,7 +54,7 @@
     <script src="assets/js/vendor/highcharts.js"></script>
     <script src="assets/js/vendor/regression.js"></script>
     <link rel="stylesheet" href="assets/css/alertify.core.css" />
-    <link rel="stylesheet" href="assets/css/alertify.default.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstrap.css" />
   </head>
   <body>
     <!-- ############# HEADER ############### -->
@@ -197,6 +197,8 @@
                 <th>Profundidad</th>
                 <th>Numero de golpes</th>
                 <th>Color</th>
+                <th>Material de relleno</th>
+                <th>Roca</th>
                 <th>Editar</th>
                 <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
                   <th>Clonar</th>
@@ -215,6 +217,8 @@
                 </td>
                 <td><?php echo $datoMuestra->numero_golpes ?></td>
                 <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
                 
                   <td>
                     <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="modalMuestra" role="button" data-toggle="modal" href="#editarmuestra">
@@ -233,9 +237,9 @@
               <?php endforeach; ?>
               <?php else: ?>
               <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
-                <td colspan="7">No hay datos que mostrar</td>
+                <td colspan="9">No hay datos que mostrar</td>
               <?php else : ?>
-                <td colspan="6">No hay datos que mostrar</td>
+                <td colspan="8">No hay datos que mostrar</td>
               <?php endif ?>
 
               <?php endif; ?>
