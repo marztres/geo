@@ -34,7 +34,7 @@ class usuarios extends DataBase {
 
 	function getTodosUsuarios($busqueda=''){
 		$retorno = false;
-		$sql = "SELECT * FROM usuarios WHERE estado='1' and id_usuario!='1'";
+		$sql = "SELECT * FROM usuarios WHERE estado='1' and id_usuario!='1' and id_usuario!='0'";
 		if($busqueda!=''){
 			$sql .= "and concat(cedula,'',nombres,'',apellidos,'',tipo) like('%".$this->real_escape_string($busqueda)."%')";
 		}

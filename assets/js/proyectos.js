@@ -8,7 +8,6 @@ var acciones = {
 		$('a[href="#"]').on( 'click', acciones.prevenirClickSinDestino );
 		$("#enviar").on('click', acciones.guardarProyecto );
 		$(".eliminarProyecto").on('click', acciones.eliminarProyecto );
-		
 
 	},
 	
@@ -29,7 +28,10 @@ var acciones = {
 				$(".limpiar").val('');
 			} else {
 				$('#respuesta_guardado').text(respuesta.mensaje);
-				$('#error').removeClass('hide');
+				$('#error').removeClass('hide'); 
+				alertify.set({ delay: 10000 });
+				alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios : Codigo, nombre y Fecha. <br> -Codigo del proyecto repetido.");
+
 				setTimeout(function() {
 					$("#error").addClass("hide");
 				}, 3000);
@@ -37,27 +39,30 @@ var acciones = {
 		}, 'json');
 	},
 
+
 	eliminarProyecto: function( e ) {
 		e.preventDefault();
 		$post = $(this).parent().find("form");
-		if(confirm('Estas seguro que quieres eliminar este proyecto')) {
-			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
-				if (respuesta.status === 'OK') {
-					console.log(respuesta.message);
-				   	$('#exitoGeneral').removeClass('hide');
-				   	location.reload();
 
-				} else {
-					console.log(respuesta.message);
-					$('#errorGeneral').removeClass('hide');
-					setTimeout(function() {
-						$("#error").addClass("hide");
-					}, 3000);
-				}
-			}, 'json');
-		}	
+		alertify.confirm("Esta seguro que desea eliminar este Proyecto", function (e) {
+	    if (e) {
+	        $.post($post.attr('action'), $post.serialize(), function(respuesta) {
+					if (respuesta.status === 'OK') {
+						console.log(respuesta.message);
+					   	$('#exitoGeneral').removeClass('hide');
+					   	location.reload();
+
+					} else {
+						console.log(respuesta.message);
+						$('#errorGeneral').removeClass('hide');
+						setTimeout(function() {
+							$("#error").addClass("hide");
+						}, 3000);
+					}
+				}, 'json');
+	    } 
+		});		
 	}
-	
 }
 
 $(document).on( 'ready', acciones.init );

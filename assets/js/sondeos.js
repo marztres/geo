@@ -9,6 +9,7 @@ var accionesSondeos = {
 		$('#btnModificarProyecto').on('click', accionesSondeos.modificarProyecto);
 		$(".eliminarSondeo").on('click', accionesSondeos.eliminarSondeo );
 		$("#lista_superficie").on('change',accionesSondeos.superficie);
+		$('#idSuperficie').on('change',accionesSondeos.editarSuperficie);
 		$("#btnnuevoSondeo").on('click',accionesSondeos.nuevoSondeo);
 		$("#enviar_modificar_sondeo").on('click',accionesSondeos.modificarSondeo);
 	},
@@ -31,6 +32,8 @@ var accionesSondeos = {
 			} else {
 				console.log(respuesta.message);
 				$('#errorModificarProyecto').removeClass('hide');
+				alertify.set({ delay: 10000 });
+				alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios : Codigo, nombre y Fecha. <br> -Codigo del proyecto repetido.");
 				setTimeout(function() {
 					$("#errorModificarProyecto").addClass("hide");
 				}, 3000);
@@ -51,6 +54,8 @@ var accionesSondeos = {
 				}, 3000);
 			} else {
 				console.log(respuesta.message);
+				alertify.set({ delay: 10000 });
+				alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios : Tipo de superficie y profundidad.");
 				$('#error_modificar_sondeo').removeClass('hide');
 				setTimeout(function() {
 					$("#error_modificar_sondeo").addClass("hide");
@@ -62,35 +67,53 @@ var accionesSondeos = {
 	eliminarSondeo: function( e ) {
 		e.preventDefault();
 		$post = $(this).parent().find("form");
-		if(confirm('Estas seguro que quieres eliminar este Sondeo')) {
-			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
-				if (respuesta.status === 'OK') {
-					console.log(respuesta.message);
-				   	$('#exitoGeneral').removeClass('hide');
-				   	location.reload();
-				} else {
-					console.log(respuesta.message);
-					$('#errorGeneral').removeClass('hide');
-					setTimeout(function() {
-						$("#error").addClass("hide");
-					}, 3000);
-				}
-			}, 'json');
-		}
+		
+		alertify.confirm("Esta seguro que desea eliminar este Sondeo", function (e) {
+		  if (e) {
+				$.post($post.attr('action'), $post.serialize(), function(respuesta) {
+					if (respuesta.status === 'OK') {
+						console.log(respuesta.message);
+					   	$('#exitoGeneral').removeClass('hide');
+					   	location.reload();
+					} else {
+						console.log(respuesta.message);
+						$('#errorGeneral').removeClass('hide');
+						setTimeout(function() {
+							$("#error").addClass("hide");
+						}, 3000);
+					}
+				}, 'json');
+			}
+		});		
+
 	},
 
 	superficie: function(){
 		var superficie = $(this).find("option:selected").val();
-		if(superficie=="2"){
+		if(superficie!="1"){
 		  $("#profundidadSuperficie").val('');
-		  $("#profundidadSuperficie").prop('disabled', false); 
+		  $("#profundidadSuperficie").attr('readonly', false);
 		} else if(superficie=="1"){
 		  $("#profundidadSuperficie").val('0');
-		  $("#profundidadSuperficie").prop('disabled', true);  
+		  $("#profundidadSuperficie").attr('readonly', true);
 		} else {
 		  $("#profundidadSuperficie").val('');
-		  $("#profundidadSuperficie").prop('disabled', true);  
+		  $("#profundidadSuperficie").attr('readonly', true);
 		}
+	},
+
+	editarSuperficie: function(){
+		var superficie = $(this).find("option:selected").val(),
+			profundidad = $('#profundidadSuperficie').val();
+			
+
+		if(superficie!="1"){
+		  $("#profundidadSuperficie").val(profundidad);
+		  $("#profundidadSuperficie").attr('readonly', false);
+		} else if(superficie=="1"){
+		  $("#profundidadSuperficie").val('0');
+		  $("#profundidadSuperficie").attr('readonly', true);
+		} 
 	},
 	nuevoSondeo: function( e ) {
 		e.preventDefault();
@@ -105,6 +128,8 @@ var accionesSondeos = {
 				}, 3000);
 			} else {
 				console.log(respuesta.message);
+				alertify.set({ delay: 10000 });
+				alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios : Tipo de superficie y profundidad.");
 				$('#errorNuevoSondeo').removeClass('hide');
 				setTimeout(function() {
 					$("#errorNuevoSondeo").addClass("hide");

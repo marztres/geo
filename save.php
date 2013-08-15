@@ -55,22 +55,7 @@
 				}	
 			break;
 
-			case 'ModificarSondeo':
-				$sondeosClass = new sondeos();
-				$nivel_freatico= $_POST['nivel_freatico'];
-				$tipo_superficie = $_POST['tipo_superficie'];
-				$Profundidad = $_POST['Profundidad'];
-				$id_sondeo = $_POST['id_sondeo'];
-				$id_tipo_superficie = $_POST['id_tipo_superficie'];
-				$respuesta = $sondeosClass->ModificarSondeos($nivel_freatico,$tipo_superficie, $Profundidad, $id_tipo_superficie, $id_sondeo);
-				if ( $respuesta ) {
-					$response["status"] = "OK";
-					$response["message"] = "Sondeo modificado";
-				} else {
-					$response["status"] = "ERROR";
-					$response["message"] = "Error modificando el sondeo";
-				}	
-			break;
+			
 
 			case 'eliminarUsuario':
 					$usuariosClass = new usuarios();				
@@ -86,15 +71,23 @@
 			break;
 
 			case 'addProyecto':
-				$proyectosClass = new proyectos();				
-				$codigoProyecto= $_POST['codigoProyecto'];
-				$nombreProyecto = $_POST['nombreProyecto'];
-				$lugar = $_POST['lugarProyecto'];
-				$contratista = $_POST['contratista'];
-				$fecha = $_POST['fecha'];
-				$autor = $_POST['autor'];
-				$responsable = $_POST['responsable'];
-				$respuesta = $proyectosClass->addProyecto($codigoProyecto, $nombreProyecto, $lugar, $contratista, $fecha, $autor, $responsable);
+				$proyectosClass = new proyectos();
+
+				if($_POST['codigoProyecto']!=NULL && $_POST['fecha']!=NULL && $_POST['nombreProyecto']!=NULL && is_numeric($_POST['codigoProyecto'])){
+					$codigoProyecto= $_POST['codigoProyecto'];
+					$nombreProyecto = $_POST['nombreProyecto'];
+					$lugar = $_POST['lugarProyecto'];
+					$contratista = $_POST['contratista'];
+					$fecha = $_POST['fecha'];
+					$autor = $_POST['autor'];
+					$responsable = $_POST['responsable'];
+					$respuesta = $proyectosClass->addProyecto($codigoProyecto, $nombreProyecto, $lugar, $contratista, $fecha, $autor, $responsable);
+				} else {
+					$respuesta = false;
+				}
+				
+
+
 				if ( $respuesta ) {
 					$response["status"] = "OK";
 					$response["message"] = "Proyecto guardado";
@@ -104,7 +97,33 @@
 				}
 			break;
 
-				case 'eliminarProyecto':
+			case 'modificarProyecto':
+				$proyectosClass = new proyectos();
+
+
+				if($_POST['codigo_proyecto']!=NULL && $_POST['fecha']!=NULL && $_POST['nombreProyecto']!=NULL && is_numeric($_POST['codigo_proyecto'])){
+				$idProyecto = $_POST['idProyecto'];
+				$codigo_proyecto= $_POST['codigo_proyecto'];
+				$nombreProyecto = $_POST['nombreProyecto'];
+				$lugar = $_POST['lugar'];
+				$contratista = $_POST['contratista'];
+				$fecha = $_POST['fecha'];
+				$responsable = $_POST['responsable'];
+				$respuesta = $proyectosClass->modificarProyecto($idProyecto, $codigo_proyecto, $nombreProyecto, $lugar, $contratista, $fecha, $responsable); 
+				} else {
+					$respuesta = false;
+				}
+
+				if ( $respuesta ) {
+					$response["status"] = "OK";
+					$response["message"] = "Proyecto modificado";
+				} else {
+					$response["status"] = "ERROR";
+					$response["message"] = "Error al modificar el proyecto proyecto";
+				}
+			break;
+
+			case 'eliminarProyecto':
 				$proyectosCLass = new proyectos();
 				$idProyecto = $_POST['idproyecto'];
 				$respuesta = $proyectosCLass->eliminarProyecto($idProyecto);
@@ -118,32 +137,24 @@
 				}
 			break;
 
-			case 'modificarProyecto':
-				$proyectosClass = new proyectos();
-				$idProyecto = $_POST['idProyecto'];
-				$codigo_proyecto= $_POST['codigo_proyecto'];
-				$nombreProyecto = $_POST['nombreProyecto'];
-				$lugar = $_POST['lugar'];
-				$contratista = $_POST['contratista'];
-				$fecha = $_POST['fecha'];
-				$responsable = $_POST['responsable'];
-				$respuesta = $proyectosClass->modificarProyecto($idProyecto, $codigo_proyecto, $nombreProyecto, $lugar, $contratista, $fecha, $responsable); 
-				if ( $respuesta ) {
-					$response["status"] = "OK";
-					$response["message"] = "Proyecto modificado";
-				} else {
-					$response["status"] = "ERROR";
-					$response["message"] = "Error al modificar el proyecto proyecto";
-				}
-			break;
-
 			case 'addSondeo':
 				$sondeosClass = new sondeos();
-				$nivelFreatico = $_POST['nivelFreatico'];
-				$profundidadSuperficie = $_POST['profundidadSuperficie'];
-				$tipoSuperficie = (isset($_POST['tipoSuperficie']) ? $_POST['tipoSuperficie'] : 0 );
-				$idProyecto= $_POST['idProyecto'];
-				$respuesta = $sondeosClass->addSondeo($nivelFreatico,$profundidadSuperficie,$tipoSuperficie,$idProyecto); 
+
+				if($_POST['tipoSuperficie']!=NULL && $_POST['profundidadSuperficie']!=NULL ){
+					if(is_numeric($_POST['nivelFreatico'])){
+						$nivelFreatico = $_POST['nivelFreatico'];
+						$profundidadSuperficie = $_POST['profundidadSuperficie'];
+						$tipoSuperficie = $_POST['tipoSuperficie'];
+						$idProyecto= $_POST['idProyecto'];
+						$respuesta = $sondeosClass->addSondeo($nivelFreatico,$profundidadSuperficie,$tipoSuperficie,$idProyecto); 
+					}else {
+						$respuesta = false;
+					}
+				}	else {
+					$respuesta = false;
+				}
+
+
 				if ( $respuesta ) {
 					$response["status"] = "OK";
 					$response["message"] = "Sondeo agregado correctamente";
@@ -151,6 +162,33 @@
 					$response["status"] = "ERROR";
 					$response["message"] = "Error al agregar el evento";
 				}
+			break;
+
+			case 'ModificarSondeo':
+				$sondeosClass = new sondeos();
+				
+				if($_POST['tipo_superficie']!=NULL && $_POST['Profundidad']!=NULL ){
+					if(is_numeric($_POST['nivel_freatico'])){
+						$nivel_freatico= $_POST['nivel_freatico'];
+						$tipo_superficie = $_POST['tipo_superficie'];
+						$Profundidad = $_POST['Profundidad'];
+						$id_sondeo = $_POST['id_sondeo'];
+						$id_tipo_superficie = $_POST['id_tipo_superficie'];
+						$respuesta = $sondeosClass->ModificarSondeos($nivel_freatico,$tipo_superficie, $Profundidad, $id_tipo_superficie, $id_sondeo);
+					} else {
+						$respuesta = false;
+					}
+				}	else {
+					$respuesta = false;
+				}
+
+				if ( $respuesta ) {
+					$response["status"] = "OK";
+					$response["message"] = "Sondeo modificado";
+				} else {
+					$response["status"] = "ERROR";
+					$response["message"] = "Error modificando el sondeo";
+				}	
 			break;
 
 			case 'eliminarSondeo':
@@ -174,10 +212,17 @@
 		  			$pesosRetenidoClass= new pesos_retenidos();
 		  			$resultadosClass= new resultados();
 
+		  			if($_POST['descripcion_muestra']!=NULL && $_POST['profundidad_inicial']!=NULL && $_POST['profundidad_final']!=NULL && is_numeric($_POST['profundidad_inicial']) && is_numeric($_POST['profundidad_final']) ){
+
 		  			$descripcion_muestra = $_POST['descripcion_muestra'];
 		  			$profundidad_inicial = $_POST['profundidad_inicial'];
 		  			$profundidad_final = $_POST['profundidad_final'];
-		  			$numero_de_golpes= $_POST['numero_de_golpes'];
+		  			
+		  			if($_POST['numero_de_golpes']==NULL){
+		  				$numero_de_golpes= 0;
+		  			} else {
+		  				$numero_de_golpes= $_POST['numero_de_golpes'];
+		  			}
 		  			$idsondeos = $_POST['idsondeos'];
 
 		  			if(isset($_POST['box_relleno'])){
@@ -250,6 +295,11 @@
 
 
 		  			$resultadosClass->addResultados($idMuestra);
+
+		  			} else {
+		  				$respuesta = false;
+		  			}	
+
 
 		  			if ( $respuesta ) {
 		  				$response["status"] = "OK";
@@ -399,6 +449,7 @@
  		  				$response["message"] = "Error guardando muestra";
  		  			}
    			break;
+
 			case 'testlimites':
 					$testLimitesClass = new testlimintes();
 					$resultadosClass= new resultados();
@@ -532,6 +583,7 @@
 
 					}
 				break;
+
 				case "UpdateCompresion":
 						$testCompresionClass = new Compresion();
 						$resultadosClass= new resultados();
@@ -564,6 +616,7 @@
 					$response["message"] = "Error actualizando compresion";
 				}					
 				break;
+
 				case 'granulometria':
   						$granulometriaClass=new granulometria();
   	  			  		$pesosRetenidosClass=new pesos_retenidos();
@@ -625,6 +678,7 @@
   						$response["message"] = "Error al actualizar granulometria ";
   					}
   			break;
+
   			case 'addFirma';
   				$firmasClass=new firmas();
 
@@ -671,6 +725,7 @@
   				}
 
   			break;
+
   			case 'updateFirma';
   				$firmasClass=new firmas();
 
@@ -736,6 +791,7 @@
   				}
 
   			break;
+
   			case 'deleteFirma';
   				$firmasClass=new firmas();
 

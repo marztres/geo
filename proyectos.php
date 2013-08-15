@@ -32,9 +32,30 @@
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="assets/js/proyectos.js"></script>
     <script src="assets/js/usuarios.js"></script>
+    <link rel="stylesheet" href="assets/css/alertify.core.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstrap.css" />
+
     <script >
       $(document).ready(function() {
-        $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' }); 
+        $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+        $.datepicker.regional['es'] = {
+        closeText: 'Cerrar',
+        prevText: '<Ant',
+        nextText: 'Sig>',
+        currentText: 'Hoy',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+        dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']); 
       })
     </script>
   </head>
@@ -100,14 +121,16 @@
           <div class="container">               
             <!-- Be sure to leave the brand out there if you want it shown -->
             <a class="brand" id="listar" href="proyectos.php" data-toggle="tooltip" title="Click listar todos los proyectos">Proyectos</a>
-            <ul class="nav pull-right">
-              <li class="divider-vertical"></li>   
-              <li>
-                <a href="#Nuevoproyecto" role="button"  data-toggle="modal">
-                  <i  class="icon-plus-sign"></i> Nuevo proyecto
-                </a>
-              </li>
-            </ul>
+            <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+              <ul class="nav pull-right">
+                <li class="divider-vertical"></li>   
+                <li>
+                  <a href="#Nuevoproyecto" role="button"  data-toggle="modal">
+                    <i  class="icon-plus-sign"></i> Nuevo proyecto
+                  </a>
+                </li>
+              </ul>
+            <?php endif ?>
             <form id="buscarProyecto" action="proyectos.php" class="navbar-form pull-right ">
               <div class="input-append  input-block-level">      
                 <input type="text" name='busqueda' placeholder="Buscar proyecto" class="input-xxlarge" >
@@ -157,7 +180,7 @@
               <span class="badge"><?php echo $proyecto->cantidad; ?></span>
             </td>
             <td>
-              <a href="sondeos.php?idp=<?php echo $proyecto->id_proyecto; ?>"><i class="icon-pencil"></i></a>
+              <a href="sondeos.php?idp=<?php echo $proyecto->id_proyecto; ?>"><i class="icon-zoom-in"></i></a>
             </td>
             <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero'  ) : ?>
               <td>
@@ -263,7 +286,11 @@
               <select name='responsable'  class="input-block-level" >
               <?php if ( count( $usuarios ) > 0 ) : ?>
               <?php foreach ( $usuarios as $usuario ) : ?>
-                <option value="<?php echo $usuario->id_usuario; ?>"><?php echo $usuario->tipo; ?> <?php echo $usuario->nombres; ?> <?php echo $usuario->apellidos; ?></option>
+              <?php if ( $usuario->id_usuario=="0" ) : ?>
+                    <option value="<?php echo $usuario->id_usuario; ?>" selected ><?php echo $usuario->tipo; ?> <?php echo $usuario->nombres; ?> <?php echo $usuario->apellidos; ?></option>
+                  <?php else: ?>
+                    <option value="<?php echo $usuario->id_usuario; ?>" ><?php echo $usuario->tipo; ?> <?php echo $usuario->nombres; ?> <?php echo $usuario->apellidos; ?></option>
+              <?php endif; ?>
               <?php endforeach; ?>
               <?php endif; ?>
               </select >
@@ -349,7 +376,11 @@
     <script src="assets/js/vendor/bootstrap.min.js"></script>
     <script> 
       $('.brand').tooltip('hide');
+
+
     </script>   
-  
+    <script src="assets/js/alertify/alertify.js"></script>  
+
+
   </body>
 </html>

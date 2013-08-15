@@ -20,6 +20,7 @@
   $datos_sondeo=$sondeosClass->getDatosSondeo($_GET['ids']);
   $muestras = new muestras();
   $muestrasSondeo = $muestras->getMuestrasSondeo($_GET['ids']);
+  $tipo_superficie = $sondeosClass->getListaSuperficie();
   $testLimitesClass = new testlimintes();
   $TestLimitesMuestra = array();
   $datosCompresion= new Compresion();
@@ -143,7 +144,9 @@
           <label for="codigo_proyecto" class="span2"><?php echo $datos_sondeo ->tipo_superficie; ?> </label>
           <label for="fecha_proyecto_label" class="span3 title">Profundidad superficie:</label>
           <label for="fecha_proyecto_label" class="span1"><?php echo $datos_sondeo ->profundidad_superficie; ?></label>
-          <a href="#modificarsondeo" role="button" data-toggle="modal" class=" span2"> <i class="icon-edit"></i> Modificar datos</a>
+          <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+            <a href="#modificarsondeo" role="button" data-toggle="modal" class=" span2"> <i class="icon-edit"></i> Modificar datos</a>
+          <?php endif ?>
         </div>
       </div>
       <!-- ############# FIN DATOS DE SONDEO ############### -->
@@ -195,7 +198,10 @@
                 <th>Numero de golpes</th>
                 <th>Color</th>
                 <th>Editar</th>
-                <th>Clonar</th>
+                <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+                  <th>Clonar</th>
+                <?php endif ?>
+
               </tr>
             </thead>
             <tbody>
@@ -209,21 +215,29 @@
                 </td>
                 <td><?php echo $datoMuestra->numero_golpes ?></td>
                 <td><?php echo $datoMuestra->descripcion ?></td>
-                <td>
-                  <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="modalMuestra" role="button" data-toggle="modal" href="#editarmuestra">
-                  <i class='icon-wrench'></i>
-                  </a>
-                </td>
-                <td>
-                  <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="clonarMuestra" role="button" data-toggle="modal" href="#clonarmuestra">
-                  <i class='icon-wrench'></i>
-                  </a>
-                </td>
+                
+                  <td>
+                    <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="modalMuestra" role="button" data-toggle="modal" href="#editarmuestra">
+                    <i class='icon-wrench'></i>
+                    </a>
+                  </td>
+                <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+                  <td>
+                    <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="clonarMuestra" role="button" data-toggle="modal" href="#clonarmuestra">
+                    <i class='icon-wrench'></i>
+                    </a>
+                  </td>
+                <?php endif ?>
               </tr>
               <?php $i++; ?>
               <?php endforeach; ?>
               <?php else: ?>
-              <td colspan="7">No hay datos que mostrar</td>
+              <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+                <td colspan="7">No hay datos que mostrar</td>
+              <?php else : ?>
+                <td colspan="6">No hay datos que mostrar</td>
+              <?php endif ?>
+
               <?php endif; ?>
             </tbody>
           </table>
@@ -2324,26 +2338,27 @@
               <input type='text' name='nivel_freatico' value="<?php echo $datos_sondeo->nivel_freatico;?>" placeholder='Nivel freatico ' class="input-block-level limpiar required" autofocus >
             </div>
             <div class="row-fluid">
-              <select name='tipo_superficie' id='lista_usuarios' class="span8"  >
-                <option>Selecciona tipo de superficie </option>
-                <?php
-                  if($datos_sondeo->tipo_superficie=='Ninguna'){ 
-                      echo "<option selected='selected' value='1'>Ninguna</option>";
-                      echo "<option value='2'>Capa vegetal</option>";
-                  }
-                  else{
-                      echo "<option selected='selected' value='2'>Capa vegetal</option>";
-                      echo "<option value='1'>Ninguna</option>";
-                  }
-                  ?>
+              <select name='tipo_superficie' id='idSuperficie' class="span8"  >
+                <?php if(count($tipo_superficie) > 0): ?>
+                  <?php foreach( $tipo_superficie as $tipo ): ?>
+                   <?php if ( $datos_sondeo->tipo_superficie==$tipo->tipo_superficie ) : ?>   
+                     <option value="<?php echo $tipo->id_tipo_superficie ?>" selected='selected'><?php echo $tipo->tipo_superficie ?></option>
+                   <?php else: ?> 
+                     <option value="<?php echo $tipo->id_tipo_superficie ?>"><?php echo $tipo->tipo_superficie ?></option>
+                   <?php endif ?>
+
+                  <?php endforeach; ?>
+                <?php endif; ?>
               </select >
-              <?php
-                if($datos_sondeo->tipo_superficie=='Ninguna'){
-                ?> 
-              <input type='text' name='Profundidad' value="0" disabled="disabled" placeholder='Profundidad' class="span4" >
-              <?php } else{?>
-              <input type='text' name='Profundidad' value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="span4" > 
-              <?php }?>
+              
+
+              <?php if ( $datos_sondeo->tipo_superficie=='Ninguna' ) : ?>
+                <input type='text' name='Profundidad' id="profundidadSuperficie" value="0" disabled="disabled" placeholder='Profundidad' class="span4" >
+              <?php else: ?>
+              <input type='text' name='Profundidad' id="profundidadSuperficie" value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="span4" > 
+              <?php endif; ?>
+
+
               <input type='hidden' name='func' value="ModificarSondeo"  class="span4" > 
               <input type='hidden' name='id_sondeo' value="<?php echo $datos_sondeo->id_sondeo;?>"  class="span4" > 
               <input type='hidden' name='id_tipo_superficie' value="<?php echo $datos_sondeo->fk_id_tipo_superficie;?>"  class="span4" >

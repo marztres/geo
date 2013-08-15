@@ -34,6 +34,8 @@
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="assets/js/sondeos.js"></script>
     <script src="assets/js/usuarios.js"></script>
+    <link rel="stylesheet" href="assets/css/alertify.core.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstrap.css" />
     <script >
       $(document).ready(function() {
         $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' }); 
@@ -117,9 +119,11 @@
           <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span1">
           <?php echo $proyectos->fecha; ?>
           </label>
+          <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
           <a href="#modalProyecto" role="button" data-toggle="modal" class=" span2 offset1">
           <i class="icon-edit"></i> Modificar información
           </a>
+          <?php endif ?>
         </div>
         <div class="row-fluid">
           <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
@@ -183,7 +187,7 @@
             <tr>
             <td><span class="titulo-proyectos"><?php echo $i; ?></span></td>
             <td><span class="badge"><?php echo $sondeo->cantidad; ?></span></td>
-            <td><a href="muestras.php?idp=<?php echo $sondeo->fk_idproyecto; ?>&ids=<?php echo $sondeo->id_sondeo; ?>&numsondeo=<?php echo $i; ?>"><i class="icon-pencil"></a></td>
+            <td><a href="muestras.php?idp=<?php echo $sondeo->fk_idproyecto; ?>&ids=<?php echo $sondeo->id_sondeo; ?>&numsondeo=<?php echo $i; ?>"><i class="icon-zoom-in"></a></td>
             <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero'  ) : ?>
               <td>
                 <a class="eliminarSondeo" href="#"><i class="icon-remove"></i></a>
@@ -337,7 +341,7 @@
                 <?php endforeach; ?>
                 <?php endif; ?>
               </select>
-              <input name='profundidadSuperficie' id="profundidadSuperficie" type='text'  placeholder='Profundidad' class="span4" disabled> 
+              <input name='profundidadSuperficie' id="profundidadSuperficie" type='text'  placeholder='Profundidad' class="span4" readonly="readonly"> 
               <input name='idProyecto' type='hidden'  value="<?php echo $proyectos->id_proyecto; ?>">  
               <input name='func' type='hidden'  value="addSondeo" >
             </div>
@@ -418,5 +422,6 @@
     <script>
        $('.brand').tooltip('hide');
     </script>
+    <script src="assets/js/alertify/alertify.js"></script>  
   </body>
 </html>
