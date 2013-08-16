@@ -222,17 +222,32 @@ var acciones = {
         sueloSeco1 = tdHijos.eq(5).find("input"),
         pesoCapsula = parseFloat(pesoCapsula1.val()),
         sueloHumedo = parseFloat(sueloHumedo1.val()),
-        sueloSeco = parseFloat(sueloSeco1.val()),
+        sueloSeco = parseFloat(sueloSeco1.val());
 
         //calculos horizontales tabla liquido
-        pesoSuelo = sueloSeco - pesoCapsula,
-        pesoAgua = sueloHumedo - sueloSeco,
-        contenidoAgua = (pesoAgua/pesoSuelo)*100,
+        if( (sueloSeco!=null && sueloSeco>0 && typeof sueloSeco == 'number') && (pesoCapsula!=null && pesoCapsula>0 && typeof pesoCapsula == 'number') && (sueloHumedo!=null && sueloHumedo>0 && typeof sueloHumedo == 'number')  ){  
+        
+          pesoSuelo = sueloSeco - pesoCapsula,
+          pesoAgua = sueloHumedo - sueloSeco;
+
+          
+          contenidoAgua = (pesoAgua/pesoSuelo)*100;
+          contenidoAgua = isNaN(contenidoAgua) || contenidoAgua<0  ? contenidoAgua = 0 : contenidoAgua;
+           
+
+        } else {
+          pesoSuelo = 0,
+          pesoAgua = 0,
+          contenidoAgua = 0;
+        }
+
         
         //columnas de resultados horiazontales
-        tdPesoSuelo = tdHijos.eq(6).text(pesoSuelo.toPrecision(4)),
-        tdPesoAgua = tdHijos.eq(7).text(pesoAgua.toPrecision(4)),
-        tdContenidoAgua = tdHijos.eq(8).text(contenidoAgua.toPrecision(4));
+        pesoSuelo == 0 ? tdPesoSuelo = tdHijos.eq(6).text(0) : tdPesoSuelo = tdHijos.eq(6).text(pesoSuelo.toFixed(2));
+
+        pesoAgua == 0 ? tdPesoAgua = tdHijos.eq(7).text(0) : tdPesoAgua = tdHijos.eq(7).text(pesoAgua.toFixed(2));
+
+        contenidoAgua == 0 ? tdContenidoAgua = tdHijos.eq(8).text(0) : tdContenidoAgua = tdHijos.eq(8).text(contenidoAgua.toFixed(2));
 
       var total = parseFloat(tdFinal1.text()) + parseFloat(tdFinal2.text()) + parseFloat(tdFinal3.text());
       tdFinal4.text(total.toPrecision(4));
