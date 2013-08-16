@@ -183,10 +183,10 @@ var acciones = {
           if (respuesta.status === 'OK') {
           console.log(respuesta.message);
           
-          alertify.log("Datos guardados exitosamente.");
+          alertify.success(" <strong>Limites guardados exitosamente.</strong>");
           } else {
           console.log(respuesta.message);
-          alertify.error("opps..Hubo un error al guardar");
+          alertify.error("<strong> opps..Hubo un error al guardar. </strong>");
           }
           contadorLimites=0;  
         } 
@@ -230,27 +230,24 @@ var acciones = {
           pesoSuelo = sueloSeco - pesoCapsula,
           pesoAgua = sueloHumedo - sueloSeco;
 
-          
           contenidoAgua = (pesoAgua/pesoSuelo)*100;
           contenidoAgua = isNaN(contenidoAgua) || contenidoAgua<0  ? contenidoAgua = 0 : contenidoAgua;
            
-
         } else {
           pesoSuelo = 0,
           pesoAgua = 0,
           contenidoAgua = 0;
         }
 
-        
         //columnas de resultados horiazontales
         pesoSuelo == 0 ? tdPesoSuelo = tdHijos.eq(6).text(0) : tdPesoSuelo = tdHijos.eq(6).text(pesoSuelo.toFixed(2));
 
         pesoAgua == 0 ? tdPesoAgua = tdHijos.eq(7).text(0) : tdPesoAgua = tdHijos.eq(7).text(pesoAgua.toFixed(2));
 
-        contenidoAgua == 0 ? tdContenidoAgua = tdHijos.eq(8).text(0) : tdContenidoAgua = tdHijos.eq(8).text(contenidoAgua.toFixed(2));
+        contenidoAgua == 0 || !isFinite(contenidoAgua) ? tdContenidoAgua = tdHijos.eq(8).text(0) : tdContenidoAgua = tdHijos.eq(8).text(contenidoAgua.toFixed(2));
 
       var total = parseFloat(tdFinal1.text()) + parseFloat(tdFinal2.text()) + parseFloat(tdFinal3.text());
-      tdFinal4.text(total.toPrecision(4));
+      tdFinal4.text(total.toFixed(2));
 
     } else {
       //elementos columnas finales tablas
@@ -277,17 +274,35 @@ var acciones = {
       sueloSeco1 = tdHijos.eq(4).find("input"), 
       pesoCapsula = parseFloat(pesoCapsula1.val()),
       sueloHumedo = parseFloat(sueloHumedo1.val()),
-      sueloSeco = parseFloat(sueloSeco1.val()),
+      sueloSeco = parseFloat(sueloSeco1.val());
 
       //calculos horizontales tablas humedad natural y plastico
-      pesoSuelo = sueloSeco - pesoCapsula,
-      pesoAgua = sueloHumedo - sueloSeco,
-      contenidoAgua = (pesoAgua/pesoSuelo)*100,
+    
+      if( (sueloSeco!=null && sueloSeco>0 && typeof sueloSeco == 'number') && (pesoCapsula!=null && pesoCapsula>0 && typeof pesoCapsula == 'number') && (sueloHumedo!=null && sueloHumedo>0 && typeof sueloHumedo == 'number')  ){  
+        
+          pesoSuelo = sueloSeco - pesoCapsula,
+          pesoAgua = sueloHumedo - sueloSeco;
+
+          contenidoAgua = (pesoAgua/pesoSuelo)*100;
+          contenidoAgua = isNaN(contenidoAgua) || contenidoAgua<0  ? contenidoAgua = 0 : contenidoAgua;
+           
+        } else {
+          pesoSuelo = 0,
+          pesoAgua = 0,
+          contenidoAgua = 0;
+        }
+    
+      //columnas de resultados horiazontales
+      tdPesoSuelo = tdHijos.eq(5).text(pesoSuelo.toFixed(2)),
+      tdPesoAgua = tdHijos.eq(6).text(pesoAgua.toFixed(2)),
+      tdContenidoAgua = tdHijos.eq(7).text(contenidoAgua.toFixed(2));
+
+
 
       //columnas de resultados horiazontales
-      tdPesoSuelo = tdHijos.eq(5).text(pesoSuelo.toPrecision(4)),
-      tdPesoAgua = tdHijos.eq(6).text(pesoAgua.toPrecision(4)),
-      tdContenidoAgua = tdHijos.eq(7).text(contenidoAgua.toPrecision(4));
+      pesoSuelo == 0 ? tdPesoSuelo = tdHijos.eq(5).text(0) : tdPesoSuelo = tdHijos.eq(5).text(pesoSuelo.toFixed(2));
+      pesoAgua == 0 ? tdPesoAgua = tdHijos.eq(6).text(0) : tdPesoAgua = tdHijos.eq(6).text(pesoAgua.toFixed(2));
+      contenidoAgua == 0 || !isFinite(contenidoAgua) ? tdContenidoAgua = tdHijos.eq(7).text(0) : tdContenidoAgua = tdHijos.eq(7).text(contenidoAgua.toFixed(2));
       
      
 
@@ -339,43 +354,42 @@ var acciones = {
         tdFinalPlastico3Var= parseFloat(tdFinalPlastico3.text()),
         tdFinalPlastico4Var= parseFloat(tdFinalPlastico4.text());              
 
+        
+        // HUMEDAD NATURAL
+
         var HumedadNatural;
         //humedad calculando el promedio
         var menorhumedad1 = Math.min(tdFinalHumedad1Var,tdFinalHumedad2Var),
           mayorhumedad1 = Math.max(tdFinalHumedad1Var,tdFinalHumedad2Var),  
           divisionMayorMenor1H=mayorhumedad1/menorhumedad1;
           if(divisionMayorMenor1H<1.29){
-            HumedadNatural= (mayorhumedad1+menorhumedad2)/2
+            HumedadNatural = (mayorhumedad1+menorhumedad2)/2;
           }
         var menorhumedad2 = Math.min(tdFinalHumedad2Var,tdFinalHumedad3Var),
           mayorhumedad2 = Math.max(tdFinalHumedad2Var,tdFinalHumedad3Var),  
           divisionMayorMenor2H=mayorhumedad2/menorhumedad2;
           if(divisionMayorMenor2H<1.29){
-            HumedadNatural= (mayorhumedad2+menorhumedad2)/2
+            HumedadNatural= (mayorhumedad2+menorhumedad2)/2;
           }
         var menorhumedad3 = Math.min(tdFinalHumedad1Var,tdFinalHumedad3Var),
           mayorhumedad3 = Math.max(tdFinalHumedad1Var,tdFinalHumedad3Var),  
           divisionMayorMenor3H=mayorhumedad3/menorhumedad3;
           if(divisionMayorMenor3H<1.29){
-            HumedadNatural= (mayorhumedad3+menorhumedad3)/2
+            HumedadNatural= (mayorhumedad3+menorhumedad3)/2;
           }
           if(divisionMayorMenor1H>1.29 && divisionMayorMenor2H>1.29 && divisionMayorMenor3H>1.29 ){
             HumedadNatural=0;  
           }
 
-        var FinalHumedadNatural=Math.round(HumedadNatural)
+        if(isNaN(HumedadNatural) || HumedadNatural<0){   
+          tdFinalHumedad4.text(0);
+        } else {
+          var FinalHumedadNatural=Math.round(HumedadNatural);
+          tdFinalHumedad4.text(FinalHumedadNatural.toFixed(2));
+        }
 
-        tdFinalHumedad4.text(FinalHumedadNatural.toPrecision(4));
 
-//        liquido calculando el promedio
-
-//               x1             y1
-//        (tdgolpes1Var,tdFinalLiquido1Var)
-//               x2             y2
-//        (tdgolpes2Var,tdFinalLiquido2Var)
-//               x3             y3
-//        (tdgolpes3Var,tdFinalLiquido3Var)
-        
+        // LIMITE LIQUIDO
         var pendiente1=(tdFinalLiquido2Var-tdFinalLiquido1Var)/(tdgolpes2Var-tdgolpes1Var),
           pendiente2=(tdFinalLiquido3Var-tdFinalLiquido1Var)/(tdgolpes3Var-tdgolpes1Var),
           pendiente3=(tdFinalLiquido3Var-tdFinalLiquido2Var)/(tdgolpes3Var-tdgolpes2Var);
@@ -386,9 +400,15 @@ var acciones = {
 
         LimiteLiquido=(limite1+limite2+limite3)/3;
 
-        var FinalLimiteLiquido=Math.round(LimiteLiquido);
-        tdFinalLiquido4.text(FinalLimiteLiquido.toPrecision(4));
+        if(isNaN(LimiteLiquido) || LimiteLiquido<0){   
+          tdFinalLiquido4.text(0);
+        } else {
+          var FinalLimiteLiquido=Math.round(LimiteLiquido);
+          tdFinalLiquido4.text(FinalLimiteLiquido.toFixed(2));
+        }
 
+
+        // LIMITE PLASTICO 
         var LimitePlastico;
         //Plastico calculando el promedio
         var menorplastico1 = Math.min(tdFinalPlastico1Var,tdFinalPlastico2Var),
@@ -413,13 +433,12 @@ var acciones = {
             LimitePlastico=0;  
           }
 
-
-        var FinalLimitePlastico=Math.round(LimitePlastico);
-        
-
-        tdFinalPlastico4.text(FinalLimitePlastico.toPrecision(4));
-          
-      
+       if(isNaN(LimitePlastico) || LimitePlastico<0){   
+          tdFinalPlastico4.text(0);
+        } else {
+          var FinalLimitePlastico=Math.round(LimitePlastico);
+          tdFinalPlastico4.text(FinalLimitePlastico.toFixed(2));
+        }
 
 
     //Elementos Totales de las tablas humedad plastico y liquido 
@@ -445,10 +464,10 @@ var acciones = {
       InputLimitePlasticoFinal= $(this).closest("div").find("form.formResultados").find("input.LimitePlasticoFinal"),
       InputIndicePlasticidad= $(this).closest("div").find("form.formResultados").find("input.IndicePlasticidadFinal");
 
-      InputHumedadFinal.val(humedadVar.toPrecision(4)),
-      InputLimiteLiquidoFinal.val(liquidoVar.toPrecision(4)),
-      InputLimitePlasticoFinal.val(plasticoVar.toPrecision(4)),
-      InputIndicePlasticidad.val(liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4));
+      InputHumedadFinal.val(humedadVar.toFixed(2)),
+      InputLimiteLiquidoFinal.val(liquidoVar.toFixed(2)),
+      InputLimitePlasticoFinal.val(plasticoVar.toFixed(2)),
+      InputIndicePlasticidad.val(liquidoVar.toFixed(2) - plasticoVar.toFixed(2));
 
 
     //resultados grafica 
@@ -459,12 +478,10 @@ var acciones = {
       inputGraficaLimites.val("["+parseFloat(tdgolpes1Var)+","+parseFloat(tdFinalLiquido1Var)+"]"+","+"["+parseFloat(tdgolpes2Var)+","+parseFloat(tdFinalLiquido2Var)+"]"+","+"["+parseFloat(tdgolpes3Var)+","+parseFloat(tdFinalLiquido3Var)+"]").trigger('change');
     optimizadorGraficas=0;  
     }
-    
-
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
     } else {
-      resultadoHumedad.text(humedadVar.toPrecision(4));
+      resultadoHumedad.text(humedadVar.toFixed(2));
     }
 
     if (plasticoVar == null) {
@@ -472,7 +489,7 @@ var acciones = {
     } else if (plasticoVar <= 0) {
       resultadoPlastico.text("NP");
     } else {
-      resultadoPlastico.text(plasticoVar.toPrecision(4));
+      resultadoPlastico.text(plasticoVar.toFixed(2));
     }
 
     if (liquidoVar == null) {
@@ -480,16 +497,15 @@ var acciones = {
     } else if (liquidoVar <= 0) {
       resultadoliquido.text("NL");
     } else {
-      resultadoliquido.text(liquidoVar.toPrecision(4));
+      resultadoliquido.text(liquidoVar.toFixed(2));
     }
 
     if (liquidoVar == null || plasticoVar == null) {
       resultadoIndicePlasticidad.text("N/A");
     } else {
-      indicePlasticidad = liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4);
-      resultadoIndicePlasticidad.text(indicePlasticidad.toPrecision(4));
+      indicePlasticidad = liquidoVar.toFixed(2) - plasticoVar.toFixed(2);
+      resultadoIndicePlasticidad.text(indicePlasticidad.toFixed(2));
     }
-
   },
   noplastico: function (e) {
     e.preventDefault();
@@ -536,15 +552,15 @@ var acciones = {
       InputLimitePlasticoFinal= $(this).closest("div").find("form.formResultados").find("input.LimitePlasticoFinal"),
       InputIndicePlasticidad= $(this).closest("div").find("form.formResultados").find("input.IndicePlasticidadFinal");
 
-      InputHumedadFinal.val(humedadVar.toPrecision(4)),
-      InputLimiteLiquidoFinal.val(liquidoVar.toPrecision(4)),
-      InputLimitePlasticoFinal.val(plasticoVar.toPrecision(4)),
-      InputIndicePlasticidad.val(liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4));  
+      InputHumedadFinal.val(humedadVar.toFixed(2)),
+      InputLimiteLiquidoFinal.val(liquidoVar.toFixed(2)),
+      InputLimitePlasticoFinal.val(plasticoVar.toFixed(2)),
+      InputIndicePlasticidad.val(liquidoVar.toFixed(2) - plasticoVar.toFixed(2));  
 
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
     } else {
-      resultadoHumedad.text(humedadVar.toPrecision(4));
+      resultadoHumedad.text(humedadVar.toFixed(2));
     }
 
     if (plasticoVar == null) {
@@ -552,7 +568,7 @@ var acciones = {
     } else if (plasticoVar <= 0) {
       resultadoPlastico.text("NP");
     } else {
-      resultadoPlastico.text(plasticoVar.toPrecision(4));
+      resultadoPlastico.text(plasticoVar.toFixed(2));
     }
 
     if (liquidoVar == null) {
@@ -560,14 +576,14 @@ var acciones = {
     } else if (liquidoVar <= 0) {
       resultadoliquido.text("NL");
     } else {
-      resultadoliquido.text(liquidoVar.toPrecision(4));
+      resultadoliquido.text(liquidoVar.toFixed(2));
     }
 
     if (liquidoVar == null || plasticoVar == null) {
       resultadoIndicePlasticidad.text("N/A");
     } else {
-      indicePlasticidad = liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4);
-      resultadoIndicePlasticidad.text(indicePlasticidad.toPrecision(4));
+      indicePlasticidad = liquidoVar.toFixed(2) - plasticoVar.toFixed(2);
+      resultadoIndicePlasticidad.text(indicePlasticidad.toFixed(2));
     }
   },
   noliquido: function (e) {
@@ -629,24 +645,24 @@ var acciones = {
 
     var inputGrafica = $(this).closest("div").find("input.datosgraficaLimites");
 
-    inputGrafica.val("["+parseFloat(tdgolpes1Var)+","+parseFloat(tdFinalLiquido1Var)+"]"+","+"["+parseFloat(tdgolpes2Var)+","+parseFloat(tdFinalLiquido2Var)+"]"+","+"["+parseFloat(tdgolpes3Var)+","+parseFloat(tdFinalLiquido3Var)+"]").trigger('change');  
+    inputGrafica.val("[1,1],[1,1],[1,1]").trigger('change');  
 
 
-      //Input hidden de resultados 
+    //Input hidden de resultados 
     var InputHumedadFinal = $(this).closest("div").find("form.formResultados").find("input.HumedadNaturalFinal"),
       InputLimiteLiquidoFinal= $(this).closest("div").find("form.formResultados").find("input.LimiteLiquidoFinal"),
       InputLimitePlasticoFinal= $(this).closest("div").find("form.formResultados").find("input.LimitePlasticoFinal"),
       InputIndicePlasticidad= $(this).closest("div").find("form.formResultados").find("input.IndicePlasticidadFinal");
 
-      InputHumedadFinal.val(humedadVar.toPrecision(4)),
-      InputLimiteLiquidoFinal.val(liquidoVar.toPrecision(4)),
-      InputLimitePlasticoFinal.val(plasticoVar.toPrecision(4)),
-      InputIndicePlasticidad.val(liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4));
+      InputHumedadFinal.val(humedadVar.toFixed(2)),
+      InputLimiteLiquidoFinal.val(liquidoVar.toFixed(2)),
+      InputLimitePlasticoFinal.val(plasticoVar.toFixed(2)),
+      InputIndicePlasticidad.val(liquidoVar.toFixed(2) - plasticoVar.toFixed(2));
 
     if (humedadVar == null || humedadVar <= 0) {
       resultadoHumedad.text("N/A");
     } else {
-      resultadoHumedad.text(humedadVar.toPrecision(4));
+      resultadoHumedad.text(humedadVar.toFixed(2));
     }
 
     if (plasticoVar == null) {
@@ -654,7 +670,7 @@ var acciones = {
     } else if (plasticoVar <= 0) {
       resultadoPlastico.text("NP");
     } else {
-      resultadoPlastico.text(plasticoVar.toPrecision(4));
+      resultadoPlastico.text(plasticoVar.toFixed(2));
     }
 
     if (liquidoVar == null) {
@@ -662,13 +678,13 @@ var acciones = {
     } else if (liquidoVar <= 0) {
       resultadoliquido.text("NL");
     } else {
-      resultadoliquido.text(liquidoVar.toPrecision(4));
+      resultadoliquido.text(liquidoVar.toFixed(2));
     }
     if (liquidoVar == null || plasticoVar == null) {
       resultadoIndicePlasticidad.text("N/A");
     } else {
-      indicePlasticidad = liquidoVar.toPrecision(4) - plasticoVar.toPrecision(4);
-      resultadoIndicePlasticidad.text(indicePlasticidad.toPrecision(4));
+      indicePlasticidad = liquidoVar.toFixed(2) - plasticoVar.toFixed(2);
+      resultadoIndicePlasticidad.text(indicePlasticidad.toFixed(2));
     }
   },
   updateGranulometria: function (e) {
@@ -714,12 +730,19 @@ var acciones = {
     diametroVar = parseFloat(diametro.val());
     alturaVar = parseFloat(altura.val());
     pesoVar = parseFloat(pesoGr.val());
-    areaVar = (Math.PI * (diametroVar * diametroVar)) / 4;
-    volumenVar = (areaVar * alturaVar);
-    pesoUnitarioVar = (pesoVar / volumenVar) * 10;
 
-    area.text(areaVar.toPrecision(4));
-    volumen.text(volumenVar.toPrecision(4));
+    //area
+    areaVar = (Math.PI * (diametroVar * diametroVar)) / 4;
+    areaVar = isNaN(areaVar) || areaVar<0  ? areaVar=0 : areaVar;
+
+    volumenVar = (areaVar * alturaVar);
+    volumenVar = isNaN(volumenVar) || volumenVar<0  ? volumenVar=0 : volumenVar;
+
+    pesoUnitarioVar = (pesoVar / volumenVar) * 10;
+    pesoUnitarioVar = isNaN(pesoUnitarioVar) || pesoUnitarioVar<0  ? pesoUnitarioVar=0 : pesoUnitarioVar;     
+
+    area.text(areaVar.toFixed(2)); 
+    volumen.text(volumenVar.toFixed(2));
 
     // elementos y calculos horizontales tabla de deformacion   
     if ($(this).hasClass("ideformacion")) {
@@ -732,30 +755,41 @@ var acciones = {
         areaCorregida = calculosFila.eq(4),
         esfuerzo = calculosFila.eq(5);
 
-      if (carga.val() > 0) {
+      if (carga.val() >= 0 && !isNaN(carga.val())) {
         var deformacionTotalVar = (parseFloat(deformacion.text()) * 2.54) / 1000;
+        var cargaKgVar = carga.val() / 10;
+        var areaCorregidaVar = (areaVar / (1 - (deformacionTotalVar / parseFloat(altura.val()))));      
+        var esfuerzoVar = parseFloat(cargaKgVar) / areaCorregidaVar;
+
       } else {
         var deformacionTotalVar = 0;
-      }
-      if (carga.val() > 0) {
-        var cargaKgVar = carga.val() / 10;
-      } else {
         var cargaKgVar = 0;
-      }
-      if (carga.val() > 0) {
-        var areaCorregidaVar = (areaVar / (1 - (deformacionTotalVar / parseFloat(altura.val()))));
-      } else {
-        var areaCorregidaVar = 0;
-      }
-      if (carga.val() > 0) {
-        var esfuerzoVar = parseFloat(cargaKgVar) / areaCorregidaVar;
-      } else {
+        var areaCorregidaVar = 0;  
         var esfuerzoVar = 0;
       }
-      deformacionTotal.text(deformacionTotalVar.toPrecision(2));
-      cargaKg.text(cargaKgVar.toPrecision(2));
-      areaCorregida.text(areaCorregidaVar.toPrecision(4));
-      esfuerzo.text(esfuerzoVar.toPrecision(2));
+
+
+      if(!isFinite(deformacionTotalVar)) {
+        deformacionTotal.text(0);
+      } else {
+        deformacionTotal.text(deformacionTotalVar.toPrecision(2));
+      }
+      if(!isFinite(cargaKgVar)) {
+        cargaKg.text(0);
+      } else {
+        cargaKg.text(cargaKgVar.toFixed(2));
+      }
+      if(!isFinite(areaCorregidaVar)) {
+        areaCorregida.text(0);
+      } else {
+        areaCorregida.text(areaCorregidaVar.toFixed(2));
+      }
+      if(!isFinite(esfuerzoVar)) {
+        esfuerzo.text(0);
+      } else {
+        esfuerzo.text(esfuerzoVar.toFixed(2));
+      }      
+    
     }
     //todas los td esfuerzo finales de la tabla de deformacion
     var trDeformacion = $(this).closest("div").find("table.tabladeformacion").find("tbody").children();
@@ -899,8 +933,12 @@ var acciones = {
 
     //Calculos de cohesion   
     cohesionVar = (Math.max(td0Var, td1Var, td2Var, td3Var, td4Var, td5Var, td6Var, td7Var, td8Var, td9Var, td10Var, td11Var, td12Var, td13Var, td14Var, td15Var, td16Var, td17Var)) / 2 * 100;
+    
+
     // Elementos y calculos tabla de resultados compresion
     var trResultados = $(this).closest("div").find("table.resultadoscompresion").find("tbody").find("tr").children();
+    
+
     resultadoDiametro = trResultados.eq(0), 
     resultadoAltura = trResultados.eq(1), 
     resultadoPeso = trResultados.eq(2), 
@@ -916,19 +954,68 @@ var acciones = {
       InputPesoUnitarioFinal= $(this).closest("div").find("form.formResultadosCompresion").find("input.pesoUnitarioFinal");
 
 
-    resultadoDiametro.text(diametroVar.toPrecision(4));
-    resultadoAltura.text(alturaVar.toPrecision(4));
-    resultadoPeso.text(pesoVar.toPrecision(4));
-    resultadoPesoUnitario.text(pesoUnitarioVar.toPrecision(4));
-    resultadoCohesion.text(cohesionVar.toPrecision(4));
-    resultadoTipoFalla.text(tipoFalla.val());
-    resultadoArea.text(areaVar.toPrecision(4));
-    resultadoVolumen.text(volumenVar.toPrecision(4));
-    resultadoCohesion.text(cohesionVar.toPrecision(4));
+    if(isNaN(diametroVar) || diametroVar<0 ){
+      resultadoDiametro.text(0);  
+    } else {
+      resultadoDiametro.text(diametroVar.toFixed(2));  
+    }   
+    
+    if(isNaN(alturaVar) || alturaVar<0 ){
+      resultadoAltura.text(0);
+    } else {
+      resultadoAltura.text(alturaVar.toFixed(2));  
+    }
+    
+    if(isNaN(pesoVar) || pesoVar<0 ){
+      resultadoPeso.text(0);
+    } else {
+      resultadoPeso.text(pesoVar.toFixed(2));
+    }
 
+    if(isNaN(pesoUnitarioVar) || pesoUnitarioVar<0 ){
+      resultadoPesoUnitario.text(0);
+    } else {
+      resultadoPesoUnitario.text(pesoUnitarioVar.toFixed(2));
+    }
+    
+    if(isNaN(cohesionVar) || cohesionVar<0 ){
+      resultadoCohesion.text(0);
+    } else {
+      resultadoCohesion.text(cohesionVar.toFixed(2));
+    }
+    if(isNaN(tipoFalla) || tipoFalla<0 ){
+      resultadoTipoFalla.text(0);
+    } else {
+      resultadoTipoFalla.text(tipoFalla.val());
+    }
+    if(isNaN(areaVar) || areaVar<0 ){
+      resultadoArea.text(0);
+    } else {
+      resultadoArea.text(areaVar.toFixed(2));
+    }
+    if(isNaN(volumenVar) || volumenVar<0 ){
+      resultadoVolumen.text(0);
+    } else {
+      resultadoVolumen.text(volumenVar.toFixed(2));
+    }
+    if(isNaN(cohesionVar) || cohesionVar<0 ){
+      resultadoCohesion.text(0);
+    } else {
+      resultadoCohesion.text(cohesionVar.toFixed(2));
+    }
+    
     //asignacion de variables a inputs resultados
-    InputCohesionFinal.val(cohesionVar.toPrecision(4)),
-    InputPesoUnitarioFinal.val(pesoUnitarioVar.toPrecision(4));
+    if(isNaN(cohesionVar) || cohesionVar<0 ){
+      InputCohesionFinal.val(0);  
+    } else {
+      InputCohesionFinal.val(cohesionVar.toFixed(2));
+    }
+    if(isNaN(pesoUnitarioVar) || pesoUnitarioVar<0 ){
+      InputPesoUnitarioFinal.val(0);
+    } else {
+      InputPesoUnitarioFinal.val(pesoUnitarioVar.toFixed(2));
+    }
+    
   },
   calculosGranulometria: function(){
     //tabla de pesos

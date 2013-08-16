@@ -2201,7 +2201,7 @@
                   <input name="N10" type="hidden" class="N10" value="<?php echo $tamizN10; ?>">
                   <input name="N40" type="hidden" class="N40" value="<?php echo $tamizN40; ?>">
                   <input name="N200" type="hidden" class="N200" value="<?php echo $tamizN200; ?>">
-                  <input name="imagenPerfil" type="text" class="imagenPerfil" value="<?php echo $imagenPerfil; ?>">
+                  <input name="imagenPerfil" type="hidden" class="imagenPerfil" value="<?php echo $imagenPerfil; ?>">
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
@@ -2685,12 +2685,18 @@
     <script type="text/javascript">
       $(function graficador() {
 
-      
       <?php $i = 1; ?>
       <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
       
       <?php if( $datoMuestra->material_de_relleno!=2 ): ?>
       var datosgrafica=$('#datosgraficaLimites<?php echo $i; ?>').val();
+
+      var datosvacios ="[0,0],[0,0],[0,0]";
+
+      if(datosgrafica==datosvacios){
+        datosgrafica = "[1,1],[1,1],[1,1]";
+       }
+
       var sourceData = eval("["+datosgrafica+"]");
       var sourceData2;
       $('#graficaLimites<?php echo $i; ?>').highcharts({
