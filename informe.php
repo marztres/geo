@@ -109,6 +109,8 @@
                 <th>Profundidad</th>
                 <th>Numero de golpes</th>
                 <th>Color  </th>
+                <th>Material de relleno</th>
+                <th>Roca</th>
               </tr>
             </thead>
             <tbody>
@@ -122,6 +124,8 @@
                 </td>
                 <td><?php echo $datoMuestra->numero_golpes ?></td>
                 <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
             
               </tr>
               <?php $i++; ?>
@@ -2100,7 +2104,7 @@
                 <th>IP</th>
                 <th>SUCS</th>
                 <th>AASHTO</th>
-                <th>Granulometria</th>
+                <th> Granulometria </th>
                 <th>Observacion</th>
               </tr>
             </thead>

@@ -167,6 +167,8 @@ var acciones = {
       } 
     } else if(box_clicked=='box_roca'){
       box_relleno.attr('checked', false);
+      alertify.set({ delay: 10000 });
+      alertify.log(" <strong> Información importante :</strong> <br> las muestras que son de roca no se le realizaran test.");
     }
 },
   
