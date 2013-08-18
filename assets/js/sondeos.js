@@ -104,10 +104,8 @@ var accionesSondeos = {
 
 	editarSuperficie: function(){
 		var superficie = $(this).find("option:selected").val(),
-			profundidad = $('#profundidadSuperficie').val();
+			profundidad = $('#editarProfundidadSuperficie').val();
 		
-		
-
 		if(superficie!="1"){
 		  $("#profundidadSuperficie").val(profundidad);
 		  $("#profundidadSuperficie").attr('readonly', false);

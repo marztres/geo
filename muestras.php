@@ -2379,7 +2379,7 @@
               
 
               <?php if ( $datos_sondeo->tipo_superficie=='Ninguna' ) : ?>
-                <input type='text' name='Profundidad' id="profundidadSuperficie" value="0" disabled="disabled" placeholder='Profundidad' class="span4" >
+                <input type='text' name='Profundidad' id="profundidadSuperficie" value="0" readonly placeholder='Profundidad' class="span4" >
               <?php else: ?>
               <input type='text' name='Profundidad' id="profundidadSuperficie" value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="span4" > 
               <?php endif; ?>

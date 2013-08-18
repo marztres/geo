@@ -184,6 +184,9 @@ var acciones = {
           console.log(respuesta.message);
           
           alertify.success(" <strong>Limites guardados exitosamente.</strong>");
+
+          alertify.set({ delay: 10000 });
+          alertify.log(" <strong>Tener en cuenta : </strong>Para que los resultados de los limites se vean reflejados en el informe final tienes que recargar la pagina.");
           } else {
           console.log(respuesta.message);
           alertify.error("<strong> opps..Hubo un error al guardar. </strong>");
@@ -509,6 +512,9 @@ var acciones = {
   },
   noplastico: function (e) {
     e.preventDefault();
+
+  
+    alertify.log(" <strong>Información: </strong> Suelo no plastico.");
     var inputTablaNoPlastico = $(this).closest("div").find("table.plastico").find("input"),
       trTablaNoPlastico = $(this).closest("div").find("table.plastico").find("tbody").children();
     inputTablaNoPlastico.val("0"), 
@@ -588,6 +594,8 @@ var acciones = {
   },
   noliquido: function (e) {
     e.preventDefault();
+
+    alertify.log(" <strong>Información: </strong> Suelo no liquido.");
     var inputTablaNoLiquido = $(this).closest("div").find("table.liquido").find("input"),
       trTablaNoLiquido = $(this).closest("div").find("table.liquido").find("tbody").children();
     inputTablaNoLiquido.val("0"), 
@@ -694,7 +702,10 @@ var acciones = {
     $.post($post.attr('action'), $post.serialize(), function (respuesta) {
       if (respuesta.status === 'OK') {
         console.log(respuesta.message);
-        alertify.log("Datos guardados exitosamente.");  
+        alertify.success("Datos guardados exitosamente."); 
+        
+        alertify.set({ delay: 10000 });
+        alertify.log(" <strong>Tener en cuenta : </strong>Para que los resultados de granulometria se vean reflejados en el informe final tienes que recargar la pagina.");
       } else {
         console.log(respuesta.message);
         alertify.error("opps..Hubo un error al guardar");
@@ -708,7 +719,10 @@ var acciones = {
     $.post($post.attr('action'), $post.serialize(), function (respuesta) {
       if (respuesta.status === 'OK') {
         console.log(respuesta.message);
-        alertify.log("Datos guardados exitosamente.");
+        alertify.success("Datos guardados exitosamente.");
+        
+        alertify.set({ delay: 10000 });
+        alertify.log(" <strong>Tener en cuenta : </strong>Para que los resultados de compresión se vean reflejados en el informe final tienes que recargar la pagina.");
       } else {
         console.log(respuesta.message);
         alertify.error("opps..Hubo un error al guardar");
@@ -1085,6 +1099,9 @@ var acciones = {
         pesoRet17Var = parseFloat(tdReT17.val()),
         pesoRet18Var = parseFloat(tdReT18.val());
 
+        
+
+
         //Sumatoria Pesos Retenidos
         var todosPesosRetenidos= pesoRet1Var+pesoRet2Var+pesoRet3Var+pesoRet4Var+pesoRet5Var+pesoRet6Var+pesoRet7Var+pesoRet8Var+pesoRet9Var+pesoRet10Var+pesoRet11Var+pesoRet12Var+pesoRet13Var+pesoRet14Var+pesoRet15Var+pesoRet16Var+pesoRet17Var+pesoRet18Var;
 
@@ -1113,18 +1130,40 @@ var acciones = {
 
     var pesoRecipienteVar= parseFloat(pesoRecipiente.val()),  
       pesoRecipienteMasMuestraVar=parseFloat(pesoRecipienteMasMuestra.val());
+
+
+
+    if((isNaN(pesoRecipienteMasMuestraVar) || pesoRecipienteMasMuestraVar<0) || (isNaN(pesoRecipienteVar) || pesoRecipienteVar<0)) {
+      pesoMuestraSecaVar=0;
+    }else {
+      pesoMuestraSecaVar=pesoRecipienteMasMuestraVar-pesoRecipienteVar; 
+    }
     
-    pesoMuestraSecaVar=pesoRecipienteMasMuestraVar-pesoRecipienteVar,
-    pesoRetenidoN200MasRecipienteVar=todosPesosRetenidos+pesoRecipienteVar,
-    pesoRetenidoN200Var=pesoRetenidoN200MasRecipienteVar-pesoRecipienteVar,
-    sumaPesoRetenidosVar=parseFloat(todosPesosRetenidos);
+    if((isNaN(todosPesosRetenidos) || todosPesosRetenidos<0) || (isNaN(pesoRecipienteVar) || pesoRecipienteVar<0)) {
+      pesoRetenidoN200MasRecipienteVar=0;
+    }else {
+      pesoRetenidoN200MasRecipienteVar=todosPesosRetenidos+pesoRecipienteVar;
+    }
+    
+    if((isNaN(pesoRetenidoN200MasRecipienteVar) || pesoRetenidoN200MasRecipienteVar<0) || (isNaN(pesoRecipienteVar) || pesoRecipienteVar<0)) {
+      pesoRetenidoN200Var=pesoRetenidoN200MasRecipienteVar-pesoRecipienteVar;
+    }else {
+      pesoRetenidoN200Var=pesoRetenidoN200MasRecipienteVar-pesoRecipienteVar;
+    }
+    
+    if(isNaN(todosPesosRetenidos) || todosPesosRetenidos<0) {
+      sumaPesoRetenidosVar=0;
+    }else {
+      sumaPesoRetenidosVar=parseFloat(todosPesosRetenidos);
+    }
+    
 
       //resultados y calculos tabla analisis 
       
-      pesoMuestraSeca.text(pesoMuestraSecaVar.toPrecision(4)),
-      pesoRetenidoN200MasRecipiente.text(pesoRetenidoN200MasRecipienteVar.toPrecision(4)),
-      pesoRetenidoN200.text(pesoRetenidoN200Var.toPrecision(4)),
-      sumaPesoRetenidos.text(sumaPesoRetenidosVar.toPrecision(4)); 
+      pesoMuestraSeca.text(pesoMuestraSecaVar.toFixed(2)),
+      pesoRetenidoN200MasRecipiente.text(pesoRetenidoN200MasRecipienteVar.toFixed(2)),
+      pesoRetenidoN200.text(pesoRetenidoN200Var.toFixed(2)),
+      sumaPesoRetenidos.text(sumaPesoRetenidosVar.toFixed(2)); 
 
 
 
@@ -1132,8 +1171,8 @@ var acciones = {
       fondoRetVar= pesoRecipienteMasMuestraVar-pesoRetenidoN200MasRecipienteVar,
       totalRetVar= sumaPesoRetenidosVar+fondoRetVar;
 
-      tdReT15.text(fondoRetVar.toPrecision(4)),
-      tdReT16.text(totalRetVar.toPrecision(4));
+      tdReT19.text(fondoRetVar.toFixed(2)),
+      tdReT20.text(totalRetVar.toFixed(2));
 
 
       //variables fondo corredigo y total Corregido 
@@ -1405,8 +1444,8 @@ var acciones = {
 
 
         // Ejecucion de clasificacion Sucs
-        acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs,imagenPerfil);
-        acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto);
+       // acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs,imagenPerfil);
+       // acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto);
 
         resultadoN4= $(this).closest("div").find("form.resultadosGranulometria").find("input.N4"),
         resultadoN10= $(this).closest("div").find("form.resultadosGranulometria").find("input.N10"),
