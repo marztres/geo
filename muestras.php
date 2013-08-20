@@ -613,7 +613,7 @@
                     </table>
                   </form>
                   <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="hidden" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
-                  <div id="graficaLimites<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+                  <div id="graficaLimites<?php echo $i; ?>" style=" widht:100%; height: 400px; display: inline-block;"></div>
                   <!-- #############  LIMITE PLASTICO ############### -->
                   <h3>Limite plastico</h3>
                   <a href="#"  class="btn btn-info pull-right title noplastico">Pulsar si el suelo es NO PLASTICO</a>
@@ -1078,7 +1078,7 @@
                     }
                     ?>
                   <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="hidden" value="<?php echo $datos?>">
-                  <div id="graficacompresion<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+                  <div id="graficacompresion<?php echo $i; ?>" style=" widht:100%; height: 400px; display: inline-block;"></div>
                   <?php 
                     unset($gdt);
                     unset($ge);
@@ -1362,7 +1362,7 @@
                     }
                     ?>
                   <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgraficaGranulometria"  type="hidden" value="<?php  echo $datos; ?>">
-                  <div id="graficagranulometria<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+                  <div id="graficagranulometria<?php echo $i; ?>" style=" widht:100%; height: 400px; display: inline-block;"></div>
                   <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                   <!-- ############# RESULTADOS ############### -->
                   <?php 
@@ -2263,13 +2263,25 @@
                 <td> - </td>
                 <td> <?php echo "Superficie ".$datos_sondeo ->tipo_superficie; ?> </td>
               </tr>
+              
+
+              $nivel;
+              <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+                <?php if( $datos_sondeo->nivel_freatico>=$datoMuestra->profundidad_inicial && $datos_sondeo->nivel_freatico<=$datoMuestra->profundidad_final ){ $nivel=$datoMuestra->profundidad_inicial; } ?>
+              <?php endforeach; ?>
+
+
+
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
               <tr>
                 <td> <?php echo $i; ?> </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $i; ?>.png" alt="patron" style="border:1px solid #CCC;" > </td>
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" > 
+                  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='20px' height='20px' style=' float:left; margin-top:15px' >" ;} ?> </td>
+                  
+                </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
                 <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
@@ -2301,7 +2313,7 @@
               <?php endforeach; ?>
             </tbody>
           </table>
-          <h5 >Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
+          <h5 > <img src="assets/img/nivelfreatico.png" alt="nivel freatico" width="30px" height="30px" > Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
           <!-- ############# FIN INFORME DE ESTRATIGRAFIA ############### -->
   
           <!-- ############# fin tabs de muestras internas estratigrafia ############### --> 
@@ -2342,8 +2354,16 @@
       </div>
       <div class="modal-body">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, modi, rem, fugiat dicta error accusantium possimus voluptatum distinctio pariatur perferendis corrupti libero minus iure id architecto eius neque velit est.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, qui, distinctio magni libero quasi molestias accusantium amet temporibus sapiente possimus eligendi quam quis perferendis rerum eos aut beatae nemo harum.
+          El acceso y el uso de esta aplicación están sujetos a los siguientes términos y condiciones y a toda la legislación aplicable. Al acceder y utilizar este sitio, usted acepta los siguientes términos y condiciones, sin limitación ni condición alguna.
+          A menos que se establezca otra cosa, el contenido de este sitio web, en especial, aunque sin que la enumeración sea exhaustiva, el texto, las imágenes y su disposición son propiedad de Geotecnia y Ambiente S.A.S. Todas las marcas comerciales utilizadas o mencionadas en este sitio web pertenecen a sus respectivos propietarios.
+        </p>
+        
+        <p>
+          Esta aplicación y sus contenidos, en especial, aunque sin que la enumeración tenga efectos limitativos, imágenes gráficas, sonidos, videos, códigos html, elementos  del sitio web  y textos, no podrán ser objeto de copia, reproducción, reedición, envío, comunicación, transmisión o distribución en modo alguno, sin contar con el consentimiento previo por escrito de Geotecnia y ambiente S.A.S, salvo los informes generados por el sistema.
+        </p>
+
+        <p>
+          El software de sondeos fue licenciado a Geotecnia y Ambiente S.A.S por SYSCOMP TECNOLOGÍA.
         </p>
       </div>
       <div class="modal-footer">

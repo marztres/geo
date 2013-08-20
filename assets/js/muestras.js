@@ -1171,21 +1171,43 @@ var acciones = {
       fondoRetVar= pesoRecipienteMasMuestraVar-pesoRetenidoN200MasRecipienteVar,
       totalRetVar= sumaPesoRetenidosVar+fondoRetVar;
 
-      tdReT19.text(fondoRetVar.toFixed(2)),
-      tdReT20.text(totalRetVar.toFixed(2));
+      if(isNaN(fondoRetVar) || fondoRetVar<0) {
+        tdReT19.text(0);
+      }else {
+        tdReT19.text(fondoRetVar.toFixed(2));
+      }
+      if(isNaN(totalRetVar) || totalRetVar<0) {
+        tdReT20.text(0);
+      }else {
+        tdReT20.text(totalRetVar.toFixed(2));
+      }
+      
 
 
       //variables fondo corredigo y total Corregido 
       var  fondoRetenidoCorregidoVar= fondoRetVar-((sumaPesoRetenidosVar-pesoRetenidoN200Var )*(fondoRetVar/sumaPesoRetenidosVar)) ,
         totalRetenidoCorregidoVar= totalRetVar-((sumaPesoRetenidosVar-pesoRetenidoN200Var)*(totalRetVar/sumaPesoRetenidosVar));
 
-
-      fondoRetenidoCorregido.text(fondoRetenidoCorregidoVar.toPrecision(4));    
-      totalRetenidoCorregido.text(totalRetenidoCorregidoVar.toPrecision(4));
-
+      if(isNaN(fondoRetenidoCorregidoVar) || fondoRetenidoCorregidoVar<0) {
+        fondoRetenidoCorregido.text(0);    
+      }else {
+        fondoRetenidoCorregido.text(fondoRetenidoCorregidoVar.toFixed(2));   
+      }  
+      if(isNaN(totalRetenidoCorregidoVar) || totalRetenidoCorregidoVar<0) {
+        totalRetenidoCorregido.text(0);
+      }else {
+        totalRetenidoCorregido.text(totalRetenidoCorregidoVar.toFixed(2));
+      }
+      
       //variable fondo retenido 
       var fondoRetenidoVar=((fondoRetenidoCorregidoVar/totalRetenidoCorregidoVar)*100);
-        fondoRetenido.text(fondoRetenidoVar.toPrecision(4));  
+      
+      if(isNaN(fondoRetenidoVar) || fondoRetenidoVar<0) {
+        fondoRetenido.text(0);  
+      }else {
+        fondoRetenido.text(fondoRetenidoVar.toFixed(2));  
+      }
+
 
 
 
@@ -1203,13 +1225,19 @@ var acciones = {
           retenidoCorregidoVar = (pesoRetenidoVar-((sumaPesoRetenidosVar-pesoRetenidoN200Var)*(pesoRetenidoVar/pesoRetenidoN200Var))),
           retenidoVar = (retenidoCorregidoVar/totalRetenidoCorregidoVar)*100;
           
-        retenidoCorregido.text(retenidoCorregidoVar.toPrecision(4));
-        
+        if(isNaN(retenidoCorregidoVar) || retenidoCorregidoVar<0) {
+          retenidoCorregido.text(0);  
+        }else {
+          retenidoCorregido.text(retenidoCorregidoVar.toFixed(2));
+        }  
+        if(isNaN(retenidoVar) || retenidoVar<0) {
+          retenido.text(0);
+        }else {
+          retenido.text(retenidoVar.toFixed(2));
+        }
 
-        retenido.text(retenidoVar.toPrecision(4));
-        
-        // calculos acumulados
-           //td  acumulado
+    // calculos acumulados
+    //td  acumulado
     var tdFinal0 = trGranulometria.eq(0).find("td.acumulado"),
       tdFinal1 = trGranulometria.eq(1).find("td.acumulado"),
       tdFinal2 = trGranulometria.eq(2).find("td.acumulado"),
@@ -1232,6 +1260,7 @@ var acciones = {
 
 
  
+
 
 
       //Variables de todos los td Finales
@@ -1323,39 +1352,47 @@ var acciones = {
       acumulado17=tdRetenido17Var+fin16Var,
       acumulado18=tdRetenido18Var+fin17Var;
 
+
       //asignacion a la tabla
-      tdFinal0.text(acumulado0.toPrecision(4)),
-      tdFinal1.text(acumulado1.toPrecision(4)),
-      tdFinal2.text(acumulado2.toPrecision(4)),
-      tdFinal3.text(acumulado3.toPrecision(4)),
-      tdFinal4.text(acumulado4.toPrecision(4)),
-      tdFinal5.text(acumulado5.toPrecision(4)),
-      tdFinal6.text(acumulado6.toPrecision(4)),
-      tdFinal7.text(acumulado7.toPrecision(4)),
-      tdFinal8.text(acumulado8.toPrecision(4)),
-      tdFinal9.text(acumulado9.toPrecision(4)),
-      tdFinal10.text(acumulado10.toPrecision(4)),
-      tdFinal11.text(acumulado11.toPrecision(4)),
-      tdFinal12.text(acumulado12.toPrecision(4)),
-      tdFinal13.text(acumulado13.toPrecision(4)),
-      tdFinal14.text(acumulado14.toPrecision(4)),
-      tdFinal15.text(acumulado15.toPrecision(4)),
-      tdFinal16.text(acumulado16.toPrecision(4)),
-      tdFinal17.text(acumulado17.toPrecision(4)),
-      tdFinal18.text(acumulado18.toPrecision(4));
+
+
+
+      isNaN(acumulado0) || acumulado0<0 ? tdFinal0.text(0) : tdFinal0.text(acumulado0.toFixed(2)),
+      isNaN(acumulado1) || acumulado1<0 ? tdFinal1.text(0) : tdFinal1.text(acumulado1.toFixed(2)),
+      isNaN(acumulado2) || acumulado2<0 ? tdFinal2.text(0) : tdFinal2.text(acumulado2.toFixed(2)),
+      isNaN(acumulado3) || acumulado3<0 ? tdFinal3.text(0) : tdFinal3.text(acumulado3.toFixed(2)),
+      isNaN(acumulado4) || acumulado4<0 ? tdFinal4.text(0) : tdFinal4.text(acumulado4.toFixed(2)),
+      isNaN(acumulado5) || acumulado5<0 ? tdFinal5.text(0) : tdFinal5.text(acumulado5.toFixed(2)),
+      isNaN(acumulado6) || acumulado6<0 ? tdFinal6.text(0) : tdFinal6.text(acumulado6.toFixed(2)),
+      isNaN(acumulado7) || acumulado7<0 ? tdFinal7.text(0) : tdFinal7.text(acumulado7.toFixed(2)),
+      isNaN(acumulado8) || acumulado8<0 ? tdFinal8.text(0) : tdFinal8.text(acumulado8.toFixed(2)),
+      isNaN(acumulado9) || acumulado9<0 ? tdFinal9.text(0) : tdFinal9.text(acumulado9.toFixed(2)),
+      isNaN(acumulado10) || acumulado10<0 ? tdFinal10.text(0) : tdFinal10.text(acumulado10.toFixed(2)),
+      isNaN(acumulado11) || acumulado11<0 ? tdFinal11.text(0) : tdFinal11.text(acumulado11.toFixed(2)),
+      isNaN(acumulado12) || acumulado12<0 ? tdFinal12.text(0) : tdFinal12.text(acumulado12.toFixed(2)), 
+      isNaN(acumulado13) || acumulado13<0 ? tdFinal13.text(0) : tdFinal13.text(acumulado13.toFixed(2)),
+      isNaN(acumulado14) || acumulado14<0 ? tdFinal14.text(0) : tdFinal14.text(acumulado14.toFixed(2)),
+      isNaN(acumulado15) || acumulado15<0 ? tdFinal15.text(0) : tdFinal15.text(acumulado15.toFixed(2)),
+      isNaN(acumulado16) || acumulado16<0 ? tdFinal16.text(0) : tdFinal16.text(acumulado16.toFixed(2)),
+      isNaN(acumulado17) || acumulado17<0 ? tdFinal17.text(0) : tdFinal17.text(acumulado17.toFixed(2)),
+      isNaN(acumulado18) || acumulado18<0 ? tdFinal18.text(0) : tdFinal18.text(acumulado18.toFixed(2));
+
         // Fin calculos acumulados
       
       // Calculos de pasa %  
       retenidoAcumuladoVar = parseFloat(retenidoAcumulado.text()),
       pasaVar = 100-retenidoAcumuladoVar;
-      pasa.text(pasaVar.toPrecision(4));
+
+      isNaN(pasaVar) || pasaVar<0 ? pasa.text(0) : pasa.text(pasaVar.toFixed(2));     
+      
       
       //variable fondo retenido 
       var fondoRetenidoAcumuladoVar=parseFloat(fondoRetenidoAcumulado.text());
 
       //Variable  fondo pasa
       var fondoPasaVar=100-fondoRetenidoAcumuladoVar;
-      fondoPasa.text(fondoPasaVar.toPrecision(4));
+      
+      isNaN(fondoPasaVar) || fondoPasaVar<0 ? fondoPasa.text(0) : fondoPasa.text(fondoPasaVar.toFixed(2));     
 
 
 
@@ -1433,8 +1470,10 @@ var acciones = {
           IndicePlasticidadVar = parseFloat(tdIndicePlasticidad.text());
           
         // asignando valores a las td de N4 y N200 
-        tdTamiz4.text(tamiz4Var),
-        tdTamiz200.text(Tamiz200Var);
+
+        isNaN(tamiz4Var) || tamiz4Var<0 ? tdTamiz4.text(0) : tdTamiz4.text(tamiz4Var); 
+        isNaN(Tamiz200Var) || Tamiz200Var<0 ? tdTamiz200.text(0) : tdTamiz200.text(Tamiz200Var); 
+        
 
         // input de resultados finales 
         var resultadoAashto= $(this).closest("div").find("form.resultadosGranulometria").find("input.aashto"),
@@ -1444,8 +1483,8 @@ var acciones = {
 
 
         // Ejecucion de clasificacion Sucs
-       // acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs,imagenPerfil);
-       // acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto);
+        acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs,imagenPerfil);
+        acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto);
 
         resultadoN4= $(this).closest("div").find("form.resultadosGranulometria").find("input.N4"),
         resultadoN10= $(this).closest("div").find("form.resultadosGranulometria").find("input.N10"),
@@ -2383,7 +2422,7 @@ var acciones = {
       }
     }
 
-    console.log("----Finalizacion de condicional gravas----");
+    console.log("----Finalizacion clasificación AASHTO----");
     console.log("La notacion Aashto es : "+notacionAashto);
     $clasAashto.text(notacionAashto);
     $resultadoAashto.val(notacionAashto);

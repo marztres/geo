@@ -2123,13 +2123,22 @@
                 <td> - </td>
                 <td> <?php echo "Superficie ".$datos_sondeo ->tipo_superficie; ?> </td>
               </tr>
+
+
+              $nivel;
+              <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+                <?php if( $datos_sondeo->nivel_freatico>=$datoMuestra->profundidad_inicial && $datos_sondeo->nivel_freatico<=$datoMuestra->profundidad_final ){ $nivel=$datoMuestra->profundidad_inicial; } ?>
+              <?php endforeach; ?>
+
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
               <tr>
-                <td> <?php echo $i; ?> </td>
+                <td> <?php echo $i; ?>  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?>  </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $i; ?>.png" alt="patron" style="border:1px solid #CCC;" > </td>
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                </td>
+                
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
                 <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
@@ -2156,7 +2165,7 @@
               <?php endforeach; ?>
             </tbody>
           </table>
-          <h5 >Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
+          <h5 > <img src="assets/img/nivelfreatico.png" alt="nivel freatico" width="30px" height="30px" > Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
           <!-- ############# FIN INFORME DE ESTRATIGRAFIA ############### -->
 
           <!-- ############# fin tabs de muestras internas estratigrafia ############### --> 

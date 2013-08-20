@@ -4,8 +4,8 @@
 		
 		function addResultados( $idMuestra ) {
 		$retorno = false;
-		$sql = "INSERT INTO resultados (id_resultados,humedad,limiteLiquido,limitePlastico,indicePlasticidad,cohesion,pesoUnitario,N200,N4,N10,N40,notacionSucs,descripcionSucs,aashto,fechaIngreso,estado,fk_idMuestra)"
-					."VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NOW(),1, '".$this->real_escape_string($idMuestra)."')";
+		$sql = "INSERT INTO resultados (id_resultados,humedad,limiteLiquido,limitePlastico,indicePlasticidad,cohesion,pesoUnitario,N200,N4,N10,N40,notacionSucs,descripcionSucs,aashto,imagenPerfil,fechaIngreso,estado,fk_idMuestra)"
+					."VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,blanco,NOW(),1, '".$this->real_escape_string($idMuestra)."')";
 		$respuesta = $this -> query($sql);
 		if ( $respuesta ) {
 			$retorno = true;

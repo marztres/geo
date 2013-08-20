@@ -76,8 +76,11 @@
         <h3 id="myModalLabel">Ayuda</h3>
       </div>
       <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, modi, rem, fugiat dicta error accusantium possimus voluptatum distinctio pariatur perferendis corrupti libero minus iure id architecto eius neque velit est.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, qui, distinctio magni libero quasi molestias accusantium amet temporibus sapiente possimus eligendi quam quis perferendis rerum eos aut beatae nemo harum.
+        <h5>¿ Como ingresar a la aplicación de sondeos ?</h3>
+        <p> R/ Para ingresar a la apliación de sondeos debes ser empleado activo de la empresa Geotecnia y Ambiente S.A.S y requerir al administrador de sistemas que registre tus datos de acuerdo a tu cargo que puede ser ingeniero o laboratorista.
+        </p>
+        <h5>¿ Ya tengo mi usuario y contraseña que hago ?</h3>
+        <p> R/ Si ya tienes un usuario y contraseña , debe introducir cada uno en su casilla correspondiente y luego hacer click en ingresar y entraras a la aplicación, si sucede un error puede deberse a que cometiste un error al ingresar tus datos, en ese caso rectifica los datos ingresados , si olvidaste tu contraseña o continua el error contacta el administrador del sistema para ayuda.
         </p>
       </div>
       <div class="modal-footer">
@@ -92,9 +95,18 @@
       </div>
       <div class="modal-body">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, modi, rem, fugiat dicta error accusantium possimus voluptatum distinctio pariatur perferendis corrupti libero minus iure id architecto eius neque velit est.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, qui, distinctio magni libero quasi molestias accusantium amet temporibus sapiente possimus eligendi quam quis perferendis rerum eos aut beatae nemo harum.
+          El acceso y el uso de esta aplicación están sujetos a los siguientes términos y condiciones y a toda la legislación aplicable. Al acceder y utilizar este sitio, usted acepta los siguientes términos y condiciones, sin limitación ni condición alguna.
+          A menos que se establezca otra cosa, el contenido de este sitio web, en especial, aunque sin que la enumeración sea exhaustiva, el texto, las imágenes y su disposición son propiedad de Geotecnia y Ambiente S.A.S. Todas las marcas comerciales utilizadas o mencionadas en este sitio web pertenecen a sus respectivos propietarios.
         </p>
+        
+        <p>
+          Esta aplicación y sus contenidos, en especial, aunque sin que la enumeración tenga efectos limitativos, imágenes gráficas, sonidos, videos, códigos html, elementos  del sitio web  y textos, no podrán ser objeto de copia, reproducción, reedición, envío, comunicación, transmisión o distribución en modo alguno, sin contar con el consentimiento previo por escrito de Geotecnia y ambiente S.A.S, salvo los informes generados por el sistema.
+        </p>
+
+        <p>
+          El software de sondeos fue licenciado a Geotecnia y Ambiente S.A.S por SYSCOMP TECNOLOGÍA.
+        </p>
+        
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
