@@ -1,4 +1,5 @@
 <?php
+  require_once("seguridad.php");
   session_start();
   require_once('includes/proyectos.php');
   require_once('includes/usuarios.php');
@@ -228,10 +229,26 @@
         <h3 id="myModalLabel">Ayuda</h3>
       </div>
       <div class="modal-body">
-        <p> 
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, modi, rem, fugiat dicta error accusantium possimus voluptatum distinctio pariatur perferendis corrupti libero minus iure id architecto eius neque velit est.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, qui, distinctio magni libero quasi molestias accusantium amet temporibus sapiente possimus eligendi quam quis perferendis rerum eos aut beatae nemo harum.
-        </p>
+        
+        <h5> Sistema de ayuda</h3>
+        <p>R/ Para resolver tus dudas reproduce el video de la seccion que necesites.</p>
+        <h5> Video vistaso general</h3>
+        <video width="370" height="214"  id="demo1" controls style="margin: 0 auto 0 auto; display: block; ">
+          <source src="assets/videos/vistasoGeneral.mp4" type="video/mp4">                   
+            Tu navegador no soporta videos , actualizalo por favor.
+        </video>
+
+        <h5> Video Proyectos</h3>
+        <video width="370" height="214"  id="demo1" controls style="margin: 0 auto 0 auto; display: block; ">
+          <source src="assets/videos/Proyectos.mp4" type="video/mp4">                   
+            Tu navegador no soporta videos , actualizalo por favor.
+        </video>
+
+        <h5> Video Sondeos</h3>
+        <video width="370" height="214"  id="demo1" controls style="margin: 0 auto 0 auto; display: block; ">
+          <source src="assets/videos/Sondeos.mp4" type="video/mp4">                   
+            Tu navegador no soporta videos , actualizalo por favor.
+        </video>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
@@ -351,6 +368,9 @@
             </div>
             <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='claveAnterior' type='password'  placeholder='Contraseña actual' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
               <input  name='clave' type='password'  placeholder='Nueva Contraseña' class="input-block-level limpiar" required >

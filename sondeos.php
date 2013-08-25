@@ -1,4 +1,5 @@
 <?php
+  require_once('seguridad.php');
   session_start();
   require_once('includes/proyectos.php');
   require_once('includes/sondeos.php');
@@ -395,6 +396,9 @@
             </div>
             <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='claveAnterior' type='password'  placeholder='Contraseña actual' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
               <input  name='clave' type='password'  placeholder='Nueva Contraseña' class="input-block-level limpiar" required >

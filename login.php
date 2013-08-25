@@ -62,6 +62,8 @@
         </form>
       </div>
     </div>
+
+
     <div class="row-fluid footer">
       <footer class="span12">
         <p class="copiright span4" >Geotecnia y Ambiente S.A.S &copy; Copyright 2013</p>
@@ -82,6 +84,15 @@
         <h5>¿ Ya tengo mi usuario y contraseña que hago ?</h3>
         <p> R/ Si ya tienes un usuario y contraseña , debe introducir cada uno en su casilla correspondiente y luego hacer click en ingresar y entraras a la aplicación, si sucede un error puede deberse a que cometiste un error al ingresar tus datos, en ese caso rectifica los datos ingresados , si olvidaste tu contraseña o continua el error contacta el administrador del sistema para ayuda.
         </p>
+
+        <h5> Video vistaso general</h3>
+        <video width="370" height="214"  id="demo1" controls style="margin: 0 auto 0 auto; display: block; ">
+          <source src="assets/videos/vistasoGeneral.mp4" type="video/mp4">                   
+            Tu navegador no soporta videos , actualizalo por favor.
+        </video>
+
+
+
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
@@ -106,12 +117,12 @@
         <p>
           El software de sondeos fue licenciado a Geotecnia y Ambiente S.A.S por SYSCOMP TECNOLOGÍA.
         </p>
-        
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
       </div>
     </div>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
+
   </body>
 </html>

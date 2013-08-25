@@ -12,6 +12,7 @@ var acciones = {
     $("#EnviarClonarMuestra").on('click', acciones.clickCopiarMuestra);
     $('.modalMuestra').on('click', acciones.clickEditarMuestra);
     $('.clonarMuestra').on('click', acciones.clickClonarMuestra);
+    $('.eliminarMuestra').on('click', acciones.clickEliminarMuestra);
     $('.guardaLimites').on('click', acciones.updateLimites);
     $('.limites').on('keyup', acciones.calculosLimites);
     $('.noplastico').on('click', acciones.noplastico);
@@ -98,6 +99,28 @@ var acciones = {
     }, 'json');
   },
 
+  clickEliminarMuestra: function( e ) {
+    e.preventDefault();
+    $post = $(this).parent().find("form");
+    alertify.confirm("Esta seguro que desea eliminar esta muestra", function (e) {
+      if (e) {
+        $.post($post.attr('action'), $post.serialize(), function(respuesta) {
+          if (respuesta.status === 'OK') {
+            console.log(respuesta.message);
+              $('#exitoGeneral').removeClass('hide');
+              location.reload();
+          } else {
+            console.log(respuesta.message);
+            $('#errorGeneral').removeClass('hide');
+            setTimeout(function() {
+              $("#error").addClass("hide");
+            }, 3000);
+          }
+        }, 'json');
+      }
+    });   
+
+  },
 
    clickClonarMuestra: function (e) {
         e.preventDefault();

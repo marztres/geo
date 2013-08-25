@@ -23,7 +23,7 @@ class muestras extends DataBase {
 		$retorno = false;
 		$sql = "SELECT profundidad_inicial,profundidad_final
 				FROM muestras
-	  			WHERE   fk_idsondeo ='$idsondeos' ORDER BY profundidad_inicial,profundidad_final DESC";
+	  			WHERE   fk_idsondeo ='$idsondeos' AND estado='1' ORDER BY profundidad_inicial,profundidad_final DESC";
 		/* Si hay respuesta se guardan todas las profundidas iniciales y las finales en el array aux */
 		if ($respuesta = $this -> query($sql)) {
 			$aux = array();
@@ -121,6 +121,16 @@ class muestras extends DataBase {
 			$retorno = true;
 					$sql = "UPDATE muestras SET profundidad_inicial='$profundidad_inicial', profundidad_final='$profundidad_final', descripcion='$descripcion_muestra',material_de_relleno='$box_relleno', numero_golpes='$numero_de_golpes'  WHERE id_muestra='$id_muestra'";
 					$respuesta = $this->query($sql);
+		}
+		return $retorno;
+	}
+
+	function eliminarMuestra($idMuestra) {
+		$retorno = false;
+		$sql = "UPDATE muestras SET estado='0' WHERE id_muestra='".$this->real_escape_string($idMuestra)."' ";
+		$respuesta = $this-> query($sql);
+		if ( $respuesta ) {
+			$retorno = true;
 		}
 		return $retorno;
 	}

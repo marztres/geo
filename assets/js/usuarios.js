@@ -69,6 +69,7 @@ var accionesUsuario = {
         }, 3000);
         $(".limpiar").val('');
       } else {
+        
         $('#respuesta_guardado').text(respuesta.mensaje);
         $('#error_modificar_usuario').removeClass('hide');
         setTimeout(function () {
@@ -90,6 +91,9 @@ var accionesUsuario = {
         }, 3000);
         $(".limpiar").val('');
       } else {
+
+      	alertify.set({ delay: 10000 });
+        alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -La contraseña actual sea correcta. <br> -Nueva contraseña sea igual a  Confirmar contraseña ");
         $('#respuesta_guardado').text(respuesta.mensaje);
         $('#error_configurando_cuenta').removeClass('hide');
         setTimeout(function () {
@@ -102,7 +106,9 @@ var accionesUsuario = {
 	eliminarUsuario: function( e ) {
 		e.preventDefault();
 		$post = $(this).parent().find("form");
-		if(confirm('Estas seguro que quieres eliminar este usuario')) {
+		alertify.confirm("Esta seguro que desea eliminar este usuario", function (e) {
+		  if (e) {
+			
 			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
 				if (respuesta.status === 'OK') {
 					console.log(respuesta.message);
@@ -117,7 +123,9 @@ var accionesUsuario = {
 					}, 3000);
 				}
 			}, 'json');
+		
 		}
+		});	
 	}
 	
 }

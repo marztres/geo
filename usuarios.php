@@ -32,6 +32,8 @@
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="assets/js/usuarios.js"></script>
+    <link rel="stylesheet" href="assets/css/alertify.core.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstrap.css" />
     <script >
       $(document).ready(function() {
         $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' }); 
@@ -191,9 +193,23 @@
         <h3 id="myModalLabel">Ayuda</h3>
       </div>
       <div class="modal-body">
+        <h5> Administración de usuarios  </h5>
         <p> 
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, modi, rem, fugiat dicta error accusantium possimus voluptatum distinctio pariatur perferendis corrupti libero minus iure id architecto eius neque velit est.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, qui, distinctio magni libero quasi molestias accusantium amet temporibus sapiente possimus eligendi quam quis perferendis rerum eos aut beatae nemo harum.
+          La aplicación muestra una lista general de usuarios registrados.
+        </p>
+       <h5> ¿ Como agregar un usuario ? </h5>
+        <p> 
+          Para agregar un usuario hacer click en el boton "Nuevo usuario" ubicado en la parte superior derecha de nuestra pantalla, 
+          ingresamos los datos correspondiente "Cédula, Nombres, Apellidos, etc". Y seleccionamos el cargo, luego hacemos click en el boton
+          agregar usuario.
+        </p>
+        <h5> ¿ Como editar un usuario ? </h5>
+        <p> 
+          Para editar un usuario hacer click en el ícono ubicado en la columna editar correspondiente al usuario, modificamos la información corespondiente y presionamos el botón modificar usuario. 
+        </p>
+        <h5> ¿ Como eliminar un usuario ? </h5>
+        <p> 
+          Para eliminar un usuario hacer click en el ícono ubicado en la columna eliminar nos aprecerá una ventana de confirmación en la que debemos presionar aceptar. 
         </p>
       </div>
       <div class="modal-footer">
@@ -306,6 +322,7 @@
             <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
             </div>
+            
             <div class="controls inputs">
               <input  name='clave' type='password'  placeholder='Nueva Contraseña' class="input-block-level limpiar" required >
             </div>
@@ -366,6 +383,9 @@
               <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
+              <input  name='claveAnterior' type='password'  placeholder='Contraseña actual' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
               <input  name='clave' type='password'  placeholder='Nueva Contraseña' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
@@ -398,5 +418,6 @@
     <script> 
       $('.brand').tooltip('hide');
     </script>   
+    <script src="assets/js/alertify/alertify.js"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+  require_once('seguridad.php');
   session_start();
   require_once('includes/sondeos.php');
   require_once('includes/muestras.php');
@@ -202,6 +203,7 @@
                 <th>Editar</th>
                 <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
                   <th>Clonar</th>
+                  <th>Eliminar</th>
                 <?php endif ?>
 
               </tr>
@@ -230,6 +232,15 @@
                     <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="clonarMuestra" role="button" data-toggle="modal" href="#clonarmuestra">
                     <i class='icon-wrench'></i>
                     </a>
+                  </td>
+                <?php endif ?>
+                <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+                    <td>
+                      <a class="eliminarMuestra" href="#"><i class="icon-remove"></i></a>
+                      <form action="save.php">
+                        <input type="hidden" name="func" value="eliminarMuestra">
+                        <input type="hidden" name="idMuestra" value="<?php echo $datoMuestra->id_muestra; ?>">
+                      </form>
                   </td>
                 <?php endif ?>
               </tr>
@@ -589,10 +600,12 @@
                               $golpes1=$TestLimitesMuestra[$i-1][3]->num_golpes;
                               $golpes2=$TestLimitesMuestra[$i-1][4]->num_golpes;
                               $golpes3=$TestLimitesMuestra[$i-1][5]->num_golpes;
-                              if($golpes1!=0 AND $golpes2!=0 AND $golpes3!=0    ){
-                                  $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
-                                  $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
-                                  $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
+                              if($golpes1!=0 && $golpes2!=0 && $golpes3!=0    ){
+                                  if($humedad2!=0){
+                                      $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
+                                      $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
+                                      $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
+                                  }
                               }
                               $limite1=($pendiente1*25)-($pendiente1*$golpes1)+$humedad1;
                               $limite2=($pendiente2*25)-($pendiente2*$golpes3)+$humedad3;
@@ -1262,7 +1275,8 @@
                           ?>
                         <td><?php 
                           if($pesoretenidoN200!=0){
-                              echo $pesoretenidocorregido=$retenidos->pesoRetenido-(($sumapesoretenidos-$pesoretenidoN200)*$retenidos->pesoRetenido/$pesoretenidoN200);
+                               $pesoretenidocorregido=$retenidos->pesoRetenido-(($sumapesoretenidos-$pesoretenidoN200)*$retenidos->pesoRetenido/$pesoretenidoN200);
+                              echo number_format($pesoretenidocorregido,2);
                           }
                           else{
                               echo 0;
@@ -1277,14 +1291,19 @@
                         <td class="retenido" >
                           <?php
                             if($totalpesoretenidocorregido!=0){
-                                echo $retenidoporcentaje = round($pesoretenidocorregido/$totalpesoretenidocorregido*100,2);
+                                 $retenidoporcentaje = round($pesoretenidocorregido/$totalpesoretenidocorregido*100,2);
+                                 echo number_format($retenidoporcentaje,2);
+                            }
+                            else{
+                                 echo 0;
                             }
                             ?>
                         </td>
                         <?php if ( $j == 0 ) array_push($temp, ($retenidoporcentaje + 0)); else array_push($temp, $retenidoporcentaje + $temp[$j-1]); ?>
-                        <td class="acumulado" ><?php echo $temp[$j]; ?></td>
+                        <td class="acumulado" ><?php echo number_format($temp[$j],2); ?></td>
                         <td class="pasa">
-                          <?php echo $pasa= 100 - $temp[$j];
+                          <?php $pasa= 100 - $temp[$j];
+                              echo number_format($pasa,2);
                             if($retenidos->pesoRetenido>0){
                                $p[]=$pasa;
                             }
@@ -2276,11 +2295,9 @@
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
               <tr>
-                <td> <?php echo $i; ?> </td>
+                <td> <?php echo $i; ?> <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?> </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" > 
-                  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='20px' height='20px' style=' float:left; margin-top:15px' >" ;} ?> </td>
-                  
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
                 </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
@@ -2306,7 +2323,7 @@
                   <?php endif ?>
                 </td>
                 <td>
-                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } else if($datoMuestra->material_de_relleno==2){ echo "Estrato de roca";} ?>  <?php if($datoMuestra->material_de_relleno==2){ echo $resultado->descripcionSucs; } ?> 
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } else if($datoMuestra->material_de_relleno==2){ echo "Estrato de roca";} ?>  <?php if($datoMuestra->material_de_relleno!=2){ echo $resultado->descripcionSucs; } ?> 
                 </td>
               </tr>
               <?php $i++; ?>
@@ -2337,8 +2354,11 @@
         <h3 id="myModalLabel">Ayuda</h3>
       </div>
       <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, modi, rem, fugiat dicta error accusantium possimus voluptatum distinctio pariatur perferendis corrupti libero minus iure id architecto eius neque velit est.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate, qui, distinctio magni libero quasi molestias accusantium amet temporibus sapiente possimus eligendi quam quis perferendis rerum eos aut beatae nemo harum.
+      
+        <h5> ¿ Como clonar una muestra ? </h5>
+        <p> 
+            Para clonar una muestra seleccionar el ícono ubicado en la columna "Clonar", escribimos los datos de la nueva muestra y luego presionamos el botón "Clonar muestra".
+            Nota: Los resultados de la muestra clonada se han guardado en cero para que los resultados se actualicen debemos acceder a cada una de las pruebas de suelo y hacer click en el botón "Guardar información".
         </p>
       </div>
       <div class="modal-footer">
@@ -2423,7 +2443,7 @@
       <!-- fin form  nuevo sondeo-->
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="enviar_modificar_sondeo"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar proyecto</button> 
+        <button type="submit" id="enviar_modificar_sondeo"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar sondeo</button> 
       </div>
     </div>
     <!-- ############# FIN FORM MODIFICAR SONDEO ############### -->
@@ -2575,7 +2595,7 @@
        </div>
        <div class="modal-footer">
          <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-         <button type="submit" id="EnviarClonarMuestra"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar muestra</button> 
+         <button type="submit" id="EnviarClonarMuestra"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Clonar muestra</button> 
        </div>
      </div>
      <!-- #############  FIN FORM ClONAR MUESTRA ############### -->
@@ -2599,6 +2619,9 @@
             </div>
             <div class="controls inputs">
               <input  name='usuario' type='text' id="nombre_usuario" value="<?php echo $user->nombre_usuario ?>" placeholder='Nombre de usuario' class="input-block-level limpiar" required >
+            </div>
+            <div class="controls inputs">
+              <input  name='claveAnterior' type='password'  placeholder='Contraseña actual' class="input-block-level limpiar" required >
             </div>
             <div class="controls inputs">
               <input  name='clave' type='password'  placeholder='Nueva Contraseña' class="input-block-level limpiar" required >

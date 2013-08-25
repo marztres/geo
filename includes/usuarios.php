@@ -1,5 +1,5 @@
 <?php
-
+require_once("seguridad.php");
 require_once 'database.php';
 
 class usuarios extends DataBase {
@@ -81,26 +81,38 @@ class usuarios extends DataBase {
 		return $retorno;
 	}
 
-	function ModificarUsuarios($id_usuario,$cedula, $usuario, $clave, $confirmar_clave, $nombres, $apellidos, $cargo) {
+	function ModificarUsuarios($id_usuario,$cedula, $usuario,$claveAnterior, $clave, $confirmar_clave, $nombres, $apellidos, $cargo) {
 		$retorno = false;
+		$sql="SELECT password FROM usuarios WHERE id_usuario='".$this->real_escape_string($id_usuario)."' LIMIT 0 , 1 ";
+		$resultado= $this-> query($sql);
+		if ( $resultado ) {
+			$matriz = array();
+			while ( $r = $resultado->fetch_object() ) {
+				 $claveOriginal=$r->password;
+			}	
+		}
 		if($clave==""){
 			if(isset($cargo)){
-				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
-				$respuesta = $this-> query($sql);
+					$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+					$respuesta = $this-> query($sql);
 			}
 			else{
-				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos',nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
-				$respuesta = $this-> query($sql);
+					$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos',nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+					$respuesta = $this-> query($sql);
 			}
 		}
 		else if($clave!="" && $clave==$confirmar_clave){
 			if(isset($cargo)){
-				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
-				$respuesta = $this-> query($sql);
+				if($claveOriginal==$claveAnterior){
+							$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos', tipo='$cargo', nombre_usuario='$usuario', password='$clave'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+							$respuesta = $this-> query($sql);
+				}
 			}
 			else{
-				$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos',nombre_usuario='$usuario'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
-				$respuesta = $this-> query($sql);
+				if($claveOriginal==$claveAnterior){
+							$sql = "UPDATE usuarios SET cedula='$cedula', nombres='$nombres', apellidos='$apellidos',nombre_usuario='$usuario', password='$clave'  WHERE id_usuario='".$this->real_escape_string($id_usuario)."' ";
+							$respuesta = $this-> query($sql);
+				}
 			}
 		}
 		if ( $respuesta ) {

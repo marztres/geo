@@ -427,11 +427,13 @@
                         <td>
                           <?php
                             if($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco!=0){
-                               $porcentajeLiquido2 = round((($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula )) * 100, 2); 
-                               echo $porcentajeLiquido2;
+                                  if($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula ){
+                                        $porcentajeLiquido2 = round((($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula )) * 100, 2); 
+                                        echo $porcentajeLiquido2;
+                                  }
                             }
                             else{
-                            echo 0;  
+                                  echo 0;  
                             }
                             ?>
                         </td>
@@ -498,10 +500,12 @@
                             $golpes1=$TestLimitesMuestra[$i-1][3]->num_golpes;
                             $golpes2=$TestLimitesMuestra[$i-1][4]->num_golpes;
                             $golpes3=$TestLimitesMuestra[$i-1][5]->num_golpes;
-                            if($golpes1!=0 AND $golpes2!=0 AND $golpes3!=0    ){
-                                $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
-                                $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
-                                $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
+                            if($golpes1!=0 && $golpes2!=0 && $golpes3!=0    ){
+                                if($humedad2!=0 && $humedad1!=0){
+                                      $pendiente1=($humedad2-$humedad1)/($golpes2-$golpes1);
+                                      $pendiente2=($humedad3-$humedad1)/($golpes3-$golpes1);
+                                      $pendiente3=($humedad3-$humedad2)/($golpes3-$golpes2);
+                                }
                             }
                             $limite1=($pendiente1*25)-($pendiente1*$golpes1)+$humedad1;
                             $limite2=($pendiente2*25)-($pendiente2*$golpes3)+$humedad3;

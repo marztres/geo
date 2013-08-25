@@ -38,7 +38,8 @@ var accionesFirma = {
 	eliminarFirma: function( e ) {
 		e.preventDefault();
 		$post = $(this).parent().find("form");
-		if(confirm('Estas seguro que quieres eliminar esta Firma')) {
+		alertify.confirm("Esta seguro que desea eliminar este usuario", function (e) {
+		  if (e) {
 			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
 				if (respuesta.status === 'OK') {
 					console.log(respuesta.message);
@@ -54,6 +55,7 @@ var accionesFirma = {
 				}
 			}, 'json');
 		}
+		});	
 	}
 	
 }

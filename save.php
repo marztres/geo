@@ -39,13 +39,14 @@
 				$usuariosClass = new usuarios();
 				$cedula= $_POST['cedula'];
 				$usuario = $_POST['usuario'];
+				$claveAnterior = $_POST['claveAnterior'];
 				$clave = $_POST['clave'];
 				$confirmar_clave = $_POST['confirmar_clave'];
 				$nombres = $_POST['nombres'];
 				$apellidos = $_POST['apellidos'];
 				$cargo = $_POST['cargo'];
 				$id_usuario = $_POST['id_usuario'];
-				$respuesta = $usuariosClass->ModificarUsuarios($id_usuario,$cedula, $usuario, $clave, $confirmar_clave, $nombres, $apellidos, $cargo);
+				$respuesta = $usuariosClass->ModificarUsuarios($id_usuario,$cedula, $usuario, $claveAnterior, $clave, $confirmar_clave, $nombres, $apellidos, $cargo);
 				if ( $respuesta ) {
 					$response["status"] = "OK";
 					$response["message"] = "Usuario modificado";
@@ -478,6 +479,19 @@
  		  				$response["message"] = "Error guardando muestra";
  		  			}
    			break;
+
+   		case 'eliminarMuestra':
+				$muestrasClass = new muestras();
+				$idMuestra = $_POST['idMuestra'];
+				$respuesta = $muestrasClass->eliminarMuestra($idMuestra); 
+				if ( $respuesta ) {
+					$response["status"] = "OK";
+					$response["message"] = "Muestra eliminada correctamente";
+				} else {
+					$response["status"] = "ERROR";
+					$response["message"] = "Error al eliminar la muestra";
+				}
+			break;
 
 			case 'testlimites':
 					$testLimitesClass = new testlimintes();

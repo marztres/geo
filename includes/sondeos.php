@@ -1,7 +1,5 @@
 <?php
-
 require_once 'database.php';
-
 class sondeos extends DataBase {
 
 	function getListaSondeos( $idp ) {

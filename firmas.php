@@ -1,4 +1,5 @@
 <?php
+    require_once("seguridad.php");
     session_start();
     require_once('includes/proyectos.php');
     require_once('includes/usuarios.php');
@@ -36,7 +37,7 @@
     <script src="assets/js/usuarios.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <link rel="stylesheet" href="assets/css/alertify.core.css" />
-    <link rel="stylesheet" href="assets/css/alertify.default.css" />
+    <link rel="stylesheet" href="assets/css/alertify.bootstrap.css" />
 
     <script>
       $(document).ready(function()
@@ -280,11 +281,23 @@
         <h3 id="myModalLabel">Ayuda</h3>
       </div>
       <div class="modal-body">
-        <video id="sampleMovie" width="640" height="360" preload controls>
-          <source src="HTML5Sample_H264.mov" />
-          <source src="HTML5Sample_Ogg.ogv" />
-          <source src="HTML5Sample_WebM.webm" />
-        </video>
+          <h5> Administración de firmas  </h5>
+        <p> 
+          La aplicación muestra una lista general de firmas registradas. </p>
+       <h5> ¿ Como agregar una firma? </h5>
+        <p> 
+          Para agregar una firma hacer click en el boton "Nuevo firma" ubicado en la parte superior derecha de nuestra pantalla, 
+          ingresamos los datos correspondiente "Nombre de persona, Tarjeta profesional". Y seleccionamos la imagen de la firma a cargar, luego hacemos click en el boton
+          "Guardar firma" , Debemos tener en cuenta que la imagen a subir no supere el peso de 1.5 mb.
+        </p>
+        <h5> ¿ Como editar una firma ? </h5>
+        <p> 
+          Para editar una fima hacer click en el ícono ubicado en la columna editar correspondiente a la firma, modificamos la información corespondiente y presionamos el botón modificar firma. 
+        </p>
+        <h5> ¿ Como eliminar una firma ? </h5>
+        <p> 
+          Para eliminar una firma hacer click en el ícono ubicado en la columna eliminar nos aprecerá una ventana de confirmación en la que debemos presionar aceptar. 
+        </p>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
