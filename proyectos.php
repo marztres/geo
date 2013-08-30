@@ -1,6 +1,6 @@
 <?php
-  require_once("seguridad.php");
   session_start();
+  require_once("seguridad.php");
   require_once('includes/proyectos.php');
   require_once('includes/usuarios.php');
   $data=$_SESSION['usuario'];

@@ -1,6 +1,6 @@
 <?php
-  require_once('seguridad.php');
   session_start();
+  require_once('seguridad.php');
   require_once('includes/proyectos.php');
   require_once('includes/sondeos.php');
   require_once('includes/usuarios.php');
@@ -22,7 +22,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Login - Geotecnia y Ambiente Systems</title>
+    <title>Sondeos - Geotecnia y Ambiente Systems</title>
     <meta name="description" content="El software de Geotecnia y Ambiente es el encargado de procesar los datos obtenidos por los laboratoristas de las muestras de los suelos">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
