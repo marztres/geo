@@ -16,10 +16,7 @@
   if ( isset( $_POST['func'] ) ) {
     $response = array();
     switch( $_POST['func'] ) {
-      case 'login' 
-        
-      break;
-
+      
       case 'addUsuario':
         $usuariosClass = new usuarios();        
         $cedula= $_POST['cedula'];

@@ -13,48 +13,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
     <script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script src="assets/js/login.js"></script>
-
-      <style type="text/css">
-      body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-      }
-
-      .form-signin {
-        max-width: 300px;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .form-signin .form-signin-heading,
-      .form-signin .checkbox {
-        margin-bottom: 10px;
-      }
-      .form-signin input[type="text"],
-      .form-signin input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
-
-    </style>
+    <script src="assets/js/vendor/usuario.js"></script>
   </head>
   <body>
     <div class="row-fluid header">
       <div class="span2">
         <figure class="logo"></figure>
       </div>
-      <h2 class="span5 header-title"> Sistema de estudios de suelo</h2>
+      <h4 class="span5 header-title"> Sistema de sondeo de suelos</h4>
       <a href="#Ayuda" role="button"  data-toggle="modal" class="link-header span1 offset2">
       Ayuda 
       </a>
@@ -63,25 +29,8 @@
       </a>
     </div>
     <div class="row-fluid cuerpo-login">
-      
-
-      <form class="form-signin" method='post' action="save.php">
-        <h3 class="form-signin-heading">Identificate</h3>
-        <input type="text" class="input-block-level" placeholder="Nombre de usuario o tu Cedula">
-        <input type="password" class="input-block-level" placeholder="Contraseña">
-        <a id="enviarDatos" class="btn btn-large btn-primary" ><i class="icon-check icon-white"></i> Ingresar</a>
-      </form>
-
-
-
-
-
-
-
       <div class="arealogin span3 offset5">
-        
-
-        <form  id='datos_usuarios'  method='post' action='validaUsuario.php' class="form-vertical">
+        <form  id='datos_usuarios'  method='post' action='valida_usuario.php?controller=navegacion&amp;action=valida_Usuarios' class="form-vertical">
           <div class="control-group">
             <label for="Titulo" class="lead" title="Identificate">Identificate</label>    
             <div class="controls inputs">
@@ -111,8 +60,6 @@
             </div>
           </div>
         </form>
-      
-
       </div>
     </div>
 
