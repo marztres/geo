@@ -311,7 +311,7 @@
               <select name='responsable'  class="input-block-level" >
               <?php if ( count( $usuarios ) > 0 ) : ?>
               <?php foreach ( $usuarios as $usuario ) : ?>
-              <?php if ( $usuario->id_usuario=="0" ) : ?>
+              <?php if ( $usuario->id_usuario=="1" ) : ?>
                     <option value="<?php echo $usuario->id_usuario; ?>" selected ><?php echo $usuario->tipo; ?> <?php echo $usuario->nombres; ?> <?php echo $usuario->apellidos; ?></option>
                   <?php else: ?>
                     <option value="<?php echo $usuario->id_usuario; ?>" ><?php echo $usuario->tipo; ?> <?php echo $usuario->nombres; ?> <?php echo $usuario->apellidos; ?></option>

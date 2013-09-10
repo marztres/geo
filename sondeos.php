@@ -371,8 +371,7 @@
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
         <button id="btnnuevoSondeo" type="submit"  class="btn btn-primary inputs">
-        <i class="icon-check icon-white"></i> Guardar sondeos
-        </button> 
+        <i class="icon-check icon-white"></i> Guardar sondeo </button> 
       </div>
     </div>
     <!-- fin nuevo sondeo form -->

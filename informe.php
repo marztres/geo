@@ -2129,7 +2129,7 @@
               </tr>
 
 
-              $nivel;
+              <php $nivel; ?> 
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
                 <?php if( $datos_sondeo->nivel_freatico>=$datoMuestra->profundidad_inicial && $datos_sondeo->nivel_freatico<=$datoMuestra->profundidad_final ){ $nivel=$datoMuestra->profundidad_inicial; } ?>
               <?php endforeach; ?>
