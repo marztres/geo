@@ -44,6 +44,7 @@
     <title>Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> - <?php echo $proyectos->fecha; ?> - Geotecnia y Ambiente S.A.S</title>
     <meta name="description" content="El software de Geotecnia y Ambiente es el encargado de procesar los datos obtenidos por los laboratoristas de las muestras de los suelos">
     <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/baseinforme.css">
     <link rel="stylesheet" href="assets/css/informe.css">
@@ -797,6 +798,45 @@
                       </tr>
                     </tbody>
                   </table>
+
+
+                  <table>
+                      <tr>
+                        <td> 
+                                 <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                                       <?php echo $firmas->imagenFirma; ?>
+                                     <?php endif; ?>
+                                   <?php endforeach; ?>
+                                 <?php endif; ?>" alt="firma ingeniero" height="100px" width="100px"> 
+                                 <br>
+                                 <span class="lineafirma"></span>
+                                 <br>
+                                 <span>
+                                 <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                                       <?php echo $firmas->persona; ?>
+                                     <?php endif; ?>
+                                   <?php endforeach; ?>
+                                 <?php endif; ?>
+
+                                 </span>
+                                 <br>
+                                 <span class="title">
+                                 <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                                       <?php echo $firmas->tarjetaProfesional; ?>
+                                     <?php endif; ?>
+                                   <?php endforeach; ?>
+                                 <?php endif; ?>
+
+                                 </span>
+                                </td>
+                      </tr>
+                    </table>                  
                   
        
                 </form>
@@ -2542,5 +2582,8 @@
       });
     </script>
     <script src="assets/js/alertify/alertify.js"></script>
+
+
+    
   </body>
 </html>

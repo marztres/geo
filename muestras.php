@@ -44,6 +44,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Muestras - Geotecnia y Ambiente Systems</title>
     <meta name="description" content="El software de Geotecnia y Ambiente es el encargado de procesar los datos obtenidos por los laboratoristas de las muestras de los suelos">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/base.css">
@@ -269,11 +270,11 @@
               
               <?php if( $datoMuestra->material_de_relleno!=2 ): ?>
                 <li class="<?php echo (($i==1)?'active':''); ?>">
-                  <a href="#muestra<?php echo $i; ?>"  data-toggle="tab">Muestra <?php echo $i; ?> </a>
+                  <a href="#muestra<?php echo $i; ?>"  data-toggle="tab" >Muestra <?php echo $i; ?> </a>
                 </li>
-                <?php $i++; ?>
+                
               <?php endif; ?>
-
+                <?php $i++; ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>
@@ -912,9 +913,9 @@
                     <a href="#" rel="muestra<?php echo $i; ?>" class="guardaLimites btn btn-primary input-xlarge">Guardar información</a>
                   </div>
                 </div>
-                <?php $i++;?>  
+                  
               <?php endif; ?>
-
+              <?php $i++;?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>
@@ -934,8 +935,9 @@
                 <li class="<?php echo (($i==1)?'active':''); ?>">
                   <a href="#compresion<?php echo $i; ?>" data-toggle="tab">Muestra <?php echo $i; ?> </a>
                 </li>
-                <?php $i++; ?>
+                
               <?php endif; ?>
+              <?php $i++; ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>
@@ -1158,8 +1160,9 @@
                 </div>
                 <!-- ############# FIN GUARDAR INFORMACION BOTON ############### -->  
               </div>
-              <?php $i++; ?>
+              
               <?php endif; ?>
+              <?php $i++; ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>              
@@ -1181,8 +1184,9 @@
                 <li class="<?php echo (($i==1)?'active':''); ?>">
                   <a href="#granulometria<?php echo $i; ?>" data-toggle="tab">Muestra <?php echo $i; ?> </a>
                 </li>
-                <?php $i++; ?>
+                
               <?php endif; ?>
+              <?php $i++; ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?>
@@ -2229,7 +2233,7 @@
                 </div>
                 <!-- ############# FIN GUARDAR INFORMACION BOTON ############### -->
               </div>
-              <?php $i++; ?>
+              
               <?php 
                 unset($tamices);
                 unset($notacion);
@@ -2239,6 +2243,7 @@
                 unset($notacionFinos);
                 ?>
               <?php endif; ?>
+              <?php $i++; ?>
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?> 
@@ -2833,8 +2838,9 @@
           }]
       });
       
-      <?php $i++; ?>
+      
       <?php endif; ?>
+      <?php $i++; ?>
       <?php endforeach; ?>
       
       
@@ -2923,8 +2929,9 @@
         }]
       });
       
-      <?php $i++; ?>
+      
       <?php endif; ?>
+      <?php $i++; ?>
       <?php endforeach; ?>
       
       
@@ -3019,8 +3026,10 @@
           }
           ]
       });  
-      <?php $i++; ?>
+      
+      
       <?php endif; ?>
+      <?php $i++; ?>
       <?php endforeach; ?> 
       
 
