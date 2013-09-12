@@ -51,7 +51,7 @@
           <figure class="logo"></figure>
         </a>
       </div>
-      <h3 class="span4 header-title"></h3>
+      <h3 class="span4 header-title"> Sistema de estudio de suelos</h3>
       <div class="btn-group span3 offset2 datos-perfil ">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
         <span>
@@ -189,10 +189,10 @@
             <tr>
             <td><span class="titulo-proyectos"><?php echo $i; ?></span></td>
             <td><span class="badge"><?php echo $sondeo->cantidad; ?></span></td>
-            <td><a href="muestras.php?idp=<?php echo $sondeo->fk_idproyecto; ?>&ids=<?php echo $sondeo->id_sondeo; ?>&numsondeo=<?php echo $i; ?>"><i class="icon-zoom-in"></a></td>
+            <td><a href="muestras.php?idp=<?php echo $sondeo->fk_idproyecto; ?>&ids=<?php echo $sondeo->id_sondeo; ?>&numsondeo=<?php echo $i; ?>"><span class="badge label-inverse"><i class="icon-zoom-in icon-white"> </span></a></td>
             <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero'  ) : ?>
               <td>
-                <a class="eliminarSondeo" href="#"><i class="icon-remove"></i></a>
+                <a class="eliminarSondeo" href="#"><span class="badge label-inverse"><i class="icon-trash icon-white"></i></span></a>
                 <form action="save.php">
                   <input type="hidden" name="func" value="eliminarSondeo">
                   <input type="hidden" name="idSondeo" value="<?php echo $sondeo->id_sondeo; ?>">
@@ -239,7 +239,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cerrar</button>
       </div>
     </div>
     <!-- Legal -->
@@ -263,7 +263,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cerrar</button>
       </div>
     </div>
     <!--  form  Editar proyecto-->
@@ -325,7 +325,7 @@
       <!-- fin form  Editar proyecto-->
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="btnModificarProyecto"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar proyecto</button> 
+        <button type="submit" id="btnModificarProyecto"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Guardar proyecto</button> 
       </div>
     </div>
     <!-- fin modificar form -->
@@ -370,8 +370,8 @@
       </div>
       <!-- fin form  nuevo sondeo-->
       <div class="modal-footer">
-        <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button id="btnnuevoSondeo" type="submit"  class="btn btn-primary inputs">
+        <button class="btn  " data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button id="btnnuevoSondeo" type="submit"  class="btn btn-success inputs">
         <i class="icon-check icon-white"></i> Guardar sondeo </button> 
       </div>
     </div>
@@ -426,7 +426,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="Mod_Usuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+        <button type="submit" id="Mod_Usuario"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
       </div>
     </div>
     <!-- Fin de configuracion cuenta -->

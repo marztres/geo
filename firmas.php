@@ -247,11 +247,11 @@
             </td>
             <td>
               <a href="#editar_Firma" rel='<?php echo $firmas->idFirma.",".$firmas->persona.",".$firmas->tarjetaProfesional.",".$firmas->imagenFirma; ?>' class="editarFirma" role="button" data-toggle="modal">
-                <i class="icon-pencil"></i>
+                <span class="badge label-inverse" ><i class="icon-pencil icon-white"></i></span>
               </a>
             </td>
             <td>
-              <a class="eliminarFirma" href="#"><i class="icon-remove"></i></a>
+              <a class="eliminarFirma" href="#"><span class="badge label-inverse" ><i class="icon-trash icon-white "></i> </span></a>
               <form action="save.php">
                 <input type="hidden" name="func" value="deleteFirma">
                 <input type="hidden" name="idFirma" value="<?php echo $firmas->idFirma; ?>">

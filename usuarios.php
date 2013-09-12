@@ -154,11 +154,11 @@
             </td>
             <td>
               <a href="#editar_usuario" rel='<?php echo $usuarios->id_usuario.",".$usuarios->cedula.",".$usuarios->nombres.",".$usuarios->apellidos.",".$usuarios->tipo.",".$usuarios->nombre_usuario;?>' class="editarUsuario" role="button" id="<?php echo $usuarios->id_usuario;?>" data-toggle="modal">
-                    <i class="icon-pencil"></i>
+                    <span class="badge label-inverse" ><i class="icon-pencil icon-white"></i></span>
                     </a>
             </td>
             <td>
-              <a class="eliminar_usuario" href="#"><i class="icon-remove"></i></a>
+              <a class="eliminar_usuario" href="#"><span class="badge label-inverse" > <i class="icon-trash icon-white"></i></span></a>
               <form action="save.php">
                 <input type="hidden" name="func" value="eliminarUsuario">
                 <input type="hidden" name="idusuario" value="<?php echo $usuarios->id_usuario; ?>">
@@ -214,7 +214,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cerrar</button>
       </div>
     </div>
     <!-- Legal -->
@@ -238,7 +238,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cerrar</button>
       </div>
     </div>
     <!-- nuevo form -->
@@ -296,7 +296,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="enviar_usuario"  class="btn btn-primary inputs"> 
+        <button type="submit" id="enviar_usuario"  class="btn btn-success inputs"> 
         <i class="icon-check icon-white"></i> Guardar usuario
         </button> 
       </div>
@@ -358,7 +358,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="EnviarModificarUsuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+        <button type="submit" id="EnviarModificarUsuario"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
       </div>
     </div>
     <!--  Fin editar usuario-->
@@ -411,7 +411,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="Mod_Usuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+        <button type="submit" id="Mod_Usuario"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
       </div>
     </div>
     <!-- Fin de configuracion cuenta -->

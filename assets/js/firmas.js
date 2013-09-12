@@ -9,7 +9,6 @@ var accionesFirma = {
 		$(".eliminarFirma").on('click', accionesFirma.eliminarFirma );
 		$('.editarFirma').on('click', accionesFirma.editarFirma);	
 	},
-	
 	prevenirClickSinDestino: function( e ) {
 		e.preventDefault();
 	},
@@ -25,7 +24,7 @@ var accionesFirma = {
     
     var mensaje =  $(this).closest('body').find('#editarFirma').find('#messageEditar');
 
-    $('#idFirma').val(idFirma); 
+    $('#idFirma').val(idFirma);
     $('#editarPersona').val(persona);
     $('#editarTarjetaPro').val(tarjetaProfesional);
     $('#imagenActual').val(imagenFirma);
@@ -43,7 +42,7 @@ var accionesFirma = {
 			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
 				if (respuesta.status === 'OK') {
 					console.log(respuesta.message);
-				   	$('#exitoGeneral').removeClass('hide');
+				    $('#exitoGeneral').removeClass('hide');
 				   	location.reload();
 
 				} else {
@@ -57,7 +56,5 @@ var accionesFirma = {
 		}
 		});	
 	}
-	
 }
-
 $(document).on( 'ready', accionesFirma.init );

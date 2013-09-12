@@ -8,9 +8,9 @@ var accionesUsuario = {
 		$('a[href="#"]').on( 'click', accionesUsuario.prevenirClickSinDestino );
 		$("#enviar_usuario").on('click', accionesUsuario.guardarUsuario );
 		$(".eliminar_usuario").on('click', accionesUsuario.eliminarUsuario );
-		$('.editarUsuario').on('click', accionesUsuario.clickEditarUsuario);	
-		$("#EnviarModificarUsuario").on('click', accionesUsuario.clickModificarUsuario);
-		$("#Mod_Usuario").on('click', accionesUsuario.clickConfigurarUsuario);
+		$('.editarUsuario').on('click', accionesUsuario.clickEditarUsuario );
+		$("#EnviarModificarUsuario").on('click', accionesUsuario.clickModificarUsuario );
+		$("#Mod_Usuario").on('click', accionesUsuario.clickConfigurarUsuario );
 	},
 	
 	prevenirClickSinDestino: function( e ) {
@@ -107,8 +107,7 @@ var accionesUsuario = {
 		e.preventDefault();
 		$post = $(this).parent().find("form");
 		alertify.confirm("Esta seguro que desea eliminar este usuario", function (e) {
-		  if (e) {
-			
+	      if (e) {	
 			$.post($post.attr('action'), $post.serialize(), function(respuesta) {
 				if (respuesta.status === 'OK') {
 					console.log(respuesta.message);
@@ -126,8 +125,6 @@ var accionesUsuario = {
 		
 		}
 		});	
-	}
-	
+	}	
 }
-
 $(document).on( 'ready', accionesUsuario.init );

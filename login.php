@@ -21,7 +21,7 @@
       <div class="span2">
         <figure class="logo"></figure>
       </div>
-      <h4 class="span5 header-title"> Sistema de sondeo de suelos</h4>
+      <h3 class="span5 header-title"> Sistema de estudio de suelos</h3>
       <a href="#Ayuda" role="button"  data-toggle="modal" class="link-header span1 offset2">
       Ayuda 
       </a>

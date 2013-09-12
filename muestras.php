@@ -64,10 +64,10 @@
       <div class="span2">
         <figure class="logo"></figure>
       </div>
-      <h3 class="span4 header-title"> </h3>
+      <h3 class="span4 header-title"> Sistema de estudio de suelos</h3>
       <div class="btn-group span3 offset2 datos-perfil ">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-        <span><i class="icon-user"></i> <?php echo $user->tipo." - ".$user->nombres." ".$user->apellidos; ?></span>
+        <a class="btn dropdown-toggle " data-toggle="dropdown" href="#">
+        <span><i class="icon-user "></i> <?php echo $user->tipo." - ".$user->nombres." ".$user->apellidos; ?></span>
         <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -116,21 +116,21 @@
       <div class="navbar">
         <div class="navbar-inner">
           <div class="container">
-            <a class="brand" href="proyectos.php" data-toggle="tooltip" title="Click para ver todos los Proyectos">Proyectos |</a>
-            <a class="brand" href="sondeos.php?idp=<?php echo $_GET['idp'] ?>" data-toggle="tooltip" title="Click para  ver los sondeos de este proyecto"> <?php echo $proyectos->nombre_proyecto; ?> |</a>
-            <a class="brand" href="#" data-toggle="tooltip" title="Debajo puede ver la información del Sondeo">Información de sondeo</a>
+            <a class="brand" href="proyectos.php" data-toggle="tooltip" title="Click para ver todos los Proyectos"> Proyectos &#187;</a>
+            <a class="brand" href="sondeos.php?idp=<?php echo $_GET['idp'] ?>" data-toggle="tooltip" title="Click para  ver los sondeos de este proyecto"> <?php echo $proyectos->nombre_proyecto; ?> &#187;</a>
+            <a class="brand" href="#" data-toggle="tooltip" title="Debajo puede ver la información del Sondeo">Información de sondeo.</a>
             <ul class="nav pull-right">
               <li class="divider-vertical"></li>
               <li>
                 <a href="#informe" role="button" class="btnInforme"  data-toggle="modal">
-                <i  class="icon-list-alt"></i> Impresión
+                <i  class="icon-print"></i> Impresión
                 </a>
               </li>
             </ul>
             <ul class="nav pull-right">
               <li class="divider-vertical"></li>
               <li>
-                <a href="#">Sondeo #<?php echo $_GET['numsondeo'] ?></a>
+                <a href="#"> Sondeo #<?php echo $_GET['numsondeo'] ?> </a>
               </li>
             </ul>
           </div>
@@ -181,7 +181,7 @@
                   <li class="divider-vertical"></li>
                   <li>
                     <a href="#nuevamuestra" role="button" data-toggle="modal">
-                    <i class="icon-plus-sign"></i> Nueva muestra
+                     <i class="icon-plus-sign "></i> Nueva muestra 
                     </a>
                   </li>
                 </ul>
@@ -214,9 +214,9 @@
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <tr>
-                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td ><span class="titulo-proyectos "> <?php echo $i; ?></span></td>
                 <td>
-                  <span class="badge">Desde <span> <?php echo $datoMuestra->profundidad_inicial ?> metros</span>----<span class='badge' >Hasta <?php echo $datoMuestra->profundidad_final ?> metros</span>
+                  <span class="badge ">Desde <span> <?php echo $datoMuestra->profundidad_inicial ?> metros</span>----<span class='badge' >Hasta <?php echo $datoMuestra->profundidad_final ?> metros</span>
                 </td>
                 <td><?php echo $datoMuestra->numero_golpes ?></td>
                 <td><?php echo $datoMuestra->descripcion ?></td>
@@ -225,19 +225,18 @@
                 
                   <td>
                     <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="modalMuestra" role="button" data-toggle="modal" href="#editarmuestra">
-                    <i class='icon-wrench'></i>
-                    </a>
+                    <span class="badge label-inverse"> <i class='icon-wrench icon-white'></i> </span>
                   </td>
                 <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
                   <td>
                     <a rel='<?php echo $datoMuestra->id_muestra.",".$datoMuestra->profundidad_inicial.",".$datoMuestra->profundidad_final.",".$datoMuestra->descripcion.",".$datoMuestra->material_de_relleno.",".$datoMuestra->numero_golpes; ?>' id="<?php echo $datoMuestra->id_muestra ?>" class="clonarMuestra" role="button" data-toggle="modal" href="#clonarmuestra">
-                    <i class='icon-wrench'></i>
+                    <span class="badge label-inverse"> <i class='icon-refresh icon-white'></i> </span>
                     </a>
                   </td>
                 <?php endif ?>
                 <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
                     <td>
-                      <a class="eliminarMuestra" href="#"><i class="icon-remove"></i></a>
+                       <a class="eliminarMuestra" href="#"> <span class="badge label-inverse"><i class="icon-trash icon-white"></i> </span></a> 
                       <form action="save.php">
                         <input type="hidden" name="func" value="eliminarMuestra">
                         <input type="hidden" name="idMuestra" value="<?php echo $datoMuestra->id_muestra; ?>">
@@ -2346,7 +2345,7 @@
     <!-- #############  FOOTER ############### -->    
     <div class="row-fluid footer ">
       <footer class="span12">
-        <p class="copiright span4" >Geotecnia y Ambiente S.A.S &copy; Copyright 2013</p>
+        <p class="copiright span4" >Geotecnia y Ambiente S.A.S &copy; Copyright 2013 </p>
         <p class="span6 offset1"><a href="#legal" role="button" data-toggle="modal" class="links-footer">Información legal</a><a href="#Ayuda" role="button" data-toggle="modal" class="links-footer">Ayuda</a>
         </p>
       </footer>
@@ -2500,7 +2499,7 @@
       <!-- fin form  nuevo sondeo-->
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="enviar_muestra"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar muestra</button> 
+        <button type="submit" id="enviar_muestra"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Guardar muestra</button> 
       </div>
     </div>
     <!-- #############  FORM NUEVA MUESTRA ############### -->
@@ -2550,7 +2549,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="EnviarModificarMuestra"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Guardar muestra</button> 
+        <button type="submit" id="EnviarModificarMuestra"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Guardar muestra</button> 
       </div>
     </div>
     <!-- #############  FIN FORM EDITAR MUESTRA ############### -->
@@ -2600,7 +2599,7 @@
        </div>
        <div class="modal-footer">
          <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-         <button type="submit" id="EnviarClonarMuestra"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Clonar muestra</button> 
+         <button type="submit" id="EnviarClonarMuestra"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Clonar muestra</button> 
        </div>
      </div>
      <!-- #############  FIN FORM ClONAR MUESTRA ############### -->
@@ -2654,7 +2653,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="Mod_Usuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+        <button type="submit" id="Mod_Usuario"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
       </div>
     </div>
     <!-- Fin de configuracion cuenta -->

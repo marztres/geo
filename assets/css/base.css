@@ -1,7 +1,7 @@
 .logo{
 	background:url(../img/logo_geotecnia.png) no-repeat;
-	height: 134px;
-	width: 90px;
+	height: 92px;
+	width: 142px;
 	transition:all 0.5s ease-in;
 
 }
@@ -17,9 +17,10 @@
 }
 .header-title {
 
-	margin-top: 100px;
+	margin-top: 50px;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 500;
+	color:#777777;
 	
 }
 
@@ -35,7 +36,7 @@
 	
 	font-weight: 600;
 	font-size: 1.1em;
-	color: #ea5d5d;
+	color: #46a546;
 	text-decoration: none;
 
 }
@@ -61,7 +62,7 @@ a.links-footer {
 }
 
 a.links-footer:hover {
-	color: #ea5d5d;
+	color: #46a546;
 	font-weight: 500;
 	text-decoration: none;
 }
@@ -69,5 +70,5 @@ a.links-footer:hover {
 
 
 .brand:hover {
-	color: #ea5d5d;
+	color: #46a546;
 }

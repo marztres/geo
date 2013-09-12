@@ -7,60 +7,11 @@
 	text-align: center;
 }
 
-.buscador {
-
-	margin-right: 30px;
-}
-
-.titulo-proyectos
-{
-	font-weight:600;
-	font-size: 1.2em;
-	color: #505050;
-}
-
-.cuerpo-proyectos {
- min-height:450px;
-
-
-}
 .title  {
 
 	font-weight: bold;  
 }
 
-
-.info_sondeos label:first-child {
-
-	padding-left: 10px;
-}
-
-.encabezados {
-	border : 1px solid #CCC;
-	margin-bottom: 0px;
-}
-
-.div-separador {
-	border-left: 1px solid #CCC;
-}
-
-.div-separador div.datosinforme {
-	margin-left: 4px;
-}
-
-.tituloprofundidad {
-	margin-top: 5px;
-	font-size: 1.2em;
-}
-
-.texture {
-
-	 background:url(../img/fondo.jpg) ;
-}
-.texture1 {
-
-	 background:url(../img/fondo1.jpg) ;
-}
 .letra-s {
 	font-size: 0.8em;
 }
@@ -68,8 +19,7 @@
 .tds {
 	height: 100%;
 	padding: 0 0 0 0;
-	margin:  0 0 0 0;
-	
+	margin:  0 0 0 0;	
 }
 
 .centimetros {
@@ -83,42 +33,6 @@
 	margin: 0 0 0 0;
 	position: relative;
 	top:100px;		
-
-}
-
-
-#Muestras {
-	height: 1390px;
-	margin-bottom: 25px;
-	/*border: 1px solid #f9b2bd;*/
-
-}
-
-.divLimites{
-	padding-bottom: 0px;
-	margin-bottom: 150px;
-	/*border: 1px solid #de00ff;*/
-}
-
-.divCompresion {
-	padding-bottom: 0px;
-	margin-bottom: 30px;
- /* border: 1px solid #03ff2c;*/
-}
-
-.divGranulometria { 
-	height: 1410px;
-	padding-bottom: 0px;	
-	margin-bottom: 10px;
-/*	border: 1px solid #0074ff;*/
-}
-
-.divInforme {
-
-	padding-bottom: 100px;	
-	/*border: 1px solid #f9b2bd;*/
-
-
 }
 
 .firmas {
@@ -132,42 +46,38 @@
 
 }
 
-.paginadorMuestras {
-	display: block;
-	text-align: right;
-	margin-top: 1050px;
-}
-
-.paginadorLimites {
-	display: block;
-	text-align: right;
-	margin-top: 0px;
-}
-
-.paginadorCompresion {
-	display: block;
-	text-align: right;
-	margin-top: 0px;
-}
-
-.paginadorGranulometria {
-	display: block;
-	text-align: right;
-	margin-top: 0px;
-}
-
-.paginadorInforme {
-	display: block;
-	text-align: right;
-	
-}
-
 .patrones {
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	border: 1px solid #CCC;
 }
 
+.tabla-headers {
+	border : 1px dotted #CCC;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 1.5em;
+}
+
+.tabla-informes {
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.letraInforme {
+	font-size: 1.3em;	
+}
+
+.tabla-footer {
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;	
+}
+.paginador {
+	font-size: 1.2em;
+}
 
 
 

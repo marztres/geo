@@ -58,44 +58,43 @@
     <link rel="stylesheet" href="assets/css/alertify.default.css" />
   </head>
   <body>
-    <!-- #############  CUERPO ############### --> 
+
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
     <div class="row-fluid cuerpo-proyectos">
       
-      <!-- #############  DATOS DE SONDEO ############### -->   
-      <div class="encabezados">
-        <div class="row-fluid">
-          <div class="span1 "> 
-            <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
-          </div>
-          <div class="span11 div-separador">
-            <div class="row-fluid"> 
-              <h4 class="header-title text-center"> 
+    
+
+      <table class="table tabla-headers">
+        <tbody>
+          <tr>
+            <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
+            <td colspan="4" class="title">
                 Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
-              </h4>
-            </div>
-            <div class="row-fluid datosinforme">
-              <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
-              <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
-              <?php echo $proyectos->nombre_proyecto; ?>
-              </label>
-              <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
-              <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
-              <?php echo $proyectos->fecha; ?>
-              </label>
-            </div>
-            <div class="row-fluid datosinforme">
-              <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
-              <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
-              <?php echo $proyectos->codigo_proyecto; ?>
-              </label>
-              <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
-              <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
-              <?php echo $proyectos->lugar; ?>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="title">Proyecto:</td>
+            <td><?php echo $proyectos->nombre_proyecto; ?></td>
+            <td class="title">Fecha:</td>
+            <td><?php echo $proyectos->fecha; ?></td>
+          </tr>
+          <tr>
+            <td class="title">Codigo:</td>
+            <td><?php echo $proyectos->codigo_proyecto; ?></td>
+            <td class="title">Lugar:</td>
+            <td><?php echo $proyectos->lugar; ?></td>
+          </tr>
+        </tbody>
+      </table>
     
         
         <div class="text-center"  id="Muestras">
@@ -103,7 +102,7 @@
           <!-- #############  TABLA MUESTRAS ############### -->
           <input type='hidden' id='idp' value="<?php echo $_GET['idp']; ?>">
           <input type='hidden' id='ids' value="<?php echo $_GET['ids']; ?>">
-          <table class="table " id='muestras'>
+          <table class="table table-bordered letraInforme tabla-informes" >
             <thead>
               <tr>
                 <th># Muestra</th>
@@ -114,7 +113,7 @@
                 <th>Roca</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody> 
               <?php if( count($muestrasSondeo) > 0 ): ?>
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
@@ -129,6 +128,106 @@
                 <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
             
               </tr>
+              <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+              <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+              <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+              <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+              <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+               <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+               <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+               <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+               <tr>
+                <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
+                <td>
+                  Desde <?php echo $datoMuestra->profundidad_inicial ?> metros --- Hasta <?php echo $datoMuestra->profundidad_final ?> metros
+                </td>
+                <td><?php echo $datoMuestra->numero_golpes ?></td>
+                <td><?php echo $datoMuestra->descripcion ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==1){ echo "Si"; } else { echo "No"; } ?></td>
+                <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
+            
+              </tr>
+          
               <?php $i++; ?>
               <?php endforeach; ?>
               <?php else: ?>
@@ -137,13 +236,93 @@
             </tbody>
           </table>
           <!-- #############  FIN TABLA MUESTRAS ############### -->
+
+          <table class="table tabla-footer letraInforme " >
+            <tr>
+              <td> 
+               <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                 <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                   <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                     <?php echo $firmas->imagenFirma; ?>
+                   <?php endif; ?>
+                 <?php endforeach; ?>
+               <?php endif; ?>" alt="firma ingeniero" height="100px" width="100px"> 
+               <br>
+               <span class="lineafirma"></span>
+               <br>
+               <span>
+               <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                 <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                   <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                     <?php echo $firmas->persona; ?>
+                   <?php endif; ?>
+                 <?php endforeach; ?>
+               <?php endif; ?>
+               </span>
+               <br>
+               <span class="title">
+               <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                 <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                   <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                     <?php echo $firmas->tarjetaProfesional; ?>
+                   <?php endif; ?>
+                 <?php endforeach; ?>
+               <?php endif; ?>
+               </span>
+              </td>
+              <td><span class="pull-right paginador ">Pagina <?php echo $pagina; ?></span></td>
+            </tr>
+          </table>    
         
-        <span class="pull-right paginadorMuestras">Pagina <?php echo $pagina; ?></span>
-        </div>
-        <?php $pagina++; ?>
-        <!-- ############# tabs de muestras internas limites ############### -->
+        
+      </div>
+      <?php $pagina++; ?>
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
+<!--############# MUESTRAS ################################################################################################### -->
         
 
+        
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+        
         <?php if ( $_GET['boxLim']==1) : ?>
         <div  id="Limites">
                  
@@ -153,40 +332,7 @@
               <?php $i = 1; $arrLimites = array(); $arrCompresion= array(); ?>
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
-              <div class="encabezados">
-                  <div class="row-fluid">
-                    <div class="span1 "> 
-                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
-                    </div>
-                    <div class="span11 div-separador">
-                      <div class="row-fluid"> 
-                        <h4 class="header-title text-center"> 
-                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
-                        </h4>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
-                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->nombre_proyecto; ?>
-                        </label>
-                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
-                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
-                        <?php echo $proyectos->fecha; ?>
-                        </label>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
-                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
-                        <?php echo $proyectos->codigo_proyecto; ?>
-                        </label>
-                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
-                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->lugar; ?>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>  
+              
               <div class="text-center divLimites"  id="muestra<?php echo $i; ?>">
                 <!-- #############  HUMEDAD NATURAL ############### -->
                 <p >Humedad natural - Muestra <?php echo $i; ?> </p>
@@ -800,43 +946,7 @@
                   </table>
 
 
-                  <table>
-                      <tr>
-                        <td> 
-                                 <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
-                                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
-                                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
-                                       <?php echo $firmas->imagenFirma; ?>
-                                     <?php endif; ?>
-                                   <?php endforeach; ?>
-                                 <?php endif; ?>" alt="firma ingeniero" height="100px" width="100px"> 
-                                 <br>
-                                 <span class="lineafirma"></span>
-                                 <br>
-                                 <span>
-                                 <?php if ( count( $ListaFirmas ) > 0 ) : ?>
-                                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
-                                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
-                                       <?php echo $firmas->persona; ?>
-                                     <?php endif; ?>
-                                   <?php endforeach; ?>
-                                 <?php endif; ?>
-
-                                 </span>
-                                 <br>
-                                 <span class="title">
-                                 <?php if ( count( $ListaFirmas ) > 0 ) : ?>
-                                   <?php foreach ( $ListaFirmas as $firmas ) : ?>
-                                     <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
-                                       <?php echo $firmas->tarjetaProfesional; ?>
-                                     <?php endif; ?>
-                                   <?php endforeach; ?>
-                                 <?php endif; ?>
-
-                                 </span>
-                                </td>
-                      </tr>
-                    </table>                  
+                                  
                   
        
                 </form>
@@ -853,7 +963,34 @@
 
         </div>
         <?php endif ?>
-        
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+<!--############# LIMITES ################################################################################################### -->
+
+
+
+
+
+
+
+
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->        
         <?php if ( $_GET['boxComp']==1) : ?>
         <div  id="Compresion">
           <!-- ############# COMPRESION ############### -->
@@ -862,40 +999,9 @@
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $DatosCompresion = $datosCompresion->GetDatosCompresion( $datoMuestra->id_muestra );  ?>
-              <div class="encabezados">
-                  <div class="row-fluid">
-                    <div class="span1 "> 
-                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
-                    </div>
-                    <div class="span11 div-separador">
-                      <div class="row-fluid"> 
-                        <h4 class="header-title text-center"> 
-                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
-                        </h4>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
-                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->nombre_proyecto; ?>
-                        </label>
-                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
-                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
-                        <?php echo $proyectos->fecha; ?>
-                        </label>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
-                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
-                        <?php echo $proyectos->codigo_proyecto; ?>
-                        </label>
-                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
-                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->lugar; ?>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>  
+              
+
+
               <div class="text-center divCompresion" id="compresion<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA ############### -->
                 <p>Compresión - Medidas de la muestra - Muestra <?php echo $i; ?></p>
@@ -1113,7 +1219,30 @@
              <!-- ############# fin Compresion ############### -->
         </div>
         <?php endif ?>
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
+<!--############# COMPRESION ################################################################################################### -->
 
+
+
+
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
         <?php if ( $_GET['boxGran']==1) : ?>
         <div  id="Granulometria">
           <!-- ############# tabs de muestras internas GRANULOMETRIA ############### -->  
@@ -1122,40 +1251,7 @@
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               <?php $DatosGranulometria = $datosGranulometria->getDatoGranulometria( $datoMuestra->id_muestra );  ?>
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
-              <div class="encabezados">
-                  <div class="row-fluid">
-                    <div class="span1 "> 
-                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
-                    </div>
-                    <div class="span11 div-separador">
-                      <div class="row-fluid"> 
-                        <h4 class="header-title text-center"> 
-                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
-                        </h4>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
-                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->nombre_proyecto; ?>
-                        </label>
-                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
-                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
-                        <?php echo $proyectos->fecha; ?>
-                        </label>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
-                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
-                        <?php echo $proyectos->codigo_proyecto; ?>
-                        </label>
-                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
-                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->lugar; ?>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>  
+              
               <div class="text-center divGranulometria" id="granulometria<?php echo $i; ?>">
                 <!-- #############  MEDIDAS DE LA MUESTRA GRANULOMETRIA############### -->
                 <p> Analisis granulometrico - Muestra <?php echo $i; ?></p>
@@ -2095,45 +2191,36 @@
               <?php endif; ?> 
           <!-- ############# fin GRANULOMETRIA ############### -->
         </div>
-        <?php endif; ?> 
-        
+        <?php endif; ?>
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+<!--############# GRANULOMETRIA ################################################################################################### -->
+
+
+
+
+
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->        
         <!-- ############# INFORME DE ESTRATIGRAFIA ############### -->
         <div  id="Informe" class="divInforme">
           
-          <div class="encabezados">
-                  <div class="row-fluid">
-                    <div class="span1 "> 
-                      <img src="assets/img/logoinforme.png" class="logo"  alt="Logo impresion">
-                    </div>
-                    <div class="span11 div-separador">
-                      <div class="row-fluid"> 
-                        <h4 class="header-title text-center"> 
-                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
-                        </h4>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="nombre_proyecto_label" class="span2 title">Proyecto:</label>
-                        <label id="lb_nombre_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->nombre_proyecto; ?>
-                        </label>
-                        <label for="fecha_proyecto_label" class="span1 title">Fecha:</label>
-                        <label id="lb_fecha_proyecto" for="fecha_proyecto" class="span2">
-                        <?php echo $proyectos->fecha; ?>
-                        </label>
-                      </div>
-                      <div class="row-fluid datosinforme">
-                        <label for="codigo_proyecto_label" class="span2 title">Codigo:</label>
-                        <label id="lb_codigo_proyecto" for="codigo_proyecto" class="span3">
-                        <?php echo $proyectos->codigo_proyecto; ?>
-                        </label>
-                        <label for="nombre_proyecto_label" class="span1 title">Lugar:</label>
-                        <label id="lb_lugar_proyecto" for="nombre_proyecto" class="span3">
-                        <?php echo $proyectos->lugar; ?>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>  
+          
           <p class="text-center">Informe de estratigrafia</p>
           <table class="table  letra-s">
             <thead>
@@ -2284,6 +2371,16 @@
           </table>
           <span class="paginadorInforme">Pagina <?php echo $pagina; ?></span>
         </div>
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
+<!--############# INFORME ################################################################################################### -->
       
       <!-- ############# FIN CUERPO ############### --> 
     </div>

@@ -69,7 +69,7 @@
         </a>
       </div>
 
-      <h3 class="span4 header-title"> </h3>
+      <h3 class="span4 header-title"> Sistema de estudio de suelos</h3>
       <div class="btn-group span3 offset2 datos-perfil ">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           
@@ -182,12 +182,12 @@
               <span class="badge"><?php echo $proyecto->cantidad; ?></span>
             </td>
             <td>
-              <a href="sondeos.php?idp=<?php echo $proyecto->id_proyecto; ?>"><i class="icon-zoom-in"></i></a>
+              <a href="sondeos.php?idp=<?php echo $proyecto->id_proyecto; ?>"><span class="badge label-inverse"><i class="icon-zoom-in icon-white"></i></span></a>
             </td>
             <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero'  ) : ?>
               <td>
                 
-                <a class="eliminarProyecto" href="#"><i class="icon-remove"></i></a>
+                <a class="eliminarProyecto" href="#"><span class="badge label-inverse"><i class="icon-trash icon-white"></i></span></a>
                 <form action="save.php">
                   <input type="hidden" name="func" value="eliminarProyecto">
                   <input type="hidden" name="idproyecto" value="<?php echo $proyecto->id_proyecto; ?>">
@@ -252,7 +252,7 @@
         </video>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cerrar</button>
       </div>
     </div>
 
@@ -277,7 +277,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cerrar</button>
       </div>
     </div>
 
@@ -343,7 +343,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="enviar"  class="btn btn-primary inputs"> 
+        <button type="submit" id="enviar"  class="btn btn-success inputs"> 
           <i class="icon-check icon-white"></i> Guardar proyecto
         </button> 
       </div>
@@ -398,7 +398,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn " data-dismiss="modal" aria-hidden="true">Cerrar</button>
-        <button type="submit" id="Mod_Usuario"  class="btn btn-primary inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
+        <button type="submit" id="Mod_Usuario"  class="btn btn-success inputs"> <i class="icon-check icon-white"></i> Modificar Usuario</button> 
       </div>
     </div>
     <!-- Fin de configuracion cuenta -->
