@@ -54,8 +54,6 @@
     <script src="assets/js/vendor/bootstrap.js"></script>
     <script src="assets/js/vendor/highcharts.js"></script>
     <script src="assets/js/vendor/regression.js"></script>
-    <link rel="stylesheet" href="assets/css/alertify.core.css" />
-    <link rel="stylesheet" href="assets/css/alertify.default.css" />
   </head>
   <body>
 
@@ -73,31 +71,34 @@
       
     
 
-      <table class="table tabla-headers">
-        <tbody>
-          <tr>
-            <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
-            <td colspan="4" class="title">
-                Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
-            </td>
-          </tr>
-          <tr>
-            <td class="title">Proyecto:</td>
-            <td><?php echo $proyectos->nombre_proyecto; ?></td>
-            <td class="title">Fecha:</td>
-            <td><?php echo $proyectos->fecha; ?></td>
-          </tr>
-          <tr>
-            <td class="title">Codigo:</td>
-            <td><?php echo $proyectos->codigo_proyecto; ?></td>
-            <td class="title">Lugar:</td>
-            <td><?php echo $proyectos->lugar; ?></td>
-          </tr>
-        </tbody>
-      </table>
+     
     
         
-        <div class="text-center"  id="Muestras">
+        <div class="text-center contenedor"  id="Muestras">
+          
+          <table class="table tabla-headers">
+            <tbody>
+              <tr>
+                <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
+                <td colspan="4" class="title">
+                    Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                </td>
+              </tr>
+              <tr>
+                <td class="title">Proyecto:</td>
+                <td><?php echo $proyectos->nombre_proyecto; ?></td>
+                <td class="title">Fecha:</td>
+                <td><?php echo $proyectos->fecha; ?></td>
+              </tr>
+              <tr>
+                <td class="title">Codigo:</td>
+                <td><?php echo $proyectos->codigo_proyecto; ?></td>
+                <td class="title">Lugar:</td>
+                <td><?php echo $proyectos->lugar; ?></td>
+              </tr>
+            </tbody>
+          </table>
+
           <p>Muestras</p>  
           <!-- #############  TABLA MUESTRAS ############### -->
           <input type='hidden' id='idp' value="<?php echo $_GET['idp']; ?>">
@@ -194,6 +195,7 @@
                 <td><?php if($datoMuestra->material_de_relleno==2){ echo "Si"; } else { echo "No"; } ?></td>
             
               </tr>
+
                <tr>
                 <td ><span class="titulo-proyectos"><?php echo $i; ?></span></td>
                 <td>
@@ -287,31 +289,7 @@
 <!--############# MUESTRAS ################################################################################################### -->
 <!--############# MUESTRAS ################################################################################################### -->
 <!--############# MUESTRAS ################################################################################################### -->
-        
 
-        
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <!--############# LIMITES ################################################################################################### -->
 <!--############# LIMITES ################################################################################################### -->
 <!--############# LIMITES ################################################################################################### -->
@@ -324,7 +302,7 @@
 <!--############# LIMITES ################################################################################################### -->
         
         <?php if ( $_GET['boxLim']==1) : ?>
-        <div  id="Limites">
+        <div id="Limites">
                  
 
               
@@ -333,7 +311,29 @@
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
               
-              <div class="text-center divLimites"  id="muestra<?php echo $i; ?>">
+              <div class="text-center contenedor"  id="muestra<?php echo $i; ?>">
+              <table class="table tabla-headers">
+                <tbody>
+                  <tr>
+                    <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
+                    <td colspan="4" class="title">
+                        Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="title">Proyecto:</td>
+                    <td><?php echo $proyectos->nombre_proyecto; ?></td>
+                    <td class="title">Fecha:</td>
+                    <td><?php echo $proyectos->fecha; ?></td>
+                  </tr>
+                  <tr>
+                    <td class="title">Codigo:</td>
+                    <td><?php echo $proyectos->codigo_proyecto; ?></td>
+                    <td class="title">Lugar:</td>
+                    <td><?php echo $proyectos->lugar; ?></td>
+                  </tr>
+                </tbody>
+              </table>
                 <!-- #############  HUMEDAD NATURAL ############### -->
                 <p >Humedad natural - Muestra <?php echo $i; ?> </p>
                 <form class="muestra<?php echo $i; ?>" action="save.php" method="post" accept-charset="utf-8">
@@ -341,7 +341,7 @@
                   <input type="hidden" name="muestra" value="0">
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
                   <input type="hidden" name="idtest" value="<?php echo $TestLimitesMuestra[$i-1][0]->id_test.",".$TestLimitesMuestra[$i-1][1]->id_test.",".$TestLimitesMuestra[$i-1][2]->id_test; ?>">
-                  <table class="table  humedad">
+                  <table class="table  humedad letratest tabla-informes">
                     <thead>
                       <tr>
                         <th>Prueba #</th>
@@ -501,7 +501,7 @@
                   <input type="hidden" name="muestra" value="1" />
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
                   <input type="hidden" name="idtest" value="<?php echo $TestLimitesMuestra[$i-1][3]->id_test.",".$TestLimitesMuestra[$i-1][4]->id_test.",".$TestLimitesMuestra[$i-1][5]->id_test; ?>">
-                  <table class="table  liquido">
+                  <table class="table  liquido letratest tabla-informes">
                     <thead>
                       <tr>
                         <th>Prueba #</th>
@@ -673,7 +673,7 @@
                   </table>
                 </form>
                 <input id="datosgraficaLimites<?php echo $i; ?>" class="datosgraficaLimites"  type="hidden" value="[<?php echo $arrLimites[$i-1]->golpes1?>,<?php echo $arrLimites[$i-1]->porcentaje1?>],[<?php echo $arrLimites[$i-1]->golpes2?>,<?php echo $arrLimites[$i-1]->porcentaje2?>],[<?php echo $arrLimites[$i-1]->golpes3?>,<?php echo $arrLimites[$i-1]->porcentaje3?>]">
-                <div id="graficaLimites<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+                <div id="graficaLimites<?php echo $i; ?>" style=" width:50%; height: 400px; display: inline-block;"></div>
                 <!-- #############  LIMITE PLASTICO ############### -->
                 <p>Limite plastico - Muestra <?php echo $i; ?></p>
                 <form class="muestra<?php echo $i; ?> formResultados" action="save.php" method="post" accept-charset="utf-8">
@@ -681,7 +681,7 @@
                   <input type="hidden" name="muestra" value="2" />
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
                   <input type="hidden" name="idtest" value="<?php echo $TestLimitesMuestra[$i-1][6]->id_test.",".$TestLimitesMuestra[$i-1][7]->id_test.",".$TestLimitesMuestra[$i-1][8]->id_test; ?>">
-                  <table class="table  plastico">
+                  <table class="table  plastico letratest tabla-informes">
                     <thead>
                       <tr>
                         <th>Prueba #</th>
@@ -826,8 +826,49 @@
                   </table>
                   <!-- ############# FIN LIMITE PLASTICO ############### -->
                   <!-- ############# RESULTADOS ############### -->
-                  <p>Resultados</p>
-                  <table class="table  resultados">
+                  
+
+
+                                  
+                  
+    
+                <!-- ############# FIN RESULTADOS HUMEDAD Y LIMITE ############### -->
+                <table class="table tabla-footer letrainforme" >
+                  <tr>
+                    <td> 
+                     <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                       <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                         <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                           <?php echo $firmas->imagenFirma; ?>
+                         <?php endif; ?>
+                       <?php endforeach; ?>
+                     <?php endif; ?>" alt="firma ingeniero" height="100px" width="100px"> 
+                     <br>
+                     <span class="lineafirma"></span>
+                     <br>
+                     <span>
+                     <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                       <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                         <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                           <?php echo $firmas->persona; ?>
+                         <?php endif; ?>
+                       <?php endforeach; ?>
+                     <?php endif; ?>
+                     </span>
+                     <br>
+                     <span class="title">
+                     <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                       <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                         <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                           <?php echo $firmas->tarjetaProfesional; ?>
+                         <?php endif; ?>
+                       <?php endforeach; ?>
+                     <?php endif; ?>
+                     </span>
+                    </td>
+                    <td>
+                      <p>Resultados</p>
+                  <table class="table  resultados letratest">
                     <thead>
                       <tr>
                         <th>Humedad natural %</th>
@@ -944,14 +985,13 @@
                       </tr>
                     </tbody>
                   </table>
+                      <span class="pull-right paginador ">Pagina <?php echo $pagina; ?></span>
 
-
-                                  
-                  
-       
+                    </td>
+                  </tr>
+                </table>
                 </form>
-                <!-- ############# FIN RESULTADOS HUMEDAD Y LIMITE ############### -->
-              <span class="paginadorLimites">Pagina <?php echo $pagina; ?></span>
+
               </div>
               <?php $i++;?>
               <?php $pagina++;?>   
@@ -1002,12 +1042,36 @@
               
 
 
-              <div class="text-center divCompresion" id="compresion<?php echo $i; ?>">
+              <div class="text-center contenedor" id="compresion<?php echo $i; ?>">
+
+                <table class="table tabla-headers">
+                  <tbody>
+                    <tr>
+                      <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
+                      <td colspan="4" class="title">
+                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="title">Proyecto:</td>
+                      <td><?php echo $proyectos->nombre_proyecto; ?></td>
+                      <td class="title">Fecha:</td>
+                      <td><?php echo $proyectos->fecha; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="title">Codigo:</td>
+                      <td><?php echo $proyectos->codigo_proyecto; ?></td>
+                      <td class="title">Lugar:</td>
+                      <td><?php echo $proyectos->lugar; ?></td>
+                    </tr>
+                  </tbody>
+                </table>
+
                 <!-- #############  MEDIDAS DE LA MUESTRA ############### -->
                 <p>Compresión - Medidas de la muestra - Muestra <?php echo $i; ?></p>
                 <form class="compresion<?php echo $i; ?> formResultadosCompresion" action="save.php" method="post" accept-charset="utf-8">
                   <input name="fk_idmuestra" type="hidden" value="<?php echo $datoMuestra->id_muestra; ?>">
-                  <table class="table  tablacompresion ">
+                  <table class="table  tablacompresion letratest tabla-informes ">
                     <thead>
                       <tr>
                         <th>Diametro (cm)</th>
@@ -1052,7 +1116,7 @@
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA ############### -->
                   <!-- #############  TABLA DE COMPRESIÓN ############### -->
                   <p>Tabla de deformación - Muestra <?php echo $i; ?></p>
-                  <table class="table  tabladeformacion">
+                  <table class="table  tabladeformacion letratest tabla-informes">
                     <thead>
                       <tr>
                         <th>Deformación(Pulg3)</th>
@@ -1144,65 +1208,114 @@
                     }
                     ?>
                   <input id="datosgraficacompresion<?php echo $i; ?>" class="datosgraficaCompresion"  type="hidden" value="<?php echo $datos?>">
-                  <div id="graficacompresion<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+                  <div id="graficacompresion<?php echo $i; ?>" style=" width:50%; height: 300px; display: inline-block;"></div>
                   <?php 
                     unset($gdt);
                     unset($ge);
                     unset($datos);
                     ?>
                   <!-- ############# FIN GRAFICA DE COMPRESIÓN ############### -->
-                  <!-- ############# RESULTADOS ############### -->
-                  <p>Resultados</p>
-                  <table class="table  resultadoscompresion">
-                    <thead>
-                      <tr>
-                        <th> Diametro cm</th>
-                        <th> Altura cm</th>
-                        <th> Peso</th>
-                        <th> Tipo de falla</th>
-                        <th> Area</th>
-                        <th> Volumen</th>
-                        <th> Peso unitario</th>
-                        <th> Cohesión</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td> <?php echo $DatosCompresion->diametro; ?> </td>
-                        <td>  <?php echo $DatosCompresion->altura; ?> </td>
-                        <td> <?php echo $DatosCompresion->peso; ?></td>
-                        <td> <?php echo $DatosCompresion->tipoFalla; ?> </td>
-                        <td> <?php echo round($area,2); ?> </td>
-                        <td> <?php echo round($volumen,2); ?> </td>
-                        <td> <?php  
-                          if($DatosCompresion->peso!=0){
-                                $pesoUnitario=($DatosCompresion->peso/ $volumen)*10;
-                                $pesoUnitarioFinal=round($pesoUnitario,2);
-                                echo $pesoUnitarioFinal; 
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php if($mayoresfuerzo!=null):?>
-                          <?php sort($mayoresfuerzo);?>
-                          <?php endif;?>
-                          <?php
-                            $posicion=count($mayoresfuerzo); 
-                            if($mayoresfuerzo[$posicion-1]!=0){
-                            
-                               $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;
-                                 
-                                 if($posicion==9){
-                                  $cohesionFinal= round($cohesion,2);
-                                  echo $cohesionFinal;  
-                                   unset($mayoresfuerzo);
-                                 }
-                            }
-                            ?>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  
+
+
+                <table class="table tabla-footer letrainforme" >
+                  <tr>
+                    <td> 
+                     <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                       <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                         <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                           <?php echo $firmas->imagenFirma; ?>
+                         <?php endif; ?>
+                       <?php endforeach; ?>
+                     <?php endif; ?>" alt="firma ingeniero" height="100px" width="100px"> 
+                     <br>
+                     <span class="lineafirma"></span>
+                     <br>
+                     <span>
+                     <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                       <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                         <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                           <?php echo $firmas->persona; ?>
+                         <?php endif; ?>
+                       <?php endforeach; ?>
+                     <?php endif; ?>
+                     </span>
+                     <br>
+                     <span class="title">
+                     <?php if ( count( $ListaFirmas ) > 0 ) : ?>
+                       <?php foreach ( $ListaFirmas as $firmas ) : ?>
+                         <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
+                           <?php echo $firmas->tarjetaProfesional; ?>
+                         <?php endif; ?>
+                       <?php endforeach; ?>
+                     <?php endif; ?>
+                     </span>
+                    </td>
+                    <td>
+                          <!-- ############# RESULTADOS ############### -->
+                      <p>Resultados</p>
+                      <table class="table  resultadoscompresion letratest">
+                        <thead>
+                          <tr>
+                            <th> Diametro cm</th>
+                            <th> Altura cm</th>
+                            <th> Peso</th>
+                            <th> Tipo de falla</th>
+                            <th> Area</th>
+                            <th> Volumen</th>
+                            <th> Peso unitario</th>
+                            <th> Cohesión</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td> <?php echo $DatosCompresion->diametro; ?> </td>
+                            <td>  <?php echo $DatosCompresion->altura; ?> </td>
+                            <td> <?php echo $DatosCompresion->peso; ?></td>
+                            <td> <?php echo $DatosCompresion->tipoFalla; ?> </td>
+                            <td> <?php echo round($area,2); ?> </td>
+                            <td> <?php echo round($volumen,2); ?> </td>
+                            <td> <?php  
+                              if($DatosCompresion->peso!=0){
+                                    $pesoUnitario=($DatosCompresion->peso/ $volumen)*10;
+                                    $pesoUnitarioFinal=round($pesoUnitario,2);
+                                    echo $pesoUnitarioFinal; 
+                              }
+                              ?>
+                            </td>
+                            <td>
+                              <?php if($mayoresfuerzo!=null):?>
+                              <?php sort($mayoresfuerzo);?>
+                              <?php endif;?>
+                              <?php
+                                $posicion=count($mayoresfuerzo); 
+                                if($mayoresfuerzo[$posicion-1]!=0){
+                                
+                                   $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;
+                                     
+                                     if($posicion==9){
+                                      $cohesionFinal= round($cohesion,2);
+                                      echo $cohesionFinal;  
+                                       unset($mayoresfuerzo);
+                                     }
+                                }
+                                ?>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+          
+
+                    <span class="pull-right paginador ">Pagina <?php echo $pagina; ?></span>
+                    </td>
+                  </tr>
+                </table>
+
+
+                  
+
+
+
                   <input name="pesoUnitarioFinal" class="pesoUnitarioFinal" type="hidden" value="<?php echo $pesoUnitarioFinal; ?>">
                   <input name="cohesionFinal" Class="cohesionFinal" type="hidden" value="<?php echo $cohesionFinal; ?>">
                 </form>
@@ -1231,8 +1344,6 @@
 <!--############# COMPRESION ################################################################################################### -->
 
 
-
-
 <!--############# GRANULOMETRIA ################################################################################################### -->
 <!--############# GRANULOMETRIA ################################################################################################### -->
 <!--############# GRANULOMETRIA ################################################################################################### -->
@@ -1244,7 +1355,12 @@
 <!--############# GRANULOMETRIA ################################################################################################### -->
 <!--############# GRANULOMETRIA ################################################################################################### -->
         <?php if ( $_GET['boxGran']==1) : ?>
+       
+
+
         <div  id="Granulometria">
+
+
           <!-- ############# tabs de muestras internas GRANULOMETRIA ############### -->  
               <?php if( count($muestrasSondeo) > 0 ): ?>
               <?php $i = 1; ?>
@@ -1252,14 +1368,37 @@
               <?php $DatosGranulometria = $datosGranulometria->getDatoGranulometria( $datoMuestra->id_muestra );  ?>
               <?php $resultado= $resultadosClass->getResultado($datoMuestra->id_muestra); ?>
               
-              <div class="text-center divGranulometria" id="granulometria<?php echo $i; ?>">
+              <div class="text-center contenedor-granulometria" id="granulometria<?php echo $i; ?>">
+                
+                <table class="table tabla-granulo">
+                  <tbody>
+                    <tr>
+                      <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
+                      <td colspan="4" class="title">
+                          Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="title">Proyecto:</td>
+                      <td><?php echo $proyectos->nombre_proyecto; ?></td>
+                      <td class="title">Fecha:</td>
+                      <td><?php echo $proyectos->fecha; ?></td>
+                    </tr>
+                    <tr>
+                      <td class="title">Codigo:</td>
+                      <td><?php echo $proyectos->codigo_proyecto; ?></td>
+                      <td class="title">Lugar:</td>
+                      <td><?php echo $proyectos->lugar; ?></td>
+                    </tr>
+                  </tbody>
+                </table>
                 <!-- #############  MEDIDAS DE LA MUESTRA GRANULOMETRIA############### -->
                 <p> Analisis granulometrico - Muestra <?php echo $i; ?></p>
                 <form class="granulometria<?php echo $i; ?> resultadosGranulometria" action="save.php" method="post" accept-charset="utf-8">
                   <input type="hidden" name="func" value="granulometria">
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
                   <input type="hidden" name="idgranulometria" value="<?php echo $DatosGranulometria->id_granulometria ?>">
-                  <table class="table  tablaanalisis">
+                  <table class="table">
                     <thead>
                       <tr>
                         <th>Peso recipiente gr</th>
@@ -1300,7 +1439,7 @@
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA GRANULOMETRIA ############### -->
                   <!-- #############  TABLA DE GRANULOMETRIA ############### -->
                   <p>Tabla de granulometria - Muestra <?php echo $i; ?></p>
-                  <table class="table  tablapesos">
+                  <table class="table">
                     <thead>
                       <tr>
                         <th>Tamiz</th>
@@ -1435,7 +1574,7 @@
                     }
                     ?>
                   <input id="datosgraficagranulometria<?php echo $i; ?>" class="datosgraficaGranulometria"  type="hidden" value="<?php  echo $datos; ?>">
-                  <div id="graficagranulometria<?php echo $i; ?>" style=" widht:600px; height: 400px;"></div>
+                  <div id="graficagranulometria<?php echo $i; ?>" class="graficaGranulo" ></div>
                   <!-- ############# FIN GRAFICA DE GRANULOMETRIA ############### -->
                   <!-- ############# RESULTADOS ############### -->
                   <?php 
@@ -1445,7 +1584,7 @@
                     ?>
                   
                   <p>Resultados</p>
-                  <table class="table  tablaResultadosGranulometria">
+                  <table class="table ">
                     <thead>
                       <tr>
                         <th> Tamiz N°4</th>
@@ -2175,6 +2314,8 @@
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
               <span class="paginadorGranulometria">Pagina <?php echo $pagina; ?></span>
+              
+
               </div>
               <?php $i++; ?>
               <?php $pagina++; ?>
@@ -2218,7 +2359,10 @@
 <!--############# INFORME ################################################################################################### -->
 <!--############# INFORME ################################################################################################### -->        
         <!-- ############# INFORME DE ESTRATIGRAFIA ############### -->
-        <div  id="Informe" class="divInforme">
+
+
+                 
+        <div  id="Informe" class="divInforme contenedor">
           
           
           <p class="text-center">Informe de estratigrafia</p>
@@ -2292,14 +2436,154 @@
                   <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
                 </td>
               </tr>
+              <!-- Repeditos  -->
+              <tr>
+                <td> <?php echo $i; ?>  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?>  </td>
+                <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                </td>
+                
+                <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
+                <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
+                <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
+                <td> <?php echo $resultado->humedad; ?> </td>
+                <td> <?php echo $resultado->limiteLiquido; ?></td>
+                <td> <?php echo $resultado->indicePlasticidad; ?> </td>
+                <td> <?php echo $resultado->notacionSucs; ?> </td>
+                <td> <?php echo $resultado->aashto; ?> </td>
+                <td> 
+                  <span class="ninguna">N° 4 = <?php echo $resultado->N4; ?>% 
+                  </span>
+                  <span class="ninguna">N° 10 = <?php echo $resultado->N10; ?>% 
+                  </span>
+                  <span class="ninguna">N° 40 = <?php echo $resultado->N40; ?>% 
+                  </span>
+                  <span class="ninguna">N° 200 = <?php echo $resultado->N200; ?>% 
+                  </span>
+                </td>
+                <td>
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
+                </td>
+              </tr>
+              <tr>
+                <td> <?php echo $i; ?>  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?>  </td>
+                <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                </td>
+                
+                <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
+                <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
+                <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
+                <td> <?php echo $resultado->humedad; ?> </td>
+                <td> <?php echo $resultado->limiteLiquido; ?></td>
+                <td> <?php echo $resultado->indicePlasticidad; ?> </td>
+                <td> <?php echo $resultado->notacionSucs; ?> </td>
+                <td> <?php echo $resultado->aashto; ?> </td>
+                <td> 
+                  <span class="ninguna">N° 4 = <?php echo $resultado->N4; ?>% 
+                  </span>
+                  <span class="ninguna">N° 10 = <?php echo $resultado->N10; ?>% 
+                  </span>
+                  <span class="ninguna">N° 40 = <?php echo $resultado->N40; ?>% 
+                  </span>
+                  <span class="ninguna">N° 200 = <?php echo $resultado->N200; ?>% 
+                  </span>
+                </td>
+                <td>
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
+                </td>
+              </tr>
+              <tr>
+                <td> <?php echo $i; ?>  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?>  </td>
+                <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                </td>
+                
+                <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
+                <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
+                <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
+                <td> <?php echo $resultado->humedad; ?> </td>
+                <td> <?php echo $resultado->limiteLiquido; ?></td>
+                <td> <?php echo $resultado->indicePlasticidad; ?> </td>
+                <td> <?php echo $resultado->notacionSucs; ?> </td>
+                <td> <?php echo $resultado->aashto; ?> </td>
+                <td> 
+                  <span class="ninguna">N° 4 = <?php echo $resultado->N4; ?>% 
+                  </span>
+                  <span class="ninguna">N° 10 = <?php echo $resultado->N10; ?>% 
+                  </span>
+                  <span class="ninguna">N° 40 = <?php echo $resultado->N40; ?>% 
+                  </span>
+                  <span class="ninguna">N° 200 = <?php echo $resultado->N200; ?>% 
+                  </span>
+                </td>
+                <td>
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
+                </td>
+              </tr>
+              <tr>
+                <td> <?php echo $i; ?>  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?>  </td>
+                <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                </td>
+                
+                <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
+                <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
+                <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
+                <td> <?php echo $resultado->humedad; ?> </td>
+                <td> <?php echo $resultado->limiteLiquido; ?></td>
+                <td> <?php echo $resultado->indicePlasticidad; ?> </td>
+                <td> <?php echo $resultado->notacionSucs; ?> </td>
+                <td> <?php echo $resultado->aashto; ?> </td>
+                <td> 
+                  <span class="ninguna">N° 4 = <?php echo $resultado->N4; ?>% 
+                  </span>
+                  <span class="ninguna">N° 10 = <?php echo $resultado->N10; ?>% 
+                  </span>
+                  <span class="ninguna">N° 40 = <?php echo $resultado->N40; ?>% 
+                  </span>
+                  <span class="ninguna">N° 200 = <?php echo $resultado->N200; ?>% 
+                  </span>
+                </td>
+                <td>
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
+                </td>
+              </tr>
+              <tr>
+                <td> <?php echo $i; ?>  <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?>  </td>
+                <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
+                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                </td>
+                
+                <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
+                <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
+                <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
+                <td> <?php echo $resultado->humedad; ?> </td>
+                <td> <?php echo $resultado->limiteLiquido; ?></td>
+                <td> <?php echo $resultado->indicePlasticidad; ?> </td>
+                <td> <?php echo $resultado->notacionSucs; ?> </td>
+                <td> <?php echo $resultado->aashto; ?> </td>
+                <td> 
+                  <span class="ninguna">N° 4 = <?php echo $resultado->N4; ?>% 
+                  </span>
+                  <span class="ninguna">N° 10 = <?php echo $resultado->N10; ?>% 
+                  </span>
+                  <span class="ninguna">N° 40 = <?php echo $resultado->N40; ?>% 
+                  </span>
+                  <span class="ninguna">N° 200 = <?php echo $resultado->N200; ?>% 
+                  </span>
+                </td>
+                <td>
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } ?>  <?php echo $resultado->descripcionSucs; ?> 
+                </td>
+              </tr>
+
               <?php $i++; ?>
               <?php endforeach; ?>
             </tbody>
           </table>
           <h5 > <img src="assets/img/nivelfreatico.png" alt="nivel freatico" width="30px" height="30px" > Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
-          <!-- ############# FIN INFORME DE ESTRATIGRAFIA ############### -->
-
-          <!-- ############# fin tabs de muestras internas estratigrafia ############### --> 
+        
           <table class="table firmas">
             <tr>
                 <td> 
@@ -2371,6 +2655,8 @@
           </table>
           <span class="paginadorInforme">Pagina <?php echo $pagina; ?></span>
         </div>
+        
+
 <!--############# INFORME ################################################################################################### -->
 <!--############# INFORME ################################################################################################### -->
 <!--############# INFORME ################################################################################################### -->
@@ -2678,9 +2964,5 @@
       <?php endif ?>
       });
     </script>
-    <script src="assets/js/alertify/alertify.js"></script>
-
-
-    
   </body>
 </html>

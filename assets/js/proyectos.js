@@ -24,6 +24,7 @@ var acciones = {
 				setTimeout(function() {
 					$("#exito").addClass("hide");
 					location.reload();
+
 				}, 3000);
 				$(".limpiar").val('');
 			} else {
@@ -31,7 +32,6 @@ var acciones = {
 				$('#error').removeClass('hide'); 
 				alertify.set({ delay: 10000 });
 				alertify.error(" <strong> Upss! Hubo un error. </strong> <br> Rectifica los datos y Ten en cuenta : <br> -Campos obligatorios : Codigo, nombre y Fecha. <br> -Codigo del proyecto repetido.");
-
 				setTimeout(function() {
 					$("#error").addClass("hide");
 				}, 3000);
