@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  @session_start();
   require_once('seguridad.php');
   require_once('includes/proyectos.php');
   require_once('includes/sondeos.php');
