@@ -405,10 +405,10 @@
             $testlimites= $testLimitesClass->getLimitesMuestra($id_muestra);
             foreach( $testlimites as $Listatest ):
               //TODOS LOS RANDOM 
-                $RandomPesoCapsula=rand(0.5, 1);
-                $RandomPesoCapsulaSueloHumedo=rand(0.5, 1);
-                $RandomPesoCapsulaSueloSeco=rand(0.5, 1);
-                $RandomNumGolpes=rand(0, 10);
+                $RandomPesoCapsula=rand(0.1, 0.2);
+                $RandomPesoCapsulaSueloHumedo=rand(0.3, 0.4);
+                $RandomPesoCapsulaSueloSeco=rand(0.2, 0.4);
+                $RandomNumGolpes=rand(0, 2);
               //FIN DE LOS RANDOM 
                 //INCREMENTO  Y SUMA DE LOS RANDOM EN HUMEDAD
                 $peso_capsula=$Listatest->peso_capsula+$RandomPesoCapsula;

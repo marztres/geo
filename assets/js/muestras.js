@@ -1020,11 +1020,9 @@ var acciones = {
     } else {
       resultadoCohesion.text(cohesionVar.toFixed(2));
     }
-    if(isNaN(tipoFalla) || tipoFalla<0 ){
-      resultadoTipoFalla.text(0);
-    } else {
-      resultadoTipoFalla.text(tipoFalla.val());
-    }
+    
+    resultadoTipoFalla.text(tipoFalla.val());
+    
     if(isNaN(areaVar) || areaVar<0 ){
       resultadoArea.text(0);
     } else {
