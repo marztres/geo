@@ -543,7 +543,7 @@
                           $temp->porcentaje2 = $porcentajeLiquido2;
                           ?>
                         <tr>
-                          <td></td>
+                          <td>3</td>
                           <td>
                             <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][5]->nom_capsula; ?>">
                           </td>
@@ -2408,7 +2408,7 @@
               <input type='text' name='nivel_freatico' value="<?php echo $datos_sondeo->nivel_freatico;?>" placeholder='Nivel freatico ' class="input-block-level limpiar required" autofocus >
             </div>
             <div class="row-fluid">
-              <select name='tipo_superficie' id='idSuperficie' class="span8"  >
+              <select name='tipo_superficie' id='idSuperficie' class="input-block-level"  >
                 <?php if(count($tipo_superficie) > 0): ?>
                   <?php foreach( $tipo_superficie as $tipo ): ?>
                    <?php if ( $datos_sondeo->tipo_superficie==$tipo->tipo_superficie ) : ?>   
@@ -2420,14 +2420,18 @@
                   <?php endforeach; ?>
                 <?php endif; ?>
               </select >
-              
 
               <?php if ( $datos_sondeo->tipo_superficie=='Ninguna' ) : ?>
-                <input type='text' name='Profundidad' id="profundidadSuperficie" value="0" readonly placeholder='Profundidad' class="span4" >
+                <div class="input-append">
+                  <input type='text' name='Profundidad' id="profundidadSuperficie" value="0" readonly placeholder='Profundidad' class="input-block-level" >
+                  <span class="add-on">metros</span>
+                </div>
               <?php else: ?>
-              <input type='text' name='Profundidad' id="profundidadSuperficie" value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="span4" > 
+                <div class="input-append">
+                  <input type='text' name='Profundidad' id="profundidadSuperficie" value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="input-block-level" > 
+                  <span class="add-on">metros</span>
+                </div>
               <?php endif; ?>
-
 
               <input type='hidden' name='func' value="ModificarSondeo"  class="span4" > 
               <input type='hidden' name='id_sondeo' value="<?php echo $datos_sondeo->id_sondeo;?>"  class="span4" > 
@@ -2463,10 +2467,22 @@
             <div class="controls inputs">
               <input type='text' name='descripcion_muestra' placeholder='Descripción' class="input-block-level limpiar" required autofocus >
             </div>
-            <div class="row-fluid">
+            <div class="row-fluid ">
               <span class="span3 title tituloprofundidad">Profundidad :</span>
-              <input type='text' name='profundidad_inicial' placeholder='Desde' class="span3 " >   
-              <input type='text' name='profundidad_final' placeholder='Hasta' class="span3 " >   
+
+                
+                <div class="row-fluid">
+                  <div class="input-append">
+                    <input type='text' name='profundidad_inicial' placeholder='Desde' class="span6" >     
+                    <span class="add-on">cm</span>
+                  </div>
+                  <div class="input-append">
+                    <input type='text' name='profundidad_final' placeholder='Hasta' class="span6 " >     
+                    <span class="add-on">cm</span>
+                  </div>
+                </div>
+
+              
             </div>
             <div class="controls inputs">
               <input type='text' name='numero_de_golpes' placeholder='Numero de golpes' class="input-block-level limpiar " >

@@ -2258,7 +2258,7 @@ var acciones = {
           }
 
         } else if(IndicePlasticidadVar<LineaA){
-          console.log("IP menos que 4 y es menor que la linea A");
+          console.log("IP menor que la linea A");
           notacionSucs="MH";
           console.log("Notacion asignada "+notacionSucs);
 

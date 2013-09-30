@@ -343,7 +343,7 @@
               <input name='nivelFreatico' type='text' placeholder='Nivel freatico' class="input-block-level limpiar required" autofocus >
             </div>
             <div class="row-fluid">
-              <select name='tipoSuperficie' id='lista_superficie' class="span8">
+              <select name='tipoSuperficie' id='lista_superficie' class="input-block-level">
                 <option >Seleccione el tipo de superficie</option>
                 <?php if(count($tipo_superficie) > 0): ?>
                 <?php foreach( $tipo_superficie as $tipo ): ?>
@@ -351,7 +351,11 @@
                 <?php endforeach; ?>
                 <?php endif; ?>
               </select>
-              <input name='profundidadSuperficie' id="profundidadSuperficie" type='text'  placeholder='Profundidad' class="span4" readonly="readonly"> 
+              <div class="input-append">
+                <input name='profundidadSuperficie' id="profundidadSuperficie" type='text'  placeholder='Profundidad' class="input-block-level" readonly="readonly"> 
+                <span class="add-on">metros</span>
+              </div>
+
               <input name='idProyecto' type='hidden'  value="<?php echo $proyectos->id_proyecto; ?>">  
               <input name='func' type='hidden'  value="addSondeo" >
             </div>
