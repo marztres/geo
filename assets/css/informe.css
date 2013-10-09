@@ -95,16 +95,17 @@ p {
 }
 
 .contenedor {
-	/* border-top: 1px dotted white;
+	border-top: 1px dotted white;
 	border-left: 1px dotted white;
 	border-right: 1px dotted white;
-	border-bottom: 1px dotted white;*/
+	border-bottom: 1px dotted white;
 
+	/*
 	border-top: 1px dotted red;
 	border-left: 1px dotted #CCC;
 	border-right: 1px dotted #CCC;
 	border-bottom: 1px dotted blue;
-
+	*/
 	height: 1526px;
 	overflow: hidden;
 

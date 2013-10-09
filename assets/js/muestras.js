@@ -761,7 +761,8 @@ var acciones = {
       pesoGr = tdCompresion.eq(2).find("input"),
       tipoFalla = tdCompresion.eq(3).find("input"),
       area = tdCompresion.eq(4),
-      volumen = tdCompresion.eq(5);
+      volumen = tdCompresion.eq(5),
+      cohesionVisible = tdCompresion.eq(6);
 
     //variables con resultados
     diametroVar = parseFloat(diametro.val());
@@ -1040,8 +1041,10 @@ var acciones = {
     }
     if(isNaN(cohesionVar) || cohesionVar<0 ){
       resultadoCohesion.text(0);
+      cohesionVisible.text(0);
     } else {
       resultadoCohesion.text(cohesionVar.toFixed(2));
+      cohesionVisible.text(cohesionVar.toFixed(2))
     }
     
     //asignacion de variables a inputs resultados
@@ -1049,6 +1052,7 @@ var acciones = {
       InputCohesionFinal.val(0);  
     } else {
       InputCohesionFinal.val(cohesionVar.toFixed(2));
+
     }
     if(isNaN(pesoUnitarioVar) || pesoUnitarioVar<0 ){
       InputPesoUnitarioFinal.val(0);

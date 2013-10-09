@@ -997,6 +997,7 @@
                         <th>Tipo de falla</th>
                         <th>Area (cm2)</th>
                         <th>Volumen (cm3)</th>
+                        <th> Cohesión </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1026,6 +1027,9 @@
                           <?php $volumen=$area * $DatosCompresion->altura; 
                             echo number_format($volumen,2);
                             ?>
+                        </td>
+                        <td>
+                          -
                         </td>
                       </tr>
                     </tbody>
