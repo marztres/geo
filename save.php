@@ -405,37 +405,38 @@
             $testlimites= $testLimitesClass->getLimitesMuestra($id_muestra);
             foreach( $testlimites as $Listatest ):
               //TODOS LOS RANDOM 
-                $RandomPesoCapsula=rand(0.1, 0.2);
-                $RandomPesoCapsulaSueloHumedo=rand(0.3, 0.4);
-                $RandomPesoCapsulaSueloSeco=rand(0.2, 0.4);
-                $RandomNumGolpes=rand(0, 2);
+                
+                $RandomPesoCapsula=rand(50, 80);
+                $RandomPesoCapsulaSueloHumedo=rand(50, 80);
+                $RandomPesoCapsulaSueloSeco=rand(50, 80);
+                $RandomNumGolpes=rand(50, 80);
               //FIN DE LOS RANDOM 
                 //INCREMENTO  Y SUMA DE LOS RANDOM EN HUMEDAD
-                $peso_capsula=$Listatest->peso_capsula+$RandomPesoCapsula;
-                $peso_capsula_suelo_humedo=$Listatest->peso_capsula_suelo_humedo+$RandomPesoCapsulaSueloHumedo;
-                $peso_capsula_suelo_seco=$Listatest->peso_capsula_suelo_seco+$RandomPesoCapsulaSueloSeco;
-                $num_golpes=$Listatest->num_golpes+$RandomNumGolpes;
+                $peso_capsula=$Listatest->peso_capsula+'0.'.$RandomPesoCapsula;
+                $peso_capsula_suelo_humedo=$Listatest->peso_capsula_suelo_humedo+'0.'.$RandomPesoCapsulaSueloHumedo;
+                $peso_capsula_suelo_seco=$Listatest->peso_capsula_suelo_seco+'0.'.$RandomPesoCapsulaSueloSeco;
+                $num_golpes=$Listatest->num_golpes+'0.'.$RandomNumGolpes;
               // FIN INCREMENTO  Y SUMA DE LOS RANDOM 
                 $testLimitesClass->addTest($Listatest->tipo_muestra, $Listatest->nom_capsula,$peso_capsula, $peso_capsula_suelo_humedo, $peso_capsula_suelo_seco, $num_golpes, $idMuestra);
             endforeach;
                 
                 $Compresion=$testCompresionClass->GetDatosCompresion($id_muestra);
                 // RANDOM EN COMPRESION
-                $RandomDiametro=rand(0.2, 1);
-                $RandomAltura=rand(0.2, 1);
-                $RandomPeso=rand(0.2, 1);
-                $Diametro=$Compresion->diametro+$RandomDiametro;
-                $Altura=$Compresion->altura+$RandomAltura;
-                $Peso=$Compresion->peso+$RandomPeso;
+                $RandomDiametro=rand(50,80);
+                $RandomAltura=rand(50, 80);
+                $RandomPeso=rand(50, 80);
+                $Diametro=$Compresion->diametro+'0.'.$RandomDiametro;
+                $Altura=$Compresion->altura+'0.'.$RandomAltura;
+                $Peso=$Compresion->peso+'0.'.$RandomPeso;
               // FIN COMPRESION
                 $testCompresionClass->addCompresion(0,$Diametro, $Altura, $Peso,$Compresion->tipoFalla,$idMuestra);
                 $idCompresion=$testCompresionClass->insert_id;
                 $deformaciones=$testCompresionClass->GetDatosDeformaciones($Compresion->id_compresion);
             foreach( $deformaciones as $ListaDeformaciones ):
               // RANDOM DEFORMACIONES
-                $RandomCarga=rand(0.2, 1);
+                $RandomCarga=rand(50, 80);
                 if($ListaDeformaciones->carga!=0){
-                  $Carga=$ListaDeformaciones->carga+$RandomCarga;
+                  $Carga=$ListaDeformaciones->carga+'0.'.$RandomCarga;
                 }
                 else{
                   $Carga=0;
@@ -445,19 +446,19 @@
             endforeach;       
             $consultaGranulometria=$granulometriaClass->getDatoGranulometria($id_muestra);
               // RANDOM GRANULOMETRIA
-                $RandomPesoRecipiente=rand(0.2,2);
-                $RandomPesoRecipienteMasMuestra=rand(0.2,2);
-                $pesoRecipiente=$consultaGranulometria->pesoRecipiente+$RandomPesoRecipiente;
-                $pesoRecipienteMasMuestra=$consultaGranulometria->pesoRecipienteMasMuestra+$RandomPesoRecipienteMasMuestra;
+                $RandomPesoRecipiente=rand(50,80);
+                $RandomPesoRecipienteMasMuestra=rand(50,80);
+                $pesoRecipiente=$consultaGranulometria->pesoRecipiente+'0.'.$RandomPesoRecipiente;
+                $pesoRecipienteMasMuestra=$consultaGranulometria->pesoRecipienteMasMuestra+'0.'.$RandomPesoRecipienteMasMuestra;
               // FIN RANDOM GRANULOMETRIA
             $granulometriaClass->addGranulometria($pesoRecipiente, $pesoRecipienteMasMuestra, $idMuestra);
             $idGranulometria= $granulometriaClass->insert_id;
             $PesosRetenidos=$pesosRetenidoClass->getDatoPesosRetenidos( $consultaGranulometria->id_granulometria );
             foreach( $PesosRetenidos as $ListaPesosRetenidos ):
               //RANDOM PESOS RETENIDOS
-                $RandompesoRetenido=rand(0.2,2);
+                $RandompesoRetenido=rand(50,80);
                 if($ListaPesosRetenidos->pesoRetenido!=0){
-                  $pesoRetenido=$ListaPesosRetenidos->pesoRetenido+$RandompesoRetenido;
+                  $pesoRetenido=$ListaPesosRetenidos->pesoRetenido+'0.'.$RandompesoRetenido;
                 }
                 else{
                   $pesoRetenido=0;  

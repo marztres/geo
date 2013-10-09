@@ -32,16 +32,9 @@
 
 	font-weight: bold;  
 }
-
-
-.info_sondeos label:first-child {
-
-	padding-left: 10px;
-}
 .info_sondeos {
 
 	border-bottom: 2px solid #CCC;
-	margin-bottom: 10px;
 }
 .tituloprofundidad {
 	margin-top: 5px;
@@ -94,6 +87,10 @@
 
 .btnInforme {
 	color:  white;
+}
+
+.Addinput{
+	width: 80%;
 }
 
 

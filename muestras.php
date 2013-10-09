@@ -139,17 +139,50 @@
       <!-- ############# FIN NAVEGACION SUPERIOR ############### -->
       <!-- #############  DATOS DE SONDEO ############### -->   
       <div class="info_sondeos">
-        <div class="row-fluid">
-          <label for="nombre_proyecto_label" class="span2 title">Nivel freatico:</label>
-          <label for="nombre_proyecto" class="span1"><?php echo $datos_sondeo->nivel_freatico; ?></label>
-          <label for="codigo_proyecto_label" class="span1 title">Superficie:</label>
-          <label for="codigo_proyecto" class="span2"><?php echo $datos_sondeo ->tipo_superficie; ?> </label>
-          <label for="fecha_proyecto_label" class="span3 title">Profundidad superficie:</label>
-          <label for="fecha_proyecto_label" class="span1"><?php echo $datos_sondeo ->profundidad_superficie; ?></label>
-          <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
-            <a href="#modificarsondeo" role="button" data-toggle="modal" class=" span2"> <i class="icon-edit"></i> Modificar datos</a>
-          <?php endif ?>
-        </div>
+        <!-- #############  
+          <div class="row-fluid">
+            <label for="nombre_proyecto_label" class="span2 title">Nivel freatico:</label>
+            <label for="nombre_proyecto" class="span1"><?php echo $datos_sondeo->nivel_freatico; ?></label>
+            <label for="codigo_proyecto_label" class="span1 title">Superficie:</label>
+            <label for="codigo_proyecto" class="span2"><?php echo $datos_sondeo ->tipo_superficie; ?> </label>
+            <label for="fecha_proyecto_label" class="span3 title">Profundidad superficie:</label>
+            <label for="fecha_proyecto_label" class="span1"><?php echo $datos_sondeo ->profundidad_superficie; ?></label>
+            <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+              <a href="#modificarsondeo" role="button" data-toggle="modal" class=" span2"> <i class="icon-edit"></i> Modificar datos</a>
+            <?php endif ?>
+          </div>
+        ############### -->
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <label for="nombre_proyecto_label" class="title">Nivel freatico:</label>
+              </td>
+              <td>
+                <label for="nombre_proyecto" ><?php echo $datos_sondeo->nivel_freatico; ?></label>
+              </td>
+              <td>
+                <label for="codigo_proyecto_label" class="title">Superficie:</label>
+              </td>
+              <td>
+                <label for="codigo_proyecto" ><?php echo $datos_sondeo ->tipo_superficie; ?> </label>
+              </td>
+              <td>
+                <label for="fecha_proyecto_label" class="span3 title">Profundidad superficie:</label>
+              </td>
+              <td>
+                <label for="fecha_proyecto_label" ><?php echo $datos_sondeo ->profundidad_superficie; ?></label>
+              </td>
+              <?php if ( $data['tipo']=='Administrador' || $data['tipo']=='Ingeniero') : ?>
+                <td>
+                  <a href="#modificarsondeo" role="button" data-toggle="modal"> <i class="icon-edit"></i> Modificar datos</a>
+                </td>
+              <?php endif ?> 
+            </tr>
+          </tbody>
+        </table>
+      
+
       </div>
       <!-- ############# FIN DATOS DE SONDEO ############### -->
       <!-- #############  TAB EXTERIORES  ############### -->
@@ -298,12 +331,12 @@
                         <tr>
                           <th>Prueba #</th>
                           <th>Capsula #</th>
-                          <th>Peso capsula gr.</th>
-                          <th>Peso capsula + Suelo humedo gr.</th>
-                          <th>Peso capsula + Suelo seco gr.</th>
-                          <th>Peso del suelo gr.</th>
-                          <th>Peso del agua gr.</th>
-                          <th>Contenido agua (W) %</th>
+                          <th>Peso capsula (gr)</th>
+                          <th>Peso capsula + Suelo humedo (gr)</th>
+                          <th>Peso capsula + Suelo seco (gr)</th>
+                          <th>Peso del suelo (gr)</th>
+                          <th>Peso del agua (gr)</th>
+                          <th>Contenido agua (W)%</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -313,20 +346,20 @@
                             <input name="humedadCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][0]->nom_capsula; ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoCapsular[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][0]->peso_capsula; ?>">
+                            <input name="humedadPesoCapsular[]" class="input-mini limites" type="text" value="<?php if ($TestLimitesMuestra[$i-1][0]->peso_capsula){echo number_format($TestLimitesMuestra[$i-1][0]->peso_capsula,2);}  ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoSueloHumedo[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo; ?>">
+                            <input name="humedadPesoSueloHumedo[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo){echo number_format($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo,2); }?>">
                           </td>
                           <td>
-                            <input name="humedadPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco; ?>">
+                            <input name="humedadPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco){echo number_format($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco,2); } ?>">
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][0]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][0]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php 
                               if($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco!=0 ){
-                                    echo $porcentajeAgua1 = round((($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][0]->peso_capsula )) * 100, 2);
+                                    echo $porcentajeAgua1 = number_format((($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][0]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][0]->peso_capsula )) * 100, 2);
                               }
                               else{
                                     echo 0;
@@ -340,29 +373,29 @@
                             <input name="humedadCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][1]->nom_capsula; ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoCapsular[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][1]->peso_capsula; ?>">
+                            <input name="humedadPesoCapsular[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][1]->peso_capsula){echo number_format($TestLimitesMuestra[$i-1][1]->peso_capsula,2);} else {echo 0.00;} ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoSueloHumedo[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo; ?>">
+                            <input name="humedadPesoSueloHumedo[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo){echo number_format($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo,2); }  else {echo 0.00;} ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco; ?>">
+                            <input name="humedadPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco){ echo number_format($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco,2); }  else {echo 0.00;} ?>">
                           </td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][1]->peso_capsula!=0){
-                                echo round(($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][1]->peso_capsula ), 2); 
+                                echo number_format(($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][1]->peso_capsula ), 2); 
                               } 
                               else{
                               echo 0;
                               }                          
                               ?>
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco!=0 ){
-                                echo $porcentajeAgua2 = round((($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][1]->peso_capsula )) * 100, 2); 
+                                echo $porcentajeAgua2 = number_format((($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][1]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][1]->peso_capsula )) * 100, 2); 
                               }else{
                               echo 0;
                               }                
@@ -375,20 +408,20 @@
                             <input name="humedadCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][2]->nom_capsula; ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoCapsular[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][2]->peso_capsula; ?>">
+                            <input name="humedadPesoCapsular[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][2]->peso_capsula){echo $TestLimitesMuestra[$i-1][2]->peso_capsula;}else{echo 0.00;} ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoSueloHumedo[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo; ?>">
+                            <input name="humedadPesoSueloHumedo[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo) { echo $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo;} else{echo 0.00;} ?>">
                           </td>
                           <td>
-                            <input name="humedadPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco; ?>">
+                            <input name="humedadPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php if($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco){echo $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco;} else {echo 0.00;} ?>">
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][2]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][2]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco!=0){
-                                 echo $porcentajeAgua3 = round((($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][2]->peso_capsula )) * 100, 2); 
+                                 echo $porcentajeAgua3 = number_format((($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][2]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][2]->peso_capsula )) * 100, 2); 
                               }
                                else{
                                 echo 0;
@@ -438,7 +471,7 @@
                               if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
                                 $resultado = 0;
                               }
-                                echo round($resultado);
+                                echo number_format($resultado,2);
                               ?>
                           </td>
                         </tr>
@@ -462,11 +495,11 @@
                           <th>Prueba #</th>
                           <th>Capsula # </th>
                           <th>Golpes # </th>
-                          <th>Peso capsula gr.</th>
-                          <th>Peso capsula + Suelo humedo gr.</th>
-                          <th>Peso capsula + Suelo seco gr.</th>
-                          <th>Peso del suelo gr.</th>
-                          <th>Peso del agua gr.</th>
+                          <th>Peso capsula (gr)</th>
+                          <th>Peso capsula + Suelo humedo (gr)</th>
+                          <th>Peso capsula + Suelo seco (gr)</th>
+                          <th>Peso del suelo (gr)</th>
+                          <th>Peso del agua (gr)</th>
                           <th>Contenido agua (W) %</th>
                         </tr>
                       </thead>
@@ -477,24 +510,24 @@
                             <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->nom_capsula; ?>">
                           </td>
                           <td>
-                            <input name="liquidoGolpes[]" class="input-mini limites iliquido ngolpes" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->num_golpes; ?>">
+                            <input name="liquidoGolpes[]" class="input-mini limites iliquido ngolpes" type="text" value="<?php if($TestLimitesMuestra[$i-1][3]->num_golpes) {echo number_format($TestLimitesMuestra[$i-1][3]->num_golpes,2);} else{ echo 0.00;}?>">
                           </td>
                           <td>
-                            <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->peso_capsula; ?>">
+                            <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php if($TestLimitesMuestra[$i-1][3]->peso_capsula){ echo number_format($TestLimitesMuestra[$i-1][3]->peso_capsula,2);} else{echo 0.00;} ?>">
                           </td>
                           <td>
-                            <input name="liquidoPesoSueloHumedo[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo; ?>">
+                            <input name="liquidoPesoSueloHumedo[]" class="input-mini limites iliquido" type="text" value="<?php if($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo){ echo number_format($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo,2); } else{echo 0.00;}?>">
                           </td>
                           <td>
-                            <input name="liquidoPesoSueloSeco[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco; ?>">
+                            <input name="liquidoPesoSueloSeco[]" class="input-mini limites iliquido" type="text" value="<?php  if($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco){ echo number_format($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco,2);} else{ echo 0.00;} ?>">
                           </td>
                           <?php $temp = new stdClass; ?>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][3]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][3]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco!=0){
-                                  $porcentajeLiquido1 = round((($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][3]->peso_capsula )) * 100, 2);
+                                  $porcentajeLiquido1 = number_format((($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][3]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][3]->peso_capsula )) * 100, 2);
                                   echo $porcentajeLiquido1;
                               }
                               else{
@@ -510,26 +543,26 @@
                         <tr>
                           <td>2</td>
                           <td>
-                            <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->nom_capsula; ?>">
+                            <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->nom_capsula;?>">
                           </td>
                           <td>
                             <input name="liquidoGolpes[]" class="input-mini limites iliquido ngolpes" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->num_golpes; ?>">
                           </td>
                           <td>
-                            <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->peso_capsula; ?>">
+                            <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php if($TestLimitesMuestra[$i-1][4]->peso_capsula) { echo $TestLimitesMuestra[$i-1][4]->peso_capsula;} else{echo 0.00;} ?>">
                           </td>
                           <td>
-                            <input name="liquidoPesoSueloHumedo[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo; ?>">
+                            <input name="liquidoPesoSueloHumedo[]" class="input-mini limites iliquido" type="text" value="<?php  if($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo){ echo $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo;} else{echo 0.00;} ?>">
                           </td>
                           <td>
-                            <input name="liquidoPesoSueloSeco[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco; ?>">
+                            <input name="liquidoPesoSueloSeco[]" class="input-mini limites iliquido" type="text" value="<?php if($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco) {echo $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco;} else{echo 0.00;} ?>">
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco!=0){
-                                 $porcentajeLiquido2 = round((($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula )) * 100, 2); 
+                                 $porcentajeLiquido2 = number_format((($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][4]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][4]->peso_capsula )) * 100, 2); 
                                  echo $porcentajeLiquido2;
                               }
                               else{
@@ -559,12 +592,12 @@
                           <td>
                             <input name="liquidoPesoSueloSeco[]" class="input-mini limites iliquido" type="text" value="<?php echo $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco; ?>">
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][5]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][5]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco!=0){
-                                $porcentajeLiquido3 = round((($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][5]->peso_capsula )) * 100, 2); 
+                                $porcentajeLiquido3 = number_format((($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][5]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][5]->peso_capsula )) * 100, 2); 
                                 echo $porcentajeLiquido3;
                               }
                               else{
@@ -613,7 +646,7 @@
                               
                               $LimiteLiquido=($limite1+$limite2+$limite3)/3;
                               if($LimiteLiquido>=0){
-                                  echo round($LimiteLiquido);
+                                  echo number_format($LimiteLiquido,2);
                               }
                               else{
                                   echo 0;
@@ -642,11 +675,11 @@
                         <tr>
                           <th>Prueba #</th>
                           <th>Capsula #</th>
-                          <th>Peso capsula gr.</th>
-                          <th>Peso capsula + Suelo humedo gr.</th>
-                          <th>Peso capsula + Suelo seco gr.</th>
-                          <th>Peso del suelo gr.</th>
-                          <th>Peso del agua gr.</th>
+                          <th>Peso capsula (gr)</th>
+                          <th>Peso capsula + Suelo humedo (gr)</th>
+                          <th>Peso capsula + Suelo seco (gr)</th>
+                          <th>Peso del suelo (gr)</th>
+                          <th>Peso del agua (gr)</th>
                           <th>Contenido agua (W) %</th>
                         </tr>
                       </thead>
@@ -665,12 +698,12 @@
                           <td>
                             <input name="plasticoPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco; ?>">
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][6]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][6]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco!=0){
-                                echo $porcentajePlastico1 = round((($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][6]->peso_capsula )) * 100, 2); 
+                                echo $porcentajePlastico1 = number_format((($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][6]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][6]->peso_capsula )) * 100, 2); 
                               }
                               else{
                               echo 0;
@@ -692,12 +725,12 @@
                           <td>
                             <input name="plasticoPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco; ?>">
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][7]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][7]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco!=0){
-                                echo $porcentajePlastico2 = round((($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][7]->peso_capsula )) * 100, 2); 
+                                echo $porcentajePlastico2 = number_format((($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][7]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][7]->peso_capsula )) * 100, 2); 
                               }  
                               else{
                               echo 0;
@@ -719,12 +752,12 @@
                           <td>
                             <input name="plasticoPesoSueloSeco[]" class="input-mini limites" type="text" value="<?php echo $TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco; ?>">
                           </td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][8]->peso_capsula ), 2); ?></td>
-                          <td><?php echo round(($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][8]->peso_capsula ), 2); ?></td>
+                          <td><?php echo number_format(($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco ), 2); ?></td>
                           <td>
                             <?php
                               if($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco!=0){
-                                echo $porcentajePlastico3 = round((($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][8]->peso_capsula )) * 100, 2);
+                                echo $porcentajePlastico3 = number_format((($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_humedo - $TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco ) / ($TestLimitesMuestra[$i-1][8]->peso_capsula_suelo_seco - $TestLimitesMuestra[$i-1][8]->peso_capsula )) * 100, 2);
                               }  
                               else{
                               echo 0;
@@ -774,7 +807,7 @@
                               if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
                                 $resultado = 0;
                               }
-                                 echo $limitePlastico=round($resultado);
+                                 echo $limitePlastico=number_format($resultado,2);
                               ?>
                           </td>
                         </tr>
@@ -786,10 +819,10 @@
                     <table class="table table-hover table-striped table-bordered resultados">
                       <thead>
                         <tr>
-                          <th>Humedad natural %</th>
-                          <th>Limite liquido %</th>
-                          <th>Limite plastico %</th>
-                          <th>Indice de plasticidad %</th>
+                          <th>Humedad natural (%)</th>
+                          <th>Limite liquido (%)</th>
+                          <th>Limite plastico (%)</th>
+                          <th>Indice de plasticidad (%) </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -824,8 +857,8 @@
                                     if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
                                       $resultado = 0;
                                     }
-                                      $HumedadNaturalFinal=ceil(round($resultado,2));
-                                      echo $HumedadNaturalFinal;
+                                      $HumedadNaturalFinal=ceil(number_format($resultado,2));
+                                      echo number_format($HumedadNaturalFinal,2);
                                       $porcentajeAgua1=0;
                                       $porcentajeAgua2=0;
                                       $porcentajeAgua3=0;
@@ -837,8 +870,8 @@
                             <?php
                               if($LimiteLiquido>=0){
                                 
-                                $LimiteLiquidoFinal=round($LimiteLiquido,2);  
-                                echo $LimiteLiquidoFinal;
+                                $LimiteLiquidoFinal=number_format($LimiteLiquido,2);  
+                                echo number_format($LimiteLiquidoFinal,2);
                               }  
                               else{
                                  echo 0;
@@ -881,15 +914,15 @@
                               if ( $divMayorMenor1 > 1.29 && $divMayorMenor2 > 1.29 && $divMayorMenor3 > 1.29 ) {
                                 $resultado = 0;
                               }
-                              echo $limitePlastico=round($resultado,2);
+                              echo $limitePlastico=number_format($resultado,2);
                                  
                               ?>
                           </td>
                           <td>
                             <?php
                               if($LimiteLiquido>=0){
-                                 $indicePlasticidadFinal= round($LimiteLiquido-$limitePlastico);    
-                                 echo  $indicePlasticidadFinal;
+                                 $indicePlasticidadFinal= number_format($LimiteLiquido-$limitePlastico);    
+                                 echo  number_format($indicePlasticidadFinal,2);
                               }
                               else{
                                 echo 0;
@@ -960,10 +993,10 @@
                       <tr>
                         <th>Diametro (cm)</th>
                         <th>Altura (cm)</th>
-                        <th>Peso gr.</th>
+                        <th>Peso (gr)</th>
                         <th>Tipo de falla</th>
-                        <th>Area</th>
-                        <th>Volumen</th>
+                        <th>Area (cm2)</th>
+                        <th>Volumen (cm3)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -986,12 +1019,12 @@
                             $diametro2= $DatosCompresion->diametro* $DatosCompresion->diametro;
                             $pi=pi();
                             $area=($pi*$diametro2)/4;
-                            echo round($area,2);
+                            echo number_format($area,2);
                             ?>
                         </td>
                         <td>
                           <?php $volumen=$area * $DatosCompresion->altura; 
-                            echo round($volumen,2);
+                            echo number_format($volumen,2);
                             ?>
                         </td>
                       </tr>
@@ -1007,7 +1040,7 @@
                         <th>Carga (N)</th>
                         <th>Deformación total</th>
                         <th>Carga (Kg)</th>
-                        <th>Area corregida cm2</th>
+                        <th>Area corregida (cm2)</th>
                         <th>Esfuerzo (Kg/cm2)</th>
                       </tr>
                     </thead>
@@ -1029,8 +1062,8 @@
                         <td class="gdeformacion">
                           <?php if($deformaciones ->carga>0) {
                             $deformacionTotal=($deformaciones ->deformacion*2.54)/1000;
-                            echo round($deformacionTotal,2); 
-                            $gdt[$k]=round($deformacionTotal,2);
+                            echo number_format($deformacionTotal,2); 
+                            $gdt[$k]=number_format($deformacionTotal,2);
                             } 
                             else{
                             echo 0;
@@ -1040,7 +1073,7 @@
                         <td>
                           <?php if($deformaciones ->carga>0) {
                             $cargakg=$deformaciones ->carga/10;
-                             echo round($cargakg,2);
+                             echo number_format($cargakg,2);
                             } 
                             else{
                               echo 0;
@@ -1050,7 +1083,7 @@
                         <td>
                           <?php if($deformaciones ->carga>0 AND $area!=0 ) {
                             $areaCorregida= $area/(1-($deformacionTotal/$DatosCompresion->altura));
-                            echo round($areaCorregida,2);
+                            echo number_format($areaCorregida,2);
                             } 
                             else{
                             echo 0;
@@ -1060,8 +1093,8 @@
                         <td>
                           <?php if($deformaciones ->carga>0 AND $areaCorregida!=0) {
                             $esfuerzo= $cargakg/$areaCorregida;
-                            echo round($esfuerzo,2);
-                            $ge[$k]=round($esfuerzo,2);
+                            echo number_format($esfuerzo,2);
+                            $ge[$k]=number_format($esfuerzo,2);
                             $mayoresfuerzo[] =$esfuerzo;
                             } 
                             else{
@@ -1104,14 +1137,14 @@
                   <table class="table table-hover table-striped table-bordered resultadoscompresion">
                     <thead>
                       <tr>
-                        <th> Diametro cm</th>
-                        <th> Altura cm</th>
-                        <th> Peso</th>
+                        <th> Diametro (cm)</th>
+                        <th> Altura (cm)</th>
+                        <th> Peso (gr)</th>
                         <th> Tipo de falla</th>
-                        <th> Area</th>
-                        <th> Volumen</th>
-                        <th> Peso unitario</th>
-                        <th> Cohesión</th>
+                        <th> Area (cm2)</th>
+                        <th> Volumen (cm3)</th>
+                        <th> Peso unitario (?)</th>
+                        <th> Cohesión (?)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1120,12 +1153,12 @@
                         <td>  <?php echo $DatosCompresion->altura; ?> </td>
                         <td> <?php echo $DatosCompresion->peso; ?></td>
                         <td> <?php echo $DatosCompresion->tipoFalla; ?> </td>
-                        <td> <?php echo round($area,2); ?> </td>
-                        <td> <?php echo round($volumen,2); ?> </td>
+                        <td> <?php echo number_format($area,2); ?> </td>
+                        <td> <?php echo number_format($volumen,2); ?> </td>
                         <td> <?php  
                           if($DatosCompresion->peso!=0){
                                 $pesoUnitario=($DatosCompresion->peso/ $volumen)*10;
-                                $pesoUnitarioFinal=round($pesoUnitario,2);
+                                $pesoUnitarioFinal=number_format($pesoUnitario,2);
                                 echo $pesoUnitarioFinal; 
                           }
                           ?>
@@ -1138,12 +1171,9 @@
                             $posicion=count($mayoresfuerzo); 
                             if($mayoresfuerzo[$posicion-1]!=0){
                                $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;                                 
-                                 if($posicion==7){
-                                   $cohesionFinal= round($cohesion,2);
-                                   echo $cohesionFinal;  
-                                   unset($mayoresfuerzo);
-                                 }
+                                 echo number_format($cohesion,2);
                             }
+                            
                             ?>
                         </td>
                       </tr>
@@ -1208,12 +1238,12 @@
                   <table class="table table-hover table-striped table-bordered tablaanalisis">
                     <thead>
                       <tr>
-                        <th>Peso recipiente gr</th>
-                        <th>Peso recipiente + muestra</th>
-                        <th>Peso muestra seca</th>
-                        <th>Peso retenido N°200 + recipiente</th>
-                        <th>Peso retenido N°200 </th>
-                        <th>Suma pesos retenidos</th>
+                        <th>Peso recipiente (gr)</th>
+                        <th>Peso recipiente + muestra (gr)</th>
+                        <th>Peso muestra seca (gr)</th>
+                        <th>Peso retenido N°200 + recipiente (gr)</th>
+                        <th>Peso retenido N°200 (gr)</th>
+                        <th>Suma pesos retenidos (gr)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1230,7 +1260,7 @@
                             if($j==17){
                             $pesoretenidomasrecipiente=$suma+$DatosGranulometria->pesoRecipiente;
                             $sumapesoretenidos=$suma;
-                            echo $suma+$DatosGranulometria->pesoRecipiente;
+                            echo number_format($suma+$DatosGranulometria->pesoRecipiente,2);
                             $suma=0;
                             $j=0;
                             }
@@ -1238,8 +1268,8 @@
                             endforeach;
                             ?>
                         </td>
-                        <td><?php echo $pesoretenidoN200=$pesoretenidomasrecipiente-$DatosGranulometria->pesoRecipiente ?></td>
-                        <td> <?php echo $sumapesoretenidos ?></td>
+                        <td><?php echo number_format($pesoretenidoN200=$pesoretenidomasrecipiente-$DatosGranulometria->pesoRecipiente,2) ?></td>
+                        <td> <?php echo number_format($sumapesoretenidos,2) ?></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1249,13 +1279,13 @@
                   <table class="table table-hover table-striped table-bordered tablapesos">
                     <thead>
                       <tr>
-                        <th>Tamiz</th>
+                        <th>Tamiz </th>
                         <th>Tamaño(mm)</th>
-                        <th>Peso retenido gr</th>
-                        <th>Peso retenido corregido gr</th>
-                        <th>Retenido %</th>
-                        <th>Retenido acumulado %</th>
-                        <th>Pasa %</th>
+                        <th>Peso retenido (gr)</th>
+                        <th>Peso retenido corregido (gr)</th>
+                        <th>Retenido (%)</th>
+                        <th>Retenido acumulado (%)</th>
+                        <th>Pasa (%)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1269,7 +1299,7 @@
                         <td class="tamTamiz"><?php echo $tamañoTamiz[]=$retenidos->tamanoTamiz ?></td>
                         <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
                         <?php 
-                          if($retenidos->pesoRetenido>0){
+                          if($retenidos->pesoRetenido>=0){
                               $pr[]=$retenidos->tamanoTamiz;
                           }
                           ?>
@@ -1294,7 +1324,7 @@
                         <td class="retenido" >
                           <?php
                             if($totalpesoretenidocorregido!=0){
-                                 $retenidoporcentaje = round($pesoretenidocorregido/$totalpesoretenidocorregido*100,2);
+                                 $retenidoporcentaje = number_format($pesoretenidocorregido/$totalpesoretenidocorregido*100,2);
                                  echo number_format($retenidoporcentaje,2);
                             }
                             else{
@@ -1307,7 +1337,7 @@
                         <td class="pasa">
                           <?php $pasa= 100 - $temp[$j];
                               echo number_format($pasa,2);
-                            if($retenidos->pesoRetenido>0){
+                            if($retenidos->pesoRetenido>=0){
                                $p[]=$pasa;
                             }
                                $tamices[]=$pasa;
@@ -1334,13 +1364,13 @@
                         <td class="retenido"> 
                           <?php
                             if($totalpesoretenidocorregido!=0){
-                                echo $Fondoretenido=round($fondopesoretenido/$totalpesoretenidocorregido*100,2);
+                                echo $Fondoretenido=number_format($fondopesoretenido/$totalpesoretenidocorregido*100,2);
                             }
                             ?>
                         </td>
                         <td class="acumulado"><?php 
-                          echo $FondoRetenidoAcomulado=round($Fondoretenido+$temp[13],2);
-                               $fondor=round($FondoRetenidoAcomulado);
+                          echo $FondoRetenidoAcomulado=number_format($Fondoretenido+$temp[13],2);
+                               $fondor=number_format($FondoRetenidoAcomulado);
                           ?>
                         </td>
                         <td> <?php echo 100 - $fondor ; ?></td>
@@ -1413,11 +1443,11 @@
                   <table class="table table-hover table-striped table-bordered tablaResultadosGranulometria">
                     <thead>
                       <tr>
-                        <th> Tamiz N°4</th>
-                        <th> Tamiz N°200</th>
-                        <th> Limite liquido</th>
-                        <th> Indice de plasticidad</th>
-                        <th> Indice de grupo</th>
+                        <th> Tamiz N°4 (%)</th>
+                        <th> Tamiz N°200 (%)</th>
+                        <th> Limite liquido (%) </th>
+                        <th> Indice de plasticidad </th>
+                        <th> Indice de grupo </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1428,12 +1458,12 @@
                           $d10=$DatosGranulometria->d10;
                           ?>
                         <td class="tdTamiz4">
-                          <?php  echo $tamizN4=round($tamices[9],2); ?>
+                          <?php  echo $tamizN4=number_format($tamices[9],2); ?>
                         </td>
                         <td class="tdTamiz200">
-                          <?php  echo $tamizN200=round($tamices[17],2);
-                                 $tamizN10=round($tamices[10]);
-                                 $tamizN40=round($tamices[15]);                             
+                          <?php  echo $tamizN200=number_format($tamices[17],2);
+                                 $tamizN10=number_format($tamices[10]);
+                                 $tamizN40=number_format($tamices[15]);                             
                           ?> 
                         </td>
                         <td class="tdLimiteLiquido">
@@ -2287,9 +2317,9 @@
                 <td> <?php echo "Superficie ".$datos_sondeo ->tipo_superficie; ?> </td>
               </tr>
               
-
+              <?php
               $nivel;
-              <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
+               foreach( $muestrasSondeo as $datoMuestra ): ?>
                 <?php if( $datos_sondeo->nivel_freatico>=$datoMuestra->profundidad_inicial && $datos_sondeo->nivel_freatico<=$datoMuestra->profundidad_final ){ $nivel=$datoMuestra->profundidad_inicial; } ?>
               <?php endforeach; ?>
 
@@ -2301,33 +2331,85 @@
               <tr>
                 <td> <?php echo $i; ?> <?php if( $datoMuestra->profundidad_inicial==$nivel ){ echo"<img src='assets/img/nivelfreatico.png' alt='nivel freatico' width='30px' height='30px' style=' float:right; ' >" ;} ?> </td>
                 <?php $tamano= ($datoMuestra->profundidad_final-$datoMuestra->profundidad_inicial)*100; ?> 
-                <td style=" padding: 0; margin : 0;"> <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                <td style=" padding: 0; margin : 0;"> 
+                  <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+                    <img src="assets/patrones/<?php echo $resultado->imagenPerfil; ?>.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                  <?php else: ?>
+                    <img src="assets/patrones/roca.jpg" alt="patron" style="border:1px solid #CCC;" >           
+                  <?php endif ?>
                 </td>
                 <td> <?php if($resultado->pesoUnitario<=0){echo"-";}else{ echo $resultado->pesoUnitario;} ?> </td>
                 <td> <?php if($resultado->cohesion<=0){echo"-";}else{ echo $resultado->cohesion;} ?></td>
                 <td> <?php echo $datoMuestra->numero_golpes; ?> </td>
-                <td> <?php echo $resultado->humedad; ?> </td>
-                <td> <?php echo $resultado->limiteLiquido; ?></td>
-                <td> <?php echo $resultado->indicePlasticidad; ?> </td>
-                <td> <?php echo $resultado->notacionSucs; ?> </td>
-                <td> <?php echo $resultado->aashto; ?> </td>
                 <td> 
                   <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+                    <?php echo $resultado->humedad; ?> 
+                  <?php else: ?>
+                    <span>-</span>
+                  <?php endif ?>
+                </td>
+                <td> 
+                  <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+                    <?php echo $resultado->limiteLiquido; ?>
+                  <?php else: ?>
+                    <span>-</span>
+                  <?php endif ?>
+                </td>
+                <td> 
+                  <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+                    <?php echo $resultado->indicePlasticidad; ?> 
+                  <?php else: ?>
+                    <span>-</span>
+                  <?php endif ?>
+                </td>
+                <td> 
+                  <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+                    <?php echo $resultado->notacionSucs; ?> 
+                  <?php else: ?>
+                    <span>-</span>
+                  <?php endif ?>
+                </td>
+                <td> 
+                  <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+                  <?php echo $resultado->aashto; ?> 
+                  <?php else: ?>
+                    <span>-</span>
+                  <?php endif ?>
 
-                    <span class="badge">N° 4 = <?php echo $resultado->N4; ?>% 
-                    </span>
-                    <span class="badge">N° 10 = <?php echo $resultado->N10; ?>% 
-                    </span>
-                    <span class="badge">N° 40 = <?php echo $resultado->N40; ?>% 
-                    </span>
-                    <span class="badge">N° 200 = <?php echo $resultado->N200; ?>% 
-                    </span>
+                </td>
+                 <td> 
+                  <?php if ($datoMuestra->material_de_relleno!=2) : ?>
+
+                    <?php if ($resultado->N4!=null) : ?>
+                    <span class="badge">N° 4 = <?php echo $resultado->N4; ?>% </span>
+                    <?php else: ?>
+                    <span>-</span>
+                    <?php endif ?>
+                    
+                    <?php if ($resultado->N10!=null) : ?>
+                    <span class="badge">N° 10 = <?php echo $resultado->N10; ?>% </span>
+                    <?php else: ?>
+                    <span>-</span>
+                    <?php endif ?>
+
+                    <?php if ($resultado->N40!=null) : ?>
+                      <span class="badge">N° 40 = <?php echo $resultado->N40; ?>% </span>
+                    <?php else: ?>
+                    <span>-</span>
+                    <?php endif ?>
+
+                    <?php if ($resultado->N200!=null) : ?>
+                      <span class="badge">N° 200 = <?php echo $resultado->N200; ?>% </span>
+                    <?php else: ?>
+                    <span>-</span>
+                    <?php endif ?>
+
                   <?php else: ?>
                     <span>-</span>
                   <?php endif ?>
                 </td>
                 <td>
-                  <?php  if($datoMuestra->material_de_relleno==1){echo "Material de relleno"; } else if($datoMuestra->material_de_relleno==2){ echo "Estrato de roca";} ?>  <?php if($datoMuestra->material_de_relleno!=2){ echo $resultado->descripcionSucs; } ?> 
+                  <?php  if($datoMuestra->material_de_relleno==1){echo "(Material de relleno) "; } else if($datoMuestra->material_de_relleno==2){ echo "Estrato de roca";} ?>  <?php if($datoMuestra->material_de_relleno!=2 && $resultado->descripcionSucs!=null){ echo $resultado->descripcionSucs; } else { echo"-";}  ?> 
                 </td>
               </tr>
               <?php $i++; ?>
@@ -2423,12 +2505,12 @@
 
               <?php if ( $datos_sondeo->tipo_superficie=='Ninguna' ) : ?>
                 <div class="input-append">
-                  <input type='text' name='Profundidad' id="profundidadSuperficie" value="0" readonly placeholder='Profundidad' class="input-block-level" >
+                  <input type='text' name='Profundidad' id="profundidadSuperficie" value="0" readonly placeholder='Profundidad de superficie' class="input-block-level" >
                   <span class="add-on">metros</span>
                 </div>
               <?php else: ?>
                 <div class="input-append">
-                  <input type='text' name='Profundidad' id="profundidadSuperficie" value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="input-block-level" > 
+                  <input type='text' name='Profundidad' id="profundidadSuperficie" placeholder='Profundidad de superficie' value="<?php echo $datos_sondeo->profundidad_superficie ?>" placeholder='Profundidad' class="input-block-level" > 
                   <span class="add-on">metros</span>
                 </div>
               <?php endif; ?>
@@ -2468,20 +2550,16 @@
               <input type='text' name='descripcion_muestra' placeholder='Descripción' class="input-block-level limpiar" required autofocus >
             </div>
             <div class="row-fluid ">
-              <span class="span3 title tituloprofundidad">Profundidad :</span>
 
-                
-                <div class="row-fluid">
-                  <div class="input-append">
-                    <input type='text' name='profundidad_inicial' placeholder='Desde' class="span6" >     
-                    <span class="add-on">cm</span>
+                  <span class="title tituloprofundidad span3">Profundidad :</span>  
+                  <div class="input-append span4">
+                    <input type='text' name='profundidad_inicial' placeholder='Desde' class="Addinput" >     
+                    <span class="add-on">m</span>
                   </div>
-                  <div class="input-append">
-                    <input type='text' name='profundidad_final' placeholder='Hasta' class="span6 " >     
-                    <span class="add-on">cm</span>
-                  </div>
-                </div>
-
+                  <div class="input-append span4">
+                    <input type='text' name='profundidad_final' placeholder='Hasta' class="Addinput" >     
+                    <span class="add-on">m</span>
+                  </div> 
               
             </div>
             <div class="controls inputs">
@@ -2532,9 +2610,21 @@
               <input id="descripcion_modificarm" name='descripcion_muestra' type='text' name='descripcion_muestra' placeholder='Descripción' class="input-block-level limpiar" required autofocus >
             </div>
             <div class="row-fluid">
+            
+
               <span class="span3 title tituloprofundidad">Profundidad :</span>
-              <input id="profundidad_inicial_modificar" type='text' name='profundidad_inicial' placeholder='Desde' class="span3 " >   
-              <input id="profundidad_final_modificar" type='text' name='profundidad_final' placeholder='Hasta' class="span3 " >   
+              
+              <div class="input-append span4">
+                <input id="profundidad_inicial_modificar" type='text' name='profundidad_inicial' placeholder='Desde' class="Addinput " >     
+                <span class="add-on">m</span>
+              </div>
+              
+              <div class="input-append span4">
+                <input id="profundidad_final_modificar" type='text' name='profundidad_final' placeholder='Hasta' class="Addinput " >   
+                <span class="add-on">m</span>
+              </div>
+              
+            
             </div>
             <div class="controls inputs">
               <input id="numero_golpes_modificar" type='text' name='numero_de_golpes' placeholder='Numero de golpes' class="input-block-level limpiar " >

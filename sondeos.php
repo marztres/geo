@@ -352,7 +352,7 @@
                 <?php endif; ?>
               </select>
               <div class="input-append">
-                <input name='profundidadSuperficie' id="profundidadSuperficie" type='text'  placeholder='Profundidad' class="input-block-level" readonly="readonly"> 
+                <input name='profundidadSuperficie' id="profundidadSuperficie" type='text'  placeholder='Profundidad de la superficie' class="input-block-level" readonly="readonly"> 
                 <span class="add-on">metros</span>
               </div>
 

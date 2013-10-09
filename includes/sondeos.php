@@ -11,7 +11,7 @@ class sondeos extends DataBase {
   `s`.`estado`,
   `s`.`fk_id_tipo_superficie`,
   `s`.`fk_idproyecto`,
-  (SELECT count(*) FROM muestras WHERE fk_idsondeo=s.id_sondeo ) AS cantidad
+  (SELECT count(*) FROM muestras WHERE fk_idsondeo=s.id_sondeo and estado=1 ) AS cantidad
 FROM 
   `sondeos` `s`
   where fk_idproyecto='$idp' and estado='1' ";

@@ -1,55 +1,5 @@
-Compresion 
-abombamiento - 
-
-estrato de roca  informe poner -
 
 
-quitar marcos de impresion
-
-
-
-Variacion de rangos, 
-
-
-Variacion de nombres de recipientes
-
-Casilla de cohesión visible. 
-
-
-
-
-Cohesion falta por defecto.
-
-
-
-Unidades de las cajas
-
-
-
-
-
-Agregar caja de calculo de muestra seca , 
-
-Campos muestra humeda + recipiente.
-
-
-Formula de calculo de muestra seca granulometria
-
-
-humedad en gramos ( recipiente + muestra humeda * humedad de la muestra =  humedad en gramos )
-
-Resultado  Muestra seca = (recipiente + humeda - humedad en gramos)
-
-Cajita opcional de ayuda
-
-
-
--Resta de recipiente a los pesos retenidos. OJO (Requerimientos N)
-
-
-Grafica de granulometria
-
-No ignorar los datos en cero
 
 
 
@@ -59,3 +9,21 @@ Impresion servidor , informe
 
 
 engluisdavid@gmail.com
+
+
+
+78
+42
+
+
+
+dina.durangoa
+1067892308
+
+
+
+warmer 
+
+get 
+
+ready
