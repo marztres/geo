@@ -410,24 +410,48 @@
                 $RandomPesoCapsulaSueloHumedo=rand(50, 80);
                 $RandomPesoCapsulaSueloSeco=rand(50, 80);
                 $RandomNumGolpes=rand(50, 80);
+                $RandomPesoCapsula=number_format($RandomPesoCapsula,2);
+                $$RandomPesoCapsulaSueloHumedo=number_format($RandomPesoCapsulaSueloHumedo,2);
+                $RandomPesoCapsulaSueloSeco=number_format($RandomPesoCapsulaSueloSeco,2);
+                $RandomNumGolpes=number_format($RandomNumGolpes,2);
+                $cadena=$Listatest->nom_capsula;
+                $caracter = substr($cadena, 0,1);
+                $numeros = substr($cadena, 1);
+                $mi_array = array("a","b","c","d","x","y","v"); 
+                shuffle($mi_array);
+                $random = array_rand($mi_array);
+                $numeros_aleatorios = rand(100,300);
+                $nom_capsula=$mi_array[$random].$numeros_aleatorios;
+                
               //FIN DE LOS RANDOM 
                 //INCREMENTO  Y SUMA DE LOS RANDOM EN HUMEDAD
-                $peso_capsula=$Listatest->peso_capsula+'0.'.$RandomPesoCapsula;
-                $peso_capsula_suelo_humedo=$Listatest->peso_capsula_suelo_humedo+'0.'.$RandomPesoCapsulaSueloHumedo;
-                $peso_capsula_suelo_seco=$Listatest->peso_capsula_suelo_seco+'0.'.$RandomPesoCapsulaSueloSeco;
-                $num_golpes=$Listatest->num_golpes+'0.'.$RandomNumGolpes;
+                $peso_capsula=$Listatest->peso_capsula+($RandomPesoCapsula/100);
+                $peso_capsula=number_format($peso_capsula,2);
+                $peso_capsula_suelo_humedo=$Listatest->peso_capsula_suelo_humedo+($RandomPesoCapsulaSueloHumedo/100);
+                $peso_capsula_suelo_humedo=number_format($peso_capsula_suelo_humedo,2);
+                $peso_capsula_suelo_seco=$Listatest->peso_capsula_suelo_seco+($RandomPesoCapsulaSueloSeco/100);
+                $peso_capsula_suelo_seco=number_format($peso_capsula_suelo_seco,2);
+                $num_golpes=$Listatest->num_golpes+($RandomNumGolpes/100);
+                $num_golpes=number_format($num_golpes);
               // FIN INCREMENTO  Y SUMA DE LOS RANDOM 
-                $testLimitesClass->addTest($Listatest->tipo_muestra, $Listatest->nom_capsula,$peso_capsula, $peso_capsula_suelo_humedo, $peso_capsula_suelo_seco, $num_golpes, $idMuestra);
-            endforeach;
+                $testLimitesClass->addTest($Listatest->tipo_muestra,$nom_capsula,$peso_capsula, $peso_capsula_suelo_humedo, $peso_capsula_suelo_seco, $num_golpes, $idMuestra);
+                endforeach;
                 
                 $Compresion=$testCompresionClass->GetDatosCompresion($id_muestra);
                 // RANDOM EN COMPRESION
                 $RandomDiametro=rand(50,80);
                 $RandomAltura=rand(50, 80);
                 $RandomPeso=rand(50, 80);
-                $Diametro=$Compresion->diametro+'0.'.$RandomDiametro;
-                $Altura=$Compresion->altura+'0.'.$RandomAltura;
-                $Peso=$Compresion->peso+'0.'.$RandomPeso;
+                $RandomDiametro=number_format($RandomDiametro,2);
+                $RandomAltura=number_format($RandomAltura,2);
+                $RandomPeso=number_format($RandomPeso,2);
+                $Diametro=$Compresion->diametro+($RandomDiametro/100);
+                $Altura=$Compresion->altura+($RandomAltura/100);
+                $Peso=$Compresion->peso+($RandomPeso/100);
+                $Diametro = number_format($Diametro,2);
+                $Altura= number_format($Altura,2);
+                $Peso= number_format($Peso,2);
+
               // FIN COMPRESION
                 $testCompresionClass->addCompresion(0,$Diametro, $Altura, $Peso,$Compresion->tipoFalla,$idMuestra);
                 $idCompresion=$testCompresionClass->insert_id;
@@ -436,7 +460,8 @@
               // RANDOM DEFORMACIONES
                 $RandomCarga=rand(50, 80);
                 if($ListaDeformaciones->carga!=0){
-                  $Carga=$ListaDeformaciones->carga+'0.'.$RandomCarga;
+                  $Carga=$ListaDeformaciones->carga+($RandomCarga/100);
+                  $Carga= number_format($Carga,2);
                 }
                 else{
                   $Carga=0;
@@ -448,8 +473,11 @@
               // RANDOM GRANULOMETRIA
                 $RandomPesoRecipiente=rand(50,80);
                 $RandomPesoRecipienteMasMuestra=rand(50,80);
-                $pesoRecipiente=$consultaGranulometria->pesoRecipiente+'0.'.$RandomPesoRecipiente;
-                $pesoRecipienteMasMuestra=$consultaGranulometria->pesoRecipienteMasMuestra+'0.'.$RandomPesoRecipienteMasMuestra;
+                $pesoRecipiente=$consultaGranulometria->pesoRecipiente+($RandomPesoRecipiente/100);
+                $pesoRecipienteMasMuestra=$consultaGranulometria->pesoRecipienteMasMuestra+($RandomPesoRecipienteMasMuestra/100);
+                $pesoRecipiente= number_format($pesoRecipiente,2);
+                $pesoRecipienteMasMuestra= number_format($pesoRecipienteMasMuestra,2);
+
               // FIN RANDOM GRANULOMETRIA
             $granulometriaClass->addGranulometria($pesoRecipiente, $pesoRecipienteMasMuestra, $idMuestra);
             $idGranulometria= $granulometriaClass->insert_id;
@@ -458,7 +486,8 @@
               //RANDOM PESOS RETENIDOS
                 $RandompesoRetenido=rand(50,80);
                 if($ListaPesosRetenidos->pesoRetenido!=0){
-                  $pesoRetenido=$ListaPesosRetenidos->pesoRetenido+'0.'.$RandompesoRetenido;
+                  $pesoRetenido=$ListaPesosRetenidos->pesoRetenido+($RandompesoRetenido/100);
+                  $pesoRetenido=number_format($pesoRetenido,2);
                 }
                 else{
                   $pesoRetenido=0;  

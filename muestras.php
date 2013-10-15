@@ -510,7 +510,7 @@
                             <input name="liquidoNombreCapsula[]" class="input-mini" type="text" value="<?php echo $TestLimitesMuestra[$i-1][3]->nom_capsula; ?>">
                           </td>
                           <td>
-                            <input name="liquidoGolpes[]" class="input-mini limites iliquido ngolpes" type="text" value="<?php if($TestLimitesMuestra[$i-1][3]->num_golpes) {echo number_format($TestLimitesMuestra[$i-1][3]->num_golpes,2);} else{ echo 0.00;}?>">
+                            <input name="liquidoGolpes[]" class="input-mini limites iliquido ngolpes" type="text" value="<?php if($TestLimitesMuestra[$i-1][3]->num_golpes) {echo number_format($TestLimitesMuestra[$i-1][3]->num_golpes);} else{ echo 0.00;}?>">
                           </td>
                           <td>
                             <input name="liquidoPeso[]" class="input-mini limites iliquido" type="text" value="<?php if($TestLimitesMuestra[$i-1][3]->peso_capsula){ echo number_format($TestLimitesMuestra[$i-1][3]->peso_capsula,2);} else{echo 0.00;} ?>">
@@ -1109,6 +1109,7 @@
                       </tr>
                       <?php $k++ ?>
                       <?php endforeach; ?>
+
                       <?php endif; ?>
                     </tbody>
                   </table>
@@ -1175,7 +1176,9 @@
                             $posicion=count($mayoresfuerzo); 
                             if($mayoresfuerzo[$posicion-1]!=0){
                                $cohesion=($mayoresfuerzo[$posicion-1]/2)*100;                                 
-                                 echo number_format($cohesion,2);
+                                 echo number_format($cohesion,2);  
+
+                                                                     
                             }
                             
                             ?>
@@ -1184,7 +1187,7 @@
                     </tbody>
                   </table>
                   <input name="pesoUnitarioFinal" class="pesoUnitarioFinal" type="hidden" value="<?php echo $pesoUnitarioFinal; ?>">
-                  <input name="cohesionFinal" Class="cohesionFinal" type="hidden" value="<?php echo $cohesionFinal; ?>">
+                  <input name="cohesionFinal" Class="cohesionFinal" type="hidden" value="<?php echo $cohesion; ?>">
                 </form>
                 <!-- ############# FIN RESULTADOS compresion ############### -->
                 <!-- ############# GUARDAR INFORMACION BOTON ############### -->
@@ -1196,7 +1199,9 @@
               
               <?php endif; ?>
               <?php $i++; ?>
+              <?php unset($mayoresfuerzo); ?>
               <?php endforeach; ?>
+              
               <?php else: ?>
               <?php endif; ?>              
             </div>
@@ -1254,7 +1259,7 @@
                       <tr>
                         <td> <input name="pesoRecipiente" class="input-mini analisis" type="text" value="<?php echo $DatosGranulometria->pesoRecipiente?>"> </td>
                         <td> <input name="pesoRecipienteMasMuestra" class="input-mini analisis" type="text" value="<?php echo $DatosGranulometria->pesoRecipienteMasMuestra ?>"> </td>
-                        <td> <?php echo $DatosGranulometria->pesoRecipienteMasMuestra- $DatosGranulometria->pesoRecipiente ?></td>
+                        <td> <?php echo number_format($DatosGranulometria->pesoRecipienteMasMuestra - $DatosGranulometria->pesoRecipiente,2) ?></td>
                         <td>  
                           <?php 
                             $DatosRetenidos=$pesosRetenidosClass->getDatoPesosRetenidos($DatosGranulometria->id_granulometria);
