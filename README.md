@@ -30,5 +30,5 @@ Instrucciones para Para correciones de problema informe Jader Mecino
 
   Haces un commit directo al reporsitorio.
 
-  
+
    

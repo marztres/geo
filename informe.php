@@ -1271,7 +1271,7 @@
               
               <div class="text-center contenedor-granulometria" id="granulometria<?php echo $i; ?>">
                 
-                <table class="table tabla-granulo">
+                <table class="table tabla-headers">
                   <tbody>
                     <tr>
                       <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
@@ -1299,7 +1299,7 @@
                   <input type="hidden" name="func" value="granulometria">
                   <input type="hidden" name="fkMuestra" value="<?php echo $datoMuestra->id_muestra ?>">
                   <input type="hidden" name="idgranulometria" value="<?php echo $DatosGranulometria->id_granulometria ?>">
-                  <table class="table">
+                  <table class="table letratest tabla-informes">
                     <thead>
                       <tr>
                         <th>Peso recipiente (gr)</th>
@@ -1340,7 +1340,7 @@
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA GRANULOMETRIA ############### -->
                   <!-- #############  TABLA DE GRANULOMETRIA ############### -->
                   <p>Tabla de granulometria - Muestra <?php echo $i; ?></p>
-                  <table class="table">
+                  <table class="table tabla-informes">
                     <thead>
                       <tr>
                         <th>Tamiz</th>
@@ -1485,7 +1485,7 @@
                     ?>
                   
                   <p>Resultados</p>
-                  <table class="table ">
+                  <table class="table letratest tabla-informes">
                     <thead>
                       <tr>
                         <th> Tamiz N°4 (%)</th>
