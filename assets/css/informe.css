@@ -74,7 +74,9 @@ p {
 }
 
 .tabla-granulo {
-	width: 90%;
+	width: 100%;
+	margin: 0 auto;
+
 }
 
 .letraInforme {
@@ -92,6 +94,11 @@ p {
 }
 .paginador {
 	font-size: 1.2em;
+}
+
+.paginadorGranulometria {
+	font-size: 1.2em;
+	margin-right: 100px;	
 }
 
 .contenedor {
@@ -130,11 +137,9 @@ p {
 }
 
 .graficaGranulo {
-	height: 300px;
 	margin: 0 auto;
 	width: 80%;
-
-
+	height: 350px;
 }
 
 

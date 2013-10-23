@@ -1340,7 +1340,7 @@
                   <!-- ############# FIN MEDIDAS DE LA MUESTRA GRANULOMETRIA ############### -->
                   <!-- #############  TABLA DE GRANULOMETRIA ############### -->
                   <p>Tabla de granulometria - Muestra <?php echo $i; ?></p>
-                  <table class="table tabla-informes">
+                  <table class="table tabla-informes letratest">
                     <thead>
                       <tr>
                         <th>Tamiz</th>
@@ -1484,9 +1484,9 @@
                     unset($datos); 
                     ?>
                   
-                  <table>
+                  <table class=" table tabla-footer letratest">
                     <tr>
-                      <td> 
+                      <td > 
                      <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
                        <?php foreach ( $ListaFirmas as $firmas ) : ?>
                          <?php if ( $firmas->idFirma==$_GET['Ing']) : ?>
@@ -1520,7 +1520,7 @@
                     
                     <td>
                     <p>Resultados</p>
-                    <table class="table letratest tabla-informes">
+                    <table class="table tabla-granulo letratest">
                       <thead>
                         <tr>
                           <th> Tamiz N°4 (%)</th>
@@ -2238,7 +2238,7 @@
                         </tr>
                       </tbody>
                     </table>
-
+                    <span class="pull-right paginadorGranulometria">Pagina <?php echo $pagina; ?></span>
                     </td>
 
 
@@ -2258,7 +2258,7 @@
                   
                 </form>
                 <!-- ############# FIN RESULTADOS ############### -->
-              <span class="paginadorGranulometria">Pagina <?php echo $pagina; ?></span>
+              
               
 
               </div>
