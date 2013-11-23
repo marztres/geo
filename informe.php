@@ -1222,7 +1222,7 @@
                 </form>
                 <!-- ############# FIN RESULTADOS compresion ############### -->
                 <!-- ############# FIN GUARDAR INFORMACION BOTON ############### -->  
-              <span class="paginadorCompresion">Pagina <?php echo $pagina; ?></span>
+              
               </div>
               <?php $i++; ?>
               <?php $pagina++; ?>
@@ -2308,10 +2308,31 @@
 
                  
         <div  id="Informe" class="divInforme contenedor">
-          
+          <table class="table tabla-headers">
+            <tbody>
+              <tr>
+                <td class="" rowspan="3"><img src="assets/img/logoinforme.png"   alt="Logo impresion"></td>
+                <td colspan="4" class="title">
+                    Informe de suelos - Sondeo <?php echo $_GET['numsondeo'] ?> 
+                </td>
+              </tr>
+              <tr>
+                <td class="title">Proyecto:</td>
+                <td><?php echo $proyectos->nombre_proyecto; ?></td>
+                <td class="title">Fecha:</td>
+                <td><?php echo $proyectos->fecha; ?></td>
+              </tr>
+              <tr>
+                <td class="title">Codigo:</td>
+                <td><?php echo $proyectos->codigo_proyecto; ?></td>
+                <td class="title">Lugar:</td>
+                <td><?php echo $proyectos->lugar; ?></td>
+              </tr>
+            </tbody>
+          </table>
           
           <p class="text-center">Informe de estratigrafia</p>
-          <table class="table  letra-s">
+          <table class="table letratest tabla-test ">
             <thead>
               <tr>
                 <th>Muestra</th>
@@ -2446,9 +2467,16 @@
               <?php endforeach; ?>
             </tbody>
           </table>
-          <h5 > <img src="assets/img/nivelfreatico.png" alt="nivel freatico" width="30px" height="30px" > Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>
+          <table class="table tabla-informes">
+            <tr>
+              <td>
+                <h5 class="pull-left" > <img src="assets/img/nivelfreatico.png" alt="nivel freatico" width="30px" height="30px" > Nivel freatico:<?php echo " ".$datos_sondeo->nivel_freatico." metros"; ?></h5>      
+              </td>
+            </tr>
+          </table>
+          
         
-          <table class="table firmas">
+          <table class="table tabla-footer letrainforme">
             <tr>
                 <td> 
                  <img src="<?php if ( count( $ListaFirmas ) > 0 ) : ?>
@@ -2513,11 +2541,12 @@
                    <?php endforeach; ?>
                  <?php endif; ?>
                  </span>
+                <span class="paginador pull-right">Pagina <?php echo $pagina; ?></span>
                 </td>
             </tr>  
 
           </table>
-          <span class="paginadorInforme">Pagina <?php echo $pagina; ?></span>
+          
         </div>
         
 

@@ -1214,6 +1214,9 @@
           <!-- ############# tabs de muestras internas GRANULOMETRIA ############### -->
           <div class="tabbable tabs-left">
             <ul class="nav nav-tabs">
+                <li class="<?php echo (($i==1)?'active':''); ?>">
+                  <a href="#ConfigTamizes; ?>" data-toggle="tab" >Configuración de tamizes</a>
+                </li>
               <?php if( count($muestrasSondeo) > 0 ): ?>
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
