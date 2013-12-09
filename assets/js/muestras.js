@@ -24,7 +24,9 @@ var acciones = {
     $('.boxImpresion,.firmasBox').on('change' , acciones.Preimpresion);
     $('.btnInforme').on('click' , acciones.Preimpresion);
     $('.impresionBtn').on('click' , acciones.imprimir);
-    $('.estratos').on('change',acciones.clickEstratos); 
+    $('.estratos').on('change',acciones.clickEstratos);
+    $('.ChecksTamizes').on('click',acciones.seleccionTamizes);
+    $('.selectAllTamizes').on('click',acciones.selectAllTamizes);
   },
 
   
@@ -2480,7 +2482,42 @@ var acciones = {
   },
   imprimir: function(){
     $(this).attr('target','_blank');  
-  }
+  },
+  seleccionTamizes: function(){
+    var TamizSelected = $(this);
+    var tamizRelacionado = TamizSelected.attr('rel');
+    var TamizesSelected = $('.' +tamizRelacionado);
 
+    if(TamizSelected.is(':checked')){
+
+      TamizesSelected.attr('readonly', true);
+      TamizesSelected.val('0');
+    } else{
+      
+      TamizesSelected.attr('readonly', false);
+      TamizesSelected.val('0');
+    } 
+  },
+  selectAllTamizes: function(){
+    
+
+    var TamizSelected = $(this);
+
+    var Alltamizes = $('.ChecksTamizes');
+    var Allinput = $('.allTam');
+    
+    if(TamizSelected.is(':checked')){
+      
+      Alltamizes.attr('checked', true);
+      Allinput.attr('readonly', true);
+
+    } else{
+      
+      Alltamizes.attr('checked', false);
+      Allinput.attr('readonly', false);
+    
+    }
+  }  
+    
 }
 $(document).on('ready', acciones.init);

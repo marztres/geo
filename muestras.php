@@ -1215,7 +1215,7 @@
           <div class="tabbable tabs-left">
             <ul class="nav nav-tabs">
                 <li class="<?php echo (($i==1)?'active':''); ?>">
-                  <a href="#ConfigTamizes; ?>" data-toggle="tab" >Configuración de tamizes</a>
+                  <a href="#ConfigTamizes" data-toggle="tab" >Configurar tamizes</a>
                 </li>
               <?php if( count($muestrasSondeo) > 0 ): ?>
               <?php $i = 1; ?>
@@ -1233,6 +1233,7 @@
               <?php endif; ?>
             </ul>
             <div class="tab-content">
+              
               <?php if( count($muestrasSondeo) > 0 ): ?>
               <?php $i = 1; ?>
               <?php foreach( $muestrasSondeo as $datoMuestra ): ?>
@@ -1309,7 +1310,7 @@
                           <input name="idPesoRetenido[]" class="input-mini" type="hidden" value="<?php echo $retenidos->idPesoRetenido ?>">
                         </td>
                         <td class="tamTamiz"><?php echo $tamañoTamiz[]=$retenidos->tamanoTamiz ?></td>
-                        <td> <input name="PesosRetenido[]" class="input-mini granulo" type="text" value="<?php echo $retenidos->pesoRetenido ?>"> </td>
+                        <td> <input name="PesosRetenido[]" class="input-mini granulo tam<?php echo $j; ?> allTam" type="text" value="<?php echo $resta_retenidos_pesorecipiente=$retenidos->pesoRetenido-$DatosGranulometria->pesoRecipiente ?>"> </td>
                         <?php 
                           if($retenidos->pesoRetenido>=0){
                               $pr[]=$retenidos->tamanoTamiz;
@@ -1320,7 +1321,7 @@
                           ?>
                         <td><?php 
                           if($pesoretenidoN200!=0){
-                               $pesoretenidocorregido=$retenidos->pesoRetenido-(($sumapesoretenidos-$pesoretenidoN200)*$retenidos->pesoRetenido/$pesoretenidoN200);
+                               $pesoretenidocorregido=$resta_retenidos_pesorecipiente-(($sumapesoretenidos-$pesoretenidoN200)*$resta_retenidos_pesorecipiente/$pesoretenidoN200);
                               echo number_format($pesoretenidocorregido,2);
                           }
                           else{
@@ -2288,6 +2289,63 @@
               <?php endforeach; ?>
               <?php else: ?>
               <?php endif; ?> 
+              <div id="ConfigTamizes" class="tab-pane text-center" >
+                <h4 class="pull-left">Seleccione los tamizes a utilizar: </h4>
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <th>(3")</th>
+                    <th>(2 1/2")</th>
+                    <th>(2")</th>
+                    <th>(1 1/2")</th>
+                    <th>(1")</th>
+                    <th>(3/4")</th>
+                    <th>(1/2")</th>
+                    <th>(3/8")</th>
+                    <th>(1/4")</th>
+                    <th>N°4</th>
+                    <th>N°10</th>
+                    <th>N°16</th>
+                    <th>N°20</th>
+                    <th>N°30</th>
+                    <th>N°40</th>
+                    <th>N°60</th>
+                    <th>N°100</th>
+                    <th>N°200</th>
+                                  
+                  </thead>
+                  <tr>
+                    <td><input type="checkbox" rel="tam0" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam1" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam2" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam3" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam4" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam5" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam6" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam7" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam8" class="ChecksTamizes"></td>
+                    
+                    <td><input type="checkbox" rel="tam9" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam10" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam11" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam12" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam13" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam14" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam15" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam16" class="ChecksTamizes"></td>
+                    <td><input type="checkbox" rel="tam17" class="ChecksTamizes"></td>
+                  </tr>
+                </table>
+                <table class="table table-striped table-bordered table-hover">
+                   <thead>
+                    <th>Seleccionar todos los tamizes</th>
+                  </thead>
+                   <tr>
+                    <td><input type="checkbox" rel="AllTam" class="selectAllTamizes"></td>
+                  </tr>
+                </table>                 
+                  
+              </div>
+              
             </div>
           </div>
           <!-- ############# fin tabs de muestras internas GRANULOMETRIA ############### -->
