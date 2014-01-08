@@ -1261,7 +1261,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td> <input name="pesoRecipiente" class="input-mini analisis" type="text" value="<?php echo $DatosGranulometria->pesoRecipiente?>"> </td>
+                        <td> <input name="pesoRecipiente" class="input-mini analisis" type="text" value="<?php echo $DatosGranulometria->pesoRecipiente ?>"> </td>
                         <td> <input name="pesoRecipienteMasMuestra" class="input-mini analisis" type="text" value="<?php echo $DatosGranulometria->pesoRecipienteMasMuestra ?>"> </td>
                         <td> <?php echo number_format($DatosGranulometria->pesoRecipienteMasMuestra - $DatosGranulometria->pesoRecipiente,2) ?></td>
                         <td>  
@@ -1310,7 +1310,7 @@
                           <input name="idPesoRetenido[]" class="input-mini" type="hidden" value="<?php echo $retenidos->idPesoRetenido ?>">
                         </td>
                         <td class="tamTamiz"><?php echo $tamañoTamiz[]=$retenidos->tamanoTamiz ?></td>
-                        <td> <input name="PesosRetenido[]" class="input-mini granulo tam<?php echo $j; ?> allTam" type="text" value="<?php echo $resta_retenidos_pesorecipiente=$retenidos->pesoRetenido-$DatosGranulometria->pesoRecipiente ?>"> </td>
+                        <td> <input name="PesosRetenido[]" class="input-mini granulo tam<?php echo $j; ?> allTam" type="text" value="<?php if($retenidos->pesoRetenido>0){$resta_retenidos_pesorecipiente=$retenidos->pesoRetenido-$DatosGranulometria->pesoRecipiente;}else{$resta_retenidos_pesorecipiente=0;} echo $retenidos->pesoRetenido;?>"> </td>
                         <?php 
                           if($retenidos->pesoRetenido>=0){
                               $pr[]=$retenidos->tamanoTamiz;
