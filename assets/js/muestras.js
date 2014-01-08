@@ -4,6 +4,8 @@ var contadorLimites=0;
 var acciones = {
   init: function () {
     acciones.clicks();
+    acciones.allTamLocked();
+
   },
   clicks: function () {
     $('a[href="#"]').on('click', acciones.prevenirClickSinDestino);
@@ -1067,6 +1069,19 @@ var acciones = {
     //tabla de pesos
     var trGranulometria = $(this).closest("div").find("table.tablapesos").find("tbody").children();
 
+    // Capturando el peso del recipiente 
+    var TablaPesoRecipiente = $(this).closest("div").find("table.tablaanalisis").find("tbody").find("tr:first").children();
+
+    var _PesoRecipienteVarPura = TablaPesoRecipiente.eq(0).find("input.analisis");
+    var _PesoRecipienteVar = parseFloat(_PesoRecipienteVarPura);
+
+
+    if( _PesoRecipienteVar<0){
+      _PesoRecipienteVar = 0;
+    }
+
+
+
       // Todos los tr    
       var tr1 = trGranulometria.eq(0).children(),
           tr2 = trGranulometria.eq(1).children(),
@@ -1112,27 +1127,49 @@ var acciones = {
         tdReT20=tr20.eq(2);
 
       // Variables de pesos retenidos   
-      var pesoRet1Var = parseFloat(tdReT1.val()),
-        pesoRet2Var = parseFloat(tdReT2.val()),
-        pesoRet3Var = parseFloat(tdReT3.val()),
-        pesoRet4Var = parseFloat(tdReT4.val()),
-        pesoRet5Var = parseFloat(tdReT5.val()),
-        pesoRet6Var = parseFloat(tdReT6.val()),
-        pesoRet7Var = parseFloat(tdReT7.val()),
-        pesoRet8Var = parseFloat(tdReT8.val()),
-        pesoRet9Var = parseFloat(tdReT9.val()),
-        pesoRet10Var = parseFloat(tdReT10.val()),
-        pesoRet11Var = parseFloat(tdReT11.val()),
-        pesoRet12Var = parseFloat(tdReT12.val()),
-        pesoRet13Var = parseFloat(tdReT13.val()),
-        pesoRet14Var = parseFloat(tdReT14.val()),
-        pesoRet15Var = parseFloat(tdReT15.val()),
-        pesoRet16Var = parseFloat(tdReT16.val()),
-        pesoRet17Var = parseFloat(tdReT17.val()),
-        pesoRet18Var = parseFloat(tdReT18.val());
+      var pesoRet1VarPura =  parseFloat(tdReT1.val())  ,
+        pesoRet2VarPura = parseFloat(tdReT2.val()),
+        pesoRet3VarPura = parseFloat(tdReT3.val()),
+        pesoRet4VarPura = parseFloat(tdReT4.val()),
+        pesoRet5VarPura = parseFloat(tdReT5.val()),
+        pesoRet6VarPura = parseFloat(tdReT6.val()),
+        pesoRet7VarPura = parseFloat(tdReT7.val()),
+        pesoRet8VarPura = parseFloat(tdReT8.val()),
+        pesoRet9VarPura = parseFloat(tdReT9.val()),
+        pesoRet10VarPura = parseFloat(tdReT10.val()),
+        pesoRet11VarPura = parseFloat(tdReT11.val()),
+        pesoRet12VarPura = parseFloat(tdReT12.val()),
+        pesoRet13VarPura = parseFloat(tdReT13.val()),
+        pesoRet14VarPura = parseFloat(tdReT14.val()),
+        pesoRet15VarPura = parseFloat(tdReT15.val()),
+        pesoRet16VarPura = parseFloat(tdReT16.val()),
+        pesoRet17VarPura = parseFloat(tdReT17.val()),
+        pesoRet18VarPura = parseFloat(tdReT18.val());
 
-        
 
+
+
+      // Variables de pesos retenidos   
+      var pesoRet1Var = pesoRet1VarPura - _PesoRecipienteVar,
+        pesoRet2Var = pesoRet2VarPura - _PesoRecipienteVar,
+        pesoRet3Var = pesoRet3VarPura - _PesoRecipienteVar,
+        pesoRet4Var = pesoRet4VarPura - _PesoRecipienteVar,
+        pesoRet5Var = pesoRet5VarPura - _PesoRecipienteVar,
+        pesoRet6Var = pesoRet6VarPura - _PesoRecipienteVar,
+        pesoRet7Var = pesoRet7VarPura - _PesoRecipienteVar,
+        pesoRet8Var = pesoRet8VarPura - _PesoRecipienteVar,
+        pesoRet9Var = pesoRet9VarPura - _PesoRecipienteVar,
+        pesoRet10Var = pesoRet10VarPura - _PesoRecipienteVar,
+        pesoRet11Var = pesoRet11VarPura - _PesoRecipienteVar,
+        pesoRet12Var = pesoRet12VarPura - _PesoRecipienteVar,
+        pesoRet13Var = pesoRet13VarPura - _PesoRecipienteVar,
+        pesoRet14Var = pesoRet14VarPura - _PesoRecipienteVar,
+        pesoRet15Var = pesoRet15VarPura - _PesoRecipienteVar,
+        pesoRet16Var = pesoRet16VarPura - _PesoRecipienteVar,
+        pesoRet17Var = pesoRet17VarPura - _PesoRecipienteVar,
+        pesoRet18Var = pesoRet18VarPura - _PesoRecipienteVar;
+
+        console.warn("Warming", _PesoRecipienteVar);
 
         //Sumatoria Pesos Retenidos
         var todosPesosRetenidos= pesoRet1Var+pesoRet2Var+pesoRet3Var+pesoRet4Var+pesoRet5Var+pesoRet6Var+pesoRet7Var+pesoRet8Var+pesoRet9Var+pesoRet10Var+pesoRet11Var+pesoRet12Var+pesoRet13Var+pesoRet14Var+pesoRet15Var+pesoRet16Var+pesoRet17Var+pesoRet18Var;
@@ -2490,11 +2527,11 @@ var acciones = {
 
     if(TamizSelected.is(':checked')){
 
-      TamizesSelected.attr('readonly', true);
+      TamizesSelected.attr('readonly', false);
       TamizesSelected.val('0');
     } else{
       
-      TamizesSelected.attr('readonly', false);
+      TamizesSelected.attr('readonly', true);
       TamizesSelected.val('0');
     } 
   },
@@ -2509,15 +2546,21 @@ var acciones = {
     if(TamizSelected.is(':checked')){
       
       Alltamizes.attr('checked', true);
-      Allinput.attr('readonly', true);
+      Allinput.attr('readonly', false);
 
     } else{
       
       Alltamizes.attr('checked', false);
-      Allinput.attr('readonly', false);
+      Allinput.attr('readonly', true);
+      Allinput.val('0');
+
     
     }
-  }  
+  },
+  allTamLocked : function(){
+    var Allinput = $('.allTam');  
+    Allinput.attr('readonly', true);
+  } 
     
 }
 $(document).on('ready', acciones.init);
