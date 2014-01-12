@@ -1246,7 +1246,7 @@
 
                 <h3 class="tituloGranulometria"> Analisis granulometrico </h3>
 
-                <input class="input-xlarge pull-left calcularMuestraSeca InputsCalcularMuestraSeca" rel="<?php echo $resultado->humedad ?>" type="text" placeholder="Peso recipiente + Muestra humeda"  >
+                <input class="input-xlarge pull-left calcularMuestraSeca InputsCalcularMuestraSeca CalculoMuestraSecaTooltip" rel="<?php echo $resultado->humedad ?>" title="Caja para calculo de muestra seca" type="text" placeholder="Peso recipiente + Muestra humeda"  >
                 <a href="#" class="btn InputsCalcularMuestraSeca btnCalcularMuestraSeca pull-left input-mini">Calcular</a>
 
                 <form class="granulometria<?php echo $i; ?> resultadosGranulometria" action="save.php" method="post" accept-charset="utf-8">
@@ -3026,7 +3026,8 @@
       
       
       
-      $('.brand').tooltip('hide');   
+      $('.brand').tooltip('hide'); 
+      $('.CalculoMuestraSecaTooltip').tooltip('hide');   
       
       //graficas compresion
       
