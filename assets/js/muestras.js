@@ -1073,14 +1073,14 @@ var acciones = {
     var TablaPesoRecipiente = $(this).closest("div").find("table.tablaanalisis").find("tbody").find("tr:first").children();
 
     var _PesoRecipienteVarPura = TablaPesoRecipiente.eq(0).find("input.analisis");
-    var _PesoRecipienteVar = parseFloat(_PesoRecipienteVarPura);
+    var _PesoRecipienteVar = parseFloat(_PesoRecipienteVarPura.val());
 
 
-    if( _PesoRecipienteVar<0){
+    if( _PesoRecipienteVar<=0){
       _PesoRecipienteVar = 0;
     }
 
-
+    
 
       // Todos los tr    
       var tr1 = trGranulometria.eq(0).children(),
@@ -1147,7 +1147,7 @@ var acciones = {
         pesoRet18VarPura = parseFloat(tdReT18.val());
 
 
-
+        
 
       // Variables de pesos retenidos   
       var pesoRet1Var = pesoRet1VarPura - _PesoRecipienteVar,
@@ -1169,7 +1169,7 @@ var acciones = {
         pesoRet17Var = pesoRet17VarPura - _PesoRecipienteVar,
         pesoRet18Var = pesoRet18VarPura - _PesoRecipienteVar;
 
-        console.warn("Warming", _PesoRecipienteVar);
+
 
         //Sumatoria Pesos Retenidos
         var todosPesosRetenidos= pesoRet1Var+pesoRet2Var+pesoRet3Var+pesoRet4Var+pesoRet5Var+pesoRet6Var+pesoRet7Var+pesoRet8Var+pesoRet9Var+pesoRet10Var+pesoRet11Var+pesoRet12Var+pesoRet13Var+pesoRet14Var+pesoRet15Var+pesoRet16Var+pesoRet17Var+pesoRet18Var;
@@ -2553,6 +2553,7 @@ var acciones = {
       Alltamizes.attr('checked', false);
       Allinput.attr('readonly', true);
       Allinput.val('0');
+      alertify.error(" <strong> Atención. </strong> Se establecerean los datos actuales a cero.");
 
     
     }
