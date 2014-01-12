@@ -29,6 +29,7 @@ var acciones = {
     $('.estratos').on('change',acciones.clickEstratos);
     $('.ChecksTamizes').on('click',acciones.seleccionTamizes);
     $('.selectAllTamizes').on('click',acciones.selectAllTamizes);
+    $('.btnCalcularMuestraSeca').on('click',acciones.CalcularMuestraSeca);
   },
 
   
@@ -1079,8 +1080,6 @@ var acciones = {
     if( _PesoRecipienteVar<=0){
       _PesoRecipienteVar = 0;
     }
-
-    
 
       // Todos los tr    
       var tr1 = trGranulometria.eq(0).children(),
@@ -2551,7 +2550,39 @@ var acciones = {
   allTamLocked : function(){
     var Allinput = $('.allTam');  
     Allinput.attr('readonly', true);
-  } 
+  },
+  CalcularMuestraSeca: function (){
+
+    // Capturando el peso del recipiente 
+    var TablaPesoRecipiente = $(this).closest("div").find("table.tablaanalisis").find("tbody").find("tr:first").children();
+    var TextMuestraSeca = TablaPesoRecipiente.eq(1).find("input.analisis");
+    
+    var TxtMuestraHumeda = $(this).closest("div").find("input.calcularMuestraSeca");
+    
+    var TxTHumedadMuestraHumerda = $(this).closest("div").find("input.calcularMuestraSeca");
+    var HumedadMuestra = TxTHumedadMuestraHumerda.attr('rel');
+
+    // Calculo de muestra seca 
+    if(isNaN(TxtMuestraHumeda.val()) || TxtMuestraHumeda.val()<0 ||  !TxtMuestraHumeda.val() || !HumedadMuestra || isNaN(HumedadMuestra) || HumedadMuestra<0 ) {
+       
+       alertify.set({ delay: 10000 });
+       alertify.error(" <strong> Upss. </strong> No se pudo calcular, verifique si existe Humedad para esta muestra en la prueba de humedad y plasticidad natural."); 
+    }else {
+      //Determinando el numero de gramos de humedad 
+      var GramosDeHumedad = parseFloat(TxtMuestraHumeda.val())  * parseFloat(HumedadMuestra) /100
+
+      var ResultadoMuestraSeca = parseFloat(TxtMuestraHumeda.val()) - GramosDeHumedad
+
+      TextMuestraSeca.val(ResultadoMuestraSeca);
+      TextMuestraSeca.select();
+      
+      alertify.set({ delay: 10000 });
+      alertify.success(" <strong> Muestra seca Calculada </strong> <br> El peso de la muestra seca + recipiente es : "+ResultadoMuestraSeca + " Gramos"); 
+
+
+    } 
+
+  }
     
 }
 $(document).on('ready', acciones.init);
