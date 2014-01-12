@@ -1252,7 +1252,6 @@ var acciones = {
       }
       
 
-
       //variables fondo corredigo y total Corregido 
       var  fondoRetenidoCorregidoVar= fondoRetVar-((sumaPesoRetenidosVar-pesoRetenidoN200Var )*(fondoRetVar/sumaPesoRetenidosVar)) ,
         totalRetenidoCorregidoVar= totalRetVar-((sumaPesoRetenidosVar-pesoRetenidoN200Var)*(totalRetVar/sumaPesoRetenidosVar));
@@ -1278,8 +1277,6 @@ var acciones = {
       }
 
 
-
-
       //Calculos Horizontales tabla pesos retenidos
       if ($(this).hasClass("granulo")) {
         var calculosFila = $(this).parent().parent().children();
@@ -1290,10 +1287,10 @@ var acciones = {
           retenidoAcumulado = calculosFila.eq(5),
           pasa = calculosFila.eq(6);
         
-        var pesoRetenidoVar = parseFloat(pesoRetenido.val()),
+        var pesoRetenidoVar = parseFloat(pesoRetenido.val())- _PesoRecipienteVar,
           retenidoCorregidoVar = (pesoRetenidoVar-((sumaPesoRetenidosVar-pesoRetenidoN200Var)*(pesoRetenidoVar/pesoRetenidoN200Var))),
           retenidoVar = (retenidoCorregidoVar/totalRetenidoCorregidoVar)*100;
-          
+
         if(isNaN(retenidoCorregidoVar) || retenidoCorregidoVar<0) {
           retenidoCorregido.text(0);  
         }else {
@@ -1327,11 +1324,6 @@ var acciones = {
       tdFinal17 = trGranulometria.eq(17).find("td.acumulado"),
       tdFinal18 = trGranulometria.eq(18).find("td.acumulado");
 
-
- 
-
-
-
       //Variables de todos los td Finales
       var fin0Var = parseFloat(tdFinal0.text()),
         fin1Var = parseFloat(tdFinal1.text()),
@@ -1353,10 +1345,8 @@ var acciones = {
         fin17Var = parseFloat(tdFinal17.text()),
         FondoFinalVar = parseFloat(tdFinal18.text());
 
-        //Fin grafica de granulometria  
-
-
-//td  retenido %
+    //Fin grafica de granulometria  
+    //td  retenido %
     var tdRetenido0 = trGranulometria.eq(0).find("td.retenido"),
       tdRetenido1 = trGranulometria.eq(1).find("td.retenido"),
       tdRetenido2 = trGranulometria.eq(2).find("td.retenido"),
