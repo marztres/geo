@@ -1511,6 +1511,8 @@ var acciones = {
           tdLimiteLiquido = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdLimiteLiquido"),
           tdIndicePlasticidad = $(this).closest("div").find("table.tablaResultadosGranulometria").find("td.tdIndicePlaticidad");
 
+
+
         // tabla de observaciones 
         tD60 =$(this).closest("div").find("table.tablaobs").find("input.d60"), 
         tD30 =$(this).closest("div").find("table.tablaobs").find("input.d30"),  
@@ -1542,7 +1544,7 @@ var acciones = {
 
         // Ejecucion de clasificacion Sucs
         acciones.clasificacionSucs(Tamiz200Var,tamiz4Var,LimiteLiquidoVar,IndicePlasticidadVar,D60Var,D30Var,D10Var,clasSucs,resultadoNotacionSucs,resultadoDescripcionSucs,imagenPerfil);
-        acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto);
+        acciones.clasificacionAashto(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,clasAashto,resultadoAashto,indiceGrupo);
 
         resultadoN4= $(this).closest("div").find("form.resultadosGranulometria").find("input.N4"),
         resultadoN10= $(this).closest("div").find("form.resultadosGranulometria").find("input.N10"),
@@ -2417,7 +2419,7 @@ var acciones = {
 
     
 
-  }, clasificacionAashto: function(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,$clasAashto,$resultadoAashto){
+  }, clasificacionAashto: function(tamiz10Var,tamiz40Var,Tamiz200Var,LimiteLiquidoVar,IndicePlasticidadVar,$clasAashto,$resultadoAashto,$indiceGrupo){
    
 
     console.log("Clasificacion de suelos Aashto");
@@ -2480,11 +2482,26 @@ var acciones = {
       }
     }
 
+    var IndiceDeGrupo = undefined;
+    if (parseFloat(IndicePlasticidadVar)<=0) {
+      IndiceDeGrupo = 0; 
+    } 
+    else {
+      if (notacionAashto=="A-2-6" || notacionAashto=="A-2-7") {
+        IndiceDeGrupo = (parseFloat(Tamiz200Var)-15) * (IndicePlasticidadVar-10)*0.01;
+      } else {
+        IndiceDeGrupo = (parseFloat(Tamiz200Var)-35)*(0.2+0.005*(parseFloat(LimiteLiquidoVar)-40))+(parseFloat(Tamiz200Var)-15)*(parseFloat(IndicePlasticidadVar)-10)*(0.01);
+      }
+      if (IndiceDeGrupo<=0) {
+        IndiceDeGrupo=0;
+      }
+    }
+      
     console.log("----Finalizacion clasificación AASHTO----");
     console.log("La notacion Aashto es : "+notacionAashto);
     $clasAashto.text(notacionAashto);
     $resultadoAashto.val(notacionAashto);
-  
+    $indiceGrupo.text(IndiceDeGrupo);
     
   },
 
@@ -2573,8 +2590,8 @@ var acciones = {
 
       var ResultadoMuestraSeca = parseFloat(TxtMuestraHumeda.val()) - GramosDeHumedad
 
-      TextMuestraSeca.val(ResultadoMuestraSeca);
-      TextMuestraSeca.select();
+      TextMuestraSeca.val(ResultadoMuestraSeca.toFixed(2));
+      TextMuestraSeca.focus();
       
       alertify.set({ delay: 10000 });
       alertify.success(" <strong> Muestra seca Calculada </strong> <br> El peso de la muestra seca + recipiente es : "+ResultadoMuestraSeca + " Gramos"); 
